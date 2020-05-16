@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>[Android] Launcher Icons | SAWD</title>
+  <title>[Github] 원격 저장소 연결 | SAWD</title>
   <meta name="description" content="시간이 나야지..." />
   <meta name="keywords" content="" />
   <meta name="HandheldFriendly" content="True" />
@@ -12,22 +12,21 @@
   <link rel="shortcut icon" href="/images/favicon.png">
   <link rel="alternate" href="/atom.xml" title="SAWD">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="이전에도 런쳐 아이콘을 등록한 적이 있지만 최근에 Android Studio에서 바뀐점이 있어 포스팅합니다. Launcher Icons런처 아이콘은 사용자에게 앱을 대표하여 보여주는 그래픽 아이콘입니다.Google Developers 문서에 이런곳에 사용된다고 합니다.  기기에 설치된 앱의 목록과 메인 스크린 앱에 대한 단축키를 나타낼 수 있음 런처 앱에서">
+  <meta name="description" content="Hyperledger fabric samples를 공부하는데 공부 이력과 자료를 남겨야겠다고 생각했습니다. 이번에 Github에 저장소를 만들고 로컬에 있는 파일들을 올려 관리하는 방법을 설명하려합니다.   Github 로그인  우측 상단 [+] &gt; New repository  Create a new repository 정보 입력  생성된 HTTPS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[Android] Launcher Icons">
-<meta property="og:url" content="https://dev-sawd.github.io/2018/06/26/Android-Launcher-Icons/index.html">
+<meta property="og:title" content="[Github] 원격 저장소 연결">
+<meta property="og:url" content="https://dev-sawd.github.io/2020/05/16/Github-connect-remote-repository/index.html">
 <meta property="og:site_name" content="SAWD">
-<meta property="og:description" content="이전에도 런쳐 아이콘을 등록한 적이 있지만 최근에 Android Studio에서 바뀐점이 있어 포스팅합니다. Launcher Icons런처 아이콘은 사용자에게 앱을 대표하여 보여주는 그래픽 아이콘입니다.Google Developers 문서에 이런곳에 사용된다고 합니다.  기기에 설치된 앱의 목록과 메인 스크린 앱에 대한 단축키를 나타낼 수 있음 런처 앱에서">
+<meta property="og:description" content="Hyperledger fabric samples를 공부하는데 공부 이력과 자료를 남겨야겠다고 생각했습니다. 이번에 Github에 저장소를 만들고 로컬에 있는 파일들을 올려 관리하는 방법을 설명하려합니다.   Github 로그인  우측 상단 [+] &gt; New repository  Create a new repository 정보 입력  생성된 HTTPS">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://dev-sawd.github.io/2018/06/26/Android-Launcher-Icons/3.png">
-<meta property="og:image" content="https://dev-sawd.github.io/2018/06/26/Android-Launcher-Icons/2.png">
-<meta property="og:image" content="https://dev-sawd.github.io/2018/06/26/Android-Launcher-Icons/1.png">
-<meta property="article:published_time" content="2018-06-26T11:10:33.000Z">
-<meta property="article:modified_time" content="2020-05-13T01:28:08.526Z">
+<meta property="og:image" content="https://dev-sawd.github.io/2020/05/16/Github-connect-remote-repository/01.PNG">
+<meta property="og:image" content="https://dev-sawd.github.io/2020/05/16/Github-connect-remote-repository/02.PNG">
+<meta property="article:published_time" content="2020-05-16T02:22:09.000Z">
+<meta property="article:modified_time" content="2020-05-16T02:43:46.517Z">
 <meta property="article:author" content="SAWD">
-<meta property="article:tag" content="TIL">
+<meta property="article:tag" content="Github">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://dev-sawd.github.io/2018/06/26/Android-Launcher-Icons/3.png">
+<meta name="twitter:image" content="https://dev-sawd.github.io/2020/05/16/Github-connect-remote-repository/01.PNG">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
@@ -143,59 +142,61 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        <article id="post-Android-Launcher-Icons"
+        <article id="post-Github-connect-remote-repository"
   class="post white-box article-type-post"
   itemscope itemprop="blogPost">
 	<section class='meta'>
 	<h2 class="title">
-  	<a href="/2018/06/26/Android-Launcher-Icons/">
-    	[Android] Launcher Icons
+  	<a href="/2020/05/16/Github-connect-remote-repository/">
+    	[Github] 원격 저장소 연결
     </a>
   </h2>
 	<time>
-	  Jun 26, 2018
+	  May 16, 2020
 	</time>
 	
-    
-    <div class='cats'>
-        <a href="/categories/Android/">Android</a>
-    </div>
-
 	</section>
 	
-		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Launcher-Icons"><span class="toc-number">1.</span> <span class="toc-text">Launcher Icons</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Adaptive-Icons"><span class="toc-number">2.</span> <span class="toc-text">Adaptive Icons</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#등록-방법"><span class="toc-number">3.</span> <span class="toc-text">등록 방법</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#이전과는-어떻게-다른가"><span class="toc-number">4.</span> <span class="toc-text">이전과는 어떻게 다른가?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#마무리"><span class="toc-number">5.</span> <span class="toc-text">마무리</span></a></li></ol></section>
+		<section class="toc-wrapper"></section>
 	
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<p>이전에도 런쳐 아이콘을 등록한 적이 있지만 최근에 Android Studio에서 바뀐점이 있어 포스팅합니다.</p>
-<h1 id="Launcher-Icons"><a href="#Launcher-Icons" class="headerlink" title="Launcher Icons"></a>Launcher Icons</h1><p>런처 아이콘은 사용자에게 앱을 대표하여 보여주는 그래픽 아이콘입니다.<br>Google Developers 문서에 이런곳에 사용된다고 합니다.</p>
-<blockquote><ol>
-<li>기기에 설치된 앱의 목록과 메인 스크린</li>
-<li>앱에 대한 단축키를 나타낼 수 있음</li>
-<li>런처 앱에서 사용할 수 있음</li>
-<li>앱 첫인상을 뚜렷이 심어줄 수 있음</li>
-<li>사용자가 Google Play에서 앱을 찾는데 도움을 줄 수 있음</li>
-</ol>
-</blockquote>
-<a id="more"></a>
-<h1 id="Adaptive-Icons"><a href="#Adaptive-Icons" class="headerlink" title="Adaptive Icons"></a>Adaptive Icons</h1><p>안드로이드 O에서 새로운 아이콘 포맷이 추가되었습니다.<br>어댑티브 아이콘이라 불리는 이 포멧은 다양한 장치 모델에 다양한 모양을 표시할 수 있는 아이콘입니다.</p>
-<h1 id="등록-방법"><a href="#등록-방법" class="headerlink" title="등록 방법"></a>등록 방법</h1><p>주로 Image Asset Studio를 이용해서 적용합니다.<br>프로젝트 우클릭 &gt; New &gt; Image Asset으로 실행할 수 있습니다.</p>
-<img src="/2018/06/26/Android-Launcher-Icons/3.png" class="">
-
-<p>원하는 아이콘 이미지를 선택하고 가이드라인에 맞춰 Resize를 조절하면 됩니다.</p>
-<img src="/2018/06/26/Android-Launcher-Icons/2.png" class="">
-
-<h1 id="이전과는-어떻게-다른가"><a href="#이전과는-어떻게-다른가" class="headerlink" title="이전과는 어떻게 다른가?"></a>이전과는 어떻게 다른가?</h1><p>사실 이전 버전 Legacy도 등록이 가능합니다.<br><del>딱히 사용할 일이 없어졌지만요.</del><br>Icon Type에서 Launcher Icons (Legacy only)를 선택화면 됩니다.</p>
-<p>일단 스크린샷은 아래와 같습니다.</p>
-<img src="/2018/06/26/Android-Launcher-Icons/1.png" class="">
-<p>비슷하지만 어딘가 단조롭습니다.<br>위에서 사용한 Adaptive Icons로 등록해도 이전 Legacy Icons들도 잘 적용되기 때문에<br>딱히 사용할 필요는 없어 보입니다.<br>제가 가진 가장 옛버전인 galaxy Note 3(5.0)에서도 에쁘게 잘 적용되어 보였습니다.</p>
-<h1 id="마무리"><a href="#마무리" class="headerlink" title="마무리"></a>마무리</h1><p>제조사도 버전도 다양한 기기들을 지원하기 위한 Google의 노력이 엿보입니다.<br>하지만 가끔 모델, 해상도, 안드로이드 버전에 의해 생기는 이슈는 개발자로 하여금 까다롭고 리소스가 너무 많이 투입되는 작업입니다.<br>계속해서 안드로이드의 하위 버전 호환과 안정화를 위해 힘써줬으면 하는 바램입니다.</p>
+    	<p>Hyperledger fabric samples를 공부하는데 공부 이력과 자료를 남겨야겠다고 생각했습니다.</p>
+<p>이번에 Github에 저장소를 만들고 로컬에 있는 파일들을 올려 관리하는 방법을 설명하려합니다.</p>
+<hr>
+<ul>
+<li><p>Github 로그인</p>
+</li>
+<li><p>우측 상단 [+] &gt; New repository</p>
+</li>
+<li><p>Create a new repository 정보 입력</p>
+</li>
+<li><p>생성된 HTTPS 주소 확인</p>
+<img src="/2020/05/16/Github-connect-remote-repository/01.PNG" class=""></li>
+<li><p>저장하고자 하는 로컬 폴더로 이동</p>
+</li>
+<li><p>git 저장소 생성</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure></li>
+<li><p>원격 저장소에 연결</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add origin [생성된 HTTPS 주소]</span><br></pre></td></tr></table></figure></li>
+<li><p>Git으로 관리하고자 하는 현재 폴더의 자료를 지정</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git add .</span><br></pre></td></tr></table></figure></li>
+<li><p>로컬 저장소에 커밋</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m &quot;Project init&quot;</span><br></pre></td></tr></table></figure></li>
+<li><p>원격 저장소에 업로드</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
+<p>이 과정에서 github 계정과 비밀번호를 입력</p>
+</li>
+<li><p>원격 저장소 확인</p>
+<img src="/2020/05/16/Github-connect-remote-repository/02.PNG" class="">
+</li>
+</ul>
 
   	</div>
 	  
 	  <div class="article-tags tags">
       
-        <a href="/tags/TIL/">TIL</a>
+        <a href="/tags/Github/">Github</a>
       
 	  </div>
     
@@ -203,13 +204,9 @@
 	
 		<div class="art-item-footer">
 				
-					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2018/06/27/ETC-Setting-root-url-in-HEXO/" rel="prev"  title="[ETC] Setting root url in HEXO">
-						[ETC] Setting root url in HEXO 
-					</a></span>
 				
-				
-					<span class="art-item-right">next：<a href="/2018/06/26/Android-About-ConstraintLayout/" rel="next"  title="[Android] About ConstraintLayout">
-						[Android] About ConstraintLayout
+					<span class="art-item-right">next：<a href="/2020/05/15/Golang-Random-Unique-String/" rel="next"  title="[Golang] Random Unique String">
+						[Golang] Random Unique String
 					</a><i class="icon icon-chevron-thin-right"></i></span>
 				
 		</div>
@@ -223,7 +220,7 @@
 </article>
 <script>
 	window.subData = {
-		title: '[Android] Launcher Icons',
+		title: '[Github] 원격 저장소 연결',
 		tools: true
 	}
 </script>
@@ -299,7 +296,7 @@
 <script>
   var disqus_shortname = 'devsawd';
   
-  var disqus_url = 'https://dev-sawd.github.io/2018/06/26/Android-Launcher-Icons/';
+  var disqus_url = 'https://dev-sawd.github.io/2020/05/16/Github-connect-remote-repository/';
   
   (function(){
     var dsq = document.createElement('script');
