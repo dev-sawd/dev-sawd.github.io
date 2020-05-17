@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>SAWD</title>
+  <title>[MacOS] tree command | SAWD</title>
   <meta name="description" content="시간이 나야지..." />
   <meta name="keywords" content="" />
   <meta name="HandheldFriendly" content="True" />
@@ -12,14 +12,17 @@
   <link rel="shortcut icon" href="/images/favicon.png">
   <link rel="alternate" href="/atom.xml" title="SAWD">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="시간이 나야지...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SAWD">
-<meta property="og:url" content="https://dev-sawd.github.io/index.html">
+  <meta name="description" content="최근 터미널에서 작업을 자주 하고있는데 폴더 구조를 한번에 봐야하는 경우가 자주 있습니다.전부터 tree 명령어를 알고 있었지만 자주 사용하지 않았는데 이번에 사용해보기 위해 설치했습니다. MacOS에서 tree를 설치하기 위해서는 brew를 이용해서 설치합니다.먼저 터미널을 열어 brew가 설치되어있는지 버전 명령어를 실행해봅니다. 123$ brew -v">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[MacOS] tree command">
+<meta property="og:url" content="https://dev-sawd.github.io/2020/05/17/MacOS-tree-command/index.html">
 <meta property="og:site_name" content="SAWD">
-<meta property="og:description" content="시간이 나야지...">
+<meta property="og:description" content="최근 터미널에서 작업을 자주 하고있는데 폴더 구조를 한번에 봐야하는 경우가 자주 있습니다.전부터 tree 명령어를 알고 있었지만 자주 사용하지 않았는데 이번에 사용해보기 위해 설치했습니다. MacOS에서 tree를 설치하기 위해서는 brew를 이용해서 설치합니다.먼저 터미널을 열어 brew가 설치되어있는지 버전 명령어를 실행해봅니다. 123$ brew -v">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-17T01:23:24.000Z">
+<meta property="article:modified_time" content="2020-05-17T01:39:20.690Z">
 <meta property="article:author" content="SAWD">
+<meta property="article:tag" content="MacOS">
 <meta name="twitter:card" content="summary">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
@@ -136,26 +139,26 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        
-<section class="post-list">
+        <article id="post-MacOS-tree-command"
+  class="post white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<section class='meta'>
+	<h2 class="title">
+  	<a href="/2020/05/17/MacOS-tree-command/">
+    	[MacOS] tree command
+    </a>
+  </h2>
+	<time>
+	  May 17, 2020
+	</time>
 	
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/05/17/MacOS-tree-command/">
-        [MacOS] tree command
-      </a>
-    </h2>
-    
-    <time>
-      May 17, 2020
-    </time>
-		
-  </section>
-  <section class="article typo">
-	  <p>최근 터미널에서 작업을 자주 하고있는데 폴더 구조를 한번에 봐야하는 경우가 자주 있습니다.<br>전부터 tree 명령어를 알고 있었지만 자주 사용하지 않았는데 이번에 사용해보기 위해 설치했습니다.</p>
+	</section>
+	
+		<section class="toc-wrapper"></section>
+	
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>최근 터미널에서 작업을 자주 하고있는데 폴더 구조를 한번에 봐야하는 경우가 자주 있습니다.<br>전부터 tree 명령어를 알고 있었지만 자주 사용하지 않았는데 이번에 사용해보기 위해 설치했습니다.</p>
 <p>MacOS에서 tree를 설치하기 위해서는 brew를 이용해서 설치합니다.<br>먼저 터미널을 열어 brew가 설치되어있는지 버전 명령어를 실행해봅니다.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ brew -v</span><br><span class="line">Homebrew 2.2.16</span><br><span class="line">Homebrew&#x2F;homebrew-core (git revision ffef; last commit 2020-05-17)</span><br></pre></td></tr></table></figure>
 
@@ -173,432 +176,38 @@
 <p>이제 원하는 폴더에서 tree 명령어를 입력하시면 해당 폴더의 하위 폴더 구조를 볼 수 있습니다.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">$ tree</span><br><span class="line">.</span><br><span class="line">|-- README.md</span><br><span class="line">|-- chaincode</span><br><span class="line">|   |-- abac</span><br><span class="line">|   |   &#96;-- go</span><br><span class="line">|   |       |-- abac.go</span><br><span class="line">|   |       &#96;-- vendor</span><br><span class="line">|   |           |-- github.com</span><br><span class="line">|   |           |   |-- golang</span><br><span class="line">|   |           |   |   &#96;-- protobuf</span><br><span class="line">|   |           |   |       |-- LICENSE</span><br><span class="line">|   |           |   |       &#96;-- proto</span><br><span class="line">|   |           |   |           |-- clone.go</span><br><span class="line">|   |           |   |           |-- decode.go</span><br><span class="line">|   |           |   |           |-- deprecated.go</span><br><span class="line">|   |           |   |           |-- discard.go</span><br><span class="line">|   |           |   |           |-- encode.go</span><br><span class="line">|   |           |   |           |-- equal.go</span><br><span class="line">|   |           |   |           |-- extensions.go</span><br><span class="line">|   |           |   |           |-- lib.go</span><br><span class="line">|   |           |   |           |-- message_set.go</span><br><span class="line">|   |           |   |           |-- pointer_reflect.go</span><br><span class="line">|   |           |   |           |-- pointer_unsafe.go</span><br><span class="line">|   |           |   |           |-- properties.go</span><br><span class="line">|   |           |   |           |-- table_marshal.go</span><br><span class="line">|   |           |   |           |-- table_merge.go</span><br><span class="line">|   |           |   |           |-- table_unmarshal.go</span><br><span class="line">|   |           |   |           |-- text.go</span><br><span class="line">|   |           |   |           &#96;-- text_parser.go</span><br><span class="line">|   |           |   |-- hyperledger</span><br><span class="line">|   |           |   |   &#96;-- fabric</span><br><span class="line">|   |           |   |       |-- LICENSE</span><br><span class="line">|   |           |   |       |-- core</span><br><span class="line">|   |           |   |       |   &#96;-- chaincode</span><br><span class="line">|   |           |   |       |       &#96;-- shim</span><br><span class="line">|   |           |   |       |           &#96;-- ext</span><br><span class="line">|   |           |   |       |               |-- attrmgr</span><br><span class="line">|   |           |   |       |               |   &#96;-- attrmgr.go</span><br><span class="line">|   |           |   |       |               &#96;-- cid</span><br><span class="line">|   |           |   |       |                   |-- README.md</span><br><span class="line">|   |           |   |       |                   |-- cid.go</span><br><span class="line">|   |           |   |       |                   &#96;-- interfaces.go</span><br><span class="line">|   |           |   |       &#96;-- protos</span><br><span class="line">|   |           |   |           &#96;-- msp</span><br><span class="line">|   |           |   |               |-- identities.pb.go</span><br><span class="line">|   |           |   |               |-- identities.proto</span><br><span class="line">|   |           |   |               |-- msp_config.go</span><br><span class="line">|   |           |   |               |-- msp_config.pb.go</span><br><span class="line">|   |           |   |               |-- msp_config.proto</span><br><span class="line">|   |           |   |               |-- msp_principal.go</span><br><span class="line">|   |           |   |               |-- msp_principal.pb.go</span><br><span class="line">|   |           |   |               &#96;-- msp_principal.proto</span><br><span class="line">|   |           |   &#96;-- pkg</span><br><span class="line">|   |           |       &#96;-- errors</span><br><span class="line">|   |           |           |-- LICENSE</span><br><span class="line">|   |           |           |-- README.md</span><br><span class="line">|   |           |           |-- appveyor.yml</span><br><span class="line">|   |           |           |-- errors.go</span><br><span class="line">|   |           |           &#96;-- stack.go</span><br><span class="line">|   |           &#96;-- vendor.json</span><br></pre></td></tr></table></figure>
 
-
-    
-    
-    
-	  <div class="full-width auto-padding tags">
+  	</div>
+	  
+	  <div class="article-tags tags">
       
         <a href="/tags/MacOS/">MacOS</a>
       
 	  </div>
     
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/05/16/Github-connect-remote-repository/">
-        [Github] 원격 저장소 연결
-      </a>
-    </h2>
-    
-    <time>
-      May 16, 2020
-    </time>
 		
-  </section>
-  <section class="article typo">
-	  <p>Hyperledger fabric samples를 공부하는데 공부 이력과 자료를 남겨야겠다고 생각했습니다.</p>
-<p>이번에 Github에 저장소를 만들고 로컬에 있는 파일들을 올려 관리하는 방법을 설명하려합니다.</p>
-<hr>
-<ul>
-<li><p>Github 로그인</p>
-</li>
-<li><p>우측 상단 [+] &gt; New repository</p>
-</li>
-<li><p>Create a new repository 정보 입력</p>
-</li>
-<li><p>생성된 HTTPS 주소 확인</p>
-<img src="/2020/05/16/Github-connect-remote-repository/01.PNG" class=""></li>
-<li><p>저장하고자 하는 로컬 폴더로 이동</p>
-</li>
-<li><p>git 저장소 생성</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git init</span><br></pre></td></tr></table></figure></li>
-<li><p>원격 저장소에 연결</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote add origin [생성된 HTTPS 주소]</span><br></pre></td></tr></table></figure></li>
-<li><p>Git으로 관리하고자 하는 현재 폴더의 자료를 지정</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git add .</span><br></pre></td></tr></table></figure></li>
-<li><p>로컬 저장소에 커밋</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit -m &quot;Project init&quot;</span><br></pre></td></tr></table></figure></li>
-<li><p>원격 저장소에 업로드</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push -u origin master</span><br></pre></td></tr></table></figure>
-<p>이 과정에서 github 계정과 비밀번호를 입력</p>
-</li>
-<li><p>원격 저장소 확인</p>
-<img src="/2020/05/16/Github-connect-remote-repository/02.PNG" class="">
-</li>
-</ul>
-
-
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/Github/">Github</a>
-      
-	  </div>
-    
-  </section>
+	
+		<div class="art-item-footer">
+				
+				
+					<span class="art-item-right">next：<a href="/2020/05/16/Github-connect-remote-repository/" rel="next"  title="[Github] 원격 저장소 연결">
+						[Github] 원격 저장소 연결
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+		<section id="comments">
+			<div id="disqus_thread"></div>
+		</section>
+	
 </article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/05/15/Golang-Random-Unique-String/">
-        [Golang] Random Unique String
-      </a>
-    </h2>
-    
-    <time>
-      May 15, 2020
-    </time>
-		
-  </section>
-  <section class="article typo">
-	  <p>체인코드를 개발하면서 Golang으로 유니크한 Random String을 생성할 필요가 있었습니다.</p>
-<p>Random은 조심해야할 부분이 몇가지 있는데 아래와 같습니다.</p>
-<ol>
-<li>Seed값</li>
-<li>고속의 동시 접속</li>
-</ol>
-<p>Seed는 주로 시각(time)을 인자로 사용합니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">	&quot;fmt&quot;</span><br><span class="line">	&quot;math&#x2F;rand&quot;</span><br><span class="line">	&quot;time&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">	rand.Seed(time.Now().UnixNano())</span><br><span class="line">	fmt.Println(rand.Int63())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>하지만 위와 같은 경우에는 Seed가 같은 값이 주어지게되면 rand.Int63()으로 생성된 값들은 일정한 규칙을 갖게</p>
-
-
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/Golang/">Golang</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/05/14/hello-world/">
-        [ETC] Hello world
-      </a>
-    </h2>
-    
-    <time>
-      May 14, 2020
-    </time>
-		
-  </section>
-  <section class="article typo">
-	  <p>오랜만에 이 블로그에 다시 포스팅하는군요..</p>
-<p>재작년부터 너무너무 바빠서 기술공부만 하느라 블로그는 머릿속에 떠오르지도 않았습니다.</p>
-<p>귀찮음을 이겨내고 지금까지 공부한것들을 토대로 천천히 다시 시작!</p>
-<p><del>그런데 마크다운부터 다시 공부해야하나…</del></p>
-<p>당장은 익숙해 지기 위해 HEXO 명령어를 여기에 메모해두어야겠습니다.</p>
-<hr>
-<p>hexo 서버 시작</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>새 포스트 작성</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new post post-name</span><br></pre></td></tr></table></figure>
-
-<p>배포</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy --generate</span><br></pre></td></tr></table></figure>
-
-
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/ETC/">ETC</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/07/26/Data-Structure-Linked-List-feat-ADT/">
-        [Data Structure] Linked List(feat. ADT)
-      </a>
-    </h2>
-    
-    <time>
-      Jul 26, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/Data-Structure/">Data Structure</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>오늘 내용은 연결리스트이지만 대부분은 ADT내용이네요.<br>다음시간에 연결리스트쪽을 더 자세하게 볼 수 있을 것 같습니다.</p>
-<img src="/2018/07/26/Data-Structure-Linked-List-feat-ADT/01.jpg" class="">
-<br>
-
-    
-	  <div class="readmore">
-      <a href="/2018/07/26/Data-Structure-Linked-List-feat-ADT/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/07/25/ETC-Performance-about-algorithms/">
-        [ETC] Performance about algorithms
-      </a>
-    </h2>
-    
-    <time>
-      Jul 25, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/ETC/">ETC</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>알고리즘 테스트에는 채점, 확인 프로그램이 사용됩니다.<br>이 입력값 대비 출력값이 올바른지(알고리즘 구조가 맞는지), 속도는 어느정도인지, 메모리는 얼마나 사용하는지 등..<br>만약 올바른 알고리즘이라도 속도나 메모리 사용을 초과하면 잘못된 풀이로 판단합니다.</p>
-<p>오늘은 알고리즘 테스트와 관련하여 속도에 대해서 이야기해볼가 합니다.</p>
-
-    
-	  <div class="readmore">
-      <a href="/2018/07/25/ETC-Performance-about-algorithms/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/07/20/ETC-svn-vs-git/">
-        [ETC] svn vs git
-      </a>
-    </h2>
-    
-    <time>
-      Jul 20, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/ETC/">ETC</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>이번 포스트는 형상관리에 대해서 적어볼까 합니다.<br>제 경험과 함께 공부하며 새롭게 알게된 사실도 같이 적습니다.</p>
-<h1 id="형상관리"><a href="#형상관리" class="headerlink" title="형상관리"></a>형상관리</h1><p>아마 프로그래밍을 배우고 어느정도 익혔을 어렸을때는 정확히 형상관리에 대해 알지 못했습니다.<br>9년전 3인 프로젝트를 진행해야 했는데, 그 프로젝트의 규모는 생각보다 괜찮은 편이였습니다.<br>저를 제외한 두 사람은 소스코드 관리에 대해서 고민할 수 밖에 없었고 저는 이러한 개념도 없을 초보 시절이였죠.</p>
-
-    
-	  <div class="readmore">
-      <a href="/2018/07/20/ETC-svn-vs-git/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/07/20/Android-Page-Indicator-with-Fragment/">
-        [Android] Page Indicator with Fragment
-      </a>
-    </h2>
-    
-    <time>
-      Jul 20, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/Android/">Android</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>오랜만에 또 포스팅 하는군요…<br>오늘은 GitHub의 라이브러리를 이용해 아래와 같은 것을 만들어볼까 합니다.</p>
-<img src="https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/preview_anim_drop.gif" class="">
-
-<p>기반 라이브러리는 PageIndicator이고 원본 주소는 아래와 같습니다.<br><a href="https://github.com/romandanylyk/PageIndicatorView" target="_blank" rel="noopener">https://github.com/romandanylyk/PageIndicatorView</a></p>
-<p>이 라이브러리를 사용하다가 샘플자체가 View로 되어있어서 이해하고 사용하기가 어려웠습니다.<br>마침 이전 강좌들에서 사용했던 Fragment를 이용해서 예제를 바꾸기로 했습니다.<br>라이브러리는 그대로 두고 샘플쪽 코드만 수정할겁니다.</p>
-
-    
-	  <div class="readmore">
-      <a href="/2018/07/20/Android-Page-Indicator-with-Fragment/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-        <a href="/tags/Example/">Example</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/07/15/Data-Structure-Recursion/">
-        [Data Structure] Recursion
-      </a>
-    </h2>
-    
-    <time>
-      Jul 15, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/Data-Structure/">Data Structure</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <h1 id="시작"><a href="#시작" class="headerlink" title="시작"></a>시작</h1><p>자료구조 두번째 포스팅입니다.<br>인트로보다 짧아서 부담이 덜하네요 ㅎㅎ..</p>
-<img src="/2018/07/15/Data-Structure-Recursion/1.jpg" class="">
-
-    
-	  <div class="readmore">
-      <a href="/2018/07/15/Data-Structure-Recursion/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/07/11/Data-Structure-Intro/">
-        [Data Structure] Intro
-      </a>
-    </h2>
-    
-    <time>
-      Jul 11, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/Data-Structure/">Data Structure</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <h1 id="시작"><a href="#시작" class="headerlink" title="시작"></a>시작</h1><p>사실 이 글이 올라간지 며칠 되었고, 작성된지는 더 오래되었는데..<br>스크린샷밖에 없던 포스트에서 글을 덧붙입니다.<br>최근에 스터디를 시작하면서 자료구조파트를 맡아서 정리, 발표하게 되었는데<br>그때 정리했던 내용과 제 개인적인 생각들이 많이 들어간 포스팅이라 할 수 있겠네요.</p>
-<h1 id="자료구조"><a href="#자료구조" class="headerlink" title="자료구조"></a>자료구조</h1><img src="/2018/07/11/Data-Structure-Intro/1.jpg" class="">
-
-    
-	  <div class="readmore">
-      <a href="/2018/07/11/Data-Structure-Intro/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-</section>
-
-
-  <nav id="page-nav">
-    
-    
-    <a class="next" rel="next" href="/page/2/">
-      <span class="text">Next</span>
-      <span class="icon icon-chevron-right"></span>
-    </a>
-    
-  </nav>
-  
+<script>
+	window.subData = {
+		title: '[MacOS] tree command',
+		tools: true
+	}
+</script>
 
       </div>
       <aside class='l_side'>
@@ -671,11 +280,13 @@
 <script>
   var disqus_shortname = 'devsawd';
   
+  var disqus_url = 'https://dev-sawd.github.io/2020/05/17/MacOS-tree-command/';
+  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>
