@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>[ETC] Shell Script 접속사 ;, &amp;, &amp;&amp;</title>
+      <link href="/2020/05/19/ETC-Shell-Script/"/>
+      <url>/2020/05/19/ETC-Shell-Script/</url>
+      
+        <content type="html"><![CDATA[<p>리눅스나 SSH로 접속해서 명령어를 실행하는 상황이 자주 생기고 있습니다.<br>그럴때마다 새로운 터미널에서 명령어를 순차적으로 반복해서 입력해야하는 번거로움도 동반합니다.<br>이럴때 shell script를 만들어 반복잡업을 줄일 수 있는데 이 포스트에서는 shell 명령어중에서도 <code>;</code> <code>&amp;</code> <code>&amp;&amp;</code>에 대해서 써보려합니다.</p><h2 id="amp-amp"><a href="#amp-amp" class="headerlink" title="&amp;&amp;"></a>&amp;&amp;</h2><p>순차적인 명령어를 제어하다보면 이전 명령어의 성공후 다음명령어를 실행하고, 실패하면 중지해야하는 경우가 있습니다.<br>이때 사용하는 접속사가 <code>&amp;&amp;</code> 입니다.</p><p>아래는 실행할 스크립트 정보입니다.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; script.sh</span><br><span class="line">mkdir test &amp;&amp; cd test &amp;&amp; touch test.txt</span><br></pre></td></tr></table></figure><p>mkdir test에서 오류가 나지 않을 경우 test폴더에 들어가 test.txt를 생성하게 됩니다.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">% sh script.sh</span><br><span class="line">% cd test</span><br><span class="line">test % ls</span><br><span class="line">test.txt</span><br></pre></td></tr></table></figure><p>만약 test라는 폴더가 이미 존재해 mkdir test에서 오류가 나지 않을 경우 test.txt파일을 만들지 않을것입니다.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">% sh script.sh</span><br><span class="line">mkdir: test: File exists</span><br><span class="line">% cd test</span><br><span class="line">% ls</span><br><span class="line">&#x2F;&#x2F; 생성된 파일이 없음</span><br></pre></td></tr></table></figure><h2 id="amp"><a href="#amp" class="headerlink" title="&amp;"></a>&amp;</h2><p>&amp;는 해당 명령어를 백그라운드에서 실행할 때 사용합니다.</p><h2 id=""><a href="#" class="headerlink" title=";"></a>;</h2><p>;는 여러 명령어를 한줄에 서술할때 앞의 명령어의 성공여부에 상관없이 다음 명령어를 실행합니다.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; script.sh</span><br><span class="line">mkdir test; cd test; touch test.txt</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">% sh script.sh</span><br><span class="line">mkdir: test: File exists</span><br><span class="line">% cd test</span><br><span class="line">test % ls</span><br><span class="line">test.txt</span><br></pre></td></tr></table></figure><p>명령어의 모음으로 스크립트를 작성하게 되면 생각보다 빈번하게 사용하는 접속사입니다.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> ETC </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> TIL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>[MacOS] tree command</title>
       <link href="/2020/05/17/MacOS-tree-command/"/>
       <url>/2020/05/17/MacOS-tree-command/</url>
