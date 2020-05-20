@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>Tag: TIL | SAWD</title>
+  <title>[Golang] JSON marshal/unmarshal시 값차이 발생 | SAWD</title>
   <meta name="description" content="시간이 나야지..." />
   <meta name="keywords" content="" />
   <meta name="HandheldFriendly" content="True" />
@@ -12,14 +12,17 @@
   <link rel="shortcut icon" href="/images/favicon.png">
   <link rel="alternate" href="/atom.xml" title="SAWD">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="시간이 나야지...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="SAWD">
-<meta property="og:url" content="https://dev-sawd.github.io/tags/TIL/index.html">
+  <meta name="description" content="어떤 정보를 주고 받을때 JSON 형태만큼 자주 사용 하는 포멧도 없습니다.Golang으로 JSON을 처리하기 위해 데이터를 JSON으로 Marshal, Unmarshal을 거칩니다.이번 포스트에서는 큰 숫자값에 대해서 Marshal, Unmarshal시 값의 차이가 생겼던 경험과 해결에 대해서 적습니다. Golang에서 map형태를 만드는 방법123456">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Golang] JSON marshal&#x2F;unmarshal시 값차이 발생">
+<meta property="og:url" content="https://dev-sawd.github.io/2020/05/20/Golang-difference-value-when-json-marshal-unmarshal/index.html">
 <meta property="og:site_name" content="SAWD">
-<meta property="og:description" content="시간이 나야지...">
+<meta property="og:description" content="어떤 정보를 주고 받을때 JSON 형태만큼 자주 사용 하는 포멧도 없습니다.Golang으로 JSON을 처리하기 위해 데이터를 JSON으로 Marshal, Unmarshal을 거칩니다.이번 포스트에서는 큰 숫자값에 대해서 Marshal, Unmarshal시 값의 차이가 생겼던 경험과 해결에 대해서 적습니다. Golang에서 map형태를 만드는 방법123456">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-05-20T12:17:40.000Z">
+<meta property="article:modified_time" content="2020-05-20T12:40:24.724Z">
 <meta property="article:author" content="SAWD">
+<meta property="article:tag" content="TIL">
 <meta name="twitter:card" content="summary">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
@@ -136,35 +139,31 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        
-  <script>
-    window.subData= { title:'Tag : TIL'}
-  </script>
-
-<section class="post-list">
+        <article id="post-Golang-difference-value-when-json-marshal-unmarshal"
+  class="post white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<section class='meta'>
+	<h2 class="title">
+  	<a href="/2020/05/20/Golang-difference-value-when-json-marshal-unmarshal/">
+    	[Golang] JSON marshal/unmarshal시 값차이 발생
+    </a>
+  </h2>
+	<time>
+	  May 20, 2020
+	</time>
 	
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/05/20/Golang-difference-value-when-json-marshal-unmarshal/">
-        [Golang] JSON marshal/unmarshal시 값차이 발생
-      </a>
-    </h2>
-    
-    <time>
-      May 20, 2020
-    </time>
-		
     
     <div class='cats'>
         <a href="/categories/Golang/">Golang</a>
     </div>
 
-  </section>
-  <section class="article typo">
-	  <p>어떤 정보를 주고 받을때 JSON 형태만큼 자주 사용 하는 포멧도 없습니다.<br>Golang으로 JSON을 처리하기 위해 데이터를 JSON으로 Marshal, Unmarshal을 거칩니다.<br>이번 포스트에서는 큰 숫자값에 대해서 Marshal, Unmarshal시 값의 차이가 생겼던 경험과 해결에 대해서 적습니다.</p>
+	</section>
+	
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Golang에서-map형태를-만드는-방법"><span class="toc-number">1.</span> <span class="toc-text">Golang에서 map형태를 만드는 방법</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Json-marshal"><span class="toc-number">2.</span> <span class="toc-text">Json marshal</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Json-unmarshal"><span class="toc-number">3.</span> <span class="toc-text">Json unmarshal</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#뭐"><span class="toc-number">4.</span> <span class="toc-text">뭐?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#이-에러는를-해석해보면"><span class="toc-number">4.1.</span> <span class="toc-text">이 에러는를 해석해보면</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#강제로-int64-형변환-후-값"><span class="toc-number">5.</span> <span class="toc-text">강제로 int64 형변환 후 값</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#산넘어-산"><span class="toc-number">6.</span> <span class="toc-text">산넘어 산</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#이-포스트는-작성중에-있습니다"><span class="toc-number"></span> <span class="toc-text">이 포스트는 작성중에 있습니다.</span></a></section>
+	
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>어떤 정보를 주고 받을때 JSON 형태만큼 자주 사용 하는 포멧도 없습니다.<br>Golang으로 JSON을 처리하기 위해 데이터를 JSON으로 Marshal, Unmarshal을 거칩니다.<br>이번 포스트에서는 큰 숫자값에 대해서 Marshal, Unmarshal시 값의 차이가 생겼던 경험과 해결에 대해서 적습니다.</p>
 <h2 id="Golang에서-map형태를-만드는-방법"><a href="#Golang에서-map형태를-만드는-방법" class="headerlink" title="Golang에서 map형태를 만드는 방법"></a>Golang에서 map형태를 만드는 방법</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">   <span class="string">"encoding/json"</span></span><br><span class="line">   <span class="string">"fmt"</span></span><br><span class="line">   <span class="string">"math"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   maxInt64 := math.MaxInt64</span><br><span class="line">   mapObject := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">   mapObject[<span class="string">"int64"</span>] = maxInt64</span><br><span class="line">   fmt.Println(mapObject)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 결과</span><br><span class="line">map[int64:9223372036854775807]</span><br></pre></td></tr></table></figure>
@@ -195,425 +194,38 @@
 </blockquote>
 <p>int64의 최대 값에서 갑자기 음수가 되었다는 것은 Overflow가 발생한 것으로 보입니다.<br>이것은 아무래도 큰 문제를 야기합니다.</p>
 <h1 id="이-포스트는-작성중에-있습니다"><a href="#이-포스트는-작성중에-있습니다" class="headerlink" title="이 포스트는 작성중에 있습니다."></a>이 포스트는 작성중에 있습니다.</h1>
-
-    
-    
-    
-	  <div class="full-width auto-padding tags">
+  	</div>
+	  
+	  <div class="article-tags tags">
       
         <a href="/tags/TIL/">TIL</a>
       
 	  </div>
     
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/05/19/ETC-Shell-Script/">
-        [ETC] Shell Script 접속사 ;, &amp;, &amp;&amp;
-      </a>
-    </h2>
-    
-    <time>
-      May 19, 2020
-    </time>
 		
-    
-    <div class='cats'>
-        <a href="/categories/ETC/">ETC</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>리눅스나 SSH로 접속해서 명령어를 실행하는 상황이 자주 생기고 있습니다.<br>그럴때마다 새로운 터미널에서 명령어를 순차적으로 반복해서 입력해야하는 번거로움도 동반합니다.<br>이럴때 shell script를 만들어 반복잡업을 줄일 수 있는데 이 포스트에서는 shell 명령어중에서도 <code>;</code> <code>&amp;</code> <code>&amp;&amp;</code>에 대해서 써보려합니다.</p>
-<h2 id="amp-amp"><a href="#amp-amp" class="headerlink" title="&amp;&amp;"></a>&amp;&amp;</h2><p>순차적인 명령어를 제어하다보면 이전 명령어의 성공후 다음명령어를 실행하고, 실패하면 중지해야하는 경우가 있습니다.<br>이때 사용하는 접속사가 <code>&amp;&amp;</code> 입니다.</p>
-<p>아래는 실행할 스크립트 정보입니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; script.sh</span><br><span class="line">mkdir test &amp;&amp; cd test &amp;&amp; touch test.txt</span><br></pre></td></tr></table></figure>
-
-<p>mkdir test에서 오류가 나지 않을 경우 test폴더에 들어가 test.txt를 생성하게 됩니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">% sh script.sh</span><br><span class="line">% cd test</span><br><span class="line">test % ls</span><br><span class="line">test.txt</span><br></pre></td></tr></table></figure>
-
-<p>만약 test라는 폴더가 이미 존재해 mkdir test에서 오류가 나지 않을 경우 test.txt파일을 만들지 않을것입니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">% sh script.sh</span><br><span class="line">mkdir: test: File exists</span><br><span class="line">% cd test</span><br><span class="line">% ls</span><br><span class="line">&#x2F;&#x2F; 생성된 파일이 없음</span><br></pre></td></tr></table></figure>
-<h2 id="amp"><a href="#amp" class="headerlink" title="&amp;"></a>&amp;</h2><p>&amp;는 해당 명령어를 백그라운드에서 실행할 때 사용합니다.</p>
-<h2 id=""><a href="#" class="headerlink" title=";"></a>;</h2><p>;는 여러 명령어를 한줄에 서술할때 앞의 명령어의 성공여부에 상관없이 다음 명령어를 실행합니다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; script.sh</span><br><span class="line">mkdir test; cd test; touch test.txt</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">% sh script.sh</span><br><span class="line">mkdir: test: File exists</span><br><span class="line">% cd test</span><br><span class="line">test % ls</span><br><span class="line">test.txt</span><br></pre></td></tr></table></figure>
-
-<p>명령어의 모음으로 스크립트를 작성하게 되면 생각보다 빈번하게 사용하는 접속사입니다.</p>
-
-
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-	  </div>
-    
-  </section>
+	
+		<div class="art-item-footer">
+				
+				
+					<span class="art-item-right">next：<a href="/2020/05/19/ETC-Shell-Script/" rel="next"  title="[ETC] Shell Script 접속사 ;, &amp;, &amp;&amp;">
+						[ETC] Shell Script 접속사 ;, &amp;, &amp;&amp;
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+		<section id="comments">
+			<div id="disqus_thread"></div>
+		</section>
+	
 </article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/07/26/Data-Structure-Linked-List-feat-ADT/">
-        [Data Structure] Linked List(feat. ADT)
-      </a>
-    </h2>
-    
-    <time>
-      Jul 26, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/Data-Structure/">Data Structure</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>오늘 내용은 연결리스트이지만 대부분은 ADT내용이네요.<br>다음시간에 연결리스트쪽을 더 자세하게 볼 수 있을 것 같습니다.</p>
-<img src="/2018/07/26/Data-Structure-Linked-List-feat-ADT/01.jpg" class="">
-<br>
-
-    
-	  <div class="readmore">
-      <a href="/2018/07/26/Data-Structure-Linked-List-feat-ADT/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/07/25/ETC-Performance-about-algorithms/">
-        [ETC] Performance about algorithms
-      </a>
-    </h2>
-    
-    <time>
-      Jul 25, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/ETC/">ETC</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>알고리즘 테스트에는 채점, 확인 프로그램이 사용됩니다.<br>이 입력값 대비 출력값이 올바른지(알고리즘 구조가 맞는지), 속도는 어느정도인지, 메모리는 얼마나 사용하는지 등..<br>만약 올바른 알고리즘이라도 속도나 메모리 사용을 초과하면 잘못된 풀이로 판단합니다.</p>
-<p>오늘은 알고리즘 테스트와 관련하여 속도에 대해서 이야기해볼가 합니다.</p>
-
-    
-	  <div class="readmore">
-      <a href="/2018/07/25/ETC-Performance-about-algorithms/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/07/20/ETC-svn-vs-git/">
-        [ETC] svn vs git
-      </a>
-    </h2>
-    
-    <time>
-      Jul 20, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/ETC/">ETC</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>이번 포스트는 형상관리에 대해서 적어볼까 합니다.<br>제 경험과 함께 공부하며 새롭게 알게된 사실도 같이 적습니다.</p>
-<h1 id="형상관리"><a href="#형상관리" class="headerlink" title="형상관리"></a>형상관리</h1><p>아마 프로그래밍을 배우고 어느정도 익혔을 어렸을때는 정확히 형상관리에 대해 알지 못했습니다.<br>9년전 3인 프로젝트를 진행해야 했는데, 그 프로젝트의 규모는 생각보다 괜찮은 편이였습니다.<br>저를 제외한 두 사람은 소스코드 관리에 대해서 고민할 수 밖에 없었고 저는 이러한 개념도 없을 초보 시절이였죠.</p>
-
-    
-	  <div class="readmore">
-      <a href="/2018/07/20/ETC-svn-vs-git/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/07/20/Android-Page-Indicator-with-Fragment/">
-        [Android] Page Indicator with Fragment
-      </a>
-    </h2>
-    
-    <time>
-      Jul 20, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/Android/">Android</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>오랜만에 또 포스팅 하는군요…<br>오늘은 GitHub의 라이브러리를 이용해 아래와 같은 것을 만들어볼까 합니다.</p>
-<img src="https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/preview_anim_drop.gif" class="">
-
-<p>기반 라이브러리는 PageIndicator이고 원본 주소는 아래와 같습니다.<br><a href="https://github.com/romandanylyk/PageIndicatorView" target="_blank" rel="noopener">https://github.com/romandanylyk/PageIndicatorView</a></p>
-<p>이 라이브러리를 사용하다가 샘플자체가 View로 되어있어서 이해하고 사용하기가 어려웠습니다.<br>마침 이전 강좌들에서 사용했던 Fragment를 이용해서 예제를 바꾸기로 했습니다.<br>라이브러리는 그대로 두고 샘플쪽 코드만 수정할겁니다.</p>
-
-    
-	  <div class="readmore">
-      <a href="/2018/07/20/Android-Page-Indicator-with-Fragment/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-        <a href="/tags/Example/">Example</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/07/15/Data-Structure-Recursion/">
-        [Data Structure] Recursion
-      </a>
-    </h2>
-    
-    <time>
-      Jul 15, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/Data-Structure/">Data Structure</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <h1 id="시작"><a href="#시작" class="headerlink" title="시작"></a>시작</h1><p>자료구조 두번째 포스팅입니다.<br>인트로보다 짧아서 부담이 덜하네요 ㅎㅎ..</p>
-<img src="/2018/07/15/Data-Structure-Recursion/1.jpg" class="">
-
-    
-	  <div class="readmore">
-      <a href="/2018/07/15/Data-Structure-Recursion/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/07/11/Data-Structure-Intro/">
-        [Data Structure] Intro
-      </a>
-    </h2>
-    
-    <time>
-      Jul 11, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/Data-Structure/">Data Structure</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <h1 id="시작"><a href="#시작" class="headerlink" title="시작"></a>시작</h1><p>사실 이 글이 올라간지 며칠 되었고, 작성된지는 더 오래되었는데..<br>스크린샷밖에 없던 포스트에서 글을 덧붙입니다.<br>최근에 스터디를 시작하면서 자료구조파트를 맡아서 정리, 발표하게 되었는데<br>그때 정리했던 내용과 제 개인적인 생각들이 많이 들어간 포스팅이라 할 수 있겠네요.</p>
-<h1 id="자료구조"><a href="#자료구조" class="headerlink" title="자료구조"></a>자료구조</h1><img src="/2018/07/11/Data-Structure-Intro/1.jpg" class="">
-
-    
-	  <div class="readmore">
-      <a href="/2018/07/11/Data-Structure-Intro/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/07/02/Android-Fragment-with-ViewPager-Example/">
-        [Android] Fragment with ViewPager Example
-      </a>
-    </h2>
-    
-    <time>
-      Jul 2, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/Android/">Android</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>오늘은 며칠동안 틈틈이 준비한 ViewPager와 Fragment를 이용한 화면전환 예제를 만들어보려 합니다.<br>며칠동안이라 했지만 거창하게 만들 시간은 없어서 정말 간단히 하려고 노력했습니다.</p>
-<h1 id="ViewPager"><a href="#ViewPager" class="headerlink" title="ViewPager"></a>ViewPager</h1><p>뷰페이저란 사용자가 Swipe나 Tab 등을 통해서 현재 보는 화면 다음 화면을 Smooth하게 시각적으로 보여주도록 도와줍니다.<br>주로 Application을 설치하고 튜토리얼을 진행하는 과정에서 좌우로 휙휙 넘기면서 설명하는 곳에서 많이 사용합니다.</p>
-<h1 id="화면구성"><a href="#화면구성" class="headerlink" title="화면구성"></a>화면구성</h1><p>우리가 만들 화면은 아래와같이 3 페이지입니다.</p>
-<img src="/2018/07/02/Android-Fragment-with-ViewPager-Example/1.png" class="">
-<p>각 페이지를 색깔로 구분하였고, 각각의 Fragment를 따로 작성하였습니다.</p>
-
-    
-	  <div class="readmore">
-      <a href="/2018/07/02/Android-Fragment-with-ViewPager-Example/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-        <a href="/tags/Example/">Example</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/06/27/iOS-About-Function/">
-        [iOS] About Function (feat. method)
-      </a>
-    </h2>
-    
-    <time>
-      Jun 27, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/iOS/">iOS</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>주로 Java를 사용하다가 iOS를 공부하는데 Objective-C를 공부하면서 함수라는 용어가 나와서 모호했던 개념을 다잡고자 정리합니다.<br>이번 포스트는 함수에 대해 알아보면서 메소드와이 차이도 간략하게 알아볼게요.</p>
-<h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><p>함수와 메소드는 모두 코드 조각을 지칭하는 용어이지만 몇가지 차이점이 있습니다.<br>함수는 코드의 최상위 레벨에 선언되고, 메소드는 특정 형식 내부에 선언됩니다.<br>함수는 함수 이름만으로 호출 할 수 있지만, 메소드는 반드시 연관된 이름이나 인스턴스를 통해 호출해야 합니다.</p>
-
-    
-	  <div class="readmore">
-      <a href="/2018/06/27/iOS-About-Function/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
-</section>
-
-
-  <nav id="page-nav">
-    
-    
-    <a class="next" rel="next" href="/tags/TIL/page/2/">
-      <span class="text">Next</span>
-      <span class="icon icon-chevron-right"></span>
-    </a>
-    
-  </nav>
-  
+<script>
+	window.subData = {
+		title: '[Golang] JSON marshal/unmarshal시 값차이 발생',
+		tools: true
+	}
+</script>
 
       </div>
       <aside class='l_side'>
@@ -692,11 +304,13 @@
 <script>
   var disqus_shortname = 'devsawd';
   
+  var disqus_url = 'https://dev-sawd.github.io/2020/05/20/Golang-difference-value-when-json-marshal-unmarshal/';
+  
   (function(){
     var dsq = document.createElement('script');
     dsq.type = 'text/javascript';
     dsq.async = true;
-    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
   })();
 </script>

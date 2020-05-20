@@ -144,6 +144,72 @@
   <section class="meta">
     
     <h2 class="title">
+      <a href="/2020/05/20/Golang-difference-value-when-json-marshal-unmarshal/">
+        [Golang] JSON marshal/unmarshal시 값차이 발생
+      </a>
+    </h2>
+    
+    <time>
+      May 20, 2020
+    </time>
+		
+    
+    <div class='cats'>
+        <a href="/categories/Golang/">Golang</a>
+    </div>
+
+  </section>
+  <section class="article typo">
+	  <p>어떤 정보를 주고 받을때 JSON 형태만큼 자주 사용 하는 포멧도 없습니다.<br>Golang으로 JSON을 처리하기 위해 데이터를 JSON으로 Marshal, Unmarshal을 거칩니다.<br>이번 포스트에서는 큰 숫자값에 대해서 Marshal, Unmarshal시 값의 차이가 생겼던 경험과 해결에 대해서 적습니다.</p>
+<h2 id="Golang에서-map형태를-만드는-방법"><a href="#Golang에서-map형태를-만드는-방법" class="headerlink" title="Golang에서 map형태를 만드는 방법"></a>Golang에서 map형태를 만드는 방법</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">   <span class="string">"encoding/json"</span></span><br><span class="line">   <span class="string">"fmt"</span></span><br><span class="line">   <span class="string">"math"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   maxInt64 := math.MaxInt64</span><br><span class="line">   mapObject := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">   mapObject[<span class="string">"int64"</span>] = maxInt64</span><br><span class="line">   fmt.Println(mapObject)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 결과</span><br><span class="line">map[int64:9223372036854775807]</span><br></pre></td></tr></table></figure>
+
+<p>API를 만드는 입장에서 연동하는 외부의 JSON의 모든 자료형을 처리해야 하는 경우가 많기 때문에<br><code>map[string]interface{}</code>로 지정해서 <code>map</code>의 <code>key</code>는 <code>string</code>이고 value는 모든 자료형을 담을 수 있도록 <code>interface{}</code>로 지정합니다.<br>이 말은 vlaue의 자료형을 명시하지 않는다는 것과 같습니다.<br>이렇게 만들어진 데이터를 <code>byte array</code>로 <code>marshal</code> 작업을 통해 전송하는게 일반적입니다.</p>
+<h2 id="Json-marshal"><a href="#Json-marshal" class="headerlink" title="Json marshal"></a>Json marshal</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">   <span class="string">"encoding/json"</span></span><br><span class="line">   <span class="string">"fmt"</span></span><br><span class="line">   <span class="string">"math"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   maxInt64 := math.MaxInt64</span><br><span class="line">   mapObject := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">   mapObject[<span class="string">"int64"</span>] = maxInt64</span><br><span class="line">   bytes, _ := json.Marshal(mapObject)</span><br><span class="line">   fmt.Println(bytes)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 결과</span><br><span class="line">[123 34 105 110 116 54 52 34 58 57 50 50 51 51 55 50 48 51 54 56 53 52 55 55 53 56 48 55 125]</span><br></pre></td></tr></table></figure>
+
+<h2 id="Json-unmarshal"><a href="#Json-unmarshal" class="headerlink" title="Json unmarshal"></a>Json unmarshal</h2><p>데이터를 받아 처리하는 입장에서는 <code>byte array</code>를 <code>unmarshal</code>하여 구조화합니다.</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">   <span class="string">"encoding/json"</span></span><br><span class="line">   <span class="string">"fmt"</span></span><br><span class="line">   <span class="string">"math"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   maxInt64 := math.MaxInt64</span><br><span class="line">   mapObject := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">   mapObject[<span class="string">"int64"</span>] = maxInt64</span><br><span class="line">   bytes, _ := json.Marshal(mapObject)</span><br><span class="line">   fmt.Println(mapObject)</span><br><span class="line">   unmarshalMapObject := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">   <span class="keyword">if</span> err := json.Unmarshal(bytes, &amp;unmarshalMapObject); err != <span class="literal">nil</span> &#123;</span><br><span class="line">      fmt.Println(err.Error())</span><br><span class="line">   &#125;</span><br><span class="line">   fmt.Println(unmarshalMapObject)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 결과</span><br><span class="line">map[int64:9223372036854775807]</span><br><span class="line">map[int64:9.223372036854776e+18]</span><br></pre></td></tr></table></figure>
+
+<h2 id="뭐"><a href="#뭐" class="headerlink" title="뭐?"></a>뭐?</h2><p>문제점을 발견했나요?<br><code>9223372036854775807</code>의 값이 <code>JSON marshal/unmarshal</code>을 거치니 <code>9.223372036854776e+18</code>로 표현되고있습니다.<br>분명 <code>int64</code>의 값을 담아 전송했고 받은 사람은 <code>map[string]interface{}</code>로 <code>unmarshal</code>했지만 Println의 호출된 결과가 달라진 것이죠.<br><code>map</code>안의 <code>int64</code>값을 확인하기 위해 <code>int64</code>로 형변환하여 확인한 결과는 아래와 같습니다.</p>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">   <span class="string">"encoding/json"</span></span><br><span class="line">   <span class="string">"fmt"</span></span><br><span class="line">   <span class="string">"math"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">   maxInt64 := math.MaxInt64</span><br><span class="line">   mapObject := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">   mapObject[<span class="string">"int64"</span>] = maxInt64</span><br><span class="line">   bytes, _ := json.Marshal(mapObject)</span><br><span class="line">   fmt.Println(mapObject)</span><br><span class="line">   unmarshalMapObject := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">interface</span>&#123;&#125;)</span><br><span class="line">   <span class="keyword">if</span> err := json.Unmarshal(bytes, &amp;unmarshalMapObject); err != <span class="literal">nil</span> &#123;</span><br><span class="line">      fmt.Println(err.Error())</span><br><span class="line">   &#125;</span><br><span class="line">   fmt.Println(unmarshalMapObject)</span><br><span class="line">   unmarshalMaxInt64 := unmarshalMapObject[<span class="string">"int64"</span>].(<span class="keyword">int64</span>)</span><br><span class="line">   fmt.Println(unmarshalMaxInt64)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;결과</span><br><span class="line">map[int64:9223372036854775807]</span><br><span class="line">map[int64:9.223372036854776e+18]</span><br><span class="line">panic: interface conversion: interface &#123;&#125; is float64, not int64</span><br><span class="line"></span><br><span class="line">goroutine 1 [running]:</span><br><span class="line">main.main()</span><br><span class="line">    &#x2F;main.go:20 +0x3ba</span><br></pre></td></tr></table></figure>
+
+<h3 id="이-에러는를-해석해보면"><a href="#이-에러는를-해석해보면" class="headerlink" title="이 에러는를 해석해보면"></a>이 에러는를 해석해보면</h3><p><code>unmarshal</code> 하는 과정에서 <code>int64</code>가 아닌 <code>float64</code>형태로 암시적으로 변환된다는 얘기입니다.<br>그렇다면 <code>float64</code>로 형 변환 후 강제로 <code>int64</code>로 변환하면 어떻게 될까요?</p>
+<h2 id="강제로-int64-형변환-후-값"><a href="#강제로-int64-형변환-후-값" class="headerlink" title="강제로 int64 형변환 후 값"></a>강제로 int64 형변환 후 값</h2><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unmarshalMaxInt64 := <span class="keyword">int64</span>(unmarshalMapObject[<span class="string">"int64"</span>].(<span class="keyword">float64</span>))</span><br><span class="line">fmt.Println(unmarshalMaxInt64)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 결과</span><br><span class="line">-9223372036854775808</span><br></pre></td></tr></table></figure>
+
+<h2 id="산넘어-산"><a href="#산넘어-산" class="headerlink" title="산넘어 산"></a>산넘어 산</h2><p>우리가 기대한 결과와는 전혀 다른 엉뚱한 값이 결과로 나왔습니다.</p>
+<blockquote>
+<p>Overflow가 발생한 것으로 보임</p>
+</blockquote>
+<p>int64의 최대 값에서 갑자기 음수가 되었다는 것은 Overflow가 발생한 것으로 보입니다.<br>이것은 아무래도 큰 문제를 야기합니다.</p>
+<h1 id="이-포스트는-작성중에-있습니다"><a href="#이-포스트는-작성중에-있습니다" class="headerlink" title="이 포스트는 작성중에 있습니다."></a>이 포스트는 작성중에 있습니다.</h1>
+
+    
+    
+    
+	  <div class="full-width auto-padding tags">
+      
+        <a href="/tags/TIL/">TIL</a>
+      
+	  </div>
+    
+  </section>
+</article>
+    </div>
+  
+    <div class='post-wrapper'>
+      <article class="post reveal">
+  <section class="meta">
+    
+    <h2 class="title">
       <a href="/2020/05/19/ETC-Shell-Script/">
         [ETC] Shell Script 접속사 ;, &amp;, &amp;&amp;
       </a>
@@ -589,47 +655,6 @@
 </article>
     </div>
   
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/07/15/Data-Structure-Recursion/">
-        [Data Structure] Recursion
-      </a>
-    </h2>
-    
-    <time>
-      Jul 15, 2018
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/Data-Structure/">Data Structure</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <h1 id="시작"><a href="#시작" class="headerlink" title="시작"></a>시작</h1><p>자료구조 두번째 포스팅입니다.<br>인트로보다 짧아서 부담이 덜하네요 ㅎㅎ..</p>
-<img src="/2018/07/15/Data-Structure-Recursion/1.jpg" class="">
-
-    
-	  <div class="readmore">
-      <a href="/2018/07/15/Data-Structure-Recursion/">Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
 </section>
 
 
@@ -669,7 +694,7 @@
     
         <li><a class="flat-box" href="/categories/Github/"><div class='name'>Github</div><div class='badget'>1</div></a></li>
     
-        <li><a class="flat-box" href="/categories/Golang/"><div class='name'>Golang</div><div class='badget'>1</div></a></li>
+        <li><a class="flat-box" href="/categories/Golang/"><div class='name'>Golang</div><div class='badget'>2</div></a></li>
     
         <li><a class="flat-box" href="/categories/MacOS/"><div class='name'>MacOS</div><div class='badget'>1</div></a></li>
     
