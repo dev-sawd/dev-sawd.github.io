@@ -12,16 +12,16 @@
   <link rel="shortcut icon" href="/images/favicon.png">
   <link rel="alternate" href="/atom.xml" title="SAWD">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="오랜만에 또 포스팅 하는군요…오늘은 GitHub의 라이브러리를 이용해 아래와 같은 것을 만들어볼까 합니다.   기반 라이브러리는 PageIndicator이고 원본 주소는 아래와 같습니다.https:&#x2F;&#x2F;github.com&#x2F;romandanylyk&#x2F;PageIndicatorView 이 라이브러리를 사용하다가 샘플자체가 View로 되어있어서 이해하고 사용하기가 어려">
+  <meta name="description" content="오랜만에 또 포스팅 하는군요…오늘은 GitHub의 라이브러리를 이용해 아래와 같은 것을 만들어볼까 합니다.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Android] Page Indicator with Fragment">
 <meta property="og:url" content="https://dev-sawd.github.io/2018/07/20/Android-Page-Indicator-with-Fragment/index.html">
 <meta property="og:site_name" content="SAWD">
-<meta property="og:description" content="오랜만에 또 포스팅 하는군요…오늘은 GitHub의 라이브러리를 이용해 아래와 같은 것을 만들어볼까 합니다.   기반 라이브러리는 PageIndicator이고 원본 주소는 아래와 같습니다.https:&#x2F;&#x2F;github.com&#x2F;romandanylyk&#x2F;PageIndicatorView 이 라이브러리를 사용하다가 샘플자체가 View로 되어있어서 이해하고 사용하기가 어려">
+<meta property="og:description" content="오랜만에 또 포스팅 하는군요…오늘은 GitHub의 라이브러리를 이용해 아래와 같은 것을 만들어볼까 합니다.">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/preview_anim_drop.gif">
 <meta property="article:published_time" content="2018-07-20T02:35:20.000Z">
-<meta property="article:modified_time" content="2020-05-13T01:28:08.615Z">
+<meta property="article:modified_time" content="2020-05-21T02:50:16.348Z">
 <meta property="article:author" content="SAWD">
 <meta property="article:tag" content="TIL">
 <meta property="article:tag" content="Example">
@@ -168,10 +168,9 @@
   	<div class="article-entry" itemprop="articleBody">
     	<p>오랜만에 또 포스팅 하는군요…<br>오늘은 GitHub의 라이브러리를 이용해 아래와 같은 것을 만들어볼까 합니다.</p>
 <img src="https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/preview_anim_drop.gif" class="">
-
+<a id="more"></a>
 <p>기반 라이브러리는 PageIndicator이고 원본 주소는 아래와 같습니다.<br><a href="https://github.com/romandanylyk/PageIndicatorView" target="_blank" rel="noopener">https://github.com/romandanylyk/PageIndicatorView</a></p>
 <p>이 라이브러리를 사용하다가 샘플자체가 View로 되어있어서 이해하고 사용하기가 어려웠습니다.<br>마침 이전 강좌들에서 사용했던 Fragment를 이용해서 예제를 바꾸기로 했습니다.<br>라이브러리는 그대로 두고 샘플쪽 코드만 수정할겁니다.</p>
-<a id="more"></a>
 <h1 id="Page-Indicator"><a href="#Page-Indicator" class="headerlink" title="Page Indicator"></a>Page Indicator</h1><p>Page Indicator는 위에서 보셨듯 화면 하단에 현재 페이지가 몇번째 페이지인지 알려주는 것을 말합니다.<br>iOS에서는 PageViewController라고도 부릅니다.<br>이 UI를 사용하면 튜토리얼이나 단계가 있는 플로우를 작성하는데 꽤 그럴듯한 UX를 제공할 수 있습니다.</p>
 <p>아주 잘 만들어진 라이브러리에 제가 사용하고 싶은 Fragment를 연동하려 합니다.</p>
 <h1 id="HomeActivity-java"><a href="#HomeActivity-java" class="headerlink" title="HomeActivity.java"></a>HomeActivity.java</h1><p>단순하게 MainActivity역할을 하는 클래스입니다.<br>전문은 아래와 같습니다.</p>

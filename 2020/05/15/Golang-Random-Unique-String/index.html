@@ -12,15 +12,15 @@
   <link rel="shortcut icon" href="/images/favicon.png">
   <link rel="alternate" href="/atom.xml" title="SAWD">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="체인코드를 개발하면서 Golang으로 유니크한 Random String을 생성할 필요가 있었습니다. Random은 조심해야할 부분이 몇가지 있는데 아래와 같습니다.  Seed값 고속의 동시 접속  Seed는 주로 시각(time.Now().UnixNano())을 인자로 사용합니다. 123456789101112package mainimport (	&quot;fmt&quot;	&quot;">
+  <meta name="description" content="체인코드를 개발하면서 Golang으로 유니크한 Random String을 생성할 필요가 있었습니다. 이 글에서는 난수를 사용해야할 때 주의점에 대해 설명합니다.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[Golang] Random Unique String">
 <meta property="og:url" content="https://dev-sawd.github.io/2020/05/15/Golang-Random-Unique-String/index.html">
 <meta property="og:site_name" content="SAWD">
-<meta property="og:description" content="체인코드를 개발하면서 Golang으로 유니크한 Random String을 생성할 필요가 있었습니다. Random은 조심해야할 부분이 몇가지 있는데 아래와 같습니다.  Seed값 고속의 동시 접속  Seed는 주로 시각(time.Now().UnixNano())을 인자로 사용합니다. 123456789101112package mainimport (	&quot;fmt&quot;	&quot;">
+<meta property="og:description" content="체인코드를 개발하면서 Golang으로 유니크한 Random String을 생성할 필요가 있었습니다. 이 글에서는 난수를 사용해야할 때 주의점에 대해 설명합니다.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-05-15T01:20:35.000Z">
-<meta property="article:modified_time" content="2020-05-18T01:07:45.285Z">
+<meta property="article:modified_time" content="2020-05-21T02:48:18.475Z">
 <meta property="article:author" content="SAWD">
 <meta property="article:tag" content="Golang">
 <meta name="twitter:card" content="summary">
@@ -164,6 +164,8 @@
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
     	<p>체인코드를 개발하면서 Golang으로 유니크한 Random String을 생성할 필요가 있었습니다.</p>
+<p>이 글에서는 난수를 사용해야할 때 주의점에 대해 설명합니다.</p>
+<a id="more"></a>
 <p>Random은 조심해야할 부분이 몇가지 있는데 아래와 같습니다.</p>
 <ol>
 <li>Seed값</li>
