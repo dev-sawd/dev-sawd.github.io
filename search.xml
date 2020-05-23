@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>[Github] change remote repository url in local repository</title>
+      <link href="/2020/05/23/Github-change-remote-repository-url-in-local-repository/"/>
+      <url>/2020/05/23/Github-change-remote-repository-url-in-local-repository/</url>
+      
+        <content type="html"><![CDATA[<p>이 포스트에서는 이미 원격 저장소가 지정되어있는 로컬 폴더의 원격 저장소 url을 변경하는 상황에 대해서 포스팅합니다.</p><a id="more"></a><p>.git 폴더로 이동</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cd test</span><br></pre></td></tr></table></figure><p>원격 저장소 url 확인</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git remote -v</span><br><span class="line">origin  https:&#x2F;&#x2F;github.com&#x2F;dev-sawd&#x2F;hyperledger-fabric-basic-network.git (fetch)</span><br></pre></td></tr></table></figure><p>저장소 url 변경</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git remote set-url origin https:&#x2F;&#x2F;github.com&#x2F;dev-sawd&#x2F;hyperledger-fabric-basic-network-multi-org.git</span><br></pre></td></tr></table></figure><p>변경된 원격 저장소 url 확인</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">% git remote -v</span><br><span class="line">origin  https:&#x2F;&#x2F;github.com&#x2F;dev-sawd&#x2F;hyperledger-fabric-basic-network-multi-org.git (fetch)</span><br><span class="line">origin  https:&#x2F;&#x2F;github.com&#x2F;dev-sawd&#x2F;hyperledger-fabric-basic-network-multi-org.git (push)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Github </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Github </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>[Data Structure] Linked List</title>
       <link href="/2020/05/23/Data-Structure-Linked-List/"/>
       <url>/2020/05/23/Data-Structure-Linked-List/</url>
