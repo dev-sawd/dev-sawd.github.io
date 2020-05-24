@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>[Github] revert change</title>
+      <link href="/2020/05/24/Github-revert-change/"/>
+      <url>/2020/05/24/Github-revert-change/</url>
+      
+        <content type="html"><![CDATA[<p>Git을 이용해 형상관리를 하다 보면 수정사항을 롤백 하고 싶을 때가 자주 있습니다.<br>이 포스트에서는 이전 커밋까지 롤백 하는 방법에 대해서 알아봅니다.</p><a id="more"></a><h2 id="git-add-명령을-하기-이전의-수정사항-롤백"><a href="#git-add-명령을-하기-이전의-수정사항-롤백" class="headerlink" title="git add 명령을 하기 이전의 수정사항 롤백"></a>git add 명령을 하기 이전의 수정사항 롤백</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> &#123;respository_directory&#125;</span></span><br><span class="line">respository_directory $ checkout .</span><br></pre></td></tr></table></figure><h2 id="git-add-명령어를-한-이후의-수정사항-롤백"><a href="#git-add-명령어를-한-이후의-수정사항-롤백" class="headerlink" title="git add 명령어를 한 이후의 수정사항 롤백"></a>git add 명령어를 한 이후의 수정사항 롤백</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset</span></span><br></pre></td></tr></table></figure><h2 id="git-commit을-한-이후-롤백"><a href="#git-commit을-한-이후-롤백" class="headerlink" title="git commit을 한 이후 롤백"></a>git commit을 한 이후 롤백</h2><ul><li>주의 아래의 명령어는 수정사항이 완전히 삭제됩니다</li></ul><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset --hard HEAD~</span></span><br></pre></td></tr></table></figure><h2 id="원격-저장소에-변경된-이력도-되돌리기"><a href="#원격-저장소에-변경된-이력도-되돌리기" class="headerlink" title="원격 저장소에 변경된 이력도 되돌리기"></a>원격 저장소에 변경된 이력도 되돌리기</h2><p>원격 저장소에 변경된 이력을 되돌리는 방법은 local 저장소의 새로운 변경사항으로 덮어쓰는것과 개념이 같습니다.</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset HEAD~</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit -m <span class="string">"commit message"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git push origin master</span></span><br></pre></td></tr></table></figure><h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>여러 롤백 케이스중에서 자주 사용할 수 있는 상황을 뽑아서 포스팅해봤습니다.<br>이외 더 자세한 롤백 방법은 아래의 사이트에 자세하게 나와있습니다.</p><p><a href="https://git-scm.com/book/ko/v2/Git-%EB%8F%84%EA%B5%AC-Reset-%EB%AA%85%ED%99%95%ED%9E%88-%EC%95%8C%EA%B3%A0-%EA%B0%80%EA%B8%B0" target="_blank" rel="noopener">https://git-scm.com/book/ko/v2/Git-%EB%8F%84%EA%B5%AC-Reset-%EB%AA%85%ED%99%95%ED%9E%88-%EC%95%8C%EA%B3%A0-%EA%B0%80%EA%B8%B0</a></p><p>중요한것은 롤백을 하기 전 어떻게 이력관리를 할것인지 한번 더 생각해 보는게 중요할 것 같습니다.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Github </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Github </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>[Github] change remote repository url in local repository</title>
       <link href="/2020/05/23/Github-change-remote-repository-url-in-local-repository/"/>
       <url>/2020/05/23/Github-change-remote-repository-url-in-local-repository/</url>
