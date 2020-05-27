@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>[ETC] URL, URI</title>
+      <link href="/2020/05/27/ETC-URL-URI/"/>
+      <url>/2020/05/27/ETC-URL-URI/</url>
+      
+        <content type="html"><![CDATA[<p>개발을 하다보면, 개발자들끼리 얘기 하다보면 URL이 자주 등장합니다.<br>그리고는 문서나 stackoverflow를 이용하다 보면 URI라는 단어도 심심치 않게 보입니다.<br>아직까지 정확히 URL과 URI에 대해 차이점을 명확히 모르는 관계로 정리해보려 합니다.</p><a id="more"></a><h1 id="URL-Uniform-Resource-Locator"><a href="#URL-Uniform-Resource-Locator" class="headerlink" title="URL : Uniform Resource Locator"></a>URL : Uniform Resource Locator</h1><blockquote><p>ex. <a href="http://github.com/" target="_blank" rel="noopener">http://github.com/</a></p></blockquote><h1 id="URI-Uniform-Resource-Identifier"><a href="#URI-Uniform-Resource-Identifier" class="headerlink" title="URI : Uniform Resource Identifier"></a>URI : Uniform Resource Identifier</h1><p>URL 이하의 식별자까지 포함</p><blockquote><p>ex. <a href="http://github.com/devsawd" target="_blank" rel="noopener">http://github.com/devsawd</a><br>ex. <a href="http://github.com/test" target="_blank" rel="noopener">http://github.com/test</a></p></blockquote><p>URI 예시인 <a href="http://github.com/devsawd" target="_blank" rel="noopener">http://github.com/devsawd</a> 와 <a href="http://github.com/test" target="_blank" rel="noopener">http://github.com/test</a> 를 보면<br>URL은 <a href="http://github.com/" target="_blank" rel="noopener">http://github.com/</a> 으로 같고<br>URI는 각각 <a href="http://github.com/devsawd" target="_blank" rel="noopener">http://github.com/devsawd</a>, <a href="http://github.com/test" target="_blank" rel="noopener">http://github.com/test</a> 이 됩니다.</p><h1 id="현실은"><a href="#현실은" class="headerlink" title="현실은"></a>현실은</h1><p>??? : 주소 줘봐<br>!!! : <a href="http://github.com/devsawd" target="_blank" rel="noopener">http://github.com/devsawd</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> ETC </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> TIL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>[ETC] address already in use error</title>
       <link href="/2020/05/26/ETC-address-already-in-use-error/"/>
       <url>/2020/05/26/ETC-address-already-in-use-error/</url>

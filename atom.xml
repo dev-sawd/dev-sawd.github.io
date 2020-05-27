@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dev-sawd.github.io/"/>
-  <updated>2020-05-26T07:57:35.502Z</updated>
+  <updated>2020-05-27T05:33:44.368Z</updated>
   <id>https://dev-sawd.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[ETC] URL, URI</title>
+    <link href="https://dev-sawd.github.io/2020/05/27/ETC-URL-URI/"/>
+    <id>https://dev-sawd.github.io/2020/05/27/ETC-URL-URI/</id>
+    <published>2020-05-27T05:20:28.000Z</published>
+    <updated>2020-05-27T05:33:44.368Z</updated>
+    
+    <content type="html"><![CDATA[<p>개발을 하다보면, 개발자들끼리 얘기 하다보면 URL이 자주 등장합니다.<br>그리고는 문서나 stackoverflow를 이용하다 보면 URI라는 단어도 심심치 않게 보입니다.<br>아직까지 정확히 URL과 URI에 대해 차이점을 명확히 모르는 관계로 정리해보려 합니다.</p><a id="more"></a><h1 id="URL-Uniform-Resource-Locator"><a href="#URL-Uniform-Resource-Locator" class="headerlink" title="URL : Uniform Resource Locator"></a>URL : Uniform Resource Locator</h1><blockquote><p>ex. <a href="http://github.com/" target="_blank" rel="noopener">http://github.com/</a></p></blockquote><h1 id="URI-Uniform-Resource-Identifier"><a href="#URI-Uniform-Resource-Identifier" class="headerlink" title="URI : Uniform Resource Identifier"></a>URI : Uniform Resource Identifier</h1><p>URL 이하의 식별자까지 포함</p><blockquote><p>ex. <a href="http://github.com/devsawd" target="_blank" rel="noopener">http://github.com/devsawd</a><br>ex. <a href="http://github.com/test" target="_blank" rel="noopener">http://github.com/test</a></p></blockquote><p>URI 예시인 <a href="http://github.com/devsawd" target="_blank" rel="noopener">http://github.com/devsawd</a> 와 <a href="http://github.com/test" target="_blank" rel="noopener">http://github.com/test</a> 를 보면<br>URL은 <a href="http://github.com/" target="_blank" rel="noopener">http://github.com/</a> 으로 같고<br>URI는 각각 <a href="http://github.com/devsawd" target="_blank" rel="noopener">http://github.com/devsawd</a>, <a href="http://github.com/test" target="_blank" rel="noopener">http://github.com/test</a> 이 됩니다.</p><h1 id="현실은"><a href="#현실은" class="headerlink" title="현실은"></a>현실은</h1><p>??? : 주소 줘봐<br>!!! : <a href="http://github.com/devsawd" target="_blank" rel="noopener">http://github.com/devsawd</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;개발을 하다보면, 개발자들끼리 얘기 하다보면 URL이 자주 등장합니다.&lt;br&gt;그리고는 문서나 stackoverflow를 이용하다 보면 URI라는 단어도 심심치 않게 보입니다.&lt;br&gt;아직까지 정확히 URL과 URI에 대해 차이점을 명확히 모르는 관계로 정리해보려 합니다.&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="ETC" scheme="https://dev-sawd.github.io/categories/ETC/"/>
+    
+    
+      <category term="TIL" scheme="https://dev-sawd.github.io/tags/TIL/"/>
+    
+  </entry>
   
   <entry>
     <title>[ETC] address already in use error</title>
@@ -476,30 +499,6 @@
       <category term="TIL" scheme="https://dev-sawd.github.io/tags/TIL/"/>
     
       <category term="Example" scheme="https://dev-sawd.github.io/tags/Example/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[iOS] About Function (feat. method)</title>
-    <link href="https://dev-sawd.github.io/2018/06/27/iOS-About-Function/"/>
-    <id>https://dev-sawd.github.io/2018/06/27/iOS-About-Function/</id>
-    <published>2018-06-27T11:59:46.000Z</published>
-    <updated>2020-05-13T01:28:08.532Z</updated>
-    
-    <content type="html"><![CDATA[<p>주로 Java를 사용하다가 iOS를 공부하는데 Objective-C를 공부하면서 함수라는 용어가 나와서 모호했던 개념을 다잡고자 정리합니다.<br>이번 포스트는 함수에 대해 알아보면서 메소드와이 차이도 간략하게 알아볼게요.</p><h1 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h1><p>함수와 메소드는 모두 코드 조각을 지칭하는 용어이지만 몇가지 차이점이 있습니다.<br>함수는 코드의 최상위 레벨에 선언되고, 메소드는 특정 형식 내부에 선언됩니다.<br>함수는 함수 이름만으로 호출 할 수 있지만, 메소드는 반드시 연관된 이름이나 인스턴스를 통해 호출해야 합니다.</p><a id="more"></a><p>Objective-C와 Swift는 함수와 메소드를 모두 구현할 수 있습니다.<br>C와 같이 함수만 구현할 수 있는 언어가 있고, Java와 같이 메소드만 구현할 수 있는 언어도 있습니다.<br>Objective-C의 경우 함수를 구현할 때 C 언어와 동일한 문법을 사용하지만,<br>메소드를 구현할 때는 Objective-C 자체 문법을 사용합니다.<br>또한 메소드를 구현할 수 있는 형식은 클래스로 제한됩니다.</p><p>Swift는 동일한 문법을 사용하여 함수와 메소드를 구현합니다.<br>Objective-C와 달리 클래스, 구조체, 열거형에 메소드를 구현할 수 있습니다.</p><h2 id="함수의-구성-요소"><a href="#함수의-구성-요소" class="headerlink" title="함수의 구성 요소"></a>함수의 구성 요소</h2><p>함수는 일반적으로 다섯 가지 요소로 구성됩니다.</p><ol><li>함수 이름</li><li>파라미터</li><li>리턴형</li><li>실행코드</li><li>프로토타입</li></ol><figure class="highlight objc"><figcaption><span>Objective-C</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSInteger</span> plusOne(<span class="built_in">NSInteger</span> x) &#123;</span><br><span class="line">    <span class="keyword">return</span> x + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight swift"><figcaption><span>Swift</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">plusOne</span><span class="params">(x: Int)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> x + <span class="number">1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="함수의-이름과-함수-호출"><a href="#함수의-이름과-함수-호출" class="headerlink" title="함수의 이름과 함수 호출"></a>함수의 이름과 함수 호출</h2><p>함수의 이름은 동사 + 명사로, 시작 동사는 소문자로 짓는 것이 관례입니다.<br>즉 PlusOne보다 plusOne으로 짓는 것이 좋습니다.<br>log, write, read와 같이 자주 사용하는 단어를 이름으로 사용할 경우 함수의 사용범위 내에 동일한 이름을 사용하는 함수가 존재할 가능성이 높습니다.<br>이 경우에는 좀 더 구체적인 이름을 사용하거나 접두어를 사용합니다.<br>Foundation 프레임워크에서 제공하는 함수들은 NS 접두어를 사용하고 있으며, NSLog가 그 예입니다.</p><h2 id="파라미터"><a href="#파라미터" class="headerlink" title="파라미터"></a>파라미터</h2><p>f(x) = x + 1에서 x를 파라미터라고 합니다.<br>파라미터는 함수를 선언할 때 ()사이에 ,로 구분하여 나열합니다.<br>함수가 받을 수 있는 파라미터 수에는 제한이 없지만 가독성을 고려해서 선언합니다.</p><h2 id="Call-by-Value-vs-Call-by-Reference"><a href="#Call-by-Value-vs-Call-by-Reference" class="headerlink" title="Call by Value vs Call by Reference"></a>Call by Value vs Call by Reference</h2><p>파라미터에 인자를 전달하는 방식은 크게 두 가지로 분류할 수 있습니다.<br>첫 번째 방식은 인자의 값을 전달하는 Call by Value이고 두 번째 방식은 인자의 값이 저장된 메모리의 주소를 전달하는 Call by Reference입니다.</p><p>두 방식의 차이점으로 자주 예를 드는 swap함수를 만들어보겠습니다.<br>swap함수는 두개의 수를 받아서 해당 수를 바꾸는 역할을 수행할 함수입니다.</p><figure class="highlight objc"><figcaption><span>Objective-C</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> swap(<span class="built_in">NSInteger</span> lhs, <span class="built_in">NSInteger</span> rhs) &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"before swap"</span>);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"lhs: %ld"</span>, lhs);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"rhs: %ld"</span>, rhs);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSInteger</span> tmp = lhs;</span><br><span class="line">    lhs = rhs;</span><br><span class="line">    rhs = tmp;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"after swap"</span>);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"lhs: %ld"</span>, lhs);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"rhs: %ld"</span>, rhs);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>그리고 호출은 이렇게 합니다.</p><figure class="highlight objc"><figcaption><span>Objective-C</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSInteger</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">NSINteger</span> b = <span class="number">2</span>;</span><br><span class="line">swap(a, b);</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"a: %ld"</span>, a);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"b: %ld"</span>, b);</span><br></pre></td></tr></table></figure><p>이 함수를 실행하면 함수 내부에서 파라미터의 값은 교체되지만, 함수 호출 후의 a와 b의 값은 교체되지 않은 것을 확인할 수 있습니다.<br>여기에서 인자를 전달한 방식은 Call by Value 입니다.</p><p>Call by Reference는 인자의 메모리 주소를 전달합니다.<br>이 방식으로 인자를 전달받는 파라미터의 자료형은 포인터로 선언되어야 합니다.<br>저는 이렇게 구현했습니다.</p><figure class="highlight objc"><figcaption><span>Objective-C</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> swap(<span class="built_in">NSInteger</span>* lhs, <span class="built_in">NSInteger</span>* rhs) &#123;</span><br><span class="line">    <span class="built_in">NSInteger</span> tmp = *lhs;</span><br><span class="line">    *lhs = *rhs;</span><br><span class="line">    *rhs = tmp;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"after swap"</span>);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"lhs: %ld"</span>, *lhs);</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"rhs: %ld"</span>, *rhs);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>실행을 해보면 Call by Value 방식과 달리 함수를 호출한 후에 a, b값이 교체된 것을 확인할 수 있습니다.</p><figure class="highlight objc"><figcaption><span>Objective-C</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSInteger</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">NSINteger</span> b = <span class="number">2</span>;</span><br><span class="line">swap(&amp;a, &amp;b);</span><br><span class="line"></span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"a: %ld"</span>, a);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"b: %ld"</span>, b);</span><br></pre></td></tr></table></figure><p>이 코드는 이전 코드와 몇가지 차이점을 가지고 있습니다.<br>swap 함수의 두 파라미터는 주소를 파라미터로 받을 수 있도록 포인터로 선언되어 있습니다.<br>그리고 함수를 호출할때 변수의 주소를 넘겨주고, 함수 내에서는 변수의 주소로 접근해 값을 변경합니다.<br>따라서 이전 Call by Value와 다르게 swap함수가 끝나고 main에서 다시 접근했을때 값이 계속 변경되어있는 것입니다.</p><h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>C 계열의 언어를 사용하는 프로그래머에게 포인터의 개념은 필수입니다.<br>특히나 이 포인터는 함수와 연관되어 많이 사용됩니다.<br>함수, 포인터는 항상 러닝커브가 급격하게 올라가는 시점이기 때문에 많은 분들이 어려워합니다.<br>이 포스트를 문법이 아닌 개념으로 접근했을때 이해가 되지 않는다면, 검색이나 책을 통해 포인터와 함수의 기본 개념에 대해서 숙지하는것을 권장합니다.</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;주로 Java를 사용하다가 iOS를 공부하는데 Objective-C를 공부하면서 함수라는 용어가 나와서 모호했던 개념을 다잡고자 정리합니다.&lt;br&gt;이번 포스트는 함수에 대해 알아보면서 메소드와이 차이도 간략하게 알아볼게요.&lt;/p&gt;
-&lt;h1 id=&quot;Function&quot;&gt;&lt;a href=&quot;#Function&quot; class=&quot;headerlink&quot; title=&quot;Function&quot;&gt;&lt;/a&gt;Function&lt;/h1&gt;&lt;p&gt;함수와 메소드는 모두 코드 조각을 지칭하는 용어이지만 몇가지 차이점이 있습니다.&lt;br&gt;함수는 코드의 최상위 레벨에 선언되고, 메소드는 특정 형식 내부에 선언됩니다.&lt;br&gt;함수는 함수 이름만으로 호출 할 수 있지만, 메소드는 반드시 연관된 이름이나 인스턴스를 통해 호출해야 합니다.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="iOS" scheme="https://dev-sawd.github.io/categories/iOS/"/>
-    
-    
-      <category term="TIL" scheme="https://dev-sawd.github.io/tags/TIL/"/>
     
   </entry>
   
