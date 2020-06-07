@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dev-sawd.github.io/"/>
-  <updated>2020-06-05T12:54:43.014Z</updated>
+  <updated>2020-06-07T12:44:02.105Z</updated>
   <id>https://dev-sawd.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Node.js] path module</title>
+    <link href="https://dev-sawd.github.io/2020/06/07/Node.js-node-js-path-module/"/>
+    <id>https://dev-sawd.github.io/2020/06/07/Node.js-node-js-path-module/</id>
+    <published>2020-06-07T12:26:47.000Z</published>
+    <updated>2020-06-07T12:44:02.105Z</updated>
+    
+    <content type="html"><![CDATA[<p>폴더와 파일의 경로를 쉽게 조작하도록 도와주는 모듈<br>운영체제별로 경로 구분자가 다르기 때문에 사용</p><a id="more"></a><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /Users/devsawd/hello-world/index.js</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.sep:'</span>, path.sep);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.delimiter:'</span>, path.delimiter);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'====================================================================================='</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.dirname(__filename):'</span>, path.dirname(__filename));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.extname(__filename):'</span>, path.extname(__filename));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.basename(__filename):'</span>, path.basename(__filename));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.basename(__filename):'</span>, path.basename(__filename, path.extname(__filename)));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'====================================================================================='</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.parse(__filename)'</span>, path.parse(__filename));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'====================================================================================='</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`path.format(&#123;</span></span><br><span class="line"><span class="string">    dir: '/Users/devsawd/hello-world',</span></span><br><span class="line"><span class="string">    name: 'index',</span></span><br><span class="line"><span class="string">    ext: '.js',</span></span><br><span class="line"><span class="string">&#125;));:`</span>, path.format(&#123;</span><br><span class="line">    dir: <span class="string">'/Users/devsawd/hello-world'</span>,</span><br><span class="line">    name: <span class="string">'index'</span>,</span><br><span class="line">    ext: <span class="string">'.js'</span>,</span><br><span class="line">&#125;));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'====================================================================================='</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.normalize('</span>/Users/devsawd/hello-world/index.js<span class="string">'):'</span>, path.normalize(<span class="string">'/Users/devsawd/hello-world/index.js'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'====================================================================================='</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.isAbsolute('</span>/users<span class="string">'):'</span>, path.isAbsolute(<span class="string">'/users'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.isAbsolute('</span>./home<span class="string">'):'</span>, path.isAbsolute(<span class="string">'./home'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'====================================================================================='</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`path.relative('/Users/devsawd/hello-world/index.js', '/Users'));: `</span>, path.relative(<span class="string">'/Users/devsawd/hello-world/index.js'</span>, <span class="string">'/Users'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'__dirname:'</span>, __dirname);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.join(__dirname, '</span>..<span class="string">', '</span>/Users<span class="string">', '</span>.<span class="string">', '</span>devsawd<span class="string">'):'</span>, path.join(__dirname, <span class="string">'..'</span>, <span class="string">'/Users'</span>, <span class="string">'.'</span>, <span class="string">'devsawd'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.resolve(__dirname, '</span>..<span class="string">', '</span>/Users<span class="string">', '</span>.<span class="string">', '</span>devsawd<span class="string">'):'</span>, path.resolve(__dirname, <span class="string">'..'</span>, <span class="string">'/Users'</span>, <span class="string">'.'</span>, <span class="string">'devsawd'</span>));</span><br></pre></td></tr></table></figure><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">hello-world % node index.js</span><br><span class="line">path.sep: /</span><br><span class="line">path.delimiter: :</span><br><span class="line">=====================================================================================</span><br><span class="line">path.dirname(__filename): /Users/devsawd/hello-world</span><br><span class="line">path.extname(__filename): .js</span><br><span class="line">path.basename(__filename): index.js</span><br><span class="line">path.basename(__filename): index</span><br><span class="line">=====================================================================================</span><br><span class="line">path.parse(__filename) &#123;</span><br><span class="line">  root: '/',</span><br><span class="line">  dir: '/Users/devsawd/hello-world',</span><br><span class="line">  base: 'index.js',</span><br><span class="line">  ext: '.js',</span><br><span class="line">  name: 'index'</span><br><span class="line">&#125;</span><br><span class="line">=====================================================================================</span><br><span class="line">path.format(&#123;</span><br><span class="line">    dir: '/Users/devsawd/hello-world',</span><br><span class="line">    name: 'index',</span><br><span class="line">    ext: '.js',</span><br><span class="line">&#125;));: /Users/devsawd/hello-world/index.js</span><br><span class="line">=====================================================================================</span><br><span class="line">path.normalize('/Users/devsawd/hello-world/index.js') /Users/devsawd/hello-world/index.js</span><br><span class="line">=====================================================================================</span><br><span class="line">path.isAbsolute('/users') true</span><br><span class="line">path.isAbsolute('./home'): false</span><br><span class="line">=====================================================================================</span><br><span class="line">path.relative('/Users/devsawd/hello-world/index.js', '/Users'));:  ../../..</span><br><span class="line">__dirname: /Users/devsawd/hello-world</span><br><span class="line">path.join(__dirname, '..', '/Users', '.', 'devsawd'): /Users/devsawd/Users/devsawd</span><br><span class="line">path.resolve(__dirname, '..', '/Users', '.', 'devsawd'): /Users/devsawd</span><br></pre></td></tr></table></figure><h1 id="path-join"><a href="#path-join" class="headerlink" title="path.join()"></a>path.join()</h1><p>인자로 받은 경로들을 합쳐서 문자열 형태로 path를 리턴</p><h1 id="path-resolve"><a href="#path-resolve" class="headerlink" title="path.resolve()"></a>path.resolve()</h1><p>기본적으로 path.join과 같지만 오른쪽 인자부터 경로를 합쳐나가며 <code>/</code>를 만나면 절대경로로 인식하고 앞의 인자들을 무시<br>만약 <code>/</code>를 만나지 못한다면 <code>/현재경로/생성된경</code>로 형태로 결과 리턴</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;폴더와 파일의 경로를 쉽게 조작하도록 도와주는 모듈&lt;br&gt;운영체제별로 경로 구분자가 다르기 때문에 사용&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Node.js" scheme="https://dev-sawd.github.io/categories/Node-js/"/>
+    
+    
+      <category term="TIL" scheme="https://dev-sawd.github.io/tags/TIL/"/>
+    
+  </entry>
   
   <entry>
     <title>[Data Structure] Circular Linked List</title>
@@ -482,31 +505,6 @@
     
     
       <category term="Golang" scheme="https://dev-sawd.github.io/tags/Golang/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[ETC] Hello world</title>
-    <link href="https://dev-sawd.github.io/2020/05/14/hello-world/"/>
-    <id>https://dev-sawd.github.io/2020/05/14/hello-world/</id>
-    <published>2020-05-14T12:53:33.000Z</published>
-    <updated>2020-05-21T02:49:14.620Z</updated>
-    
-    <content type="html"><![CDATA[<p>오랜만에 이 블로그에 다시 포스팅하는군요..</p><p>재작년부터 너무너무 바빠서 기술공부만 하느라 블로그는 머릿속에 떠오르지도 않았습니다.</p><p>귀찮음을 이겨내고 지금까지 공부한것들을 토대로 천천히 다시 시작!</p><a id="more"></a><p><del>그런데 마크다운부터 다시 공부해야하나…</del></p><p>당장은 익숙해 지기 위해 HEXO 명령어를 여기에 메모해두어야겠습니다.</p><hr><p>hexo 서버 시작</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>새 포스트 작성</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new post post-name</span><br></pre></td></tr></table></figure><p>배포</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy --generate</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;오랜만에 이 블로그에 다시 포스팅하는군요..&lt;/p&gt;
-&lt;p&gt;재작년부터 너무너무 바빠서 기술공부만 하느라 블로그는 머릿속에 떠오르지도 않았습니다.&lt;/p&gt;
-&lt;p&gt;귀찮음을 이겨내고 지금까지 공부한것들을 토대로 천천히 다시 시작!&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="ETC" scheme="https://dev-sawd.github.io/categories/ETC/"/>
-    
-    
-      <category term="ETC" scheme="https://dev-sawd.github.io/tags/ETC/"/>
     
   </entry>
   
