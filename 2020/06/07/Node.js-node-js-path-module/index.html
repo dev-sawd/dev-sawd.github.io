@@ -19,11 +19,13 @@
 <meta property="og:site_name" content="SAWD">
 <meta property="og:description" content="폴더와 파일의 경로를 쉽게 조작하도록 도와주는 모듈운영체제별로 경로 구분자가 다르기 때문에 사용">
 <meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://dev-sawd.github.io/images/node.js_logo.png">
 <meta property="article:published_time" content="2020-06-07T12:26:47.000Z">
-<meta property="article:modified_time" content="2020-06-07T12:44:02.105Z">
+<meta property="article:modified_time" content="2020-06-08T12:46:50.030Z">
 <meta property="article:author" content="SAWD">
 <meta property="article:tag" content="TIL">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dev-sawd.github.io/images/node.js_logo.png">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
@@ -163,7 +165,8 @@
 	
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<p>폴더와 파일의 경로를 쉽게 조작하도록 도와주는 모듈<br>운영체제별로 경로 구분자가 다르기 때문에 사용</p>
+    	<p><img src="/images/node.js_logo.png" alt=""></p>
+<p>폴더와 파일의 경로를 쉽게 조작하도록 도와주는 모듈<br>운영체제별로 경로 구분자가 다르기 때문에 사용</p>
 <a id="more"></a>
 
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// /Users/devsawd/hello-world/index.js</span></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.sep:'</span>, path.sep);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.delimiter:'</span>, path.delimiter);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'====================================================================================='</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.dirname(__filename):'</span>, path.dirname(__filename));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.extname(__filename):'</span>, path.extname(__filename));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.basename(__filename):'</span>, path.basename(__filename));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.basename(__filename):'</span>, path.basename(__filename, path.extname(__filename)));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'====================================================================================='</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.parse(__filename)'</span>, path.parse(__filename));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'====================================================================================='</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`path.format(&#123;</span></span><br><span class="line"><span class="string">    dir: '/Users/devsawd/hello-world',</span></span><br><span class="line"><span class="string">    name: 'index',</span></span><br><span class="line"><span class="string">    ext: '.js',</span></span><br><span class="line"><span class="string">&#125;));:`</span>, path.format(&#123;</span><br><span class="line">    dir: <span class="string">'/Users/devsawd/hello-world'</span>,</span><br><span class="line">    name: <span class="string">'index'</span>,</span><br><span class="line">    ext: <span class="string">'.js'</span>,</span><br><span class="line">&#125;));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'====================================================================================='</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.normalize('</span>/Users/devsawd/hello-world/index.js<span class="string">'):'</span>, path.normalize(<span class="string">'/Users/devsawd/hello-world/index.js'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'====================================================================================='</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.isAbsolute('</span>/users<span class="string">'):'</span>, path.isAbsolute(<span class="string">'/users'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.isAbsolute('</span>./home<span class="string">'):'</span>, path.isAbsolute(<span class="string">'./home'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'====================================================================================='</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`path.relative('/Users/devsawd/hello-world/index.js', '/Users'));: `</span>, path.relative(<span class="string">'/Users/devsawd/hello-world/index.js'</span>, <span class="string">'/Users'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'__dirname:'</span>, __dirname);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.join(__dirname, '</span>..<span class="string">', '</span>/Users<span class="string">', '</span>.<span class="string">', '</span>devsawd<span class="string">'):'</span>, path.join(__dirname, <span class="string">'..'</span>, <span class="string">'/Users'</span>, <span class="string">'.'</span>, <span class="string">'devsawd'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'path.resolve(__dirname, '</span>..<span class="string">', '</span>/Users<span class="string">', '</span>.<span class="string">', '</span>devsawd<span class="string">'):'</span>, path.resolve(__dirname, <span class="string">'..'</span>, <span class="string">'/Users'</span>, <span class="string">'.'</span>, <span class="string">'devsawd'</span>));</span><br></pre></td></tr></table></figure>
@@ -185,6 +188,10 @@
 		
 	
 		<div class="art-item-footer">
+				
+					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2020/06/08/Node-js-simplex-crypto/" rel="prev"  title="[Node.js] 단방향 암호화">
+						[Node.js] 단방향 암호화 
+					</a></span>
 				
 				
 					<span class="art-item-right">next：<a href="/2020/06/05/Data-Structure-circular-linked-list/" rel="next"  title="[Data Structure] Circular Linked List">
@@ -242,7 +249,7 @@
     
         <li><a class="flat-box" href="/categories/MacOS/"><div class='name'>MacOS</div><div class='badget'>3</div></a></li>
     
-        <li><a class="flat-box" href="/categories/Node-js/"><div class='name'>Node.js</div><div class='badget'>1</div></a></li>
+        <li><a class="flat-box" href="/categories/Node-js/"><div class='name'>Node.js</div><div class='badget'>2</div></a></li>
     
         <li><a class="flat-box" href="/categories/Objective-C/"><div class='name'>Objective-C</div><div class='badget'>1</div></a></li>
     
