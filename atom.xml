@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dev-sawd.github.io/"/>
-  <updated>2020-06-14T06:16:13.351Z</updated>
+  <updated>2020-06-14T08:57:13.270Z</updated>
   <id>https://dev-sawd.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Data Structure] Doubly Linked List And Stack</title>
+    <link href="https://dev-sawd.github.io/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/"/>
+    <id>https://dev-sawd.github.io/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/</id>
+    <published>2020-06-14T08:53:05.000Z</published>
+    <updated>2020-06-14T08:57:13.270Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://docs.google.com/presentation/d/1AWs6JLYcvdhQbpPTEsTCXLCYV0yYwnig7yjoQgJgd7k/edit?usp=sharing" target="_blank" rel="noopener">원본자료</a></p><p>원본 자료를 전체화면으로 보면 더 쉽게 볼 수 있어요!</p><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/02.png" class=""><br><a id="more"></a><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/03.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/04.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/05.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/06.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/07.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/08.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/09.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/10.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/11.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/12.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/13.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/14.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/15.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/16.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/17.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/18.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/19.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/20.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/21.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/22.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/23.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/24.png" class=""><br><img src="/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/25.png" class=""><br>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://docs.google.com/presentation/d/1AWs6JLYcvdhQbpPTEsTCXLCYV0yYwnig7yjoQgJgd7k/edit?usp=sharing&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;원본자료&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;원본 자료를 전체화면으로 보면 더 쉽게 볼 수 있어요!&lt;/p&gt;
+&lt;img src=&quot;/2020/06/14/Data-Structure-Doubly-Linked-List-And-Stack/02.png&quot; class=&quot;&quot;&gt;
+&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Data Structure" scheme="https://dev-sawd.github.io/categories/Data-Structure/"/>
+    
+    
+      <category term="TIL" scheme="https://dev-sawd.github.io/tags/TIL/"/>
+    
+  </entry>
   
   <entry>
     <title>[Node.js] cluster</title>
@@ -489,31 +515,6 @@
     
     
       <category term="Github" scheme="https://dev-sawd.github.io/tags/Github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Data Structure] Linked List</title>
-    <link href="https://dev-sawd.github.io/2020/05/23/Data-Structure-Linked-List/"/>
-    <id>https://dev-sawd.github.io/2020/05/23/Data-Structure-Linked-List/</id>
-    <published>2020-05-23T02:48:54.000Z</published>
-    <updated>2020-05-29T16:57:06.379Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://docs.google.com/presentation/d/1LCv9_7XEzesbJSftRH4IYvEK84SslpDoThIdH_KwTtI/edit?usp=sharing" target="_blank" rel="noopener">원본자료</a><br>와! 얼마만에 자료구조를 포스팅 하는지..<br>이미 자료는 다 만들어놨는데.. 그간 이런저런 문제와 핑계로 인해 이제 다시 올리게 되었습니다.</p><img src="/2020/05/23/Data-Structure-Linked-List/02.png" class=""><br><a id="more"></a><img src="/2020/05/23/Data-Structure-Linked-List/03.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/04.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/05.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/06.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/07.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/08.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/09.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/10.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/11.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/12.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/13.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/14.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/15.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/16.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/17.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/18.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/19.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/20.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/21.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/22.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/23.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/24.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/25.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/26.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/27.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/28.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/29.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/30.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/31.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/32.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/33.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/34.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/35.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/36.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/37.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/38.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/39.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/40.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/41.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/42.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/43.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/44.png" class=""><br>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://docs.google.com/presentation/d/1LCv9_7XEzesbJSftRH4IYvEK84SslpDoThIdH_KwTtI/edit?usp=sharing&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;원본자료&lt;/a&gt;&lt;br&gt;와! 얼마만에 자료구조를 포스팅 하는지..&lt;br&gt;이미 자료는 다 만들어놨는데.. 그간 이런저런 문제와 핑계로 인해 이제 다시 올리게 되었습니다.&lt;/p&gt;
-&lt;img src=&quot;/2020/05/23/Data-Structure-Linked-List/02.png&quot; class=&quot;&quot;&gt;
-&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="Data Structure" scheme="https://dev-sawd.github.io/categories/Data-Structure/"/>
-    
-    
-      <category term="TIL" scheme="https://dev-sawd.github.io/tags/TIL/"/>
     
   </entry>
   
