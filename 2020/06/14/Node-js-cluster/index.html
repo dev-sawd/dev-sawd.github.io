@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>[Github] git 변경사항 되돌리기 | SAWD</title>
+  <title>[Node.js] cluster | SAWD</title>
   <meta name="description" content="시간이 나야지..." />
   <meta name="keywords" content="" />
   <meta name="HandheldFriendly" content="True" />
@@ -12,18 +12,20 @@
   <link rel="shortcut icon" href="/images/favicon.png">
   <link rel="alternate" href="/atom.xml" title="SAWD">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Git을 이용해 형상관리를 하다 보면 수정사항을 롤백 하고 싶을 때가 자주 있습니다.이 포스트에서는 이전 커밋까지 롤백 하는 방법에 대해서 알아봅니다.">
+  <meta name="description" content="cluster 모듈은 싱글 스레드인 노드가 CPU코어를 모두 사용할 수 있게 해주는 모듈">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[Github] git 변경사항 되돌리기">
-<meta property="og:url" content="https://dev-sawd.github.io/2020/05/24/Github-revert-change/index.html">
+<meta property="og:title" content="[Node.js] cluster">
+<meta property="og:url" content="https://dev-sawd.github.io/2020/06/14/Node-js-cluster/index.html">
 <meta property="og:site_name" content="SAWD">
-<meta property="og:description" content="Git을 이용해 형상관리를 하다 보면 수정사항을 롤백 하고 싶을 때가 자주 있습니다.이 포스트에서는 이전 커밋까지 롤백 하는 방법에 대해서 알아봅니다.">
+<meta property="og:description" content="cluster 모듈은 싱글 스레드인 노드가 CPU코어를 모두 사용할 수 있게 해주는 모듈">
 <meta property="og:locale" content="ko_KR">
-<meta property="article:published_time" content="2020-05-24T01:55:54.000Z">
-<meta property="article:modified_time" content="2020-05-30T10:32:45.091Z">
+<meta property="og:image" content="https://dev-sawd.github.io/images/node.js_logo.png">
+<meta property="article:published_time" content="2020-06-14T06:07:25.000Z">
+<meta property="article:modified_time" content="2020-06-14T06:16:13.351Z">
 <meta property="article:author" content="SAWD">
-<meta property="article:tag" content="git">
+<meta property="article:tag" content="TIL">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dev-sawd.github.io/images/node.js_logo.png">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
@@ -139,54 +141,44 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        <article id="post-Github-revert-change"
+        <article id="post-Node-js-cluster"
   class="post white-box article-type-post"
   itemscope itemprop="blogPost">
 	<section class='meta'>
 	<h2 class="title">
-  	<a href="/2020/05/24/Github-revert-change/">
-    	[Github] git 변경사항 되돌리기
+  	<a href="/2020/06/14/Node-js-cluster/">
+    	[Node.js] cluster
     </a>
   </h2>
 	<time>
-	  5월 24, 2020
+	  6월 14, 2020
 	</time>
 	
     
     <div class='cats'>
-        <a href="/categories/Github/">Github</a>
+        <a href="/categories/Node-js/">Node.js</a>
     </div>
 
 	</section>
 	
-		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#git-add-명령을-하기-이전의-수정사항-롤백"><span class="toc-number">1.</span> <span class="toc-text">git add 명령을 하기 이전의 수정사항 롤백</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-add-명령어를-한-이후의-수정사항-롤백"><span class="toc-number">2.</span> <span class="toc-text">git add 명령어를 한 이후의 수정사항 롤백</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-commit을-한-이후-롤백"><span class="toc-number">3.</span> <span class="toc-text">git commit을 한 이후 롤백</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#원격-저장소에-변경된-이력도-되돌리기"><span class="toc-number">4.</span> <span class="toc-text">원격 저장소에 변경된 이력도 되돌리기</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#마치며"><span class="toc-number">5.</span> <span class="toc-text">마치며</span></a></li></ol></section>
+		<section class="toc-wrapper"></section>
 	
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<p>Git을 이용해 형상관리를 하다 보면 수정사항을 롤백 하고 싶을 때가 자주 있습니다.<br>이 포스트에서는 이전 커밋까지 롤백 하는 방법에 대해서 알아봅니다.</p>
+    	<p><img src="/images/node.js_logo.png" alt=""></p>
+<p>cluster 모듈은 싱글 스레드인 노드가 CPU코어를 모두 사용할 수 있게 해주는 모듈</p>
 <a id="more"></a>
 
-<h2 id="git-add-명령을-하기-이전의-수정사항-롤백"><a href="#git-add-명령을-하기-이전의-수정사항-롤백" class="headerlink" title="git add 명령을 하기 이전의 수정사항 롤백"></a>git add 명령을 하기 이전의 수정사항 롤백</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> &#123;respository_directory&#125;</span></span><br><span class="line">respository_directory $ checkout .</span><br></pre></td></tr></table></figure>
+<p>포트를 공유하는 노드 프로세스를 여러 개 둘 수도 있어 요청이 많이 들어왔을 때 병렬로 실행된 서버의 개수만큼 요청이 분산되게 할 수 있음<br>cluster 모듈을 설정하여 코어 하나당 노드 프로세스 하나가 돌아가게 할 수 있음<br>그렇다고 꼭 코어의 갯수에 비례하여 성능이 향상되는것은 아님</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//cluster.js</span></span><br><span class="line"><span class="keyword">const</span> cluster = <span class="built_in">require</span>(<span class="string">'cluster'</span>);</span><br><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"><span class="keyword">const</span> numCPUs = <span class="built_in">require</span>(<span class="string">'os'</span>).cpus().length;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (cluster.isMaster) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`마스터 프로세스 아이디 : <span class="subst">$&#123;process.pid&#125;</span>`</span>);</span><br><span class="line">    <span class="comment">// CPU 개수 만큼 워크를 생산</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; numCPUs; i += <span class="number">1</span>) &#123;</span><br><span class="line">        cluster.fork();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 워커가 종료되었을 때</span></span><br><span class="line">    cluster.on(<span class="string">'exit'</span>, (worker, code, signal) =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;worker.process.pid&#125;</span>번 워커가 종료되었습니다.`</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 워커들이 포트에서 대기</span></span><br><span class="line">    http.createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">        res.write(<span class="string">'&lt;h1&gt;Hello Node!&lt;/h1&gt;'</span>);</span><br><span class="line">        res.end(<span class="string">'&lt;p&gt;Hello Cluster!&lt;/p&gt;'</span>);</span><br><span class="line">    &#125;).listen(<span class="number">8085</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123;process.pid&#125;</span>번 워커 실행`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="git-add-명령어를-한-이후의-수정사항-롤백"><a href="#git-add-명령어를-한-이후의-수정사항-롤백" class="headerlink" title="git add 명령어를 한 이후의 수정사항 롤백"></a>git add 명령어를 한 이후의 수정사항 롤백</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="git-commit을-한-이후-롤백"><a href="#git-commit을-한-이후-롤백" class="headerlink" title="git commit을 한 이후 롤백"></a>git commit을 한 이후 롤백</h2><ul>
-<li>주의 아래의 명령어는 수정사항이 완전히 삭제됩니다</li>
-</ul>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset --hard HEAD~</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="원격-저장소에-변경된-이력도-되돌리기"><a href="#원격-저장소에-변경된-이력도-되돌리기" class="headerlink" title="원격 저장소에 변경된 이력도 되돌리기"></a>원격 저장소에 변경된 이력도 되돌리기</h2><p>원격 저장소에 변경된 이력을 되돌리는 방법은 local 저장소의 새로운 변경사항으로 덮어쓰는것과 개념이 같습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset HEAD~</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit -m <span class="string">"commit message"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git push origin master</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>여러 롤백 케이스중에서 자주 사용할 수 있는 상황을 뽑아서 포스팅해봤습니다.<br>이외 더 자세한 롤백 방법은 아래의 사이트에 자세하게 나와있습니다.</p>
-<p><a href="https://git-scm.com/book/ko/v2/Git-%EB%8F%84%EA%B5%AC-Reset-%EB%AA%85%ED%99%95%ED%9E%88-%EC%95%8C%EA%B3%A0-%EA%B0%80%EA%B8%B0" target="_blank" rel="noopener">https://git-scm.com/book/ko/v2/Git-%EB%8F%84%EA%B5%AC-Reset-%EB%AA%85%ED%99%95%ED%9E%88-%EC%95%8C%EA%B3%A0-%EA%B0%80%EA%B8%B0</a></p>
-<p>중요한것은 롤백을 하기 전 어떻게 이력관리를 할것인지 한번 더 생각해 보는게 중요할 것 같습니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> node cluster</span></span><br><span class="line">마스터 프로세스 아이디 : 78766</span><br><span class="line">78767번 워커 실행</span><br><span class="line">78768번 워커 실행</span><br><span class="line">78770번 워커 실행</span><br><span class="line">78769번 워커 실행</span><br></pre></td></tr></table></figure>
 
   	</div>
 	  
 	  <div class="article-tags tags">
       
-        <a href="/tags/git/">git</a>
+        <a href="/tags/TIL/">TIL</a>
       
 	  </div>
     
@@ -194,13 +186,9 @@
 	
 		<div class="art-item-footer">
 				
-					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2020/05/25/MacOS-remote-access-for-dev-study/" rel="prev"  title="[MacOS] 개발 공부를 위한 원격 개발환경 세팅">
-						[MacOS] 개발 공부를 위한 원격 개발환경 세팅 
-					</a></span>
 				
-				
-					<span class="art-item-right">next：<a href="/2020/05/23/Github-change-remote-repository-url-in-local-repository/" rel="next"  title="[Github] 로컬 저장소의 원격 저장소 URL 변경">
-						[Github] 로컬 저장소의 원격 저장소 URL 변경
+					<span class="art-item-right">next：<a href="/2020/06/12/Node-js-REST-API/" rel="next"  title="[Node.js] REST API">
+						[Node.js] REST API
 					</a><i class="icon icon-chevron-thin-right"></i></span>
 				
 		</div>
@@ -214,7 +202,7 @@
 </article>
 <script>
 	window.subData = {
-		title: '[Github] git 변경사항 되돌리기',
+		title: '[Node.js] cluster',
 		tools: true
 	}
 </script>
@@ -304,7 +292,7 @@
 <script>
   var disqus_shortname = 'devsawd';
   
-  var disqus_url = 'https://dev-sawd.github.io/2020/05/24/Github-revert-change/';
+  var disqus_url = 'https://dev-sawd.github.io/2020/06/14/Node-js-cluster/';
   
   (function(){
     var dsq = document.createElement('script');
