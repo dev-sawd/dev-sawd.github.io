@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dev-sawd.github.io/"/>
-  <updated>2020-06-14T08:57:13.270Z</updated>
+  <updated>2020-06-17T13:06:39.134Z</updated>
   <id>https://dev-sawd.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Node.js] 익스프레스(Express)</title>
+    <link href="https://dev-sawd.github.io/2020/06/15/Node-js-Express/"/>
+    <id>https://dev-sawd.github.io/2020/06/15/Node-js-Express/</id>
+    <published>2020-06-15T12:03:23.000Z</published>
+    <updated>2020-06-17T13:06:39.134Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/images/node.js_logo.png" alt=""></p><p>npm에는 서버 제작 시 불편함을 해소하고, 편의 기능을 추가한 웹 서버 프레임워크로 익스프레스가 대표적</p><a id="more"></a><p>Express-generator로 프레임워크에 필요한 package.json 구조와 기본 폴더 구조까지 잡아줌</p><br><h1 id="Express-설치"><a href="#Express-설치" class="headerlink" title="Express 설치"></a>Express 설치</h1><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> npm install express-generator -g</span></span><br><span class="line">npm WARN deprecated mkdirp@0.5.1: Legacy versions of mkdirp are no longer supported. Please update to mkdirp 1.x. (Note that the API surface has changed to use Promises in 1.x.)</span><br><span class="line">/usr/local/bin/express -&gt; /usr/local/lib/node_modules/express-generator/bin/express-cli.js</span><br><span class="line">+ express-generator@4.16.1</span><br><span class="line">updated 1 package in 0.593s</span><br></pre></td></tr></table></figure><br><h1 id="프로젝트-생성"><a href="#프로젝트-생성" class="headerlink" title="프로젝트 생성"></a>프로젝트 생성</h1><p>설치가 완료되면 새 프로젝트 생성</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> express learn-express --view=pug</span></span><br><span class="line"></span><br><span class="line">   create : learn-express/</span><br><span class="line">   create : learn-express/public/</span><br><span class="line">   create : learn-express/public/javascripts/</span><br><span class="line">   create : learn-express/public/images/</span><br><span class="line">   create : learn-express/public/stylesheets/</span><br><span class="line">   create : learn-express/public/stylesheets/style.css</span><br><span class="line">   create : learn-express/routes/</span><br><span class="line">   create : learn-express/routes/index.js</span><br><span class="line">   create : learn-express/routes/users.js</span><br><span class="line">   create : learn-express/views/</span><br><span class="line">   create : learn-express/views/error.pug</span><br><span class="line">   create : learn-express/views/index.pug</span><br><span class="line">   create : learn-express/views/layout.pug</span><br><span class="line">   create : learn-express/app.js</span><br><span class="line">   create : learn-express/package.json</span><br><span class="line">   create : learn-express/bin/</span><br><span class="line">   create : learn-express/bin/www</span><br><span class="line"></span><br><span class="line">   change directory:</span><br><span class="line">     $ cd learn-express</span><br><span class="line"></span><br><span class="line">   install dependencies:</span><br><span class="line">     $ npm install</span><br><span class="line"></span><br><span class="line">   run the app:</span><br><span class="line">     $ DEBUG=learn-express:* npm start</span><br></pre></td></tr></table></figure><br><h1 id="npm-모듈-설치"><a href="#npm-모듈-설치" class="headerlink" title="npm 모듈 설치"></a>npm 모듈 설치</h1><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> <span class="built_in">cd</span> learn-express &amp;&amp; npm i</span></span><br><span class="line">npm WARN deprecated core-js@2.6.11: core-js@&lt;3 is no longer maintained and not recommended for usage due to the number of issues. Please, upgrade your dependencies to the actual version of core-js@3.</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> core-js@2.6.11 postinstall /Users/devsawd/learn-express/node_modules/core-js</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> node -e <span class="string">"try&#123;require('./postinstall')&#125;catch(e)&#123;&#125;"</span></span></span><br><span class="line"></span><br><span class="line">Thank you for using core-js ( https://github.com/zloirock/core-js ) for polyfilling JavaScript standard library!</span><br><span class="line"></span><br><span class="line">The project needs your help! Please consider supporting of core-js on Open Collective or Patreon:</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> https://opencollective.com/core-js</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> https://www.patreon.com/zloirock</span></span><br><span class="line"></span><br><span class="line">Also, the author of core-js ( https://github.com/zloirock ) is looking for a good job -)</span><br><span class="line"></span><br><span class="line">npm notice created a lockfile as package-lock.json. You should commit this file.</span><br><span class="line">added 118 packages from 171 contributors and audited 119 packages in 5.601s</span><br><span class="line"></span><br><span class="line">3 packages are looking for funding</span><br><span class="line">  run `npm fund` for details</span><br><span class="line"></span><br><span class="line">found 1 low severity vulnerability</span><br><span class="line">  run `npm audit fix` to fix them, or `npm audit` for details</span><br></pre></td></tr></table></figure><br><h1 id="폴더-구조-1Depth"><a href="#폴더-구조-1Depth" class="headerlink" title="폴더 구조 (1Depth)"></a>폴더 구조 (1Depth)</h1><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">learn-express % tree ./ -L 1</span><br><span class="line">./</span><br><span class="line">|-- app.js</span><br><span class="line">|-- bin</span><br><span class="line">|-- node_modules</span><br><span class="line">|-- package-lock.json</span><br><span class="line">|-- package.json</span><br><span class="line">|-- public</span><br><span class="line">|-- routes</span><br><span class="line">`-- views</span><br></pre></td></tr></table></figure><ul><li><p>app.js<br>핵심적인 서버 역할</p></li><li><p>bin/www<br>서버를 실행하는 스크립트</p></li><li><p>public<br>외부(브라우저 등의 클라이언트)에서 접근 가능한 파일들을 모아둔곳<br>이미지, 자바스크립트, css 파일들이 있음</p></li><li><p>routes<br>주소별 라우터들을 모아둔 곳</p></li><li><p>views<br>템플릿 파일을 모아둔곳</p></li></ul><h1 id="서버-실행"><a href="#서버-실행" class="headerlink" title="서버 실행"></a>서버 실행</h1><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">learn-express % npm start</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> learn-express@0.0.0 start /Users/devsawd/learn-express</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> node ./bin/www</span></span><br></pre></td></tr></table></figure><br><p><a href="http://localhost:3000" target="_blank" rel="noopener">http://localhost:3000</a> 으로 접속하면 Welcome to Express 페이지를 볼 수 있음<br>이때 콘솔에서는 클라이언트가 보낸 요청에 대한 정보가 기록됨</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GET / 200 515.753 ms - 170</span><br><span class="line">GET /stylesheets/style.css 200 8.630 ms - 111</span><br><span class="line">GET /favicon.ico 404 21.596 ms - 1102</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/images/node.js_logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;npm에는 서버 제작 시 불편함을 해소하고, 편의 기능을 추가한 웹 서버 프레임워크로 익스프레스가 대표적&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Node.js" scheme="https://dev-sawd.github.io/categories/Node-js/"/>
+    
+    
+      <category term="TIL" scheme="https://dev-sawd.github.io/tags/TIL/"/>
+    
+  </entry>
   
   <entry>
     <title>[Data Structure] Doubly Linked List And Stack</title>
@@ -492,29 +516,6 @@
     
     
       <category term="git" scheme="https://dev-sawd.github.io/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Github] 로컬 저장소의 원격 저장소 URL 변경</title>
-    <link href="https://dev-sawd.github.io/2020/05/23/Github-change-remote-repository-url-in-local-repository/"/>
-    <id>https://dev-sawd.github.io/2020/05/23/Github-change-remote-repository-url-in-local-repository/</id>
-    <published>2020-05-23T06:35:51.000Z</published>
-    <updated>2020-05-30T10:33:41.926Z</updated>
-    
-    <content type="html"><![CDATA[<p>이 포스트에서는 이미 원격 저장소가 지정되어있는 로컬 폴더의 원격 저장소 url을 변경하는 상황에 대해서 포스팅합니다.</p><a id="more"></a><p>.git 폴더로 이동</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> <span class="built_in">test</span></span></span><br></pre></td></tr></table></figure><p>원격 저장소 url 확인</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git remote -v</span></span><br><span class="line">origin  https://github.com/dev-sawd/hyperledger-fabric-basic-network.git (fetch)</span><br></pre></td></tr></table></figure><p>저장소 url 변경</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git remote <span class="built_in">set</span>-url origin https://github.com/dev-sawd/hyperledger-fabric-basic-network-multi-org.git</span></span><br></pre></td></tr></table></figure><p>변경된 원격 저장소 url 확인</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> git remote -v</span></span><br><span class="line">origin  https://github.com/dev-sawd/hyperledger-fabric-basic-network-multi-org.git (fetch)</span><br><span class="line">origin  https://github.com/dev-sawd/hyperledger-fabric-basic-network-multi-org.git (push)</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;이 포스트에서는 이미 원격 저장소가 지정되어있는 로컬 폴더의 원격 저장소 url을 변경하는 상황에 대해서 포스팅합니다.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Github" scheme="https://dev-sawd.github.io/categories/Github/"/>
-    
-    
-      <category term="Github" scheme="https://dev-sawd.github.io/tags/Github/"/>
     
   </entry>
   
