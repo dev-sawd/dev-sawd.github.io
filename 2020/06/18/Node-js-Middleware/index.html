@@ -21,7 +21,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://dev-sawd.github.io/images/node.js_logo.png">
 <meta property="article:published_time" content="2020-06-17T22:54:33.000Z">
-<meta property="article:modified_time" content="2020-06-17T23:14:43.259Z">
+<meta property="article:modified_time" content="2020-06-18T13:17:08.172Z">
 <meta property="article:author" content="SAWD">
 <meta property="article:tag" content="TIL">
 <meta name="twitter:card" content="summary">
@@ -161,7 +161,7 @@
 
 	</section>
 	
-		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#커스텀-미들웨어"><span class="toc-number">1.</span> <span class="toc-text">커스텀 미들웨어</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#morgan"><span class="toc-number">2.</span> <span class="toc-text">morgan</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#body-parser"><span class="toc-number">3.</span> <span class="toc-text">body-parser</span></a></li></ol></section>
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#커스텀-미들웨어"><span class="toc-number">1.</span> <span class="toc-text">커스텀 미들웨어</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#morgan"><span class="toc-number">2.</span> <span class="toc-text">morgan</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#body-parser"><span class="toc-number">3.</span> <span class="toc-text">body-parser</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cookie-parser"><span class="toc-number">4.</span> <span class="toc-text">cookie-parser</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#static"><span class="toc-number">5.</span> <span class="toc-text">static</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#express-session"><span class="toc-number">6.</span> <span class="toc-text">express-session</span></a></li></ol></section>
 	
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
@@ -197,7 +197,52 @@
 </blockquote>
 <br>
 
-<h1 id="body-parser"><a href="#body-parser" class="headerlink" title="body-parser"></a>body-parser</h1>
+<h1 id="body-parser"><a href="#body-parser" class="headerlink" title="body-parser"></a>body-parser</h1><p>요청의 본문을 해석해주는 미들웨어<br>보통 폼 데이터나 AJAX 요청의 데이터를 처리함</p>
+<br>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//app.js</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="keyword">var</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>);</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">app.use(bodyParser.json());</span><br><span class="line">app.use(bodyParser.urlencoded(&#123; <span class="attr">extended</span>: flase &#125;));</span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure>
+<p>익스프레스 4.16.0버전부터 body-parser의 일부 기능이 익스프레스에 내장됨<br>따라서 아래와 같이 익스프레스에서는 대체됨</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">app.use(express.json());</span><br><span class="line">app.use(express.urlencoded(&#123; <span class="attr">extended</span>: <span class="literal">false</span>&#125;));</span><br></pre></td></tr></table></figure>
+<p>body-parser가 필요한 경우도 있는데, JSON과 URL-encoded 형식 본문 외에도 Raw, Text 형식의 본문을 추가로 해석 가능하기 때문<br>Raw는 본문이 버퍼 데이터일때, Text는 본문이 텍스트 데이터일때 해석하는 미들웨어<br>아래와 같이 사용 가능</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">app.use(bodyParser.raw());</span><br><span class="line">app.use(bodyParser.text());</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>JSON은 JSON형식의 데이터 전달 방식<br>URL-encoded는 주소 형식으로 데이터를 보내는 방식<br>urlencoded 메서드의 { extended: false }라는 옵션이 있는데<br>이 옵션이 false면 노드의 querystring모듈을 사용하여 쿼리스트링을 해석하고<br>true면 qs 모듈을 사용하여 쿼리스트링을 해석함<br>qs 모듈은 내장 모듈이 아니라 npm 패키지이며, querystring 모듈의 기능을 조금 더 확장한 모듈</p>
+<p>body-parser를 사용하면 기존의 <code>req.on(&#39;data&#39;)</code>와 <code>req.on(&#39;end&#39;)</code>로 스트림을 사용하지 않아도 됨<br>패키지가 내부적으로 본문을 해석해 <code>req.body</code>에 추가해줌</p>
+<br>
+
+<h1 id="cookie-parser"><a href="#cookie-parser" class="headerlink" title="cookie-parser"></a>cookie-parser</h1><p>요청에 동봉된 쿠키를 해석해줌</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="keyword">var</span> cookieParser = <span class="built_in">require</span>(<span class="string">'cookie-parser'</span>);</span><br><span class="line">app.use(cookieParser());</span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure>
+<p>해석된 쿠키들은 <code>req.cookies</code> 객체에 들어감<br><code>name=devsawd</code> 쿠키를 보냈다면 <code>req.cookies</code>는 <code>{ name: &#39;devsawd&#39; }</code>가 됨</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.use(cookieParser(<span class="string">'secret code'</span>));</span><br></pre></td></tr></table></figure>
+<p>이와같이 첫번째 인자로 문자열을 넣어줄 수도 있음<br>서명된(암호화된)쿠키가 있는 경우, 제공한 문자열을 키로 삼아 복호화할 수 있음<br>서명된 쿠키는 클라이언트에서 수정 했을 때 에러가 발생</p>
+<br>
+
+<h1 id="static"><a href="#static" class="headerlink" title="static"></a>static</h1><p>정적인 파일들을 제공</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">app.use(express.static(path.join(__dirname, <span class="string">'public'</span>)));</span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure>
+<p>함수의 인자로 정적 파일들이 담겨 있는 폴더를 지정하면 됨<br>현재 public 폴더가 지정되어 있음<br>public/stylesheets/style.css는 <a href="http://localhost:3000/stylesheets/style.css로" target="_blank" rel="noopener">http://localhost:3000/stylesheets/style.css로</a> 접근할 수 있음</p>
+<br>
+
+<h1 id="express-session"><a href="#express-session" class="headerlink" title="express-session"></a>express-session</h1><p>세션 관리용 미들웨어<br>로그인 등의 이유로 세션을 구현할 때 매우 유용<br>express-generator로는 설치되지 않으므로 직접 설치해야함</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> npm i express-session</span></span><br><span class="line">+ express-session@1.17.1</span><br><span class="line">added 5 packages from 5 contributors and audited 124 packages in 2.284s</span><br><span class="line"></span><br><span class="line">3 packages are looking for funding</span><br><span class="line"> run `npm fund` for details</span><br><span class="line"></span><br><span class="line">found 1 low severity vulnerability</span><br><span class="line"> run `npm audit fix` to fix them, or `npm audit` for details</span><br></pre></td></tr></table></figure>
+
+<p>설치 후 app.js에 express-session을 연결</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="keyword">var</span> logger = <span class="built_in">require</span>(<span class="string">'morgan'</span>);</span><br><span class="line"><span class="keyword">var</span> session = <span class="built_in">require</span>(<span class="string">'express-session'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> indexRouter = <span class="built_in">require</span>(<span class="string">'./routes/index'</span>);</span><br><span class="line"><span class="keyword">var</span> usersRouter = <span class="built_in">require</span>(<span class="string">'./routes/users'</span>);</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">app.use(cookieParser(<span class="string">'secret code'</span>));</span><br><span class="line">app.use(session(&#123;</span><br><span class="line">    resave: <span class="literal">false</span>,</span><br><span class="line">    saveUninitialized: <span class="literal">false</span>,</span><br><span class="line">    secret: <span class="string">'secret code'</span>,</span><br><span class="line">    cookie: &#123;</span><br><span class="line">        httpOnly: <span class="literal">true</span>,</span><br><span class="line">        secure: <span class="literal">false</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;));</span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>resave<br>요청이 왔을때 세션에 수정 사항이 생기지 않더라도 세션을 다시 저장할지에 대한 설정</p>
+</li>
+<li><p>saveUninitialized<br>세션에 저장할 내역이 없더라도 세션을 저장할지에 대한 설정(보통 방문자 추적에 사용)</p>
+</li>
+<li><p>secret<br>안전하게 쿠키를 전송하려면 쿠키에 서명을 추가해야하고, 쿠키를 서명하는데 secret의 값이 필요<br>cookie-parser의 secret과 같게 설정해야함</p>
+</li>
+<li><p>httpOnly<br>클라이언트에서 쿠키를 확인하지 못하도록 함</p>
+</li>
+<li><p>secure<br>false로 설정해서 http가 아닌 환경에서도 사용할 수 있게 함<br>배포시에는 https를 적용하고 secure도 true로 설정하는 것이 좋음</p>
+</li>
+</ul>
+
   	</div>
 	  
 	  <div class="article-tags tags">
