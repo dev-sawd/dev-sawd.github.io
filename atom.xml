@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dev-sawd.github.io/"/>
-  <updated>2020-06-19T11:28:59.541Z</updated>
+  <updated>2020-06-20T02:30:00.600Z</updated>
   <id>https://dev-sawd.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Data Structure] 계산기 프로그램 구현</title>
+    <link href="https://dev-sawd.github.io/2020/06/20/Data-Structure-Calculator/"/>
+    <id>https://dev-sawd.github.io/2020/06/20/Data-Structure-Calculator/</id>
+    <published>2020-06-20T02:25:34.000Z</published>
+    <updated>2020-06-20T02:30:00.600Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://docs.google.com/presentation/d/1xROXXl_eVXwKsEZpLEVNMLamiTHySWH0sH9ENhKhGjM/edit?usp=sharing" target="_blank" rel="noopener">원본자료</a></p><p>원본 자료를 전체화면으로 보면 더 쉽게 볼 수 있어요!</p><img src="/2020/06/20/Data-Structure-Calculator/02.png" class=""><br><a id="more"></a><img src="/2020/06/20/Data-Structure-Calculator/03.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/04.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/05.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/06.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/07.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/08.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/09.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/10.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/11.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/12.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/13.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/14.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/15.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/16.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/17.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/18.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/19.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/20.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/21.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/22.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/23.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/24.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/25.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/26.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/27.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/28.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/29.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/30.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/31.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/32.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/33.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/34.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/35.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/36.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/37.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/38.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/39.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/40.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/41.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/42.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/43.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/44.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/45.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/46.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/47.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/48.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/49.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/50.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/51.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/52.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/53.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/54.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/55.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/56.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/57.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/58.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/59.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/60.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/61.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/62.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/63.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/64.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/65.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/66.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/67.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/68.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/69.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/70.png" class=""><br><img src="/2020/06/20/Data-Structure-Calculator/71.png" class=""><br>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://docs.google.com/presentation/d/1xROXXl_eVXwKsEZpLEVNMLamiTHySWH0sH9ENhKhGjM/edit?usp=sharing&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;원본자료&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;원본 자료를 전체화면으로 보면 더 쉽게 볼 수 있어요!&lt;/p&gt;
+&lt;img src=&quot;/2020/06/20/Data-Structure-Calculator/02.png&quot; class=&quot;&quot;&gt;
+&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Data Structure" scheme="https://dev-sawd.github.io/categories/Data-Structure/"/>
+    
+    
+      <category term="TIL" scheme="https://dev-sawd.github.io/tags/TIL/"/>
+    
+  </entry>
   
   <entry>
     <title>[Javascript] var, let, const</title>
@@ -490,29 +516,6 @@
     
       <category term="Hyperledger Fabric" scheme="https://dev-sawd.github.io/categories/Hyperledger-Fabric/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>[ETC] URL, URI</title>
-    <link href="https://dev-sawd.github.io/2020/05/27/ETC-URL-URI/"/>
-    <id>https://dev-sawd.github.io/2020/05/27/ETC-URL-URI/</id>
-    <published>2020-05-27T05:20:28.000Z</published>
-    <updated>2020-05-27T05:35:15.300Z</updated>
-    
-    <content type="html"><![CDATA[<p>개발을 하다보면, 개발자들끼리 얘기 하다보면 URL이 자주 등장합니다.<br>그리고 문서나 stackoverflow를 이용하다 보면 URI라는 단어도 심심치 않게 보입니다.<br>아직까지 정확히 URL과 URI에 대해 차이점을 명확히 모르는 관계로 정리해보려 합니다.</p><a id="more"></a><h1 id="URL-Uniform-Resource-Locator"><a href="#URL-Uniform-Resource-Locator" class="headerlink" title="URL : Uniform Resource Locator"></a>URL : Uniform Resource Locator</h1><blockquote><p>ex. <a href="http://github.com/" target="_blank" rel="noopener">http://github.com/</a></p></blockquote><h1 id="URI-Uniform-Resource-Identifier"><a href="#URI-Uniform-Resource-Identifier" class="headerlink" title="URI : Uniform Resource Identifier"></a>URI : Uniform Resource Identifier</h1><p>URL 이하의 식별자까지 포함</p><blockquote><p>ex. <a href="http://github.com/devsawd" target="_blank" rel="noopener">http://github.com/devsawd</a><br>ex. <a href="http://github.com/test" target="_blank" rel="noopener">http://github.com/test</a></p></blockquote><p>URI 예시인 <a href="http://github.com/devsawd" target="_blank" rel="noopener">http://github.com/devsawd</a> 와 <a href="http://github.com/test" target="_blank" rel="noopener">http://github.com/test</a> 를 보면<br>URL은 <a href="http://github.com/" target="_blank" rel="noopener">http://github.com/</a> 으로 같고<br>URI는 각각 <a href="http://github.com/devsawd" target="_blank" rel="noopener">http://github.com/devsawd</a>, <a href="http://github.com/test" target="_blank" rel="noopener">http://github.com/test</a> 이 됩니다.</p><h1 id="현실은"><a href="#현실은" class="headerlink" title="현실은"></a>현실은</h1><p>??? : 주소 줘봐<br>!!! : <a href="http://github.com/devsawd" target="_blank" rel="noopener">http://github.com/devsawd</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;개발을 하다보면, 개발자들끼리 얘기 하다보면 URL이 자주 등장합니다.&lt;br&gt;그리고 문서나 stackoverflow를 이용하다 보면 URI라는 단어도 심심치 않게 보입니다.&lt;br&gt;아직까지 정확히 URL과 URI에 대해 차이점을 명확히 모르는 관계로 정리해보려 합니다.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="ETC" scheme="https://dev-sawd.github.io/categories/ETC/"/>
-    
-    
-      <category term="TIL" scheme="https://dev-sawd.github.io/tags/TIL/"/>
     
   </entry>
   
