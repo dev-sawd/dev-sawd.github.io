@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>[iOS] UILabel을 클릭했을때 처리 | SAWD</title>
+  <title>[Node.js] 라우터 객체 | SAWD</title>
   <meta name="description" content="시간이 나야지..." />
   <meta name="keywords" content="" />
   <meta name="HandheldFriendly" content="True" />
@@ -12,18 +12,20 @@
   <link rel="shortcut icon" href="/images/favicon.png">
   <link rel="alternate" href="/atom.xml" title="SAWD">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="개인 프로젝트를 진행하면서..UILabel을 탭했을때 페이지를 넘어가거나 특정 일을 처리해야 하는 경우가 생겼습니다.iOS와 특히 Objective C 문법 개념을 같이 학습하려고 하니 필요한 부분들은 정리해 둘 필요가 있는것 같습니다.그래야 안잊어 버립니다.. 검색해보니 생각보다 간단하게 처리할 수 있을 것 같습니다.저는 viewDidLoad에 아래와 같">
+  <meta name="description" content="이전 라우터를 만들었을때 주소별로 분기하느라 코드가 복잡했는데 익스프레스와 라우터를 이용해 깔끔하게 관리">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[iOS] UILabel을 클릭했을때 처리">
-<meta property="og:url" content="https://dev-sawd.github.io/2018/06/16/iOS-How-to-add-tapgesture-at-UILabel/index.html">
+<meta property="og:title" content="[Node.js] 라우터 객체">
+<meta property="og:url" content="https://dev-sawd.github.io/2020/06/21/Node-js-Router-Object/index.html">
 <meta property="og:site_name" content="SAWD">
-<meta property="og:description" content="개인 프로젝트를 진행하면서..UILabel을 탭했을때 페이지를 넘어가거나 특정 일을 처리해야 하는 경우가 생겼습니다.iOS와 특히 Objective C 문법 개념을 같이 학습하려고 하니 필요한 부분들은 정리해 둘 필요가 있는것 같습니다.그래야 안잊어 버립니다.. 검색해보니 생각보다 간단하게 처리할 수 있을 것 같습니다.저는 viewDidLoad에 아래와 같">
+<meta property="og:description" content="이전 라우터를 만들었을때 주소별로 분기하느라 코드가 복잡했는데 익스프레스와 라우터를 이용해 깔끔하게 관리">
 <meta property="og:locale" content="ko_KR">
-<meta property="article:published_time" content="2018-06-16T12:10:18.000Z">
-<meta property="article:modified_time" content="2020-05-13T01:28:08.516Z">
+<meta property="og:image" content="https://dev-sawd.github.io/images/node.js_logo.png">
+<meta property="article:published_time" content="2020-06-21T00:59:06.000Z">
+<meta property="article:modified_time" content="2020-06-21T10:06:03.742Z">
 <meta property="article:author" content="SAWD">
 <meta property="article:tag" content="TIL">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dev-sawd.github.io/images/node.js_logo.png">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
@@ -139,38 +141,55 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        <article id="post-iOS-How-to-add-tapgesture-at-UILabel"
+        <article id="post-Node-js-Router-Object"
   class="post white-box article-type-post"
   itemscope itemprop="blogPost">
 	<section class='meta'>
 	<h2 class="title">
-  	<a href="/2018/06/16/iOS-How-to-add-tapgesture-at-UILabel/">
-    	[iOS] UILabel을 클릭했을때 처리
+  	<a href="/2020/06/21/Node-js-Router-Object/">
+    	[Node.js] 라우터 객체
     </a>
   </h2>
 	<time>
-	  6월 16, 2018
+	  6월 21, 2020
 	</time>
 	
     
     <div class='cats'>
-        <a href="/categories/iOS/">iOS</a>
+        <a href="/categories/Node-js/">Node.js</a>
     </div>
 
 	</section>
 	
-		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#개인-프로젝트를-진행하면서"><span class="toc-number">1.</span> <span class="toc-text">개인 프로젝트를 진행하면서..</span></a></li></ol></section>
+		<section class="toc-wrapper"></section>
 	
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<h1 id="개인-프로젝트를-진행하면서"><a href="#개인-프로젝트를-진행하면서" class="headerlink" title="개인 프로젝트를 진행하면서.."></a>개인 프로젝트를 진행하면서..</h1><p>UILabel을 탭했을때 페이지를 넘어가거나 특정 일을 처리해야 하는 경우가 생겼습니다.<br>iOS와 특히 Objective C 문법 개념을 같이 학습하려고 하니 필요한 부분들은 정리해 둘 필요가 있는것 같습니다.<br><del>그래야 안잊어 버립니다..</del></p>
-<p>검색해보니 생각보다 간단하게 처리할 수 있을 것 같습니다.<br>저는 viewDidLoad에 아래와 같이 UILabel을 클릭했을때 호출할 delegate와 action을 설정하였습니다.</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    ...</span><br><span class="line">    [labelMenu setUserInteractionEnabled:<span class="literal">YES</span>];</span><br><span class="line">    <span class="built_in">UITapGestureRecognizer</span> *tapGesture = [[<span class="built_in">UITapGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(labelTap:)];</span><br><span class="line">    [tapGesture setDelegate:<span class="keyword">self</span>];</span><br><span class="line">    [labelMenu addGestureRecognizer:tapGesture];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    	<p><img src="/images/node.js_logo.png" alt=""></p>
+<p>이전 라우터를 만들었을때 주소별로 분기하느라 코드가 복잡했는데 익스프레스와 라우터를 이용해 깔끔하게 관리</p>
+<a id="more"></a>
 
-<p>그리고 같은 파일안에서 labelTap을 정의하고 처리작업을 넣었습니다.</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)labelTap:(<span class="built_in">UITapGestureRecognizer</span> *)recognizer &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"label is tapped"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<br>
 
-<p>이제 해당 UILabel을 클릭하면 Log가 찍히는 것을 볼 수 있을 것입니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="keyword">var</span> indexRouter = <span class="built_in">require</span>(<span class="string">'./routes/index'</span>);</span><br><span class="line"><span class="keyword">var</span> usersRouter = <span class="built_in">require</span>(<span class="string">'./routes/users'</span>);</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">app.use(<span class="string">'/'</span>, indexRouter);</span><br><span class="line">app.use(<span class="string">'/users'</span>, usersRouter);</span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure>
+
+<p>주소가 <code>/</code>로 시작하면 <code>routes/index.js</code><br>주소가 <code>/users</code>로 시작하면 <code>routes/users.js</code>를 호출<br>use 대신 get, post, put, patch, delete 같은 HTTP 메서드를 사용할 수도 있음</p>
+<br>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// routes/index.js</span></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* GET home page. */</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  res.render(<span class="string">'index'</span>, &#123; <span class="attr">title</span>: <span class="string">'Express'</span> &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+<p>/ 주소로 GET 요청이 들어왔을때의 처리</p>
+<br>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// routes/users.js</span></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* GET users listing. */</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="string">'respond with a resource'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure>
+<p><code>app.js</code>에서 <code>app.guse(/users&#39;, usersRouter)</code>로 연결했기 때문에 <code>/users</code>와 <code>/</code>이 합쳐져 <code>/users/</code>로 GET을 요청했을때 이 라우터의 콜백 함수가 실행됨</p>
+<p>라우터(express.Router())를 사용할 필요 없이 <code>app.js</code>에서 <code>app.get(&#39;/&#39;, 미들웨어)</code>, <code>app.get(&#39;/users&#39;, 미들웨어)</code>를 해도 기능은 동일하지만 코드 관리를 위해 라우터를 별도로 분리하는것</p>
+<p>라우터에서는 반드시 요청에 대한 응답을 보내거나 에러 핸들러로 요청을 넘겨줘야함<br>응답을 보내지 않으면 브라우저는 계속 응답을 기다림<br>응답 시간에 제한이 있으므로 영원히 기다리지는 않지만 기다리는 동안 다른 동작을 수행할 수 없을 수도 있음</p>
+<br>
+
+<p>라우터 주소의 특수한 패턴</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="string">'/users/:id'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(req.params, req.query);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>:id</code>의 의미는 다른 값을 넣을 수 있다는 의미<br><code>/users/1</code>이나 <code>/users/123</code>등의 요청도 이 라우터에 걸림<br><code>req.params.id</code> 형태로 <code>:id</code>의 값을 받아올 수 있음</p>
+<p>이러한 특수한 패턴은 일반 라우터보다 뒤에 위치해야 함<br>일반 라우터보다 뒤에 위치해야 다른 라우터를 방해하지 않음</p>
 
   	</div>
 	  
@@ -184,13 +203,9 @@
 	
 		<div class="art-item-footer">
 				
-					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2018/06/17/ETC-Kotlin-vs-Java/" rel="prev"  title="[ETC] Kotlin vs Java">
-						[ETC] Kotlin vs Java 
-					</a></span>
 				
-				
-					<span class="art-item-right">next：<a href="/2018/06/15/Android-About-Material-Design/" rel="next"  title="[Android] About Material Design">
-						[Android] About Material Design
+					<span class="art-item-right">next：<a href="/2020/06/20/Data-Structure-Calculator/" rel="next"  title="[Data Structure] 계산기 프로그램 구현">
+						[Data Structure] 계산기 프로그램 구현
 					</a><i class="icon icon-chevron-thin-right"></i></span>
 				
 		</div>
@@ -204,7 +219,7 @@
 </article>
 <script>
 	window.subData = {
-		title: '[iOS] UILabel을 클릭했을때 처리',
+		title: '[Node.js] 라우터 객체',
 		tools: true
 	}
 </script>
@@ -296,7 +311,7 @@
 <script>
   var disqus_shortname = 'devsawd';
   
-  var disqus_url = 'https://dev-sawd.github.io/2018/06/16/iOS-How-to-add-tapgesture-at-UILabel/';
+  var disqus_url = 'https://dev-sawd.github.io/2020/06/21/Node-js-Router-Object/';
   
   (function(){
     var dsq = document.createElement('script');

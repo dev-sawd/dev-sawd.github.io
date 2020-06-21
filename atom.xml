@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dev-sawd.github.io/"/>
-  <updated>2020-06-20T02:30:00.600Z</updated>
+  <updated>2020-06-21T10:06:03.742Z</updated>
   <id>https://dev-sawd.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Node.js] 라우터 객체</title>
+    <link href="https://dev-sawd.github.io/2020/06/21/Node-js-Router-Object/"/>
+    <id>https://dev-sawd.github.io/2020/06/21/Node-js-Router-Object/</id>
+    <published>2020-06-21T00:59:06.000Z</published>
+    <updated>2020-06-21T10:06:03.742Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/images/node.js_logo.png" alt=""></p><p>이전 라우터를 만들었을때 주소별로 분기하느라 코드가 복잡했는데 익스프레스와 라우터를 이용해 깔끔하게 관리</p><a id="more"></a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="keyword">var</span> indexRouter = <span class="built_in">require</span>(<span class="string">'./routes/index'</span>);</span><br><span class="line"><span class="keyword">var</span> usersRouter = <span class="built_in">require</span>(<span class="string">'./routes/users'</span>);</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">app.use(<span class="string">'/'</span>, indexRouter);</span><br><span class="line">app.use(<span class="string">'/users'</span>, usersRouter);</span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure><p>주소가 <code>/</code>로 시작하면 <code>routes/index.js</code><br>주소가 <code>/users</code>로 시작하면 <code>routes/users.js</code>를 호출<br>use 대신 get, post, put, patch, delete 같은 HTTP 메서드를 사용할 수도 있음</p><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// routes/index.js</span></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* GET home page. */</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  res.render(<span class="string">'index'</span>, &#123; <span class="attr">title</span>: <span class="string">'Express'</span> &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure><p>/ 주소로 GET 요청이 들어왔을때의 처리</p><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// routes/users.js</span></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* GET users listing. */</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="string">'respond with a resource'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure><p><code>app.js</code>에서 <code>app.guse(/users&#39;, usersRouter)</code>로 연결했기 때문에 <code>/users</code>와 <code>/</code>이 합쳐져 <code>/users/</code>로 GET을 요청했을때 이 라우터의 콜백 함수가 실행됨</p><p>라우터(express.Router())를 사용할 필요 없이 <code>app.js</code>에서 <code>app.get(&#39;/&#39;, 미들웨어)</code>, <code>app.get(&#39;/users&#39;, 미들웨어)</code>를 해도 기능은 동일하지만 코드 관리를 위해 라우터를 별도로 분리하는것</p><p>라우터에서는 반드시 요청에 대한 응답을 보내거나 에러 핸들러로 요청을 넘겨줘야함<br>응답을 보내지 않으면 브라우저는 계속 응답을 기다림<br>응답 시간에 제한이 있으므로 영원히 기다리지는 않지만 기다리는 동안 다른 동작을 수행할 수 없을 수도 있음</p><br><p>라우터 주소의 특수한 패턴</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="string">'/users/:id'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(req.params, req.query);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p><code>:id</code>의 의미는 다른 값을 넣을 수 있다는 의미<br><code>/users/1</code>이나 <code>/users/123</code>등의 요청도 이 라우터에 걸림<br><code>req.params.id</code> 형태로 <code>:id</code>의 값을 받아올 수 있음</p><p>이러한 특수한 패턴은 일반 라우터보다 뒤에 위치해야 함<br>일반 라우터보다 뒤에 위치해야 다른 라우터를 방해하지 않음</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;img src=&quot;/images/node.js_logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;이전 라우터를 만들었을때 주소별로 분기하느라 코드가 복잡했는데 익스프레스와 라우터를 이용해 깔끔하게 관리&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Node.js" scheme="https://dev-sawd.github.io/categories/Node-js/"/>
+    
+    
+      <category term="TIL" scheme="https://dev-sawd.github.io/tags/TIL/"/>
+    
+  </entry>
   
   <entry>
     <title>[Data Structure] 계산기 프로그램 구현</title>
@@ -494,28 +518,6 @@
       <category term="docker" scheme="https://dev-sawd.github.io/tags/docker/"/>
     
       <category term="golang" scheme="https://dev-sawd.github.io/tags/golang/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Hyperledger Fabric] fabric 버전을 확인하는 방법</title>
-    <link href="https://dev-sawd.github.io/2020/05/29/Hyperledger-Fabric-how-to-check-fabric-version/"/>
-    <id>https://dev-sawd.github.io/2020/05/29/Hyperledger-Fabric-how-to-check-fabric-version/</id>
-    <published>2020-05-29T01:36:27.000Z</published>
-    <updated>2020-06-08T12:53:38.693Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/images/hyperledger_fabric_logo.png" alt=""></p><p>지난번 포스트에서 Windows10에 docker와 hyperledger fabric samples 실행을 성공했다고 언급한적이 있습니다.<br>그리고는 제대로 테스트하기 위해서 제 github에 올라가있는 <a href="https://github.com/dev-sawd/hyperledger-fabric-basic-network" target="_blank" rel="noopener">basic-netowrk</a>를 다운받아 실행했습니다.<br>항상 공부용 맥북에서만 개발,테스트 후 원격 저장소에 푸쉬했기 때문에 Windows에서도 문제없이 돌아갈지 궁금했거든요.</p><a id="more"></a><p>start.sh로 실행했는데.. 시작부터 에러가 발생합니다.</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ./start.sh</span></span><br><span class="line">org1.example.com</span><br><span class="line">2020-05-29 11:56:21.048 KST [common.tools.configtxgen] main -&gt; FATA 001 Missing channelID, please specify it with '-channelID'</span><br><span class="line">2020-05-29 11:56:21.116 KST [common.tools.configtxgen] main -&gt; INFO 001 Loading configuration</span><br><span class="line">2020-05-29 11:56:21.142 KST [common.tools.configtxgen.localconfig] Load -&gt; INFO 002 Loaded configuration: C:\Users\KimYongTaek\hyperledger-fabric-basic-network\configtx.yaml</span><br><span class="line">2020-05-29 11:56:21.142 KST [common.tools.configtxgen] doOutputChannelCreateTx -&gt; INFO 003 Generating new channel configtx</span><br><span class="line">2020-05-29 11:56:21.142 KST [common.tools.configtxgen] main -&gt; FATA 004 Error on outputChannelCreateTx: could not generate default config template: error parsing configuration: error adding policies to channel group: no policies defined</span><br><span class="line">2020-05-29 11:56:21.189 KST [common.tools.configtxgen] main -&gt; INFO 001 Loading configuration</span><br><span class="line">2020-05-29 11:56:21.225 KST [common.tools.configtxgen.localconfig] Load -&gt; INFO 002 Loaded configuration: C:\Users\KimYongTaek\hyperledger-fabric-basic-network\configtx.yaml</span><br><span class="line">2020-05-29 11:56:21.225 KST [common.tools.configtxgen] doOutputAnchorPeersUpdate -&gt; INFO 003 Generating anchor peer update</span><br><span class="line">2020-05-29 11:56:21.225 KST [common.tools.configtxgen] main -&gt; FATA 004 Error on inspectChannelCreateTx: error parsing profile as ch</span><br></pre></td></tr></table></figure><blockquote><p>그럼 그렇지.. 쉽게 될리가..</p></blockquote><p>에러 로그는 configtxgen을 실행하면서 <code>-channelID</code> 인자를 넣어주지 않아서 생기는 문제였습니다.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">configtxgen -profile OneOrgOrdererGenesis -outputBlock .&#x2F;config&#x2F;genesis.block</span><br></pre></td></tr></table></figure><p>configtxgen 명령어를 뚫어져라 쳐다보고있는데..</p><blockquote><p>어? 이상하다..</p></blockquote><p>configtxgen의 위치를 찾아보니 최신 버전으로 설치한 fabric-samples/bin안에 있는 파일을 참조하고 있었습니다.<br>최신 fabric 버전과 구버전 실행 스크립트간의 버전 불일치로 발생한 문제로 보입니다.<br>맥북의 fabric-samples는 5개월 전쯤에 1.4버전대로 설치한것으로 기억합니다.</p><p>설치한 fabric의 버전을 알기 위해 맥북(MacOs)과 데스크탑(Windows)의 cryptogen의 version을 확인해봅니다.</p><p>MacOs</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">% cd fabric-samples&#x2F;bin</span><br><span class="line">bin % .&#x2F;cryptogen version</span><br><span class="line">cryptogen:</span><br><span class="line"> Version: 1.4.3</span><br><span class="line"> Commit SHA: b8c4a6a</span><br><span class="line"> Go version: go1.11.5</span><br><span class="line"> OS&#x2F;Arch: darwin&#x2F;amd64</span><br></pre></td></tr></table></figure><p>Windows</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cd fabric-samples&#x2F;bin</span><br><span class="line">$ cryptogen version</span><br><span class="line">cryptogen:</span><br><span class="line"> Version: 2.1.0</span><br><span class="line"> Commit SHA: 1bdf97537</span><br><span class="line"> Go version: go1.14.1</span><br><span class="line"> OS&#x2F;Arch: windows&#x2F;amd64</span><br></pre></td></tr></table></figure><p>역시 예상한 대로 버전이 상이합니다.</p><p>Windows에 깔려있는 fabric-samples를 1.4.3버전으로 재설치 후 다시 실행해보니 정상 작동합니다.</p><blockquote><p>야호!</p></blockquote><p>이제 basic-network의 fabric-samples/bin 폴더의 의존성을 끊기 위해 1.4.3버전의 bin 폴더를 basic-network안에 복사해 넣고<br>start.sh의 bin폴더 경로를 방금 복사한 1.4.3 버전의 bin 폴더로 지정했습니다.<br>앞으로 다른 환경에서도 잘 동작할겁니다 :)</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;/images/hyperledger_fabric_logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;지난번 포스트에서 Windows10에 docker와 hyperledger fabric samples 실행을 성공했다고 언급한적이 있습니다.&lt;br&gt;그리고는 제대로 테스트하기 위해서 제 github에 올라가있는 &lt;a href=&quot;https://github.com/dev-sawd/hyperledger-fabric-basic-network&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;basic-netowrk&lt;/a&gt;를 다운받아 실행했습니다.&lt;br&gt;항상 공부용 맥북에서만 개발,테스트 후 원격 저장소에 푸쉬했기 때문에 Windows에서도 문제없이 돌아갈지 궁금했거든요.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Hyperledger Fabric" scheme="https://dev-sawd.github.io/categories/Hyperledger-Fabric/"/>
-    
     
   </entry>
   

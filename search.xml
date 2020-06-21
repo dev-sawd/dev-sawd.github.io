@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>[Node.js] 라우터 객체</title>
+      <link href="/2020/06/21/Node-js-Router-Object/"/>
+      <url>/2020/06/21/Node-js-Router-Object/</url>
+      
+        <content type="html"><![CDATA[<p><img src="/images/node.js_logo.png" alt=""></p><p>이전 라우터를 만들었을때 주소별로 분기하느라 코드가 복잡했는데 익스프레스와 라우터를 이용해 깔끔하게 관리</p><a id="more"></a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// app.js</span></span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="keyword">var</span> indexRouter = <span class="built_in">require</span>(<span class="string">'./routes/index'</span>);</span><br><span class="line"><span class="keyword">var</span> usersRouter = <span class="built_in">require</span>(<span class="string">'./routes/users'</span>);</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line">app.use(<span class="string">'/'</span>, indexRouter);</span><br><span class="line">app.use(<span class="string">'/users'</span>, usersRouter);</span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure><p>주소가 <code>/</code>로 시작하면 <code>routes/index.js</code><br>주소가 <code>/users</code>로 시작하면 <code>routes/users.js</code>를 호출<br>use 대신 get, post, put, patch, delete 같은 HTTP 메서드를 사용할 수도 있음</p><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// routes/index.js</span></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* GET home page. */</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  res.render(<span class="string">'index'</span>, &#123; <span class="attr">title</span>: <span class="string">'Express'</span> &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure><p>/ 주소로 GET 요청이 들어왔을때의 처리</p><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// routes/users.js</span></span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">var</span> router = express.Router();</span><br><span class="line"></span><br><span class="line"><span class="comment">/* GET users listing. */</span></span><br><span class="line">router.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="string">'respond with a resource'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = router;</span><br></pre></td></tr></table></figure><p><code>app.js</code>에서 <code>app.guse(/users&#39;, usersRouter)</code>로 연결했기 때문에 <code>/users</code>와 <code>/</code>이 합쳐져 <code>/users/</code>로 GET을 요청했을때 이 라우터의 콜백 함수가 실행됨</p><p>라우터(express.Router())를 사용할 필요 없이 <code>app.js</code>에서 <code>app.get(&#39;/&#39;, 미들웨어)</code>, <code>app.get(&#39;/users&#39;, 미들웨어)</code>를 해도 기능은 동일하지만 코드 관리를 위해 라우터를 별도로 분리하는것</p><p>라우터에서는 반드시 요청에 대한 응답을 보내거나 에러 핸들러로 요청을 넘겨줘야함<br>응답을 보내지 않으면 브라우저는 계속 응답을 기다림<br>응답 시간에 제한이 있으므로 영원히 기다리지는 않지만 기다리는 동안 다른 동작을 수행할 수 없을 수도 있음</p><br><p>라우터 주소의 특수한 패턴</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">router.get(<span class="string">'/users/:id'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(req.params, req.query);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><p><code>:id</code>의 의미는 다른 값을 넣을 수 있다는 의미<br><code>/users/1</code>이나 <code>/users/123</code>등의 요청도 이 라우터에 걸림<br><code>req.params.id</code> 형태로 <code>:id</code>의 값을 받아올 수 있음</p><p>이러한 특수한 패턴은 일반 라우터보다 뒤에 위치해야 함<br>일반 라우터보다 뒤에 위치해야 다른 라우터를 방해하지 않음</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Node.js </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> TIL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>[Data Structure] 계산기 프로그램 구현</title>
       <link href="/2020/06/20/Data-Structure-Calculator/"/>
       <url>/2020/06/20/Data-Structure-Calculator/</url>
