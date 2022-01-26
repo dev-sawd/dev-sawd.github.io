@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>[Android] Page Indicator with Fragment | SAWD</title>
+  <meta name="description" content="시간이 나야지..." />
+  <meta name="keywords" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/images/favicon.png">
+  <link rel="alternate" href="/atom.xml" title="SAWD">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="오랜만에 또 포스팅 하는군요…오늘은 GitHub의 라이브러리를 이용해 아래와 같은 것을 만들어볼까 합니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Android] Page Indicator with Fragment">
+<meta property="og:url" content="https://dev-sawd.github.io/2018/07/20/Android-Page-Indicator-with-Fragment/index.html">
+<meta property="og:site_name" content="SAWD">
+<meta property="og:description" content="오랜만에 또 포스팅 하는군요…오늘은 GitHub의 라이브러리를 이용해 아래와 같은 것을 만들어볼까 합니다.">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/preview_anim_drop.gif">
+<meta property="article:published_time" content="2018-07-20T02:35:20.000Z">
+<meta property="article:modified_time" content="2022-01-26T13:51:21.028Z">
+<meta property="article:author" content="SAWD">
+<meta property="article:tag" content="TIL">
+<meta property="article:tag" content="Example">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/preview_anim_drop.gif">
+    
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href='/css/waves.min.css' rel='stylesheet'>
+  
+<link rel="stylesheet" href="/style.css">
+
+
+  
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-120934734-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="SAWD" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+  <script>setLoadingBarProgress(20)</script> 
+  <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				SAWD
+			</a>
+			<div class='menu'>
+				<ul class='h-list'>
+					
+						<li>
+							<a class='flat-box nav-home' href='/'>
+								Home
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-archives' href='/archives'>
+								Archives
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-about' href='/about'>
+								About
+							</a>
+						</li>
+					
+				</ul>
+				<div class='underline'></div>
+			</div>
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon icon-search"></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a href='javascript:void(0)'><span class="icon icon-search flat-box"></span></a></li>
+				
+				<li class='s-menu'><a href='javascript:void(0)'><span class="icon icon-menu flat-box"></span></a></li>
+			</ul>
+		</div>
+		
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				Word of Forks
+			</a>
+
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a href='javascript:void(0)'><span class="icon icon-chat_bubble_outline flat-box"></span></a></li>
+				<li class='s-top'><a href='javascript:void(0)'><span class="icon icon-arrow_upward flat-box"></span></a></li>
+				<li class='s-toc'><a href='javascript:void(0)'><span class="icon icon-format_list_numbered flat-box"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<aside class="menu-phone">
+	<nav>
+		
+			<a href="/" class="nav-home nav">
+				Home
+			</a>
+		
+			<a href="/archives" class="nav-archives nav">
+				Archives
+			</a>
+		
+			<a href="/about" class="nav-about nav">
+				About
+			</a>
+		
+	</nav>
+</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+  <div class="l_body">
+    <div class='container clearfix'>
+      <div class='l_main'>
+        <article id="post-Android-Page-Indicator-with-Fragment"
+  class="post white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<section class='meta'>
+	<h2 class="title">
+  	<a href="/2018/07/20/Android-Page-Indicator-with-Fragment/">
+    	[Android] Page Indicator with Fragment
+    </a>
+  </h2>
+	<time>
+	  7월 20, 2018
+	</time>
+	
+    
+    <div class='cats'>
+        <a href="/categories/Android/">Android</a>
+    </div>
+
+	</section>
+<!--	-->
+<!--		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Page-Indicator"><span class="toc-number">1.</span> <span class="toc-text">Page Indicator</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HomeActivity-java"><span class="toc-number">2.</span> <span class="toc-text">HomeActivity.java</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#집중할-부분"><span class="toc-number">2.1.</span> <span class="toc-text">집중할 부분</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#HomeFragmentAdpater-java"><span class="toc-number">3.</span> <span class="toc-text">HomeFragmentAdpater.java</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#BaseFragment-java"><span class="toc-number">4.</span> <span class="toc-text">BaseFragment.java</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#fragment-base-xml"><span class="toc-number">4.1.</span> <span class="toc-text">fragment_base.xml</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#마무리"><span class="toc-number">5.</span> <span class="toc-text">마무리</span></a></li></ol></section>-->
+<!--	-->
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>오랜만에 또 포스팅 하는군요…<br>오늘은 GitHub의 라이브러리를 이용해 아래와 같은 것을 만들어볼까 합니다.</p>
+<img src="https://raw.githubusercontent.com/romandanylyk/PageIndicatorView/master/assets/preview_anim_drop.gif" class="">
+<a id="more"></a>
+<p>기반 라이브러리는 PageIndicator이고 원본 주소는 아래와 같습니다.<br><a href="https://github.com/romandanylyk/PageIndicatorView" target="_blank" rel="noopener">https://github.com/romandanylyk/PageIndicatorView</a></p>
+<p>이 라이브러리를 사용하다가 샘플자체가 View로 되어있어서 이해하고 사용하기가 어려웠습니다.<br>마침 이전 강좌들에서 사용했던 Fragment를 이용해서 예제를 바꾸기로 했습니다.<br>라이브러리는 그대로 두고 샘플쪽 코드만 수정할겁니다.</p>
+<h1 id="Page-Indicator"><a href="#Page-Indicator" class="headerlink" title="Page Indicator"></a>Page Indicator</h1><p>Page Indicator는 위에서 보셨듯 화면 하단에 현재 페이지가 몇번째 페이지인지 알려주는 것을 말합니다.<br>iOS에서는 PageViewController라고도 부릅니다.<br>이 UI를 사용하면 튜토리얼이나 단계가 있는 플로우를 작성하는데 꽤 그럴듯한 UX를 제공할 수 있습니다.</p>
+<p>아주 잘 만들어진 라이브러리에 제가 사용하고 싶은 Fragment를 연동하려 합니다.</p>
+<h1 id="HomeActivity-java"><a href="#HomeActivity-java" class="headerlink" title="HomeActivity.java"></a>HomeActivity.java</h1><p>단순하게 MainActivity역할을 하는 클래스입니다.<br>전문은 아래와 같습니다.</p>
+<figure class="highlight java"><figcaption><span>HomeActivity.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.rd.pageindicatorview.home;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.content.Intent;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.support.annotation.NonNull;</span><br><span class="line"><span class="keyword">import</span> android.support.v4.app.Fragment;</span><br><span class="line"><span class="keyword">import</span> android.support.v4.view.ViewPager;</span><br><span class="line"><span class="keyword">import</span> android.view.Menu;</span><br><span class="line"><span class="keyword">import</span> android.view.MenuItem;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.rd.PageIndicatorView;</span><br><span class="line"><span class="keyword">import</span> com.rd.pageindicatorview.base.BaseActivity;</span><br><span class="line"><span class="keyword">import</span> com.rd.pageindicatorview.base.BaseFragment;</span><br><span class="line"><span class="keyword">import</span> com.rd.pageindicatorview.customize.CustomizeActivity;</span><br><span class="line"><span class="keyword">import</span> com.rd.pageindicatorview.data.Customization;</span><br><span class="line"><span class="keyword">import</span> com.rd.pageindicatorview.sample.R;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeActivity</span> <span class="keyword">extends</span> <span class="title">BaseActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> PageIndicatorView pageIndicatorView;</span><br><span class="line">    <span class="keyword">private</span> Customization customization;</span><br><span class="line">    <span class="keyword">private</span> ViewPager viewPager;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.ac_home);</span><br><span class="line">        customization = <span class="keyword">new</span> Customization();</span><br><span class="line"></span><br><span class="line">        initToolbar();</span><br><span class="line">        initViews();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent intent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> customization = requestCode == CustomizeActivity.EXTRAS_CUSTOMIZATION_REQUEST_CODE &amp;&amp; resultCode == RESULT_OK;</span><br><span class="line">        <span class="keyword">if</span> (customization &amp;&amp; intent != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">this</span>.customization = intent.getParcelableExtra(CustomizeActivity.EXTRAS_CUSTOMIZATION);</span><br><span class="line">            updateIndicator();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onCreateOptionsMenu</span><span class="params">(Menu menu)</span> </span>&#123;</span><br><span class="line">        getMenuInflater().inflate(R.menu.menu_customize, menu);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onOptionsItemSelected</span><span class="params">(MenuItem item)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">switch</span> (item.getItemId()) &#123;</span><br><span class="line">            <span class="keyword">case</span> R.id.actionCustomize:</span><br><span class="line">                CustomizeActivity.start(<span class="keyword">this</span>, customization);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">super</span>.onOptionsItemSelected(item);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@SuppressWarnings</span>(<span class="string">"ConstantConditions"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initViews</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        viewPager = findViewById(R.id.viewPager);</span><br><span class="line">        HomeFragmentAdapter homeFragmentAdapter = <span class="keyword">new</span> HomeFragmentAdapter(getSupportFragmentManager());</span><br><span class="line">        homeFragmentAdapter.setData(createPageList());</span><br><span class="line">        viewPager.setAdapter(homeFragmentAdapter);</span><br><span class="line"></span><br><span class="line">        pageIndicatorView = findViewById(R.id.pageIndicatorView);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@NonNull</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> List&lt;Fragment&gt; <span class="title">createPageList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] colors = &#123;R.color.google_red, R.color.google_yellow, R.color.google_green, R.color.google_blue&#125;;</span><br><span class="line">        List&lt;Fragment&gt; pageList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">            BaseFragment baseFragment = <span class="keyword">new</span> BaseFragment();</span><br><span class="line">            Bundle bundle = <span class="keyword">new</span> Bundle();</span><br><span class="line">            bundle.putInt(BaseFragment.BACKGROUND_COLOR, colors[i]);</span><br><span class="line">            baseFragment.setArguments(bundle);</span><br><span class="line">            pageList.add(baseFragment);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> pageList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateIndicator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (customization == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        pageIndicatorView.setAnimationType(customization.getAnimationType());</span><br><span class="line">        pageIndicatorView.setOrientation(customization.getOrientation());</span><br><span class="line">        pageIndicatorView.setRtlMode(customization.getRtlMode());</span><br><span class="line">        pageIndicatorView.setInteractiveAnimation(customization.isInteractiveAnimation());</span><br><span class="line">        pageIndicatorView.setAutoVisibility(customization.isAutoVisibility());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>코드 전체적으로 라이브러리 사용방법과 설정을 통해 애니메이션, 세로모드 등을 바로바로 적용할 수 있도록 도와주는 코드입니다.<br>여기서 제가 수정한 곳에 포커스를 맞추려 합니다.</p>
+<h2 id="집중할-부분"><a href="#집중할-부분" class="headerlink" title="집중할 부분"></a>집중할 부분</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initViews</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    viewPager = findViewById(R.id.viewPager);</span><br><span class="line">    HomeFragmentAdapter homeFragmentAdapter = <span class="keyword">new</span> HomeFragmentAdapter(getSupportFragmentManager());</span><br><span class="line">    homeFragmentAdapter.setData(createPageList());</span><br><span class="line">    viewPager.setAdapter(homeFragmentAdapter);</span><br><span class="line"></span><br><span class="line">    pageIndicatorView = findViewById(R.id.pageIndicatorView);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>뷰를 초기화하는 부분입니다.<br>Fragment용 Adapter인 HomeFragmentAdapter를 만들었고 getSupportFragmentManager를 이용해 생성하였습니다.<br>그 Fragment Adapter에 데이터를 지정하고 뷰 페이저에 setAdpater로 연동하였습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NonNull</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> List&lt;Fragment&gt; <span class="title">createPageList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span>[] colors = &#123;R.color.google_red, R.color.google_yellow, R.color.google_green, R.color.google_blue&#125;;</span><br><span class="line">    List&lt;Fragment&gt; pageList = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i++) &#123;</span><br><span class="line">        BaseFragment baseFragment = <span class="keyword">new</span> BaseFragment();</span><br><span class="line">        Bundle bundle = <span class="keyword">new</span> Bundle();</span><br><span class="line">        bundle.putInt(BaseFragment.BACKGROUND_COLOR, colors[i]);</span><br><span class="line">        baseFragment.setArguments(bundle);</span><br><span class="line">        pageList.add(baseFragment);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pageList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>원래는 레이아웃 xml 이 없고 View를 새로 생성해서 넣는 코드였습니다.<br>하지만 실제 사용시에는 xml을 이용한 레이아웃 작업과 더 나아가 Fragment를 적용하는데 더 좋을 것 같아서 공부한 것을 토대로 수정하였습니다.</p>
+<p>각 페이지는 알아보기 쉽게 기존 샘플에서와 같이 색상으로 페이지를 구분할 수 있도록 하였습니다.<br>Bundle을 이용해 Fragment에 색상 값들을 전달 할 수 있습니다.<br>밑에서 보겠지만 Fragment에서는 이 Bundle을 통해 들어온 색상값들을 자기 배경색으로 지정할 겁니다.</p>
+<h1 id="HomeFragmentAdpater-java"><a href="#HomeFragmentAdpater-java" class="headerlink" title="HomeFragmentAdpater.java"></a>HomeFragmentAdpater.java</h1><figure class="highlight java"><figcaption><span>HomeFragmentAdapter.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.rd.pageindicatorview.home;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.support.v4.app.Fragment;</span><br><span class="line"><span class="keyword">import</span> android.support.v4.app.FragmentManager;</span><br><span class="line"><span class="keyword">import</span> android.support.v4.app.FragmentPagerAdapter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HomeFragmentAdapter</span> <span class="keyword">extends</span> <span class="title">FragmentPagerAdapter</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Fragment&gt; fragmentList;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">HomeFragmentAdapter</span><span class="params">(FragmentManager fragmentManager)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(fragmentManager);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setData</span><span class="params">(List&lt;Fragment&gt; fragmentList)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.fragmentList = fragmentList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Fragment <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> fragmentList.get(position);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> fragmentList.size();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>제가 Fragment를 ViewPager와 연동하기 위해 만든 Fragment Adapter입니다.<br>FragmentPagerAdpater를 상속받아서 생성하였고 위에서 설명한 setData를 정의하였습니다.<br>getItem, getCount너무 간단해서 설명하지 않도록 하겠습니다.</p>
+<h1 id="BaseFragment-java"><a href="#BaseFragment-java" class="headerlink" title="BaseFragment.java"></a>BaseFragment.java</h1><figure class="highlight java"><figcaption><span>BaseFragment.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.rd.pageindicatorview.base;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.support.v4.app.Fragment;</span><br><span class="line"><span class="keyword">import</span> android.support.v4.content.ContextCompat;</span><br><span class="line"><span class="keyword">import</span> android.view.LayoutInflater;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.view.ViewGroup;</span><br><span class="line"><span class="keyword">import</span> android.widget.LinearLayout;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.rd.pageindicatorview.sample.R;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String BACKGROUND_COLOR = <span class="string">"param1"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> backgroundColor;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BaseFragment</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Required empty public constructor</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        <span class="keyword">if</span> (getArguments() != <span class="keyword">null</span>) &#123;</span><br><span class="line">            backgroundColor = getArguments().getInt(BACKGROUND_COLOR);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(LayoutInflater inflater, ViewGroup container,</span></span></span><br><span class="line"><span class="function"><span class="params">                             Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        View view = inflater.inflate(R.layout.fragment_base, container, <span class="keyword">false</span>);</span><br><span class="line">        LinearLayout linearLayout = view.findViewById(R.id.linear_layout);</span><br><span class="line">        linearLayout.setBackgroundColor(ContextCompat.getColor(getContext(), backgroundColor));</span><br><span class="line">        <span class="keyword">return</span> view;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>BaseFragment라고 이름을 짓고 Fragment 를 상속받았습니다.<br>그리고 HomeActivity에서 인자로 사용할 static 변수인 BACKGROUND_COLOR도 지정했습니다.<br>onCreate에서 arguments가 있는지 확인하고 멤버 변수에 색상값을 넣어주었습니다.<br>onCreateView에서 배경이 되는 LinearLayout에 색상값을 이용해 배경색으로 지정하였습니다.</p>
+<h2 id="fragment-base-xml"><a href="#fragment-base-xml" class="headerlink" title="fragment_base.xml"></a>fragment_base.xml</h2><figure class="highlight xml"><figcaption><span>fragment_base.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">"@+id/linear_layout"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>LinearLayout의 width와 height를 match_parent로 지정하였습니다.<br>이 영역에 색을 칠해서 배경으로 사용합니다.</p>
+<h1 id="마무리"><a href="#마무리" class="headerlink" title="마무리"></a>마무리</h1><p>라이브러리 사용자 관점에서는 굉장히 사용하고 싶은데 샘플이 너무 불친절했습니다.<br>xml없이 뷰를 하나 생성하고 색을 칠해서 Page Indicator에 연동해서 사용자에게 보여주는 형태였습니다.<br>사실 Page Indicator에는 Fragment가 더 좋을것 같다는 생각에 프로젝트를 Fork해서 수정했습니다.</p>
+<p>제가 수정한 전체 코드는 아래에서 다운받을 수 있습니다.<br><a href="https://github.com/dev-sawd/PageIndicatorViewWithFragment" target="_blank" rel="noopener">https://github.com/dev-sawd/PageIndicatorViewWithFragment</a></p>
+<p>이 강좌는 한번 더 확장할 에정입니다.<br>실제로 사용할때 ViewPager의 특성에 의해서 고려해야될 부분이 만만치 않기 때문입니다.<br>그럼 또 시간날때 포스팅 하겠습니다!</p>
+
+  	</div>
+	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/TIL/">TIL</a>
+      
+        <a href="/tags/Example/">Example</a>
+      
+	  </div>
+    
+		
+	
+		<div class="art-item-footer">
+				
+					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2018/07/20/ETC-svn-vs-git/" rel="prev"  title="[ETC] svn vs git">
+						[ETC] svn vs git 
+					</a></span>
+				
+				
+					<span class="art-item-right">next：<a href="/2018/07/15/Data-Structure-Recursion/" rel="next"  title="[Data Structure] Recursion">
+						[Data Structure] Recursion
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+		<section id="comments">
+			<div id="disqus_thread"></div>
+		</section>
+	
+</article>
+<script>
+	window.subData = {
+		title: '[Android] Page Indicator with Fragment',
+		tools: true
+	}
+</script>
+
+      </div>
+      <aside class='l_side'>
+        
+  <section class='m_widget about'>
+
+<div class='header'>SAWD</div>
+<div class='content'>
+<div class='desc'>시간이 나면 쓰는 블로그</div>
+</div>
+</section>
+
+  <section class='m_widget categories'>
+<div class='header'>Categories</div>
+<div class='content'>
+    
+    <ul class="entry">
+    
+        <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badget'>8</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Data-Structure/"><div class='name'>Data Structure</div><div class='badget'>6</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>9</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/GitLab/"><div class='name'>GitLab</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Github/"><div class='name'>Github</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Golang/"><div class='name'>Golang</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Hyperledger-Fabric/"><div class='name'>Hyperledger Fabric</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Linux/"><div class='name'>Linux</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MacOS/"><div class='name'>MacOS</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Node-js/"><div class='name'>Node.js</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Objective-C/"><div class='name'>Objective-C</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Samll-talk/"><div class='name'>Samll talk</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/iOS/"><div class='name'>iOS</div><div class='badget'>4</div></a></li>
+    
+    </ul>
+    
+</div>
+</section>
+
+  
+<div class="m_widget tagcloud">
+    <div class="header">Tags</div>
+    <div class='content'>
+        <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 18px; color: #2b2b2b">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Example/" style="font-size: 18px; color: #2b2b2b">Example</a> <a href="/tags/Github/" style="font-size: 16px; color: #555">Github</a> <a href="/tags/Gitlab/" style="font-size: 14px; color: #808080">Gitlab</a> <a href="/tags/Golang/" style="font-size: 14px; color: #808080">Golang</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #808080">HEXO</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Troubleshooting/" style="font-size: 16px; color: #555">Troubleshooting</a> <a href="/tags/docker/" style="font-size: 14px; color: #808080">docker</a> <a href="/tags/error/" style="font-size: 14px; color: #808080">error</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/golang/" style="font-size: 14px; color: #808080">golang</a> <a href="/tags/port/" style="font-size: 14px; color: #808080">port</a> <a href="/tags/windows/" style="font-size: 14px; color: #808080">windows</a>
+    </div>
+</div>
+
+
+
+      </aside>
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+  </div>
+  <footer id="footer" class="clearfix">
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="https://github.com/dev-sawd" class="social github"
+          target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <a href='https://github.com/stkevintan/hexo-theme-material-flow' target="_blank" rel="noopener" class="codename">MaterialFlow</a> designed by <a href="http://keyin.me/" target="_blank">Kevin Tan</a>.</div>
+  
+</footer>
+
+
+  <script>setLoadingBarProgress(80);</script>
+  
+<script>
+  var disqus_shortname = 'devsawd';
+  
+  var disqus_url = 'https://dev-sawd.github.io/2018/07/20/Android-Page-Indicator-with-Fragment/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='/js/waves.min.js'></script>
+<script src="/js/scrollreveal.min.js"></script>
+
+<script src="/js/jquery.fitvids.js"></script>
+
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "hexo";
+  var ROOT = "/"||"/";
+  if(!ROOT.endsWith('/'))ROOT += '/';
+</script>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/app.js"></script>
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>

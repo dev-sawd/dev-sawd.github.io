@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>[GitLab] 개인 저장소 연동 테스트 | SAWD</title>
+  <meta name="description" content="시간이 나야지..." />
+  <meta name="keywords" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/images/favicon.png">
+  <link rel="alternate" href="/atom.xml" title="SAWD">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="지난 포스트 Docker를 이용해 GitLab을 설치해보자로 GitLab을 설치한 후 정말 제대로 동작하는지 궁금해졌습니다.이번 포스트에서는 저장소를 직접 생성해보고 연동 테스트를 해볼거예요.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[GitLab] 개인 저장소 연동 테스트">
+<meta property="og:url" content="https://dev-sawd.github.io/2020/06/03/GitLab-create-personal-repository/index.html">
+<meta property="og:site_name" content="SAWD">
+<meta property="og:description" content="지난 포스트 Docker를 이용해 GitLab을 설치해보자로 GitLab을 설치한 후 정말 제대로 동작하는지 궁금해졌습니다.이번 포스트에서는 저장소를 직접 생성해보고 연동 테스트를 해볼거예요.">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://dev-sawd.github.io/images/gitlab_logo.jpg">
+<meta property="og:image" content="https://dev-sawd.github.io/2020/06/03/GitLab-create-personal-repository/1.png">
+<meta property="og:image" content="https://dev-sawd.github.io/2020/06/03/GitLab-create-personal-repository/2.png">
+<meta property="og:image" content="https://dev-sawd.github.io/2020/06/03/GitLab-create-personal-repository/3.png">
+<meta property="og:image" content="https://dev-sawd.github.io/2020/06/03/GitLab-create-personal-repository/4.png">
+<meta property="article:published_time" content="2020-06-03T11:44:56.000Z">
+<meta property="article:modified_time" content="2022-01-26T13:51:21.145Z">
+<meta property="article:author" content="SAWD">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Docker-Compose">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dev-sawd.github.io/images/gitlab_logo.jpg">
+    
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href='/css/waves.min.css' rel='stylesheet'>
+  
+<link rel="stylesheet" href="/style.css">
+
+
+  
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-120934734-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="SAWD" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+  <script>setLoadingBarProgress(20)</script> 
+  <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				SAWD
+			</a>
+			<div class='menu'>
+				<ul class='h-list'>
+					
+						<li>
+							<a class='flat-box nav-home' href='/'>
+								Home
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-archives' href='/archives'>
+								Archives
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-about' href='/about'>
+								About
+							</a>
+						</li>
+					
+				</ul>
+				<div class='underline'></div>
+			</div>
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon icon-search"></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a href='javascript:void(0)'><span class="icon icon-search flat-box"></span></a></li>
+				
+				<li class='s-menu'><a href='javascript:void(0)'><span class="icon icon-menu flat-box"></span></a></li>
+			</ul>
+		</div>
+		
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				Word of Forks
+			</a>
+
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a href='javascript:void(0)'><span class="icon icon-chat_bubble_outline flat-box"></span></a></li>
+				<li class='s-top'><a href='javascript:void(0)'><span class="icon icon-arrow_upward flat-box"></span></a></li>
+				<li class='s-toc'><a href='javascript:void(0)'><span class="icon icon-format_list_numbered flat-box"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<aside class="menu-phone">
+	<nav>
+		
+			<a href="/" class="nav-home nav">
+				Home
+			</a>
+		
+			<a href="/archives" class="nav-archives nav">
+				Archives
+			</a>
+		
+			<a href="/about" class="nav-about nav">
+				About
+			</a>
+		
+	</nav>
+</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+  <div class="l_body">
+    <div class='container clearfix'>
+      <div class='l_main'>
+        <article id="post-GitLab-create-personal-repository"
+  class="post white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<section class='meta'>
+	<h2 class="title">
+  	<a href="/2020/06/03/GitLab-create-personal-repository/">
+    	[GitLab] 개인 저장소 연동 테스트
+    </a>
+  </h2>
+	<time>
+	  6월 3, 2020
+	</time>
+	
+    
+    <div class='cats'>
+        <a href="/categories/GitLab/">GitLab</a>
+    </div>
+
+	</section>
+<!--	-->
+<!--		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#저장소-생성"><span class="toc-number">1.</span> <span class="toc-text">저장소 생성</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#저장소-복제"><span class="toc-number">2.</span> <span class="toc-text">저장소 복제</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#README-md-파일-생성"><span class="toc-number">3.</span> <span class="toc-text">README.md 파일 생성</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Commit-and-Push"><span class="toc-number">4.</span> <span class="toc-text">Commit and Push</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#결과"><span class="toc-number">5.</span> <span class="toc-text">결과</span></a></li></ol></section>-->
+<!--	-->
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p><img src="/images/gitlab_logo.jpg" alt=""></p>
+<p>지난 포스트 <a href="https://dev-sawd.github.io/2020/05/30/MacOS-gitlab-with-docker/">Docker를 이용해 GitLab을 설치해보자</a>로 GitLab을 설치한 후 정말 제대로 동작하는지 궁금해졌습니다.<br>이번 포스트에서는 저장소를 직접 생성해보고 연동 테스트를 해볼거예요.</p>
+ <a id="more"></a>
+
+<br>
+
+<h2 id="저장소-생성"><a href="#저장소-생성" class="headerlink" title="저장소 생성"></a>저장소 생성</h2><img src="/2020/06/03/GitLab-create-personal-repository/1.png" class="">
+<p>GitLab에 로그인 후 [Create a project]를 클릭합니다.</p>
+<br>
+<br>
+
+<img src="/2020/06/03/GitLab-create-personal-repository/2.png" class="">
+<p>프로젝트 이름을 적고 생성을 눌러줍니다.</p>
+<br>
+<br>
+
+<img src="/2020/06/03/GitLab-create-personal-repository/3.png" class="">
+<p>정상적으로 생성되었네요.<br>빨간 박스를 참고해 아래의 스텝에서 저장소를 복제하도록 합니다.</p>
+<br>
+<br>
+
+<h2 id="저장소-복제"><a href="#저장소-복제" class="headerlink" title="저장소 복제"></a>저장소 복제</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"> %</span><span class="bash"> git <span class="built_in">clone</span> http://xxx.xxx.xxx.xxx/devsawd/hello-world.git</span></span><br><span class="line"></span><br><span class="line">Cloning into 'hello-world'...</span><br><span class="line">Username for 'http://xxx.xxx.xxx.xxx': devsawd@gmail.com</span><br><span class="line">Password for 'http://devsawd@gmail.com@xxx.xxx.xxx.xxx':</span><br><span class="line">warning: You appear to have cloned an empty repository.</span><br><span class="line"><span class="meta"> %</span><span class="bash"> <span class="built_in">cd</span> hello-world</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>빈 프로젝트를 복제한것이기 때문에 warning이 뜨니 가볍게 무시해줍니다.</p>
+</blockquote>
+<br>
+
+<h2 id="README-md-파일-생성"><a href="#README-md-파일-생성" class="headerlink" title="README.md 파일 생성"></a>README.md 파일 생성</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> touch README.md</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="Commit-and-Push"><a href="#Commit-and-Push" class="headerlink" title="Commit and Push"></a>Commit and Push</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">hello-world % git add README.md</span><br><span class="line">hello-world % git commit -m "add README"</span><br><span class="line">[master (root-commit) 204db60] add README</span><br><span class="line">1 file changed, 0 insertions(+), 0 deletions(-)</span><br><span class="line">create mode 100644 README.md</span><br><span class="line"></span><br><span class="line">hello-world % git push -u origin master</span><br><span class="line">Username for 'http://xxx.xxx.xxx.xxx': devsawd@gmail.com</span><br><span class="line">Password for 'http://devsawd@gmail.com@xxx.xxx.xxx.xxx':</span><br><span class="line">Enumerating objects: 3, done.</span><br><span class="line">Counting objects: 100% (3/3), done.</span><br><span class="line">Writing objects: 100% (3/3), 212 bytes | 212.00 KiB/s, done.</span><br><span class="line">Total 3 (delta 0), reused 0 (delta 0)</span><br><span class="line">To http://xxx.xxx.xxx.xxx/devsawd/hello-world.git</span><br><span class="line">* [new branch]      master -&gt; master</span><br><span class="line">Branch 'master' set up to track remote branch 'master' from 'origin'.</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="결과"><a href="#결과" class="headerlink" title="결과"></a>결과</h2><img src="/2020/06/03/GitLab-create-personal-repository/4.png" class="">
+<p>정상적으로 파일이 올라간것이 보입니다!<br>이제 집 밖의 어디에서든 개인 GitLab에 접근해서 사용할 수 있게 되었습니다.</p>
+<p>다음에는 이 hello-world 프로젝트를 백업하고 GitLab Docker를 삭제하고 재구동했을때 복구가 되는지 확인해볼거예요.</p>
+
+  	</div>
+	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/Docker/">Docker</a>
+      
+        <a href="/tags/Docker-Compose/">Docker-Compose</a>
+      
+	  </div>
+    
+		
+	
+		<div class="art-item-footer">
+				
+					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2020/06/04/GitLab-backup-and-restore/" rel="prev"  title="[GitLab] 백업과 복구">
+						[GitLab] 백업과 복구 
+					</a></span>
+				
+				
+					<span class="art-item-right">next：<a href="/2020/05/30/MacOS-gitlab-with-docker/" rel="next"  title="[MacOS] Docker를 이용해 GitLab을 설치해보자">
+						[MacOS] Docker를 이용해 GitLab을 설치해보자
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+		<section id="comments">
+			<div id="disqus_thread"></div>
+		</section>
+	
+</article>
+<script>
+	window.subData = {
+		title: '[GitLab] 개인 저장소 연동 테스트',
+		tools: true
+	}
+</script>
+
+      </div>
+      <aside class='l_side'>
+        
+  <section class='m_widget about'>
+
+<div class='header'>SAWD</div>
+<div class='content'>
+<div class='desc'>시간이 나면 쓰는 블로그</div>
+</div>
+</section>
+
+  <section class='m_widget categories'>
+<div class='header'>Categories</div>
+<div class='content'>
+    
+    <ul class="entry">
+    
+        <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badget'>8</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Data-Structure/"><div class='name'>Data Structure</div><div class='badget'>6</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>9</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/GitLab/"><div class='name'>GitLab</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Github/"><div class='name'>Github</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Golang/"><div class='name'>Golang</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Hyperledger-Fabric/"><div class='name'>Hyperledger Fabric</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Linux/"><div class='name'>Linux</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MacOS/"><div class='name'>MacOS</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Node-js/"><div class='name'>Node.js</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Objective-C/"><div class='name'>Objective-C</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Samll-talk/"><div class='name'>Samll talk</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/iOS/"><div class='name'>iOS</div><div class='badget'>4</div></a></li>
+    
+    </ul>
+    
+</div>
+</section>
+
+  
+<div class="m_widget tagcloud">
+    <div class="header">Tags</div>
+    <div class='content'>
+        <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 18px; color: #2b2b2b">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Example/" style="font-size: 18px; color: #2b2b2b">Example</a> <a href="/tags/Github/" style="font-size: 16px; color: #555">Github</a> <a href="/tags/Gitlab/" style="font-size: 14px; color: #808080">Gitlab</a> <a href="/tags/Golang/" style="font-size: 14px; color: #808080">Golang</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #808080">HEXO</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Troubleshooting/" style="font-size: 16px; color: #555">Troubleshooting</a> <a href="/tags/docker/" style="font-size: 14px; color: #808080">docker</a> <a href="/tags/error/" style="font-size: 14px; color: #808080">error</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/golang/" style="font-size: 14px; color: #808080">golang</a> <a href="/tags/port/" style="font-size: 14px; color: #808080">port</a> <a href="/tags/windows/" style="font-size: 14px; color: #808080">windows</a>
+    </div>
+</div>
+
+
+
+      </aside>
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+  </div>
+  <footer id="footer" class="clearfix">
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="https://github.com/dev-sawd" class="social github"
+          target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <a href='https://github.com/stkevintan/hexo-theme-material-flow' target="_blank" rel="noopener" class="codename">MaterialFlow</a> designed by <a href="http://keyin.me/" target="_blank">Kevin Tan</a>.</div>
+  
+</footer>
+
+
+  <script>setLoadingBarProgress(80);</script>
+  
+<script>
+  var disqus_shortname = 'devsawd';
+  
+  var disqus_url = 'https://dev-sawd.github.io/2020/06/03/GitLab-create-personal-repository/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='/js/waves.min.js'></script>
+<script src="/js/scrollreveal.min.js"></script>
+
+<script src="/js/jquery.fitvids.js"></script>
+
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "hexo";
+  var ROOT = "/"||"/";
+  if(!ROOT.endsWith('/'))ROOT += '/';
+</script>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/app.js"></script>
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>[Android] Fragment with ViewPager Example | SAWD</title>
+  <meta name="description" content="시간이 나야지..." />
+  <meta name="keywords" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/images/favicon.png">
+  <link rel="alternate" href="/atom.xml" title="SAWD">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="오늘은 며칠동안 틈틈이 준비한 ViewPager와 Fragment를 이용한 화면전환 예제를 만들어보려 합니다.며칠동안이라 했지만 거창하게 만들 시간은 없어서 정말 간단히 하려고 노력했습니다. ViewPager뷰페이저란 사용자가 Swipe나 Tab 등을 통해서 현재 보는 화면 다음 화면을 Smooth하게 시각적으로 보여주도록 도와줍니다.주로 Applicati">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Android] Fragment with ViewPager Example">
+<meta property="og:url" content="https://dev-sawd.github.io/2018/07/02/Android-Fragment-with-ViewPager-Example/index.html">
+<meta property="og:site_name" content="SAWD">
+<meta property="og:description" content="오늘은 며칠동안 틈틈이 준비한 ViewPager와 Fragment를 이용한 화면전환 예제를 만들어보려 합니다.며칠동안이라 했지만 거창하게 만들 시간은 없어서 정말 간단히 하려고 노력했습니다. ViewPager뷰페이저란 사용자가 Swipe나 Tab 등을 통해서 현재 보는 화면 다음 화면을 Smooth하게 시각적으로 보여주도록 도와줍니다.주로 Applicati">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://dev-sawd.github.io/2018/07/02/Android-Fragment-with-ViewPager-Example/1.png">
+<meta property="og:image" content="https://dev-sawd.github.io/2018/07/02/Android-Fragment-with-ViewPager-Example/2.png">
+<meta property="article:published_time" content="2018-07-02T11:58:31.000Z">
+<meta property="article:modified_time" content="2022-01-26T13:51:20.976Z">
+<meta property="article:author" content="SAWD">
+<meta property="article:tag" content="TIL">
+<meta property="article:tag" content="Example">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dev-sawd.github.io/2018/07/02/Android-Fragment-with-ViewPager-Example/1.png">
+    
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href='/css/waves.min.css' rel='stylesheet'>
+  
+<link rel="stylesheet" href="/style.css">
+
+
+  
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-120934734-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="SAWD" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+  <script>setLoadingBarProgress(20)</script> 
+  <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				SAWD
+			</a>
+			<div class='menu'>
+				<ul class='h-list'>
+					
+						<li>
+							<a class='flat-box nav-home' href='/'>
+								Home
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-archives' href='/archives'>
+								Archives
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-about' href='/about'>
+								About
+							</a>
+						</li>
+					
+				</ul>
+				<div class='underline'></div>
+			</div>
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon icon-search"></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a href='javascript:void(0)'><span class="icon icon-search flat-box"></span></a></li>
+				
+				<li class='s-menu'><a href='javascript:void(0)'><span class="icon icon-menu flat-box"></span></a></li>
+			</ul>
+		</div>
+		
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				Word of Forks
+			</a>
+
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a href='javascript:void(0)'><span class="icon icon-chat_bubble_outline flat-box"></span></a></li>
+				<li class='s-top'><a href='javascript:void(0)'><span class="icon icon-arrow_upward flat-box"></span></a></li>
+				<li class='s-toc'><a href='javascript:void(0)'><span class="icon icon-format_list_numbered flat-box"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<aside class="menu-phone">
+	<nav>
+		
+			<a href="/" class="nav-home nav">
+				Home
+			</a>
+		
+			<a href="/archives" class="nav-archives nav">
+				Archives
+			</a>
+		
+			<a href="/about" class="nav-about nav">
+				About
+			</a>
+		
+	</nav>
+</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+  <div class="l_body">
+    <div class='container clearfix'>
+      <div class='l_main'>
+        <article id="post-Android-Fragment-with-ViewPager-Example"
+  class="post white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<section class='meta'>
+	<h2 class="title">
+  	<a href="/2018/07/02/Android-Fragment-with-ViewPager-Example/">
+    	[Android] Fragment with ViewPager Example
+    </a>
+  </h2>
+	<time>
+	  7월 2, 2018
+	</time>
+	
+    
+    <div class='cats'>
+        <a href="/categories/Android/">Android</a>
+    </div>
+
+	</section>
+<!--	-->
+<!--		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ViewPager"><span class="toc-number">1.</span> <span class="toc-text">ViewPager</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#화면구성"><span class="toc-number">2.</span> <span class="toc-text">화면구성</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#MainActivity"><span class="toc-number">3.</span> <span class="toc-text">MainActivity</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MainActivity-java"><span class="toc-number">3.1.</span> <span class="toc-text">MainActivity.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#activity-main-xml"><span class="toc-number">3.2.</span> <span class="toc-text">activity_main.xml</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SawdFragment"><span class="toc-number">4.</span> <span class="toc-text">SawdFragment</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SawdFragment1-3-java"><span class="toc-number">4.1.</span> <span class="toc-text">SawdFragment1~3.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fragment-sawd1-3-xml"><span class="toc-number">4.2.</span> <span class="toc-text">fragment_sawd1~3.xml</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ZoomOutPageTransformer-java"><span class="toc-number">5.</span> <span class="toc-text">ZoomOutPageTransformer.java</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#마무리"><span class="toc-number">6.</span> <span class="toc-text">마무리</span></a></li></ol></section>-->
+<!--	-->
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>오늘은 며칠동안 틈틈이 준비한 ViewPager와 Fragment를 이용한 화면전환 예제를 만들어보려 합니다.<br>며칠동안이라 했지만 거창하게 만들 시간은 없어서 정말 간단히 하려고 노력했습니다.</p>
+<h1 id="ViewPager"><a href="#ViewPager" class="headerlink" title="ViewPager"></a>ViewPager</h1><p>뷰페이저란 사용자가 Swipe나 Tab 등을 통해서 현재 보는 화면 다음 화면을 Smooth하게 시각적으로 보여주도록 도와줍니다.<br>주로 Application을 설치하고 튜토리얼을 진행하는 과정에서 좌우로 휙휙 넘기면서 설명하는 곳에서 많이 사용합니다.</p>
+<h1 id="화면구성"><a href="#화면구성" class="headerlink" title="화면구성"></a>화면구성</h1><p>우리가 만들 화면은 아래와같이 3 페이지입니다.</p>
+<img src="/2018/07/02/Android-Fragment-with-ViewPager-Example/1.png" class="">
+<p>각 페이지를 색깔로 구분하였고, 각각의 Fragment를 따로 작성하였습니다.</p>
+<a id="more"></a>
+<p>그리고 화면 전환시 아래와 같이 지금 화면이 작아지고 다음에 올 화면이 오른쪽 또는 왼쪽에 보이는 애니메이션을 넣을겁니다.</p>
+<img src="/2018/07/02/Android-Fragment-with-ViewPager-Example/2.png" class="">
+
+<h1 id="MainActivity"><a href="#MainActivity" class="headerlink" title="MainActivity"></a>MainActivity</h1><h2 id="MainActivity-java"><a href="#MainActivity-java" class="headerlink" title="MainActivity.java"></a>MainActivity.java</h2><p>MainActivity에서는 FragmentPagerAdapter를 이용해 Fragment들간의 페이지 설정과 애니메이션을 지정할겁니다.</p>
+<figure class="highlight java"><figcaption><span>MainActivity.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.sawd.viewpagerwithfragment;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.support.v4.app.Fragment;</span><br><span class="line"><span class="keyword">import</span> android.support.v4.app.FragmentManager;</span><br><span class="line"><span class="keyword">import</span> android.support.v4.app.FragmentPagerAdapter;</span><br><span class="line"><span class="keyword">import</span> android.support.v4.view.ViewPager;</span><br><span class="line"><span class="keyword">import</span> android.support.v7.app.AppCompatActivity;</span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> MAX_PAGE = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">    Fragment currentFragment = <span class="keyword">new</span> Fragment();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        ViewPager viewPager = findViewById(R.id.view_pager);</span><br><span class="line">        viewPager.setPageTransformer(<span class="keyword">true</span>, <span class="keyword">new</span> ZoomOutPageTransformer());</span><br><span class="line">        viewPager.setAdapter(<span class="keyword">new</span> SawdFragmentAdatper(getSupportFragmentManager()));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">SawdFragmentAdatper</span> <span class="keyword">extends</span> <span class="title">FragmentPagerAdapter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="title">SawdFragmentAdatper</span><span class="params">(FragmentManager fm)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>(fm);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Fragment <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (position &lt; <span class="number">0</span> || MAX_PAGE &lt;= position)</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">switch</span> (position) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                    currentFragment = <span class="keyword">new</span> SawdFragment1();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                    currentFragment = <span class="keyword">new</span> SawdFragment2();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                    currentFragment = <span class="keyword">new</span> SawdFragment3();</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> currentFragment;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> MAX_PAGE;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>코드블록 단위로 쪼개서 분석해보겠습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">viewPager.setPageTransformer(<span class="keyword">true</span>, <span class="keyword">new</span> ZoomOutPageTransformer());</span><br></pre></td></tr></table></figure>
+<p>위의 코드를 이용해 페이지 이동시 애니메이션을 지정할 수 있습니다.<br>ZoomOutPageTransformer 클래스 코드는 Android Developer사이트에서 가져왔고 뒤에 코드를 서술하겠습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">viewPager.setAdapter(<span class="keyword">new</span> SawdFragmentAdatper(getSupportFragmentManager()));</span><br></pre></td></tr></table></figure>
+<p>ViewPager에 Adapter를 설정하고 Fragment를 관리할 수 있도록 해당 액티비티의 SupportFragmentManager를 인자로 넘겨줍니다.<br>우리는 Adapter를 커스터마이징하기 위해 FragmentPagerAdapter를 상속받은 SawdFragmentAdapter를 만들겁니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.sawd.viewpagerwithfragment;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.support.annotation.NonNull;</span><br><span class="line"><span class="keyword">import</span> android.support.annotation.Nullable;</span><br><span class="line"><span class="keyword">import</span> android.support.v4.app.Fragment;</span><br><span class="line"><span class="keyword">import</span> android.view.LayoutInflater;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.view.ViewGroup;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SawdFragmentAdatper</span> <span class="keyword">extends</span> <span class="title">FragmentPagerAdapter</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">SawdFragmentAdatper</span><span class="params">(FragmentManager fm)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(fm);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Fragment <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (position &lt; <span class="number">0</span> || MAX_PAGE &lt;= position)</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span> (position) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">                currentFragment = <span class="keyword">new</span> SawdFragment1();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">                currentFragment = <span class="keyword">new</span> SawdFragment2();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">                currentFragment = <span class="keyword">new</span> SawdFragment3();</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> currentFragment;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> MAX_PAGE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>필수로 getItem 메소드와 getCount 메소드를 오버라이딩 해야합니다.<br>코드로 간단히 알 수 있듯 getItem에서는 각 페이지별로 보여줄 Fragment를, getCount는 페이지수를 리턴합니다.<br>이부분에서 정말 다양하게 코드들을 작성 할 수 있습니다.</p>
+<h2 id="activity-main-xml"><a href="#activity-main-xml" class="headerlink" title="activity_main.xml"></a>activity_main.xml</h2><p>레이아웃은 ConstraintLayout안에 ViewPager만 꽉채워서 넣었습니다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">android.support.constraint.ConstraintLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="tag"><span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag"><span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag"><span class="attr">tools:context</span>=<span class="string">".MainActivity"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">android.support.v4.view.ViewPager</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">"@+id/view_pager"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"0dp"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_marginBottom</span>=<span class="string">"8dp"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_marginEnd</span>=<span class="string">"8dp"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_marginLeft</span>=<span class="string">"8dp"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_marginRight</span>=<span class="string">"8dp"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_marginStart</span>=<span class="string">"8dp"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_marginTop</span>=<span class="string">"8dp"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:layout_constraintBottom_toBottomOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">"parent"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">android.support.constraint.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="SawdFragment"><a href="#SawdFragment" class="headerlink" title="SawdFragment"></a>SawdFragment</h1><h2 id="SawdFragment1-3-java"><a href="#SawdFragment1-3-java" class="headerlink" title="SawdFragment1~3.java"></a>SawdFragment1~3.java</h2><p>Fragment를 상속받은 SawdFragment 클래스를 3개 만들었습니다.<br>내용은 완전히 같고 inflate에 들어가는 layout만 다르기 때문에 1을 기준으로 설명할게요.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.sawd.viewpagerwithfragment;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.support.annotation.NonNull;</span><br><span class="line"><span class="keyword">import</span> android.support.annotation.Nullable;</span><br><span class="line"><span class="keyword">import</span> android.support.constraint.ConstraintLayout;</span><br><span class="line"><span class="keyword">import</span> android.support.v4.app.Fragment;</span><br><span class="line"><span class="keyword">import</span> android.view.LayoutInflater;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.view.ViewGroup;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SawdFragment1</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SawdFragment1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Nullable</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> inflater.inflate(R.layout.fragment_sawd1, container, <span class="keyword">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>fragment_sawd1.xml의 내용을 inflate하여 View로 만듭니다.<br>이 View가 MainActivity의 ViewPager에 적용된다고 생각하면 편합니다.</p>
+<p>만약 Fragment안에 있는 뷰를 찾기 위해 findViewById() 메소드를 써야한다면 onCreate()에서 아래와 같이 접근할 수 있습니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">View parentView = inflater.inflate(R.layout.fragment_sawd1, container, <span class="keyword">false</span>);</span><br><span class="line">View childView = parentView.findViewById(R.id.child_view);</span><br><span class="line"><span class="comment">// Something to do about childView</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="fragment-sawd1-3-xml"><a href="#fragment-sawd1-3-xml" class="headerlink" title="fragment_sawd1~3.xml"></a>fragment_sawd1~3.xml</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">android.support.constraint.ConstraintLayout</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span> <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag"><span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag"><span class="attr">android:id</span>=<span class="string">"@+id/constraint_layout"</span></span></span><br><span class="line"><span class="tag"><span class="attr">android:background</span>=<span class="string">"#27ab27"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">android.support.constraint.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>background를 설정해 각 페이지를 색깔로 구분할 수 있게 간단히 구현하였습니다.</p>
+<h1 id="ZoomOutPageTransformer-java"><a href="#ZoomOutPageTransformer-java" class="headerlink" title="ZoomOutPageTransformer.java"></a>ZoomOutPageTransformer.java</h1><figure class="highlight java"><figcaption><span>ZoomOutPageTransformer.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.example.sawd.viewpagerwithfragment;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.support.annotation.NonNull;</span><br><span class="line"><span class="keyword">import</span> android.support.v4.view.ViewPager;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZoomOutPageTransformer</span> <span class="keyword">implements</span> <span class="title">ViewPager</span>.<span class="title">PageTransformer</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> MIN_SCALE = <span class="number">0.85f</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">float</span> MIN_ALPHA = <span class="number">0.5f</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transformPage</span><span class="params">(@NonNull View view, <span class="keyword">float</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> pageWidth = view.getWidth();</span><br><span class="line">        <span class="keyword">int</span> pageHeight = view.getHeight();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (position &lt; -<span class="number">1</span>) &#123; <span class="comment">// [-Infinity,-1)</span></span><br><span class="line">            <span class="comment">// This page is way off-screen to the left.</span></span><br><span class="line">            view.setAlpha(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (position &lt;= <span class="number">1</span>) &#123; <span class="comment">// [-1,1]</span></span><br><span class="line">            <span class="comment">// Modify the default slide transition to shrink the page as well</span></span><br><span class="line">            <span class="keyword">float</span> scaleFactor = Math.max(MIN_SCALE, <span class="number">1</span> - Math.abs(position));</span><br><span class="line">            <span class="keyword">float</span> vertMargin = pageHeight * (<span class="number">1</span> - scaleFactor) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">float</span> horzMargin = pageWidth * (<span class="number">1</span> - scaleFactor) / <span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span> (position &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                view.setTranslationX(horzMargin - vertMargin / <span class="number">2</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                view.setTranslationX(-horzMargin + vertMargin / <span class="number">2</span>);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Scale the page down (between MIN_SCALE and 1)</span></span><br><span class="line">            view.setScaleX(scaleFactor);</span><br><span class="line">            view.setScaleY(scaleFactor);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Fade the page relative to its size.</span></span><br><span class="line">            view.setAlpha(MIN_ALPHA +</span><br><span class="line">                    (scaleFactor - MIN_SCALE) /</span><br><span class="line">                    (<span class="number">1</span> - MIN_SCALE) * (<span class="number">1</span> - MIN_ALPHA));</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// (1,+Infinity]</span></span><br><span class="line">            <span class="comment">// This page is way off-screen to the right.</span></span><br><span class="line">            view.setAlpha(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>ZoomOutPageTransformer는 page수와 position에 따라서 화면 전환시에 애니메이션을 정의하고 있습니다.<br>Android Developers에서 DepthPageTransformer도 함께 예제로 제공하고있는데 시간날때 보시면 좋을 것 같습니다.</p>
+<a href="https://developer.android.com/training/animation/screen-slide#depth-page" title="" target="">Depth page transformer</a>
+
+<h1 id="마무리"><a href="#마무리" class="headerlink" title="마무리"></a>마무리</h1><p>최근에 공부하고 배우는것을 토대로 포스팅을 하지만 주 업무에 너무 치이고 있어서 며칠에 걸쳐서 포스팅까지 완료하였네요.<br>빠르진 않더라도 앞으로도 이렇게 차근차근 포스팅 할 예정입니다.<br>전체 소스를 원하시는 분이 있을지 모르니 링크 드립니다.</p>
+<a href="https://github.com/dev-sawd/ViewPager-With-Fragment" title="" target="">ViewPager-With-Fragment</a>
+  	</div>
+	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/TIL/">TIL</a>
+      
+        <a href="/tags/Example/">Example</a>
+      
+	  </div>
+    
+		
+	
+		<div class="art-item-footer">
+				
+					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2018/07/11/Data-Structure-Intro/" rel="prev"  title="[Data Structure] Intro">
+						[Data Structure] Intro 
+					</a></span>
+				
+				
+					<span class="art-item-right">next：<a href="/2018/06/27/iOS-About-Function/" rel="next"  title="[iOS] About Function (feat. method)">
+						[iOS] About Function (feat. method)
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+		<section id="comments">
+			<div id="disqus_thread"></div>
+		</section>
+	
+</article>
+<script>
+	window.subData = {
+		title: '[Android] Fragment with ViewPager Example',
+		tools: true
+	}
+</script>
+
+      </div>
+      <aside class='l_side'>
+        
+  <section class='m_widget about'>
+
+<div class='header'>SAWD</div>
+<div class='content'>
+<div class='desc'>시간이 나면 쓰는 블로그</div>
+</div>
+</section>
+
+  <section class='m_widget categories'>
+<div class='header'>Categories</div>
+<div class='content'>
+    
+    <ul class="entry">
+    
+        <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badget'>8</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Data-Structure/"><div class='name'>Data Structure</div><div class='badget'>6</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>9</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/GitLab/"><div class='name'>GitLab</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Github/"><div class='name'>Github</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Golang/"><div class='name'>Golang</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Hyperledger-Fabric/"><div class='name'>Hyperledger Fabric</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Linux/"><div class='name'>Linux</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MacOS/"><div class='name'>MacOS</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Node-js/"><div class='name'>Node.js</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Objective-C/"><div class='name'>Objective-C</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Samll-talk/"><div class='name'>Samll talk</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/iOS/"><div class='name'>iOS</div><div class='badget'>4</div></a></li>
+    
+    </ul>
+    
+</div>
+</section>
+
+  
+<div class="m_widget tagcloud">
+    <div class="header">Tags</div>
+    <div class='content'>
+        <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 18px; color: #2b2b2b">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Example/" style="font-size: 18px; color: #2b2b2b">Example</a> <a href="/tags/Github/" style="font-size: 16px; color: #555">Github</a> <a href="/tags/Gitlab/" style="font-size: 14px; color: #808080">Gitlab</a> <a href="/tags/Golang/" style="font-size: 14px; color: #808080">Golang</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #808080">HEXO</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Troubleshooting/" style="font-size: 16px; color: #555">Troubleshooting</a> <a href="/tags/docker/" style="font-size: 14px; color: #808080">docker</a> <a href="/tags/error/" style="font-size: 14px; color: #808080">error</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/golang/" style="font-size: 14px; color: #808080">golang</a> <a href="/tags/port/" style="font-size: 14px; color: #808080">port</a> <a href="/tags/windows/" style="font-size: 14px; color: #808080">windows</a>
+    </div>
+</div>
+
+
+
+      </aside>
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+  </div>
+  <footer id="footer" class="clearfix">
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="https://github.com/dev-sawd" class="social github"
+          target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <a href='https://github.com/stkevintan/hexo-theme-material-flow' target="_blank" rel="noopener" class="codename">MaterialFlow</a> designed by <a href="http://keyin.me/" target="_blank">Kevin Tan</a>.</div>
+  
+</footer>
+
+
+  <script>setLoadingBarProgress(80);</script>
+  
+<script>
+  var disqus_shortname = 'devsawd';
+  
+  var disqus_url = 'https://dev-sawd.github.io/2018/07/02/Android-Fragment-with-ViewPager-Example/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='/js/waves.min.js'></script>
+<script src="/js/scrollreveal.min.js"></script>
+
+<script src="/js/jquery.fitvids.js"></script>
+
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "hexo";
+  var ROOT = "/"||"/";
+  if(!ROOT.endsWith('/'))ROOT += '/';
+</script>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/app.js"></script>
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>

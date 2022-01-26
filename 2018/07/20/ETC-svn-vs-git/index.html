@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>[ETC] svn vs git | SAWD</title>
+  <meta name="description" content="시간이 나야지..." />
+  <meta name="keywords" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/images/favicon.png">
+  <link rel="alternate" href="/atom.xml" title="SAWD">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="이번 포스트는 형상관리에 대해서 적어볼까 합니다.제 경험과 함께 공부하며 새롭게 알게된 사실도 같이 적습니다. 형상관리아마 프로그래밍을 배우고 어느정도 익혔을 어렸을때는 정확히 형상관리에 대해 알지 못했습니다.9년전 3인 프로젝트를 진행해야 했는데, 그 프로젝트의 규모는 생각보다 괜찮은 편이였습니다.저를 제외한 두 사람은 소스코드 관리에 대해서 고민할 수">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[ETC] svn vs git">
+<meta property="og:url" content="https://dev-sawd.github.io/2018/07/20/ETC-svn-vs-git/index.html">
+<meta property="og:site_name" content="SAWD">
+<meta property="og:description" content="이번 포스트는 형상관리에 대해서 적어볼까 합니다.제 경험과 함께 공부하며 새롭게 알게된 사실도 같이 적습니다. 형상관리아마 프로그래밍을 배우고 어느정도 익혔을 어렸을때는 정확히 형상관리에 대해 알지 못했습니다.9년전 3인 프로젝트를 진행해야 했는데, 그 프로젝트의 규모는 생각보다 괜찮은 편이였습니다.저를 제외한 두 사람은 소스코드 관리에 대해서 고민할 수">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://dev-sawd.github.io/2018/07/20/ETC-svn-vs-git/1.png">
+<meta property="article:published_time" content="2018-07-20T07:22:53.000Z">
+<meta property="article:modified_time" content="2022-01-26T13:51:21.029Z">
+<meta property="article:author" content="SAWD">
+<meta property="article:tag" content="TIL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dev-sawd.github.io/2018/07/20/ETC-svn-vs-git/1.png">
+    
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href='/css/waves.min.css' rel='stylesheet'>
+  
+<link rel="stylesheet" href="/style.css">
+
+
+  
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-120934734-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="SAWD" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+  <script>setLoadingBarProgress(20)</script> 
+  <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				SAWD
+			</a>
+			<div class='menu'>
+				<ul class='h-list'>
+					
+						<li>
+							<a class='flat-box nav-home' href='/'>
+								Home
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-archives' href='/archives'>
+								Archives
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-about' href='/about'>
+								About
+							</a>
+						</li>
+					
+				</ul>
+				<div class='underline'></div>
+			</div>
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon icon-search"></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a href='javascript:void(0)'><span class="icon icon-search flat-box"></span></a></li>
+				
+				<li class='s-menu'><a href='javascript:void(0)'><span class="icon icon-menu flat-box"></span></a></li>
+			</ul>
+		</div>
+		
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				Word of Forks
+			</a>
+
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a href='javascript:void(0)'><span class="icon icon-chat_bubble_outline flat-box"></span></a></li>
+				<li class='s-top'><a href='javascript:void(0)'><span class="icon icon-arrow_upward flat-box"></span></a></li>
+				<li class='s-toc'><a href='javascript:void(0)'><span class="icon icon-format_list_numbered flat-box"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<aside class="menu-phone">
+	<nav>
+		
+			<a href="/" class="nav-home nav">
+				Home
+			</a>
+		
+			<a href="/archives" class="nav-archives nav">
+				Archives
+			</a>
+		
+			<a href="/about" class="nav-about nav">
+				About
+			</a>
+		
+	</nav>
+</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+  <div class="l_body">
+    <div class='container clearfix'>
+      <div class='l_main'>
+        <article id="post-ETC-svn-vs-git"
+  class="post white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<section class='meta'>
+	<h2 class="title">
+  	<a href="/2018/07/20/ETC-svn-vs-git/">
+    	[ETC] svn vs git
+    </a>
+  </h2>
+	<time>
+	  7월 20, 2018
+	</time>
+	
+    
+    <div class='cats'>
+        <a href="/categories/ETC/">ETC</a>
+    </div>
+
+	</section>
+<!--	-->
+<!--		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#형상관리"><span class="toc-number">1.</span> <span class="toc-text">형상관리</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#전쟁의-서막"><span class="toc-number">1.1.</span> <span class="toc-text">전쟁의 서막</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#복병을-만나다"><span class="toc-number">1.2.</span> <span class="toc-text">복병을 만나다</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#끝내"><span class="toc-number">1.3.</span> <span class="toc-text">끝내</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#형상관리를-해야하는-이유"><span class="toc-number">2.</span> <span class="toc-text">형상관리를 해야하는 이유</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SVN과-git"><span class="toc-number">3.</span> <span class="toc-text">SVN과 git</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#브랜치에-관하여"><span class="toc-number">3.1.</span> <span class="toc-text">브랜치에 관하여</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#개인적으로"><span class="toc-number">4.</span> <span class="toc-text">개인적으로</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#마치며"><span class="toc-number">5.</span> <span class="toc-text">마치며</span></a></li></ol></section>-->
+<!--	-->
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>이번 포스트는 형상관리에 대해서 적어볼까 합니다.<br>제 경험과 함께 공부하며 새롭게 알게된 사실도 같이 적습니다.</p>
+<h1 id="형상관리"><a href="#형상관리" class="headerlink" title="형상관리"></a>형상관리</h1><p>아마 프로그래밍을 배우고 어느정도 익혔을 어렸을때는 정확히 형상관리에 대해 알지 못했습니다.<br>9년전 3인 프로젝트를 진행해야 했는데, 그 프로젝트의 규모는 생각보다 괜찮은 편이였습니다.<br>저를 제외한 두 사람은 소스코드 관리에 대해서 고민할 수 밖에 없었고 저는 이러한 개념도 없을 초보 시절이였죠.</p>
+<a id="more"></a>
+<h2 id="전쟁의-서막"><a href="#전쟁의-서막" class="headerlink" title="전쟁의 서막"></a>전쟁의 서막</h2><p>그중 한 사람이 SVN에 대해서 얘기하고 제안 했습니다.(아직도 생생하군요.)<br>나머지 한 사람이 “그럴 필요까지 있는가?”라며 반대했습니다.<br>결국 SVN을 사용하지 않기로 결정하고 개발에 착수했습니다.<br>우리는 나름 잘 개발했고 인터페이스도 그럭저럭 괜찮은 편이였습니다. 초반 며칠만 말이죠.</p>
+<h2 id="복병을-만나다"><a href="#복병을-만나다" class="headerlink" title="복병을 만나다"></a>복병을 만나다</h2><p>프로젝트에서 관리해야 할 파일은 점점 늘어만 갔습니다.<br>한 폴더 안에는 일련의 클래스와 헤더들(그때는 C++)이 넘쳐나기 시작했고 다른 사람이 개발한 소스코드를 네이트온으로 받아서 병합해야 하는 시간은 날로 늘어만 갔습니다.<br>소스코드 관리는 점점 힘들어지고 개발해야 하는 기능도 늘어만 갔습니다.</p>
+<h2 id="끝내"><a href="#끝내" class="headerlink" title="끝내"></a>끝내</h2><p>당시 한명이 짜증을 내면서 이짓을 언제까지 해야하는지 푸념했습니다.<br>그가 바로 SVN을 반대한 사람이였습니다.</p>
+<h1 id="형상관리를-해야하는-이유"><a href="#형상관리를-해야하는-이유" class="headerlink" title="형상관리를 해야하는 이유"></a>형상관리를 해야하는 이유</h1><p>앞서 제 이야기에서 형상관리를 해야하는 메세지가 담겨있습니다.<br>고작 3명으로 진행하는 프로젝트에서도 소스코드 병합과 배포등에 많은 시간을 할애 해야 했죠.<br>서로 개발하고있는 소스 버전도 달라서 누구에게는 있는 기능이 누구에게는 없어서 혼동이 오는 경우도 많았습니다.<br>거의 저 일화가 있은 1년정도 후에 공부하면서 SVN을 알게 되었고 제 무지함도 같이 깨닫게 되었습니다.<br>그 이후로 한참동안 SVN을 사용하면서 잘 개발해 왔습니다.<br>git이 제 곁에 훌쩍 다가와 있음에도 말이죠.</p>
+<h1 id="SVN과-git"><a href="#SVN과-git" class="headerlink" title="SVN과 git"></a>SVN과 git</h1><p>SVN과 git은 형상관리를 해준다는 장점과 공통점이 있지만 차이점도 많습니다.<br>대표적으로 git은 local 기반의 저장소, SVN은 중앙(서버) 저장소를 사용하는 구조입니다.</p>
+<img src="/2018/07/20/ETC-svn-vs-git/1.png" class="">
+<p>위의 그림이 시각적으로 명확하게 보여주고있습니다.<br>이런 특성을 이용해 차이점이자 git의 장점이 또 있는데, 오프라인 작업이 가능하다는 것 입니다.<br>SVN에서는 코드를 원본에 커밋(푸쉬)할 때 온라인으로 중앙 저장소에 접근 가능해야 합니다.<br>로컬에서 변화가 있으면 중앙 저장소에 커밋해서 다른사람들이 받을 수 있도록 해야합니다.</p>
+<p>이런 차이점은 단순히 인터넷접근이 불가능한 공간에서 작업이 가능하다는 장점만을 말하는 것이 아닙니다.<br>중앙 저장소의 고장으로 인해 발생할 수 있는 예외나 불편함을 피할 수 있습니다.</p>
+<p>git을 사용하면 로컬에 커밋해놓고 중앙 저장소가 정상화 되었거나 복구되었을때 커밋을 푸쉬하면 됩니다.<br>SVN에서 커밋, 푸쉬의 영역이 모호했다면 git에서는 커밋이 로컬 저장소에 저장, 푸쉬가 중앙 저장소에 반영 정도가 될 것입니다.</p>
+<h2 id="브랜치에-관하여"><a href="#브랜치에-관하여" class="headerlink" title="브랜치에 관하여"></a>브랜치에 관하여</h2><p>SVN에서는 저장소에 실제 파일들을 저장합니다.<br>브랜치의 개념은 폴더로 구분 짓습니다.<br>조금 더 쉽게 풀어쓰자면, 어떤 기능을 개발하기 위해 브랜치로 분리해서 작업하게 되면 시스템에 독립된 폴더가 생성되고 그 공간에서 작업하게 됩니다.</p>
+<p>반면 git의 경우 해시로 관리되고 이 해시에 이름을 붙인것입니다.<br>이 내용은 복잡하므로 간단히 얘기하면 SVN처럼 폴더를 새로 만들어서 복사본을 만드는 것이 아닙니다.<br>마치 각자 파일들이 바뀌는 것 처럼 동작하게 됩니다.<br>개발자는 작업중인 공간에서 계속해서 작업하면 됩니다.</p>
+<h1 id="개인적으로"><a href="#개인적으로" class="headerlink" title="개인적으로"></a>개인적으로</h1><p>브랜치를 나누는 방법에 대해서 주변 사람들과 이야기 하곤 하는데 정답은 없다고 생각합니다.<br>다만 어느정도의 가이드가 있으면 좋을 큰 틀은 머릿속에 있는데요.</p>
+<p>Master 브랜치는 지금 당장 배포할 수 있는 수준의 코드를 관리합니다.<br>Dev 브랜치를 만들어 다음 버전에 반영될 Feature들이 모일 브랜치로 관리합니다.<br>나머지는 Feature 단위로 각자 브랜치를 만들어서 개발하고, 개발이 완료되면 Dev에 머지합니다.<br>반영할 Feature 브랜치들이 모두 머지되면 Dev로 부터 Release 브랜치를 만들어 테스트합니다.<br>이때 발생된 버그들을 모두 Release 브랜치에서 처리하여 Dev와 Master로 병합하고 배포합니다.<br>배포가 완료되고 Release, Feature 브랜치들이 필요없다고 판단되는 시점에서 브랜치를 삭제합니다.<br>Master, Dev는 계속해서 관리하여 개발을 진행합니다.</p>
+<p>지금 제가 속한 회사는 Master에 모든 작업을 하고있습니다.<br>급하게 배포해야할때 굉장히 어려움이 있죠.<br>제대로 테스트 되지 않은 부분을 배포한다는건 사실 굉장한 스트레스입니다.<br>이런 불완전한 기능은 아직 크리티컬한 타격을 주지 않았지만, 언젠가는 그 크리티컬함을 넘어 사람의 생명까지 위협할 수 있습니다.<br>회사, 단체 구성원들이 한데 모여 규칙을 정하고 그 규칙을 잘 지켜나가는 데에서 이러한 오버헤드를 줄일 수 있습니다.</p>
+<h1 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h1><p>간단히 SVN과 git을 이야기 하면서 형상관리의 중요성에 대해서도 적어보았습니다.<br>위에서 설명한 것은 정말 초급 부분만 이야기 한 것으로 git은 ‘git 생태계’라는 말이 있을 정도로 무궁무진합니다.<br>하나의 예로 GitHub이 있을 수 있죠.<br>지금은 주제에서 벗어나고 나중에 포스팅할 기회가 있을겁니다.</p>
+
+  	</div>
+	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/TIL/">TIL</a>
+      
+	  </div>
+    
+		
+	
+		<div class="art-item-footer">
+				
+					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2018/07/25/ETC-Performance-about-algorithms/" rel="prev"  title="[ETC] Performance about algorithms">
+						[ETC] Performance about algorithms 
+					</a></span>
+				
+				
+					<span class="art-item-right">next：<a href="/2018/07/20/Android-Page-Indicator-with-Fragment/" rel="next"  title="[Android] Page Indicator with Fragment">
+						[Android] Page Indicator with Fragment
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+		<section id="comments">
+			<div id="disqus_thread"></div>
+		</section>
+	
+</article>
+<script>
+	window.subData = {
+		title: '[ETC] svn vs git',
+		tools: true
+	}
+</script>
+
+      </div>
+      <aside class='l_side'>
+        
+  <section class='m_widget about'>
+
+<div class='header'>SAWD</div>
+<div class='content'>
+<div class='desc'>시간이 나면 쓰는 블로그</div>
+</div>
+</section>
+
+  <section class='m_widget categories'>
+<div class='header'>Categories</div>
+<div class='content'>
+    
+    <ul class="entry">
+    
+        <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badget'>8</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Data-Structure/"><div class='name'>Data Structure</div><div class='badget'>6</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>9</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/GitLab/"><div class='name'>GitLab</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Github/"><div class='name'>Github</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Golang/"><div class='name'>Golang</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Hyperledger-Fabric/"><div class='name'>Hyperledger Fabric</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Linux/"><div class='name'>Linux</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MacOS/"><div class='name'>MacOS</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Node-js/"><div class='name'>Node.js</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Objective-C/"><div class='name'>Objective-C</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Samll-talk/"><div class='name'>Samll talk</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/iOS/"><div class='name'>iOS</div><div class='badget'>4</div></a></li>
+    
+    </ul>
+    
+</div>
+</section>
+
+  
+<div class="m_widget tagcloud">
+    <div class="header">Tags</div>
+    <div class='content'>
+        <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 18px; color: #2b2b2b">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Example/" style="font-size: 18px; color: #2b2b2b">Example</a> <a href="/tags/Github/" style="font-size: 16px; color: #555">Github</a> <a href="/tags/Gitlab/" style="font-size: 14px; color: #808080">Gitlab</a> <a href="/tags/Golang/" style="font-size: 14px; color: #808080">Golang</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #808080">HEXO</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Troubleshooting/" style="font-size: 16px; color: #555">Troubleshooting</a> <a href="/tags/docker/" style="font-size: 14px; color: #808080">docker</a> <a href="/tags/error/" style="font-size: 14px; color: #808080">error</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/golang/" style="font-size: 14px; color: #808080">golang</a> <a href="/tags/port/" style="font-size: 14px; color: #808080">port</a> <a href="/tags/windows/" style="font-size: 14px; color: #808080">windows</a>
+    </div>
+</div>
+
+
+
+      </aside>
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+  </div>
+  <footer id="footer" class="clearfix">
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="https://github.com/dev-sawd" class="social github"
+          target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+  <div>Theme <a href='https://github.com/stkevintan/hexo-theme-material-flow' target="_blank" rel="noopener" class="codename">MaterialFlow</a> designed by <a href="http://keyin.me/" target="_blank">Kevin Tan</a>.</div>
+  
+</footer>
+
+
+  <script>setLoadingBarProgress(80);</script>
+  
+<script>
+  var disqus_shortname = 'devsawd';
+  
+  var disqus_url = 'https://dev-sawd.github.io/2018/07/20/ETC-svn-vs-git/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='/js/waves.min.js'></script>
+<script src="/js/scrollreveal.min.js"></script>
+
+<script src="/js/jquery.fitvids.js"></script>
+
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "hexo";
+  var ROOT = "/"||"/";
+  if(!ROOT.endsWith('/'))ROOT += '/';
+</script>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/app.js"></script>
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
