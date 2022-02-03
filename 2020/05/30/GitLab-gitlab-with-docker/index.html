@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>[MacOS] Docker를 이용해 GitLab을 설치해보자 | SAWD</title>
+  <title>[Gitlab] Docker를 이용해 GitLab을 설치해보자 | SAWD</title>
   <meta name="description" content="시간이 나야지..." />
   <meta name="keywords" content="" />
   <meta name="HandheldFriendly" content="True" />
@@ -14,26 +14,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="당장은 아니지만 코드 저장소를 내부적으로 운영해야될 상황이 있을거라 생각합니다. 그 저장소가 제 개인적인 저장소가 될지, 회사 내부를 저장소가 될지는 잘 모르겠습니다. 그래서 Gitlab을 직접 설치해보고 정리해두려고 합니다.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[MacOS] Docker를 이용해 GitLab을 설치해보자">
-<meta property="og:url" content="https://dev-sawd.github.io/2020/05/30/MacOS-gitlab-with-docker/index.html">
+<meta property="og:title" content="[Gitlab] Docker를 이용해 GitLab을 설치해보자">
+<meta property="og:url" content="https://dev-sawd.github.io/2020/05/30/GitLab-gitlab-with-docker/index.html">
 <meta property="og:site_name" content="SAWD">
 <meta property="og:description" content="당장은 아니지만 코드 저장소를 내부적으로 운영해야될 상황이 있을거라 생각합니다. 그 저장소가 제 개인적인 저장소가 될지, 회사 내부를 저장소가 될지는 잘 모르겠습니다. 그래서 Gitlab을 직접 설치해보고 정리해두려고 합니다.">
 <meta property="og:locale" content="ko_KR">
-<meta property="og:image" content="https://dev-sawd.github.io/2020/05/30/MacOS-gitlab-with-docker/gitlab_logo.jpg">
-<meta property="og:image" content="https://dev-sawd.github.io/2020/05/30/MacOS-gitlab-with-docker/1.png">
-<meta property="og:image" content="https://dev-sawd.github.io/2020/05/30/MacOS-gitlab-with-docker/2.png">
-<meta property="og:image" content="https://dev-sawd.github.io/2020/05/30/MacOS-gitlab-with-docker/3.png">
-<meta property="og:image" content="https://dev-sawd.github.io/2020/05/30/MacOS-gitlab-with-docker/4.png">
-<meta property="og:image" content="https://dev-sawd.github.io/2020/05/30/MacOS-gitlab-with-docker/5.png">
-<meta property="og:image" content="https://dev-sawd.github.io/2020/05/30/MacOS-gitlab-with-docker/6.png">
 <meta property="article:published_time" content="2020-05-30T10:37:43.000Z">
-<meta property="article:modified_time" content="2022-01-26T13:51:21.140Z">
+<meta property="article:modified_time" content="2022-02-03T19:20:33.086Z">
 <meta property="article:author" content="SAWD">
-<meta property="article:tag" content="Gitlab">
 <meta property="article:tag" content="Docker">
+<meta property="article:tag" content="Gitlab">
 <meta property="article:tag" content="Docker-Compose">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://dev-sawd.github.io/2020/05/30/MacOS-gitlab-with-docker/gitlab_logo.jpg">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
@@ -149,13 +141,13 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        <article id="post-MacOS-gitlab-with-docker"
+        <article id="post-GitLab-gitlab-with-docker"
   class="post white-box article-type-post"
   itemscope itemprop="blogPost">
 	<section class='meta'>
 	<h2 class="title">
-  	<a href="/2020/05/30/MacOS-gitlab-with-docker/">
-    	[MacOS] Docker를 이용해 GitLab을 설치해보자
+  	<a href="/2020/05/30/GitLab-gitlab-with-docker/">
+    	[Gitlab] Docker를 이용해 GitLab을 설치해보자
     </a>
   </h2>
 	<time>
@@ -164,7 +156,7 @@
 	
     
     <div class='cats'>
-        <a href="/categories/MacOS/">MacOS</a>
+        <a href="/categories/GitLab/">GitLab</a>
     </div>
 
 	</section>
@@ -173,7 +165,7 @@
 <!--	-->
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<img src="/2020/05/30/MacOS-gitlab-with-docker/gitlab_logo.jpg" class="">
+    	
 <br>
 당장은 아니지만 코드 저장소를 내부적으로 운영해야될 상황이 있을거라 생각합니다.
 그 저장소가 제 개인적인 저장소가 될지, 회사 내부를 저장소가 될지는 잘 모르겠습니다.
@@ -238,24 +230,24 @@
 <br>
 
 <h2 id="설치한-GitLab-사이트-접속"><a href="#설치한-GitLab-사이트-접속" class="headerlink" title="설치한 GitLab 사이트 접속"></a>설치한 GitLab 사이트 접속</h2><p>이제 웹페이지로 접속 해 봅시다.<br>브라우저를 실행해 <a href="http://127.0.0.1" target="_blank" rel="noopener">http://127.0.0.1</a> 접속해 봅니다.</p>
-<img src="/2020/05/30/MacOS-gitlab-with-docker/1.png" class="">
+
 
 <p>화면이 정상적으로 보인다면 root 비밀번호를 설정해야합니다.</p>
-<img src="/2020/05/30/MacOS-gitlab-with-docker/2.png" class="">
+
 
 <p>sign in에서 root와 설정한 비밀번호로 로그인합니다.</p>
-<img src="/2020/05/30/MacOS-gitlab-with-docker/3.png" class="">
+
 <p>관리자 계정으로 로그인 완료!!</p>
 <br>
 
 <h1 id="이외-설정"><a href="#이외-설정" class="headerlink" title="이외 설정"></a>이외 설정</h1><p>혼자 사용할 때는 회원가입 기능이 필요 없기 때문에 비활성화 시켜놓을 필요가 있습니다.</p>
-<img src="/2020/05/30/MacOS-gitlab-with-docker/4.png" class="">
+
 <p>상단의 Admin Area 아이콘을 눌러 관리자 페이지에 들어갑니다.</p>
-<img src="/2020/05/30/MacOS-gitlab-with-docker/5.png" class="">
+
 <p>좌측 메뉴 Settings &gt; General &gt; Sign-up restrictions &gt; Sign-up enabled 체크 해제 &gt; 하단 Save changes 클릭</p>
 <br>
 
-<h2 id="회원-가입-기능-비활성화"><a href="#회원-가입-기능-비활성화" class="headerlink" title="회원 가입 기능 비활성화"></a>회원 가입 기능 비활성화</h2><img src="/2020/05/30/MacOS-gitlab-with-docker/6.png" class="">
+<h2 id="회원-가입-기능-비활성화"><a href="#회원-가입-기능-비활성화" class="headerlink" title="회원 가입 기능 비활성화"></a>회원 가입 기능 비활성화</h2>
 <p>Admin Area 대쉬보드의 New user를 통해 회원가입을 시킬 수 있습니다.</p>
 <br>
 
@@ -281,9 +273,9 @@
 	  
 	  <div class="article-tags tags">
       
-        <a href="/tags/Gitlab/">Gitlab</a>
-      
         <a href="/tags/Docker/">Docker</a>
+      
+        <a href="/tags/Gitlab/">Gitlab</a>
       
         <a href="/tags/Docker-Compose/">Docker-Compose</a>
       
@@ -309,7 +301,7 @@
 </article>
 <script>
 	window.subData = {
-		title: '[MacOS] Docker를 이용해 GitLab을 설치해보자',
+		title: '[Gitlab] Docker를 이용해 GitLab을 설치해보자',
 		tools: true
 	}
 </script>
@@ -337,7 +329,7 @@
     
         <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>9</div></a></li>
     
-        <li><a class="flat-box" href="/categories/GitLab/"><div class='name'>GitLab</div><div class='badget'>2</div></a></li>
+        <li><a class="flat-box" href="/categories/GitLab/"><div class='name'>GitLab</div><div class='badget'>3</div></a></li>
     
         <li><a class="flat-box" href="/categories/Github/"><div class='name'>Github</div><div class='badget'>3</div></a></li>
     
@@ -347,7 +339,7 @@
     
         <li><a class="flat-box" href="/categories/Linux/"><div class='name'>Linux</div><div class='badget'>1</div></a></li>
     
-        <li><a class="flat-box" href="/categories/MacOS/"><div class='name'>MacOS</div><div class='badget'>3</div></a></li>
+        <li><a class="flat-box" href="/categories/MacOS/"><div class='name'>MacOS</div><div class='badget'>2</div></a></li>
     
         <li><a class="flat-box" href="/categories/Node-js/"><div class='name'>Node.js</div><div class='badget'>4</div></a></li>
     
@@ -366,7 +358,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class='content'>
-        <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 18px; color: #2b2b2b">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Example/" style="font-size: 18px; color: #2b2b2b">Example</a> <a href="/tags/Github/" style="font-size: 16px; color: #555">Github</a> <a href="/tags/Gitlab/" style="font-size: 14px; color: #808080">Gitlab</a> <a href="/tags/Golang/" style="font-size: 16px; color: #555">Golang</a> <a href="/tags/HEXO/" style="font-size: 14px; color: #808080">HEXO</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Troubleshooting/" style="font-size: 16px; color: #555">Troubleshooting</a> <a href="/tags/docker/" style="font-size: 14px; color: #808080">docker</a> <a href="/tags/error/" style="font-size: 14px; color: #808080">error</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/golang/" style="font-size: 14px; color: #808080">golang</a> <a href="/tags/port/" style="font-size: 14px; color: #808080">port</a> <a href="/tags/windows/" style="font-size: 14px; color: #808080">windows</a>
+        <a href="/tags/Docker/" style="font-size: 18.5px; color: #202020">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 17px; color: #404040">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 15.5px; color: #606060">ETC</a> <a href="/tags/Example/" style="font-size: 17px; color: #404040">Example</a> <a href="/tags/GitLab/" style="font-size: 15.5px; color: #606060">GitLab</a> <a href="/tags/Github/" style="font-size: 15.5px; color: #606060">Github</a> <a href="/tags/Gitlab/" style="font-size: 14px; color: #808080">Gitlab</a> <a href="/tags/Golang/" style="font-size: 17px; color: #404040">Golang</a> <a href="/tags/HEXO/" style="font-size: 15.5px; color: #606060">HEXO</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Troubleshooting/" style="font-size: 15.5px; color: #606060">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a>
     </div>
 </div>
 
