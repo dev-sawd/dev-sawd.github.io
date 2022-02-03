@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Hello Golang</title>
+      <link href="/2022/02/04/20220204-Hello-Golang/"/>
+      <url>/2022/02/04/20220204-Hello-Golang/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello Golang"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>가볍게라도 꾸준히!</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Golang </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Golang </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>[Node.js] 이벤트와 이벤트 리스너</title>
       <link href="/2020/06/10/Node-js-event-and-event-listener/"/>
       <url>/2020/06/10/Node-js-event-and-event-listener/</url>

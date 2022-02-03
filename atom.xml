@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dev-sawd.github.io/"/>
-  <updated>2022-01-26T13:51:21.162Z</updated>
+  <updated>2022-02-03T18:59:05.663Z</updated>
   <id>https://dev-sawd.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hello Golang</title>
+    <link href="https://dev-sawd.github.io/2022/02/04/20220204-Hello-Golang/"/>
+    <id>https://dev-sawd.github.io/2022/02/04/20220204-Hello-Golang/</id>
+    <published>2022-02-03T18:47:41.000Z</published>
+    <updated>2022-02-03T18:59:05.663Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello Golang"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>가볍게라도 꾸준히!</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight golang&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span clas
+      
+    
+    </summary>
+    
+    
+      <category term="Golang" scheme="https://dev-sawd.github.io/categories/Golang/"/>
+    
+    
+      <category term="Golang" scheme="https://dev-sawd.github.io/tags/Golang/"/>
+    
+  </entry>
   
   <entry>
     <title>[Node.js] 이벤트와 이벤트 리스너</title>
@@ -485,29 +511,6 @@
     
     
       <category term="Golang" scheme="https://dev-sawd.github.io/categories/Golang/"/>
-    
-    
-      <category term="TIL" scheme="https://dev-sawd.github.io/tags/TIL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[ETC] Shell Script 접속사 ;, &amp;, &amp;&amp;</title>
-    <link href="https://dev-sawd.github.io/2020/05/19/ETC-Shell-Script/"/>
-    <id>https://dev-sawd.github.io/2020/05/19/ETC-Shell-Script/</id>
-    <published>2020-05-19T01:34:48.000Z</published>
-    <updated>2022-01-26T13:51:21.056Z</updated>
-    
-    <content type="html"><![CDATA[<p>리눅스나 SSH로 접속해서 명령어를 실행하는 상황이 자주 생기고 있습니다.<br>그럴때마다 새로운 터미널에서 명령어를 순차적으로 반복해서 입력해야하는 번거로움도 동반합니다.<br>이럴때 shell script를 만들어 반복잡업을 줄일 수 있는데 이 포스트에서는 shell 명령어중에서도 <code>;</code> <code>&amp;</code> <code>&amp;&amp;</code>에 대해서 써보려합니다.</p><a id="more"></a><h2 id="amp-amp"><a href="#amp-amp" class="headerlink" title="&amp;&amp;"></a>&amp;&amp;</h2><p>순차적인 명령어를 제어하다보면 이전 명령어의 성공후 다음명령어를 실행하고, 실패하면 중지해야하는 경우가 있습니다.<br>이때 사용하는 접속사가 <code>&amp;&amp;</code> 입니다.</p><p>아래는 실행할 스크립트 정보입니다.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; script.sh</span><br><span class="line">mkdir test &amp;&amp; cd test &amp;&amp; touch test.txt</span><br></pre></td></tr></table></figure><p>mkdir test에서 오류가 나지 않을 경우 test폴더에 들어가 test.txt를 생성하게 됩니다.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">% sh script.sh</span><br><span class="line">% cd test</span><br><span class="line">test % ls</span><br><span class="line">test.txt</span><br></pre></td></tr></table></figure><p>만약 test라는 폴더가 이미 존재해 mkdir test에서 오류가 나지 않을 경우 test.txt파일을 만들지 않을것입니다.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">% sh script.sh</span><br><span class="line">mkdir: test: File exists</span><br><span class="line">% cd test</span><br><span class="line">% ls</span><br><span class="line">&#x2F;&#x2F; 생성된 파일이 없음</span><br></pre></td></tr></table></figure><h2 id="amp"><a href="#amp" class="headerlink" title="&amp;"></a>&amp;</h2><p>&amp;는 해당 명령어를 백그라운드에서 실행할 때 사용합니다.</p><h2 id=""><a href="#" class="headerlink" title=";"></a>;</h2><p>;는 여러 명령어를 한줄에 서술할때 앞의 명령어의 성공여부에 상관없이 다음 명령어를 실행합니다.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; script.sh</span><br><span class="line">mkdir test; cd test; touch test.txt</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">% sh script.sh</span><br><span class="line">mkdir: test: File exists</span><br><span class="line">% cd test</span><br><span class="line">test % ls</span><br><span class="line">test.txt</span><br></pre></td></tr></table></figure><p>명령어의 모음으로 스크립트를 작성하게 되면 생각보다 빈번하게 사용하는 접속사입니다.</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;리눅스나 SSH로 접속해서 명령어를 실행하는 상황이 자주 생기고 있습니다.&lt;br&gt;그럴때마다 새로운 터미널에서 명령어를 순차적으로 반복해서 입력해야하는 번거로움도 동반합니다.&lt;br&gt;이럴때 shell script를 만들어 반복잡업을 줄일 수 있는데 이 포스트에서는 shell 명령어중에서도 &lt;code&gt;;&lt;/code&gt; &lt;code&gt;&amp;amp;&lt;/code&gt; &lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;에 대해서 써보려합니다.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="ETC" scheme="https://dev-sawd.github.io/categories/ETC/"/>
     
     
       <category term="TIL" scheme="https://dev-sawd.github.io/tags/TIL/"/>
