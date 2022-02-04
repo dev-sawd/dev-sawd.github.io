@@ -245,9 +245,9 @@
       <category term="GitLab" scheme="https://dev-sawd.github.io/categories/GitLab/"/>
     
     
-      <category term="Docker" scheme="https://dev-sawd.github.io/tags/Docker/"/>
-    
       <category term="Gitlab" scheme="https://dev-sawd.github.io/tags/Gitlab/"/>
+    
+      <category term="Docker" scheme="https://dev-sawd.github.io/tags/Docker/"/>
     
       <category term="Docker-Compose" scheme="https://dev-sawd.github.io/tags/Docker-Compose/"/>
     
@@ -300,9 +300,9 @@
     
       <category term="Golang" scheme="https://dev-sawd.github.io/tags/Golang/"/>
     
-      <category term="Windows" scheme="https://dev-sawd.github.io/tags/Windows/"/>
-    
       <category term="Docker" scheme="https://dev-sawd.github.io/tags/Docker/"/>
+    
+      <category term="Windows" scheme="https://dev-sawd.github.io/tags/Windows/"/>
     
   </entry>
   
