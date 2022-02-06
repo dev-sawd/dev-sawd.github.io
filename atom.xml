@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dev-sawd.github.io/"/>
-  <updated>2022-02-05T16:50:32.950Z</updated>
+  <updated>2022-02-06T10:36:30.172Z</updated>
   <id>https://dev-sawd.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Golang] go modules 사용</title>
+    <link href="https://dev-sawd.github.io/2022/02/06/Golang-go-modules/"/>
+    <id>https://dev-sawd.github.io/2022/02/06/Golang-go-modules/</id>
+    <published>2022-02-06T10:20:03.000Z</published>
+    <updated>2022-02-06T10:36:30.172Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="govendor-deprecated"><a href="#govendor-deprecated" class="headerlink" title="govendor (deprecated)"></a>govendor (deprecated)</h1><p>Golang을 처음 접하고 체인코드를 개발할때부터 시간에 쫓겨 의존성 라이브러리 관리를 govendor를 통해 했었음</p><ul><li><a href="https://github.com/kardianos/govendor" target="_blank" rel="noopener">https://github.com/kardianos/govendor</a></li></ul><h1 id="Go-modules"><a href="#Go-modules" class="headerlink" title="Go modules"></a>Go modules</h1><p>이제는 1.11부터 Go modules가 도입되면서 govendor 개발자도 1.14부터는 Go modules를 사용하도록 권장하고있음</p><p>사실상 govendor는 deprecated 되어 앞으로는 사용하지 않을 것임</p><ul><li><a href="https://go.dev/blog/using-go-modules" target="_blank" rel="noopener">https://go.dev/blog/using-go-modules</a></li></ul><a id="more"></a><h3 id="go-mod-init-module-name"><a href="#go-mod-init-module-name" class="headerlink" title="go mod init [module-name]"></a>go mod init [module-name]</h3><p>새 모듈을 만들었을때 go mod init 명령어로 go.mod 파일 작성</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go mod init github.com&#x2F;dev-sawd&#x2F;</span><br></pre></td></tr></table></figure><h3 id="go-get-module-name"><a href="#go-get-module-name" class="headerlink" title="go get [module-name]"></a>go get [module-name]</h3><p>종속성 모듈을 다운로드</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get github.com&#x2F;dev-sawd&#x2F;</span><br></pre></td></tr></table></figure><h3 id="go-mod-tidy"><a href="#go-mod-tidy" class="headerlink" title="go mod tidy"></a>go mod tidy</h3><p>사용되지 않는 종속성 모듈을 제거하거나 추가된 종속성 모듈을 go.mod에 추가</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go mod tidy</span><br></pre></td></tr></table></figure><h3 id="go-mod-vendor"><a href="#go-mod-vendor" class="headerlink" title="go mod vendor"></a>go mod vendor</h3><p>해당 위치에 종속성 모듈을 vendor 폴더안에 복사</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go mod vendor</span><br></pre></td></tr></table></figure><p>프로젝트를 새로 만들었을 경우는 go mod init를 이용해 go.mod를 생성하고 작업하면서 필요한 모듈들을 정리해가며 개발</p><p>만약 github에 공유된 모듈들을 받아 직접 실행하는 경우는 go.mod파일이 이미 존재하기 때문에 go get을 이용해 해당 모듈에서 사용하고 있는 모듈들을 다운받아 실행하면 됨</p><p>go get등을 이용해 github에 공유되어있는 모듈들을 다운로드 받을 수 없는 경우에는 go mod vendor를 이용해 해당 모듈들을 현재 개발중인 모듈 폴더의 vendor에 복사하게 한 후</p><p>모듈 전체를 배포하는 형태로 진행해야함</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;govendor-deprecated&quot;&gt;&lt;a href=&quot;#govendor-deprecated&quot; class=&quot;headerlink&quot; title=&quot;govendor (deprecated)&quot;&gt;&lt;/a&gt;govendor (deprecated)&lt;/h1&gt;&lt;p&gt;Golang을 처음 접하고 체인코드를 개발할때부터 시간에 쫓겨 의존성 라이브러리 관리를 govendor를 통해 했었음&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/kardianos/govendor&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/kardianos/govendor&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&quot;Go-modules&quot;&gt;&lt;a href=&quot;#Go-modules&quot; class=&quot;headerlink&quot; title=&quot;Go modules&quot;&gt;&lt;/a&gt;Go modules&lt;/h1&gt;&lt;p&gt;이제는 1.11부터 Go modules가 도입되면서 govendor 개발자도 1.14부터는 Go modules를 사용하도록 권장하고있음&lt;/p&gt;
+&lt;p&gt;사실상 govendor는 deprecated 되어 앞으로는 사용하지 않을 것임&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://go.dev/blog/using-go-modules&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://go.dev/blog/using-go-modules&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="Golang" scheme="https://dev-sawd.github.io/categories/Golang/"/>
+    
+    
+      <category term="Golang" scheme="https://dev-sawd.github.io/tags/Golang/"/>
+    
+  </entry>
   
   <entry>
     <title>[Chaincode] panic recover 샘플</title>
@@ -51,9 +82,9 @@
     <link href="https://dev-sawd.github.io/2022/02/04/Golang-mvc-pattern/"/>
     <id>https://dev-sawd.github.io/2022/02/04/Golang-mvc-pattern/</id>
     <published>2022-02-04T11:45:25.000Z</published>
-    <updated>2022-02-05T18:00:43.952Z</updated>
+    <updated>2022-02-06T09:57:22.972Z</updated>
     
-    <content type="html"><![CDATA[<p>조금 더 확실하게 공부해서 앞으로 있을 체인코드 개발에 MVC에 가깝게 구조를 잡고 개발하기위해 정리</p><h1 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1><blockquote><p>MVC (모델-뷰-컨트롤러) 는 사용자 인터페이스, 데이터 및 논리 제어를 구현하는데 널리 사용되는 소프트웨어 디자인 패턴입니다. 소프트웨어의 비즈니스 로직과 화면을 구분하는데 중점을 두고 있습니다. 이러한 “관심사 분리” 는 더나은 업무의 분리와 향상된 관리를 제공합니다. MVC 에 기반을 둔 몇 가지 다른 디자인 패턴으로 MVVM (모델-뷰-뷰모델), MVP (모델-뷰-프리젠터), MVW (모델-뷰-왓에버) 가 있습니다.</p></blockquote><ul><li><a href="https://developer.mozilla.org/ko/docs/Glossary/MVC" target="_blank" rel="noopener">https://developer.mozilla.org/ko/docs/Glossary/MVC</a></li></ul><h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>데이터를 받아 비즈니스 로직을 처리<br>주로 DB와의 상호작용이 해당</p><a id="more"></a><h3 id="View"><a href="#View" class="headerlink" title="View"></a>View</h3><p>레이아웃과 화면을 처리<br>애플리케이션의 데이터를 보여주는 방식</p><h3 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h3><p>사용자로부터 요청을 받아 수행할 비즈니스 로직을 제어</p><p>&nbsp;</p><h1 id="Go언어에서의-MVC"><a href="#Go언어에서의-MVC" class="headerlink" title="Go언어에서의 MVC"></a>Go언어에서의 MVC</h1><p>Go언어에서는 Revel이라고 하는 MVC를 도와주는 웹 프레임워크가 있다고 함</p><a href="https://revel.github.io/" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="descriptions"><div class="og-title">Revel - Go Web Framework</div></div></div></a><p>&nbsp;</p><h1 id="하지만-체인코드에서는"><a href="#하지만-체인코드에서는" class="headerlink" title="하지만 체인코드에서는..?"></a>하지만 체인코드에서는..?</h1><p>MVC패턴을 제대로 모르더라도 구조를 보면 많이 익숙한 느낌이 들정도로 개발자들은 자주 접하는 구조<br>하지만 체인코드를 개발할때 MVC를 그대로 사용하기에는 무리가 있어서 조금 내 방식대로 수정<br>호출 순서는 아래와 같다고 생각</p><p>사용자 → Controller → Service → DAO → DB</p><p>그리고 각 호출에서 필요한 데이터 구조(DTO)를 정의하는 정도로 생각</p><p>&nbsp;</p><h1 id="폴더-구조"><a href="#폴더-구조" class="headerlink" title="폴더 구조"></a>폴더 구조</h1><p>직관적으로 각 구조마다 폴더명을 지정해서 관리<br>dao, dto는 service, object등으로 상황에 따라 다르게 사용</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">\GOPROJECT\SRC\MVC</span><br><span class="line">│  main.go</span><br><span class="line">│</span><br><span class="line">├─controller</span><br><span class="line">│      personController.go</span><br><span class="line">│</span><br><span class="line">├─dao</span><br><span class="line">│      DBManager.go</span><br><span class="line">│</span><br><span class="line">├─dto</span><br><span class="line">│      person.go</span><br><span class="line">│</span><br><span class="line">└─service</span><br><span class="line">        personService.go</span><br></pre></td></tr></table></figure><p>&nbsp;</p><h1 id="코드"><a href="#코드" class="headerlink" title="코드"></a>코드</h1><script src="//gist.github.com/c8bc668ea2d139dfdc69a16128db3189.js"></script><p>개발을 하면서 반복되는 코드는 계속해서 리펙토링을 통해 제거하고 관리해야함</p><p><del>그래도 나중엔 감당안되긴 해…</del></p>]]></content>
+    <content type="html"><![CDATA[<p>조금 더 확실하게 공부해서 앞으로 있을 체인코드 개발에 MVC에 가깝게 구조를 잡고 개발하기위해 정리</p><h1 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1><blockquote><p>MVC (모델-뷰-컨트롤러) 는 사용자 인터페이스, 데이터 및 논리 제어를 구현하는데 널리 사용되는 소프트웨어 디자인 패턴입니다. 소프트웨어의 비즈니스 로직과 화면을 구분하는데 중점을 두고 있습니다. 이러한 “관심사 분리” 는 더나은 업무의 분리와 향상된 관리를 제공합니다. MVC 에 기반을 둔 몇 가지 다른 디자인 패턴으로 MVVM (모델-뷰-뷰모델), MVP (모델-뷰-프리젠터), MVW (모델-뷰-왓에버) 가 있습니다.</p></blockquote><ul><li><a href="https://developer.mozilla.org/ko/docs/Glossary/MVC" target="_blank" rel="noopener">https://developer.mozilla.org/ko/docs/Glossary/MVC</a></li></ul><h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>데이터를 받아 비즈니스 로직을 처리<br>주로 DB와의 상호작용이 해당</p><a id="more"></a><h3 id="View"><a href="#View" class="headerlink" title="View"></a>View</h3><p>레이아웃과 화면을 처리<br>애플리케이션의 데이터를 보여주는 방식</p><h3 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h3><p>사용자로부터 요청을 받아 수행할 비즈니스 로직을 제어</p><p>&nbsp;</p><h1 id="Go언어에서의-MVC"><a href="#Go언어에서의-MVC" class="headerlink" title="Go언어에서의 MVC"></a>Go언어에서의 MVC</h1><p>Go언어에서는 Revel이라고 하는 MVC를 도와주는 웹 프레임워크가 있다고 함</p><a href="https://revel.github.io/" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="descriptions"><div class="og-title">Revel - Go Web Framework</div></div></div></a><p>&nbsp;</p><h1 id="하지만-체인코드에서는"><a href="#하지만-체인코드에서는" class="headerlink" title="하지만 체인코드에서는..?"></a>하지만 체인코드에서는..?</h1><p>MVC패턴을 제대로 모르더라도 구조를 보면 많이 익숙한 느낌이 들정도로 개발자들은 자주 접하는 구조<br>하지만 체인코드를 개발할때 MVC를 그대로 사용하기에는 무리가 있어서 조금 내 방식대로 수정<br>호출 순서는 아래와 같다고 생각</p><p>사용자 → Controller → Service → DAO → DB</p><p>그리고 각 호출에서 필요한 데이터 구조(DTO)를 정의하는 정도로 생각</p><p>&nbsp;</p><h1 id="폴더-구조"><a href="#폴더-구조" class="headerlink" title="폴더 구조"></a>폴더 구조</h1><p>직관적으로 각 구조마다 폴더명을 지정해서 관리<br>dao, dto는 service, object등으로 상황에 따라 다르게 사용</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\GOPROJECT\SRC\MVC</span><br><span class="line">│  main.go</span><br><span class="line">│</span><br></pre></td></tr></table></figure><p>&nbsp;</p><h1 id="코드"><a href="#코드" class="headerlink" title="코드"></a>코드</h1><script src="//gist.github.com/c8bc668ea2d139dfdc69a16128db3189.js"></script><p>개발을 하면서 반복되는 코드는 계속해서 리펙토링을 통해 제거하고 관리해야함</p><p><del>그래도 나중엔 감당안되긴 해…</del></p>]]></content>
     
     <summary type="html">
     
@@ -510,31 +541,6 @@
     
     
       <category term="Github" scheme="https://dev-sawd.github.io/tags/Github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Data Structure] Linked List</title>
-    <link href="https://dev-sawd.github.io/2020/05/23/Data-Structure-Linked-List/"/>
-    <id>https://dev-sawd.github.io/2020/05/23/Data-Structure-Linked-List/</id>
-    <published>2020-05-23T02:48:54.000Z</published>
-    <updated>2022-01-26T13:51:21.056Z</updated>
-    
-    <content type="html"><![CDATA[<p><a href="https://docs.google.com/presentation/d/1LCv9_7XEzesbJSftRH4IYvEK84SslpDoThIdH_KwTtI/edit?usp=sharing" target="_blank" rel="noopener">원본자료</a><br>와! 얼마만에 자료구조를 포스팅 하는지..<br>이미 자료는 다 만들어놨는데.. 그간 이런저런 문제와 핑계로 인해 이제 다시 올리게 되었습니다.</p><img src="/2020/05/23/Data-Structure-Linked-List/02.png" class=""><br><a id="more"></a><img src="/2020/05/23/Data-Structure-Linked-List/03.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/04.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/05.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/06.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/07.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/08.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/09.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/10.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/11.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/12.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/13.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/14.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/15.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/16.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/17.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/18.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/19.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/20.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/21.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/22.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/23.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/24.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/25.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/26.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/27.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/28.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/29.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/30.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/31.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/32.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/33.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/34.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/35.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/36.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/37.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/38.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/39.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/40.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/41.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/42.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/43.png" class=""><br><img src="/2020/05/23/Data-Structure-Linked-List/44.png" class=""><br>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;https://docs.google.com/presentation/d/1LCv9_7XEzesbJSftRH4IYvEK84SslpDoThIdH_KwTtI/edit?usp=sharing&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;원본자료&lt;/a&gt;&lt;br&gt;와! 얼마만에 자료구조를 포스팅 하는지..&lt;br&gt;이미 자료는 다 만들어놨는데.. 그간 이런저런 문제와 핑계로 인해 이제 다시 올리게 되었습니다.&lt;/p&gt;
-&lt;img src=&quot;/2020/05/23/Data-Structure-Linked-List/02.png&quot; class=&quot;&quot;&gt;
-&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="Data Structure" scheme="https://dev-sawd.github.io/categories/Data-Structure/"/>
-    
-    
-      <category term="TIL" scheme="https://dev-sawd.github.io/tags/TIL/"/>
     
   </entry>
   
