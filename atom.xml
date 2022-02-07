@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dev-sawd.github.io/"/>
-  <updated>2022-02-06T10:36:30.172Z</updated>
+  <updated>2022-02-07T06:25:45.776Z</updated>
   <id>https://dev-sawd.github.io/</id>
   
   <author>
@@ -17,11 +17,40 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>[Docker] no matching manifest for linux/arm64/v8 in the manifest list entries</title>
+    <link href="https://dev-sawd.github.io/2022/02/07/Docker-no-matching-manifest-for-linux-arm64-v8-in-the-manifest-list-entries/"/>
+    <id>https://dev-sawd.github.io/2022/02/07/Docker-no-matching-manifest-for-linux-arm64-v8-in-the-manifest-list-entries/</id>
+    <published>2022-02-07T06:05:33.000Z</published>
+    <updated>2022-02-07T06:25:45.776Z</updated>
+    
+    <content type="html"><![CDATA[<p>M1 맥북 에어를 구입하고 Docker를 이용해 이미지를 받을때 아래와 같은 문제가 발생</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">% docker pull hyperledger&#x2F;fabric-javaenv:2.4</span><br><span class="line">2.4: Pulling from hyperledger&#x2F;fabric-javaenv</span><br><span class="line">no matching manifest for linux&#x2F;arm64&#x2F;v8 in the manifest list entries</span><br></pre></td></tr></table></figure><p>M1 환경에서 발생하는 문제로 보임</p><p><code>--platform linux/x86_64</code> 인자를 주어 실행하면 정상적으로 받아오는것을 확인</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">% docker pull --platform linux&#x2F;x86_64 hyperledger&#x2F;fabric-javaenv:2.4</span><br></pre></td></tr></table></figure><ul><li><a href="https://unluckyjung.github.io/develop-setting/2021/03/27/M1-Docker-Mysql-Error/" target="_blank" rel="noopener">https://unluckyjung.github.io/develop-setting/2021/03/27/M1-Docker-Mysql-Error/</a></li><li><a href="https://stackoverflow.com/a/67361161" target="_blank" rel="noopener">https://stackoverflow.com/a/67361161</a></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;M1 맥북 에어를 구입하고 Docker를 이용해 이미지를 받을때 아래와 같은 문제가 발생&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;lin
+      
+    
+    </summary>
+    
+    
+      <category term="Docker" scheme="https://dev-sawd.github.io/categories/Docker/"/>
+    
+    
+      <category term="Docker" scheme="https://dev-sawd.github.io/tags/Docker/"/>
+    
+      <category term="M1 MacBook Air" scheme="https://dev-sawd.github.io/tags/M1-MacBook-Air/"/>
+    
+  </entry>
+  
+  <entry>
     <title>[Golang] go modules 사용</title>
     <link href="https://dev-sawd.github.io/2022/02/06/Golang-go-modules/"/>
     <id>https://dev-sawd.github.io/2022/02/06/Golang-go-modules/</id>
     <published>2022-02-06T10:20:03.000Z</published>
-    <updated>2022-02-06T10:36:30.172Z</updated>
+    <updated>2022-02-06T12:57:14.931Z</updated>
     
     <content type="html"><![CDATA[<h1 id="govendor-deprecated"><a href="#govendor-deprecated" class="headerlink" title="govendor (deprecated)"></a>govendor (deprecated)</h1><p>Golang을 처음 접하고 체인코드를 개발할때부터 시간에 쫓겨 의존성 라이브러리 관리를 govendor를 통해 했었음</p><ul><li><a href="https://github.com/kardianos/govendor" target="_blank" rel="noopener">https://github.com/kardianos/govendor</a></li></ul><h1 id="Go-modules"><a href="#Go-modules" class="headerlink" title="Go modules"></a>Go modules</h1><p>이제는 1.11부터 Go modules가 도입되면서 govendor 개발자도 1.14부터는 Go modules를 사용하도록 권장하고있음</p><p>사실상 govendor는 deprecated 되어 앞으로는 사용하지 않을 것임</p><ul><li><a href="https://go.dev/blog/using-go-modules" target="_blank" rel="noopener">https://go.dev/blog/using-go-modules</a></li></ul><a id="more"></a><h3 id="go-mod-init-module-name"><a href="#go-mod-init-module-name" class="headerlink" title="go mod init [module-name]"></a>go mod init [module-name]</h3><p>새 모듈을 만들었을때 go mod init 명령어로 go.mod 파일 작성</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go mod init github.com&#x2F;dev-sawd&#x2F;</span><br></pre></td></tr></table></figure><h3 id="go-get-module-name"><a href="#go-get-module-name" class="headerlink" title="go get [module-name]"></a>go get [module-name]</h3><p>종속성 모듈을 다운로드</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get github.com&#x2F;dev-sawd&#x2F;</span><br></pre></td></tr></table></figure><h3 id="go-mod-tidy"><a href="#go-mod-tidy" class="headerlink" title="go mod tidy"></a>go mod tidy</h3><p>사용되지 않는 종속성 모듈을 제거하거나 추가된 종속성 모듈을 go.mod에 추가</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go mod tidy</span><br></pre></td></tr></table></figure><h3 id="go-mod-vendor"><a href="#go-mod-vendor" class="headerlink" title="go mod vendor"></a>go mod vendor</h3><p>해당 위치에 종속성 모듈을 vendor 폴더안에 복사</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go mod vendor</span><br></pre></td></tr></table></figure><p>프로젝트를 새로 만들었을 경우는 go mod init를 이용해 go.mod를 생성하고 작업하면서 필요한 모듈들을 정리해가며 개발</p><p>만약 github에 공유된 모듈들을 받아 직접 실행하는 경우는 go.mod파일이 이미 존재하기 때문에 go get을 이용해 해당 모듈에서 사용하고 있는 모듈들을 다운받아 실행하면 됨</p><p>go get등을 이용해 github에 공유되어있는 모듈들을 다운로드 받을 수 없는 경우에는 go mod vendor를 이용해 해당 모듈들을 현재 개발중인 모듈 폴더의 vendor에 복사하게 한 후</p><p>모듈 전체를 배포하는 형태로 진행해야함</p>]]></content>
     
@@ -42,6 +71,8 @@
     
       <category term="Golang" scheme="https://dev-sawd.github.io/categories/Golang/"/>
     
+    
+      <category term="TIL" scheme="https://dev-sawd.github.io/tags/TIL/"/>
     
       <category term="Golang" scheme="https://dev-sawd.github.io/tags/Golang/"/>
     
@@ -518,29 +549,6 @@
     
     
       <category term="git" scheme="https://dev-sawd.github.io/tags/git/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Github] 로컬 저장소의 원격 저장소 URL 변경</title>
-    <link href="https://dev-sawd.github.io/2020/05/23/Github-change-remote-repository-url-in-local-repository/"/>
-    <id>https://dev-sawd.github.io/2020/05/23/Github-change-remote-repository-url-in-local-repository/</id>
-    <published>2020-05-23T06:35:51.000Z</published>
-    <updated>2022-01-26T13:51:21.084Z</updated>
-    
-    <content type="html"><![CDATA[<p>이 포스트에서는 이미 원격 저장소가 지정되어있는 로컬 폴더의 원격 저장소 url을 변경하는 상황에 대해서 포스팅합니다.</p><a id="more"></a><p>.git 폴더로 이동</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> <span class="built_in">test</span></span></span><br></pre></td></tr></table></figure><p>원격 저장소 url 확인</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git remote -v</span></span><br><span class="line">origin  https://github.com/dev-sawd/hyperledger-fabric-basic-network.git (fetch)</span><br></pre></td></tr></table></figure><p>저장소 url 변경</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git remote <span class="built_in">set</span>-url origin https://github.com/dev-sawd/hyperledger-fabric-basic-network-multi-org.git</span></span><br></pre></td></tr></table></figure><p>변경된 원격 저장소 url 확인</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> git remote -v</span></span><br><span class="line">origin  https://github.com/dev-sawd/hyperledger-fabric-basic-network-multi-org.git (fetch)</span><br><span class="line">origin  https://github.com/dev-sawd/hyperledger-fabric-basic-network-multi-org.git (push)</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;이 포스트에서는 이미 원격 저장소가 지정되어있는 로컬 폴더의 원격 저장소 url을 변경하는 상황에 대해서 포스팅합니다.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Github" scheme="https://dev-sawd.github.io/categories/Github/"/>
-    
-    
-      <category term="Github" scheme="https://dev-sawd.github.io/tags/Github/"/>
     
   </entry>
   
