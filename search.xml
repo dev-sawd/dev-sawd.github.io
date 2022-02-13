@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>[MySQL] access denied for user</title>
+      <link href="/2022/02/13/MySQL-access-denied-for-user/"/>
+      <url>/2022/02/13/MySQL-access-denied-for-user/</url>
+      
+        <content type="html"><![CDATA[<p>토이 프로젝트를 만드는 중에 프로시져를 사용해야 할 일이 생김</p><p>프로시져에 대해서 공부하고 테스트 서버에서 프로시져 생성 명령어를 실행하는데 아래와 같은 에러 발생</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access denied for user &#39;root&#39;@&#39;%&#39; to database &#39;information_schema&#39;</span><br></pre></td></tr></table></figure><p>거의 반나절을 구글링과 스택오버플로우를 찾아봤는데도 해답을 찾을 수 없었음</p><p>대부분 권한 문제 때문이라고 하는데 이미 필요한 권한은 다 가지고있었음</p><p>그리고 며칠 지나 다시 문제를 풀어보려고 열었는데 에러 문구에 <code>database &#39;information_schema&#39;</code> 부분이 자꾸 거슬렸음</p><p>그래서 이 부분에 초점을 두고 database를 내가 원하는 데이터베이스로 설정 후 프로시져를 생성하니 성공</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use my_database</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; procedure 생성</span><br></pre></td></tr></table></figure><p>너무 허무하다.. 😪</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> MySQL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MySQL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>[Docker] no matching manifest for linux/arm64/v8 in the manifest list entries</title>
       <link href="/2022/02/07/Docker-no-matching-manifest-for-linux-arm64-v8-in-the-manifest-list-entries/"/>
       <url>/2022/02/07/Docker-no-matching-manifest-for-linux-arm64-v8-in-the-manifest-list-entries/</url>

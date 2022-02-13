@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dev-sawd.github.io/"/>
-  <updated>2022-02-07T06:25:45.776Z</updated>
+  <updated>2022-02-13T14:29:31.213Z</updated>
   <id>https://dev-sawd.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[MySQL] access denied for user</title>
+    <link href="https://dev-sawd.github.io/2022/02/13/MySQL-access-denied-for-user/"/>
+    <id>https://dev-sawd.github.io/2022/02/13/MySQL-access-denied-for-user/</id>
+    <published>2022-02-13T14:22:14.000Z</published>
+    <updated>2022-02-13T14:29:31.213Z</updated>
+    
+    <content type="html"><![CDATA[<p>토이 프로젝트를 만드는 중에 프로시져를 사용해야 할 일이 생김</p><p>프로시져에 대해서 공부하고 테스트 서버에서 프로시져 생성 명령어를 실행하는데 아래와 같은 에러 발생</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access denied for user &#39;root&#39;@&#39;%&#39; to database &#39;information_schema&#39;</span><br></pre></td></tr></table></figure><p>거의 반나절을 구글링과 스택오버플로우를 찾아봤는데도 해답을 찾을 수 없었음</p><p>대부분 권한 문제 때문이라고 하는데 이미 필요한 권한은 다 가지고있었음</p><p>그리고 며칠 지나 다시 문제를 풀어보려고 열었는데 에러 문구에 <code>database &#39;information_schema&#39;</code> 부분이 자꾸 거슬렸음</p><p>그래서 이 부분에 초점을 두고 database를 내가 원하는 데이터베이스로 설정 후 프로시져를 생성하니 성공</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use my_database</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; procedure 생성</span><br></pre></td></tr></table></figure><p>너무 허무하다.. 😪</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;토이 프로젝트를 만드는 중에 프로시져를 사용해야 할 일이 생김&lt;/p&gt;
+&lt;p&gt;프로시져에 대해서 공부하고 테스트 서버에서 프로시져 생성 명령어를 실행하는데 아래와 같은 에러 발생&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;ta
+      
+    
+    </summary>
+    
+    
+      <category term="MySQL" scheme="https://dev-sawd.github.io/categories/MySQL/"/>
+    
+    
+      <category term="MySQL" scheme="https://dev-sawd.github.io/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>[Docker] no matching manifest for linux/arm64/v8 in the manifest list entries</title>
@@ -526,29 +554,6 @@
     
     
       <category term="ETC" scheme="https://dev-sawd.github.io/tags/ETC/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Github] git 변경사항 되돌리기</title>
-    <link href="https://dev-sawd.github.io/2020/05/24/Github-revert-change/"/>
-    <id>https://dev-sawd.github.io/2020/05/24/Github-revert-change/</id>
-    <published>2020-05-24T01:55:54.000Z</published>
-    <updated>2022-01-26T13:51:21.085Z</updated>
-    
-    <content type="html"><![CDATA[<p>Git을 이용해 형상관리를 하다 보면 수정사항을 롤백 하고 싶을 때가 자주 있습니다.<br>이 포스트에서는 이전 커밋까지 롤백 하는 방법에 대해서 알아봅니다.</p><a id="more"></a><h2 id="git-add-명령을-하기-이전의-수정사항-롤백"><a href="#git-add-명령을-하기-이전의-수정사항-롤백" class="headerlink" title="git add 명령을 하기 이전의 수정사항 롤백"></a>git add 명령을 하기 이전의 수정사항 롤백</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> &#123;respository_directory&#125;</span></span><br><span class="line">respository_directory $ checkout .</span><br></pre></td></tr></table></figure><h2 id="git-add-명령어를-한-이후의-수정사항-롤백"><a href="#git-add-명령어를-한-이후의-수정사항-롤백" class="headerlink" title="git add 명령어를 한 이후의 수정사항 롤백"></a>git add 명령어를 한 이후의 수정사항 롤백</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset</span></span><br></pre></td></tr></table></figure><h2 id="git-commit을-한-이후-롤백"><a href="#git-commit을-한-이후-롤백" class="headerlink" title="git commit을 한 이후 롤백"></a>git commit을 한 이후 롤백</h2><ul><li>주의 아래의 명령어는 수정사항이 완전히 삭제됩니다</li></ul><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset --hard HEAD~</span></span><br></pre></td></tr></table></figure><h2 id="원격-저장소에-변경된-이력도-되돌리기"><a href="#원격-저장소에-변경된-이력도-되돌리기" class="headerlink" title="원격 저장소에 변경된 이력도 되돌리기"></a>원격 저장소에 변경된 이력도 되돌리기</h2><p>원격 저장소에 변경된 이력을 되돌리는 방법은 local 저장소의 새로운 변경사항으로 덮어쓰는것과 개념이 같습니다.</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset HEAD~</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit -m <span class="string">"commit message"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git push origin master</span></span><br></pre></td></tr></table></figure><h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>여러 롤백 케이스중에서 자주 사용할 수 있는 상황을 뽑아서 포스팅해봤습니다.<br>이외 더 자세한 롤백 방법은 아래의 사이트에 자세하게 나와있습니다.</p><p><a href="https://git-scm.com/book/ko/v2/Git-%EB%8F%84%EA%B5%AC-Reset-%EB%AA%85%ED%99%95%ED%9E%88-%EC%95%8C%EA%B3%A0-%EA%B0%80%EA%B8%B0" target="_blank" rel="noopener">https://git-scm.com/book/ko/v2/Git-%EB%8F%84%EA%B5%AC-Reset-%EB%AA%85%ED%99%95%ED%9E%88-%EC%95%8C%EA%B3%A0-%EA%B0%80%EA%B8%B0</a></p><p>중요한것은 롤백을 하기 전 어떻게 이력관리를 할것인지 한번 더 생각해 보는게 중요할 것 같습니다.</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Git을 이용해 형상관리를 하다 보면 수정사항을 롤백 하고 싶을 때가 자주 있습니다.&lt;br&gt;이 포스트에서는 이전 커밋까지 롤백 하는 방법에 대해서 알아봅니다.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Github" scheme="https://dev-sawd.github.io/categories/Github/"/>
-    
-    
-      <category term="git" scheme="https://dev-sawd.github.io/tags/git/"/>
     
   </entry>
   
