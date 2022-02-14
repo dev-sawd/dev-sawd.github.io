@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>gitignore가 문제야 뭐야? | SAWD</title>
+  <title>[MySQL] 두 컬럼의 값 바꾸기 | SAWD</title>
   <meta name="description" content="시간이 나야지..." />
   <meta name="keywords" content="" />
   <meta name="HandheldFriendly" content="True" />
@@ -12,16 +12,17 @@
   <link rel="shortcut icon" href="/images/favicon.png">
   <link rel="alternate" href="/atom.xml" title="SAWD">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="HEXO에 대해 점점 친해지고 있는 와중에버전관리중인 git에서 문제가 생겼습니다… 테마를 바꾸려고 themes&#x2F;something1 에서 themes&#x2F;something2를 추가하고something1을 삭제했더니.. themes 폴더를 전혀 인식하지 못하는 현상이 생겼습니다… 결국 git 주소를 하나 더 생성해서 어찌저찌 해결하기는 했는데기존에 가지고 있던">
+  <meta name="description" content="DB의 두 컬럼의 값이 바뀌어 들어가는 실수가 발생했을때 아래와 같이 두 컬럼의 값을 바꿀 수 있음 123456UPDATE    [TABLE_NAME]SET    A &#x3D; (@temp:&#x3D;A),    A &#x3D; B,    B &#x3D; @temp  이때 주의해야 할 점이 A &#x3D; (@temp:&#x3D;A)에서 콜론이 들어간다는것 만약 콜론을 빼">
 <meta property="og:type" content="article">
-<meta property="og:title" content="gitignore가 문제야 뭐야?">
-<meta property="og:url" content="https://dev-sawd.github.io/2018/06/14/gitignore/index.html">
+<meta property="og:title" content="[MySQL] 두 컬럼의 값 바꾸기">
+<meta property="og:url" content="https://dev-sawd.github.io/2022/02/15/MySQL-change-column-value/index.html">
 <meta property="og:site_name" content="SAWD">
-<meta property="og:description" content="HEXO에 대해 점점 친해지고 있는 와중에버전관리중인 git에서 문제가 생겼습니다… 테마를 바꾸려고 themes&#x2F;something1 에서 themes&#x2F;something2를 추가하고something1을 삭제했더니.. themes 폴더를 전혀 인식하지 못하는 현상이 생겼습니다… 결국 git 주소를 하나 더 생성해서 어찌저찌 해결하기는 했는데기존에 가지고 있던">
+<meta property="og:description" content="DB의 두 컬럼의 값이 바뀌어 들어가는 실수가 발생했을때 아래와 같이 두 컬럼의 값을 바꿀 수 있음 123456UPDATE    [TABLE_NAME]SET    A &#x3D; (@temp:&#x3D;A),    A &#x3D; B,    B &#x3D; @temp  이때 주의해야 할 점이 A &#x3D; (@temp:&#x3D;A)에서 콜론이 들어간다는것 만약 콜론을 빼">
 <meta property="og:locale" content="ko_KR">
-<meta property="article:published_time" content="2018-06-14T08:35:59.000Z">
-<meta property="article:modified_time" content="2022-01-26T13:51:20.957Z">
+<meta property="article:published_time" content="2022-02-14T17:55:21.000Z">
+<meta property="article:modified_time" content="2022-02-14T18:00:50.055Z">
 <meta property="article:author" content="SAWD">
+<meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
@@ -138,22 +139,22 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        <article id="post-gitignore"
+        <article id="post-MySQL-change-column-value"
   class="post white-box article-type-post"
   itemscope itemprop="blogPost">
 	<section class='meta'>
 	<h2 class="title">
-  	<a href="/2018/06/14/gitignore/">
-    	gitignore가 문제야 뭐야?
+  	<a href="/2022/02/15/MySQL-change-column-value/">
+    	[MySQL] 두 컬럼의 값 바꾸기
     </a>
   </h2>
 	<time>
-	  6월 14, 2018
+	  2월 15, 2022
 	</time>
 	
     
     <div class='cats'>
-        <a href="/categories/Samll-talk/">Samll talk</a>
+        <a href="/categories/MySQL/">MySQL</a>
     </div>
 
 	</section>
@@ -162,25 +163,32 @@
 <!--	-->
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<p>HEXO에 대해 점점 친해지고 있는 와중에<br>버전관리중인 git에서 문제가 생겼습니다…</p>
-<p>테마를 바꾸려고 themes/something1 에서 themes/something2를 추가하고<br>something1을 삭제했더니.. themes 폴더를 전혀 인식하지 못하는 현상이 생겼습니다…</p>
-<p>결국 git 주소를 하나 더 생성해서 어찌저찌 해결하기는 했는데<br>기존에 가지고 있던 git에서 gitignore나 global gitignore에서도 그 해결점을 찾지 못했습니다.</p>
-<p>버그인지 원래 동작이 저렇게 되는것인지 모르겠는데 주의해야겠네요.</p>
-<p>이것으로 시간 3시간을…..ㅜㅜ</p>
+    	<p>DB의 두 컬럼의 값이 바뀌어 들어가는 실수가 발생했을때 아래와 같이 두 컬럼의 값을 바꿀 수 있음</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">UPDATE</span><br><span class="line">    [TABLE_NAME]</span><br><span class="line">SET</span><br><span class="line">    A &#x3D; (@temp:&#x3D;A),</span><br><span class="line">    A &#x3D; B,</span><br><span class="line">    B &#x3D; @temp</span><br></pre></td></tr></table></figure>
+
+<p>이때 주의해야 할 점이 <code>A = (@temp:=A)</code>에서 콜론이 들어간다는것</p>
+<p>만약 콜론을 빼고 UPDATE를 실행한다면 B 컬럼에 NULL이 들어가니 신중히 실행해야함</p>
+<p>가장 좋은 방법은 테스트용 DB에서 실행한 결과를 확인하고 운영 DB에 적용하는것이 좋다</p>
 
   	</div>
 	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/MySQL/">MySQL</a>
+      
+	  </div>
+    
 		
 	
 		<div class="art-item-footer">
 				
-					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2018/06/14/png-svg/" rel="prev"  title="PNG? SVG?">
-						PNG? SVG? 
+					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2022/02/15/MySQL-event-schedule/" rel="prev"  title="[MySQL] 이벤트 스케줄 사용시 주의사항">
+						[MySQL] 이벤트 스케줄 사용시 주의사항 
 					</a></span>
 				
 				
-					<span class="art-item-right">next：<a href="/2018/06/12/app-transport-security-http/" rel="next"  title="[iOS] App Transport Security has blocked a cleartext HTTP">
-						[iOS] App Transport Security has blocked a cleartext HTTP
+					<span class="art-item-right">next：<a href="/2022/02/13/MySQL-access-denied-for-user/" rel="next"  title="[MySQL] access denied for user">
+						[MySQL] access denied for user
 					</a><i class="icon icon-chevron-thin-right"></i></span>
 				
 		</div>
@@ -190,7 +198,7 @@
 </article>
 <script>
 	window.subData = {
-		title: 'gitignore가 문제야 뭐야?',
+		title: '[MySQL] 두 컬럼의 값 바꾸기',
 		tools: true
 	}
 </script>

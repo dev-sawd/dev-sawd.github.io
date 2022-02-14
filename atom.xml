@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dev-sawd.github.io/"/>
-  <updated>2022-02-13T14:29:31.213Z</updated>
+  <updated>2022-02-14T18:18:27.580Z</updated>
   <id>https://dev-sawd.github.io/</id>
   
   <author>
@@ -17,11 +17,67 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>[MySQL] 이벤트 스케줄 사용시 주의사항</title>
+    <link href="https://dev-sawd.github.io/2022/02/15/MySQL-event-schedule/"/>
+    <id>https://dev-sawd.github.io/2022/02/15/MySQL-event-schedule/</id>
+    <published>2022-02-14T18:09:13.000Z</published>
+    <updated>2022-02-14T18:18:27.580Z</updated>
+    
+    <content type="html"><![CDATA[<p>이벤트 스케줄을 사용할때 시간을 지정해서 사용</p><p>예를들면 <code>하루 한번 0시에 어떤 작업을 실행</code></p><p>그런데 이 실행 시각이 언제를 기준으로 하는지 확인 하기 위해서 MySQL의 시간을 먼저 확인</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT NOW();</span><br></pre></td></tr></table></figure><p>한국의 시간과 9시간이 차이가 나는것을 확인할 수 있었음</p><p>그리고 내가 설정할 이벤트 스케줄의 시간을 MySQL 시간을 기준으로 1분뒤에 실행하도록 설정하고 확인한 결과는</p><p><code>이벤트 스케줄은 MySQL의 시간을 기준으로 실행된다.</code></p><p>관리를 편하게 하기 위해 MySQL의 시간을 한국 시간으로 변경</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set time_zone&#x3D;&#39;Asia&#x2F;Seoul&#39;;</span><br></pre></td></tr></table></figure><p>그리고 실제 해당 시각에 정상 실행되는 것을 확인 할 수 있었음</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;이벤트 스케줄을 사용할때 시간을 지정해서 사용&lt;/p&gt;
+&lt;p&gt;예를들면 &lt;code&gt;하루 한번 0시에 어떤 작업을 실행&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;그런데 이 실행 시각이 언제를 기준으로 하는지 확인 하기 위해서 MySQL의 시간을 먼저 확인&lt;/p&gt;
+&lt;f
+      
+    
+    </summary>
+    
+    
+      <category term="MySQL" scheme="https://dev-sawd.github.io/categories/MySQL/"/>
+    
+    
+      <category term="MySQL" scheme="https://dev-sawd.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>[MySQL] 두 컬럼의 값 바꾸기</title>
+    <link href="https://dev-sawd.github.io/2022/02/15/MySQL-change-column-value/"/>
+    <id>https://dev-sawd.github.io/2022/02/15/MySQL-change-column-value/</id>
+    <published>2022-02-14T17:55:21.000Z</published>
+    <updated>2022-02-14T18:00:50.055Z</updated>
+    
+    <content type="html"><![CDATA[<p>DB의 두 컬럼의 값이 바뀌어 들어가는 실수가 발생했을때 아래와 같이 두 컬럼의 값을 바꿀 수 있음</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">UPDATE</span><br><span class="line">    [TABLE_NAME]</span><br><span class="line">SET</span><br><span class="line">    A &#x3D; (@temp:&#x3D;A),</span><br><span class="line">    A &#x3D; B,</span><br><span class="line">    B &#x3D; @temp</span><br></pre></td></tr></table></figure><p>이때 주의해야 할 점이 <code>A = (@temp:=A)</code>에서 콜론이 들어간다는것</p><p>만약 콜론을 빼고 UPDATE를 실행한다면 B 컬럼에 NULL이 들어가니 신중히 실행해야함</p><p>가장 좋은 방법은 테스트용 DB에서 실행한 결과를 확인하고 운영 DB에 적용하는것이 좋다</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;DB의 두 컬럼의 값이 바뀌어 들어가는 실수가 발생했을때 아래와 같이 두 컬럼의 값을 바꿀 수 있음&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span clas
+      
+    
+    </summary>
+    
+    
+      <category term="MySQL" scheme="https://dev-sawd.github.io/categories/MySQL/"/>
+    
+    
+      <category term="MySQL" scheme="https://dev-sawd.github.io/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
     <title>[MySQL] access denied for user</title>
     <link href="https://dev-sawd.github.io/2022/02/13/MySQL-access-denied-for-user/"/>
     <id>https://dev-sawd.github.io/2022/02/13/MySQL-access-denied-for-user/</id>
-    <published>2022-02-13T14:22:14.000Z</published>
-    <updated>2022-02-13T14:29:31.213Z</updated>
+    <published>2022-02-13T14:33:52.000Z</published>
+    <updated>2022-02-13T14:34:54.604Z</updated>
     
     <content type="html"><![CDATA[<p>토이 프로젝트를 만드는 중에 프로시져를 사용해야 할 일이 생김</p><p>프로시져에 대해서 공부하고 테스트 서버에서 프로시져 생성 명령어를 실행하는데 아래와 같은 에러 발생</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access denied for user &#39;root&#39;@&#39;%&#39; to database &#39;information_schema&#39;</span><br></pre></td></tr></table></figure><p>거의 반나절을 구글링과 스택오버플로우를 찾아봤는데도 해답을 찾을 수 없었음</p><p>대부분 권한 문제 때문이라고 하는데 이미 필요한 권한은 다 가지고있었음</p><p>그리고 며칠 지나 다시 문제를 풀어보려고 열었는데 에러 문구에 <code>database &#39;information_schema&#39;</code> 부분이 자꾸 거슬렸음</p><p>그래서 이 부분에 초점을 두고 database를 내가 원하는 데이터베이스로 설정 후 프로시져를 생성하니 성공</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use my_database</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; procedure 생성</span><br></pre></td></tr></table></figure><p>너무 허무하다.. 😪</p>]]></content>
     
@@ -504,56 +560,6 @@
     
     
       <category term="TIL" scheme="https://dev-sawd.github.io/tags/TIL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[ETC] address already in use error</title>
-    <link href="https://dev-sawd.github.io/2020/05/26/ETC-address-already-in-use-error/"/>
-    <id>https://dev-sawd.github.io/2020/05/26/ETC-address-already-in-use-error/</id>
-    <published>2020-05-26T07:48:51.000Z</published>
-    <updated>2022-02-03T19:17:50.595Z</updated>
-    
-    <content type="html"><![CDATA[<p>포스트 작성을 위해 hexo server로 프로세스로 돌고있던 터미널을 강제로 종료했습니다.<br>이후 hexo server를 실행하려 하는데 <code>address already in use</code> 에러가 발생했습니다.</p><p>간단히 이 에러를 해결해봅시다.</p><a id="more"></a><p>에러 전문은 아래와 같습니다.</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> hexo server</span></span><br><span class="line">AL Port 4000 has been used. Try other port instead.</span><br><span class="line">FATAL Something's wrong. Maybe you can find the solution here: https://hexo.io/docs/troubleshooting.html</span><br><span class="line">Error: listen EADDRINUSE: address already in use :::4000</span><br><span class="line">    at Server.setupListenHandle [as _listen2] (net.js:1309:16)</span><br><span class="line">    at listenInCluster (net.js:1357:12)</span><br><span class="line">    at Server.listen (net.js:1445:7)</span><br><span class="line">    at /Users/devsawd/blog/node_modules/hexo-server/lib/server.js:69:12</span><br><span class="line">    at Promise._execute (/Users/devsawd/blog/node_modules/bluebird/js/release/debuggability.js:384:9)</span><br><span class="line">    at Promise._resolveFromExecutor (/Users/devsawd/blog/node_modules/bluebird/js/release/promise.js:518:18)</span><br><span class="line">    at new Promise (/Users/devsawd/blog/node_modules/bluebird/js/release/promise.js:103:10)</span><br><span class="line">    at checkPort (/Users/devsawd/blog/node_modules/hexo-server/lib/server.js:66:10)</span><br><span class="line">    at Hexo.module.exports (/Users/devsawd/blog/node_modules/hexo-server/lib/server.js:18:10)</span><br><span class="line">    at Hexo.tryCatcher (/Users/devsawd/blog/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Hexo.&lt;anonymous&gt; (/Users/devsawd/blog/node_modules/bluebird/js/release/method.js:15:34)</span><br><span class="line">    at /Users/devsawd/blog/node_modules/hexo/lib/hexo/index.js:248:17</span><br><span class="line">    at Promise._execute (/Users/devsawd/blog/node_modules/bluebird/js/release/debuggability.js:384:9)</span><br><span class="line">    at Promise._resolveFromExecutor (/Users/devsawd/blog/node_modules/bluebird/js/release/promise.js:518:18)</span><br><span class="line">    at new Promise (/Users/devsawd/blog/node_modules/bluebird/js/release/promise.js:103:10)</span><br><span class="line">    at Hexo.call (/Users/devsawd/blog/node_modules/hexo/lib/hexo/index.js:244:12)</span><br><span class="line">    at /usr/local/lib/node_modules/hexo-cli/lib/hexo.js:67:17</span><br><span class="line">    at tryCatcher (/usr/local/lib/node_modules/hexo-cli/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Promise._settlePromiseFromHandler (/usr/local/lib/node_modules/hexo-cli/node_modules/bluebird/js/release/promise.js:547:31)</span><br><span class="line">    at Promise._settlePromise (/usr/local/lib/node_modules/hexo-cli/node_modules/bluebird/js/release/promise.js:604:18)</span><br><span class="line">    at Promise._settlePromise0 (/usr/local/lib/node_modules/hexo-cli/node_modules/bluebird/js/release/promise.js:649:10)</span><br><span class="line">    at Promise._settlePromises (/usr/local/lib/node_modules/hexo-cli/node_modules/bluebird/js/release/promise.js:729:18)</span><br></pre></td></tr></table></figure><p>에러 내용은 4000번 포트가 이미 사용되고 있다는겁니다.<br>4000번 포트를 사용중인 프로세스를 먼저 찾아봐야겠네요.</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> lsof -i :4000</span></span><br><span class="line">COMMAND   PID    USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME</span><br><span class="line">node    43609 devsawd   42u  IPv6 0x1a23ef236800be15      0t0  TCP *:terabase (LISTEN)</span><br></pre></td></tr></table></figure><p>PID의 43609번이 사용중으로 확인됩니다.<br>kill 명령어로 해당 프로세스를 종료시킨 후</p><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash">  <span class="built_in">kill</span> -9 43609</span></span><br></pre></td></tr></table></figure><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash">  hexo server</span></span><br></pre></td></tr></table></figure><p>hexo server 명령어를 이용해 재구동 하니 정상적으로 사용할 수 있습니다.</p><p><code>address already in use</code>에러는 port를 사용하는 프로세스를 다룰때 자주 볼 수 있는 에러입니다.<br>간단히 해당 프로세스를 종료시켜 문제를 해결할 수 있습니다.</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;포스트 작성을 위해 hexo server로 프로세스로 돌고있던 터미널을 강제로 종료했습니다.&lt;br&gt;이후 hexo server를 실행하려 하는데 &lt;code&gt;address already in use&lt;/code&gt; 에러가 발생했습니다.&lt;/p&gt;
-&lt;p&gt;간단히 이 에러를 해결해봅시다.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="ETC" scheme="https://dev-sawd.github.io/categories/ETC/"/>
-    
-    
-      <category term="HEXO" scheme="https://dev-sawd.github.io/tags/HEXO/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[MacOS] 개발 공부를 위한 원격 개발환경 세팅</title>
-    <link href="https://dev-sawd.github.io/2020/05/25/MacOS-remote-access-for-dev-study/"/>
-    <id>https://dev-sawd.github.io/2020/05/25/MacOS-remote-access-for-dev-study/</id>
-    <published>2020-05-25T12:05:52.000Z</published>
-    <updated>2022-01-26T13:51:21.085Z</updated>
-    
-    <content type="html"><![CDATA[<p>10년 다된 구형 맥북을 보유하고 있습니다.<br>2년 전 부터 이걸 어떻게 활용하면 좋을지 꾸준히 고민했었죠.<br>메인으로 쓰기엔 성능이 떨어지고..<br>그냥 두기에는 뭔가 아까운..</p><blockquote><p>이 계륵뇨속!</p></blockquote><a id="more"></a><h1 id="전쟁의-서막"><a href="#전쟁의-서막" class="headerlink" title="전쟁의 서막"></a>전쟁의 서막</h1><p>최근에 블록체인 Hyperledger Fabric 네트워크를 공부하면서 개발용 장비가 있었으면 했습니다.<br><del>윈도우 노트북이 있긴 한데 무슨 이유에서인지 Hyperledger Fabric 개발 환경 구성이 잘 진행되지 않더라구요.</del></p><blockquote><p>윈도우10에서 개발환경 구성에 성공했습니다.<br>가이드도 시간내서 포스팅할게요!<br><a href="https://dev-sawd.github.io/2020/05/29/Hyperledger-Fabric-run-fabric-samples-on-windows10/">가이드 링크</a></p></blockquote><p>물론 회사에 얘기해서 적절한 개발용 장비를 받아도 됐지만..<br>마음대로 사용할 수 없는게 조금 답답합니다.<br>퇴근때는 꺼놔야 했고, 뭔가 이리 저리 만질 수 없다는 단점이 있었습니다.</p><p>이때 생각난 것이 10년된 맥북.<br>공부용이기 때문에 성능이 좋을 필요도 없고 마음대로 변경할 수 있는게 아주 딱이였습니다.<br>이번에 구형 맥북을 공부용으로 써보고자 세팅한 이야기를 하려고 합니다.</p><h1 id="문제의-맥북"><a href="#문제의-맥북" class="headerlink" title="문제의 맥북"></a>문제의 맥북</h1><p>먼저 10년된 구형 맥북의 사진.</p><img src="/2020/05/25/MacOS-remote-access-for-dev-study/1.jpg" class=""><p>두께가 어마어마한 만큼 무게도 상당합니다.<br>따라서 들고다니기에는 무리가 있어 어느 자리에 위치시켜 놓고 원격으로 접속하는게 좋을 것 같다는 생각이 들었습니다.<br>제 방에 와이파이에서 멀지 않은 넓은 공간에 위치 시키고 충전 케이블을 항상 꽂아두었습니다.</p><h1 id="우리집-네트워크-구성도"><a href="#우리집-네트워크-구성도" class="headerlink" title="우리집 네트워크 구성도"></a>우리집 네트워크 구성도</h1><p>이제 네트워크를 설정해야 하는데 우리집은 기본적으로 개발자가 두명에 사용하는 기기도 엄청 많아 고민해야 했습니다.</p><img src="/2020/05/25/MacOS-remote-access-for-dev-study/1.png" class=""><p>먼저 외부에서 <code>유선 공유기(1)</code>로 네트워크가 들어옵니다.<br>이 <code>유선 공유기(1)</code>에서 제방, 동생 방의 <code>유무선 공유기(2, 3)</code>로 각각 들어갑니다.<br>제 방의 <code>유무선 공유기(2)</code>는 유선으로 데스크탑, 무선으로 구형 맥북에 연결될 예정이였습니다.<br>동생 방의 <code>유무선 공유기(3)</code>에서는 다시 안방으로 선이 들어가고, 안방에서는 거실로…(사실 여기까지 고민할 필요는 없어 보이지만..)</p><h1 id="포트포워딩-설정"><a href="#포트포워딩-설정" class="headerlink" title="포트포워딩 설정"></a>포트포워딩 설정</h1><p>위에서 얘기한 것과 같이 공유기를 2번 거쳐서 맥북에 들어오는 상황입니다.<br>따라서 포트포워딩을 <code>유선 공유기(1)</code>, <code>유무선 공유기(2)</code>에 각각 설정해줘야 했습니다.</p><h2 id="맥북-원격-접속-허용"><a href="#맥북-원격-접속-허용" class="headerlink" title="맥북 원격 접속 허용"></a>맥북 원격 접속 허용</h2><h2 id="IP-확인"><a href="#IP-확인" class="headerlink" title="IP 확인"></a>IP 확인</h2><img src="/2020/05/25/MacOS-remote-access-for-dev-study/2.png" class=""><p>먼저 <code>유선 공유기(1)</code>에 접속해서 외부 인터넷에 연결될때 사용되는 IP를 확인했습니다.<br><code>11.11.11.11(가칭)</code>으로 확인 되었고 한번 더 확인하기 위해 <code>유선 공유기(1)</code>에 데스크탑을 연결해서 IP를 확인하는 사이트에 들어가서 크로스체크했습니다.<br>그리고 <code>유무선 공유기(2)</code>에 접속해서 <code>유선 공유기(1)</code>로부터 할당받은 IP를 확인했습니다.<br><code>22.22.22.22(가칭)</code>으로 확인 되었습니다.<br>그리고 <code>유무선 공유기(2)</code>에 무선으로 연결된 맥북의 IP도 확인했습니다.<br><code>33.33.33.33(가칭)</code>으로 확인 되었습니다.</p><p>제가 사용할 포트는 SSH로 22번 포트에 해당합니다.<br>따라서 간단히 외부에서도 22번 포트로 접속하고 22번 포트로 포트포워딩을 설정했습니다.<br>(물론외부에서 다른 포트로 연결하고 포트포워딩을 그에 맞도록 설정한다면 22번포트 외에 다른 번호도 가능합니다.)</p><img src="/2020/05/25/MacOS-remote-access-for-dev-study/3.png" class=""><p>순서는 아래와 같을것입니다.</p><ol><li>외부에서 <code>11.11.11.11:22</code>로 접속</li><li><code>유선 공유기(1)</code>에서 22번 포트에 대한 장치(<code>유무선 공유기(2)</code>)로 포트포워딩</li><li><code>유무선 공유기(2)</code>에서 22번 포트에 대한 장치(맥북)로 포트포워딩</li><li>맥북의 22번 포트 사용</li></ol><h2 id="포트포워딩"><a href="#포트포워딩" class="headerlink" title="포트포워딩"></a>포트포워딩</h2><p>위의 2, 3번에 대한 포트포워딩 설정을 해야합니다.<br><code>유선 공유기(1)</code>에 접속해서 포트포워딩 설정 페이지로 이동 후<br>외부 연결 포트 <code>22</code>를 내부 IP <code>22.22.22.22</code>와 포트 <code>22</code>로 설정해줍니다.<br><code>유무선 공유기(2)</code>에 접속해서 포트포워딩 설정 페이지로 이동 후<br>외부 연결 포트 <code>22</code>를 내부 IP <code>33.33.33.33</code>와 포트 <code>22</code>로 설정해줍니다.</p><h1 id="확인"><a href="#확인" class="headerlink" title="확인"></a>확인</h1><p>이제 외부 네트워크에 연결되어있는 PC를 이용해 putty나 ssh로 <code>11.11.11.11:22</code>로 접속을 확인해봅니다.<br>이때 외부 네트워크를 만들기 힘들다면 테더링을 이용하거나 카페에서 차 한잔의 여유..읍읍..<br><del>이시국에</del></p><p>만약 확인 작업에서 접속이 되지 않는다면 ISP 외부포트가 완전히 막혀있거나 집으로 들어오는 첫번째 공유기가 알고있는것과 다른 녀석이 존재할 수 있습니다.</p><p><a href="https://www.yougetsignal.com/tools/open-ports/" target="_blank" rel="noopener">포트 체커</a> 사이트를 이용해 22번포트가 열려있는지, 또는 자주 사용하는 다른 포트들이 열려있는지 같이 확인해주면 빨리 찾을 수 있습니다.</p><p>저는 집의 데스크탑으로도 맥북에 연결해서 작업 하는데요<br>실질적으로 구형 맥북은 화면도 작고 듀얼모니터로 사용할 케이블도 분실했고.. 이런저런 답답함이 있기 때문입니다.<br>데스크탑은 <code>유무선공유기(2)</code>에 유선으로 연결되어있습니다.<br>같은 네트워크에 있기 때문에 <code>11.11.11.11:22</code>로 접속하지 않아도 <code>33.33.33.33:22</code>를 이용해 맥북에 접속할 수 있습니다.</p><img src="/2020/05/25/MacOS-remote-access-for-dev-study/4.png" class="">]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;10년 다된 구형 맥북을 보유하고 있습니다.&lt;br&gt;2년 전 부터 이걸 어떻게 활용하면 좋을지 꾸준히 고민했었죠.&lt;br&gt;메인으로 쓰기엔 성능이 떨어지고..&lt;br&gt;그냥 두기에는 뭔가 아까운..&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;이 계륵뇨속!&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-    
-      <category term="MacOS" scheme="https://dev-sawd.github.io/categories/MacOS/"/>
-    
-    
-      <category term="ETC" scheme="https://dev-sawd.github.io/tags/ETC/"/>
     
   </entry>
   

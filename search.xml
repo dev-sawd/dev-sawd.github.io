@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>[MySQL] 이벤트 스케줄 사용시 주의사항</title>
+      <link href="/2022/02/15/MySQL-event-schedule/"/>
+      <url>/2022/02/15/MySQL-event-schedule/</url>
+      
+        <content type="html"><![CDATA[<p>이벤트 스케줄을 사용할때 시간을 지정해서 사용</p><p>예를들면 <code>하루 한번 0시에 어떤 작업을 실행</code></p><p>그런데 이 실행 시각이 언제를 기준으로 하는지 확인 하기 위해서 MySQL의 시간을 먼저 확인</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT NOW();</span><br></pre></td></tr></table></figure><p>한국의 시간과 9시간이 차이가 나는것을 확인할 수 있었음</p><p>그리고 내가 설정할 이벤트 스케줄의 시간을 MySQL 시간을 기준으로 1분뒤에 실행하도록 설정하고 확인한 결과는</p><p><code>이벤트 스케줄은 MySQL의 시간을 기준으로 실행된다.</code></p><p>관리를 편하게 하기 위해 MySQL의 시간을 한국 시간으로 변경</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set time_zone&#x3D;&#39;Asia&#x2F;Seoul&#39;;</span><br></pre></td></tr></table></figure><p>그리고 실제 해당 시각에 정상 실행되는 것을 확인 할 수 있었음</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> MySQL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MySQL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>[MySQL] 두 컬럼의 값 바꾸기</title>
+      <link href="/2022/02/15/MySQL-change-column-value/"/>
+      <url>/2022/02/15/MySQL-change-column-value/</url>
+      
+        <content type="html"><![CDATA[<p>DB의 두 컬럼의 값이 바뀌어 들어가는 실수가 발생했을때 아래와 같이 두 컬럼의 값을 바꿀 수 있음</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">UPDATE</span><br><span class="line">    [TABLE_NAME]</span><br><span class="line">SET</span><br><span class="line">    A &#x3D; (@temp:&#x3D;A),</span><br><span class="line">    A &#x3D; B,</span><br><span class="line">    B &#x3D; @temp</span><br></pre></td></tr></table></figure><p>이때 주의해야 할 점이 <code>A = (@temp:=A)</code>에서 콜론이 들어간다는것</p><p>만약 콜론을 빼고 UPDATE를 실행한다면 B 컬럼에 NULL이 들어가니 신중히 실행해야함</p><p>가장 좋은 방법은 테스트용 DB에서 실행한 결과를 확인하고 운영 DB에 적용하는것이 좋다</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> MySQL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MySQL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>[MySQL] access denied for user</title>
       <link href="/2022/02/13/MySQL-access-denied-for-user/"/>
       <url>/2022/02/13/MySQL-access-denied-for-user/</url>
