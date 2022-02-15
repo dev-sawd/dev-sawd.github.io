@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>[Github] git 변경사항 되돌리기 | SAWD</title>
+  <title>[Chaincode] 체인코드 개발자용 Hyperledger fabric 테스트 네트워크 | SAWD</title>
   <meta name="description" content="시간이 나야지..." />
   <meta name="keywords" content="" />
   <meta name="HandheldFriendly" content="True" />
@@ -12,18 +12,20 @@
   <link rel="shortcut icon" href="/images/favicon.png">
   <link rel="alternate" href="/atom.xml" title="SAWD">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Git을 이용해 형상관리를 하다 보면 수정사항을 롤백 하고 싶을 때가 자주 있습니다.이 포스트에서는 이전 커밋까지 롤백 하는 방법에 대해서 알아봅니다.">
+  <meta name="description" content="하이퍼레저 프로젝트 개발시 체인코드 개발자는 테스트용 네트워크가 필요 네트워크가 빨리 구성되면 좋지만 마냥 기다릴 수 없고 개발이 병행으로 진행되는 경우가 많아 네트워크 구성 전 까지 사용할 기본 네트워크를 만들었음 GitHub - dev-sawd&#x2F;hyperledger-fabric-basic-networkContribute to dev-sawd&#x2F;hyperl">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[Github] git 변경사항 되돌리기">
-<meta property="og:url" content="https://dev-sawd.github.io/2020/05/24/Github-revert-change/index.html">
+<meta property="og:title" content="[Chaincode] 체인코드 개발자용 Hyperledger fabric 테스트 네트워크">
+<meta property="og:url" content="https://dev-sawd.github.io/2022/02/15/Chaincode-hyperledger-fabric-basic-network-for-chiancode-developer/index.html">
 <meta property="og:site_name" content="SAWD">
-<meta property="og:description" content="Git을 이용해 형상관리를 하다 보면 수정사항을 롤백 하고 싶을 때가 자주 있습니다.이 포스트에서는 이전 커밋까지 롤백 하는 방법에 대해서 알아봅니다.">
+<meta property="og:description" content="하이퍼레저 프로젝트 개발시 체인코드 개발자는 테스트용 네트워크가 필요 네트워크가 빨리 구성되면 좋지만 마냥 기다릴 수 없고 개발이 병행으로 진행되는 경우가 많아 네트워크 구성 전 까지 사용할 기본 네트워크를 만들었음 GitHub - dev-sawd&#x2F;hyperledger-fabric-basic-networkContribute to dev-sawd&#x2F;hyperl">
 <meta property="og:locale" content="ko_KR">
-<meta property="article:published_time" content="2020-05-24T01:55:54.000Z">
-<meta property="article:modified_time" content="2022-01-26T13:51:21.085Z">
+<meta property="og:image" content="https://opengraph.githubassets.com/730c2750645a82fd4beff9d6e321a59337b69cf394aceaf6cd987f955e397183/dev-sawd/hyperledger-fabric-basic-network">
+<meta property="article:published_time" content="2022-02-15T03:53:28.000Z">
+<meta property="article:modified_time" content="2022-02-15T04:18:08.797Z">
 <meta property="article:author" content="SAWD">
-<meta property="article:tag" content="git">
+<meta property="article:tag" content="Chaincode">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://opengraph.githubassets.com/730c2750645a82fd4beff9d6e321a59337b69cf394aceaf6cd987f955e397183/dev-sawd/hyperledger-fabric-basic-network">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
@@ -139,54 +141,61 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        <article id="post-Github-revert-change"
+        <article id="post-Chaincode-hyperledger-fabric-basic-network-for-chiancode-developer"
   class="post white-box article-type-post"
   itemscope itemprop="blogPost">
 	<section class='meta'>
 	<h2 class="title">
-  	<a href="/2020/05/24/Github-revert-change/">
-    	[Github] git 변경사항 되돌리기
+  	<a href="/2022/02/15/Chaincode-hyperledger-fabric-basic-network-for-chiancode-developer/">
+    	[Chaincode] 체인코드 개발자용 Hyperledger fabric 테스트 네트워크
     </a>
   </h2>
 	<time>
-	  5월 24, 2020
+	  2월 15, 2022
 	</time>
 	
     
     <div class='cats'>
-        <a href="/categories/Github/">Github</a>
+        <a href="/categories/Chaincode/">Chaincode</a>
     </div>
 
 	</section>
 <!--	-->
-<!--		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#git-add-명령을-하기-이전의-수정사항-롤백"><span class="toc-number">1.</span> <span class="toc-text">git add 명령을 하기 이전의 수정사항 롤백</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-add-명령어를-한-이후의-수정사항-롤백"><span class="toc-number">2.</span> <span class="toc-text">git add 명령어를 한 이후의 수정사항 롤백</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-commit을-한-이후-롤백"><span class="toc-number">3.</span> <span class="toc-text">git commit을 한 이후 롤백</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#원격-저장소에-변경된-이력도-되돌리기"><span class="toc-number">4.</span> <span class="toc-text">원격 저장소에 변경된 이력도 되돌리기</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#마치며"><span class="toc-number">5.</span> <span class="toc-text">마치며</span></a></li></ol></section>-->
+<!--		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker-Container-list"><span class="toc-number">1.</span> <span class="toc-text">Docker Container list</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#실행"><span class="toc-number">2.</span> <span class="toc-text">실행</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#종료"><span class="toc-number">3.</span> <span class="toc-text">종료</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#체인코드-설치"><span class="toc-number">4.</span> <span class="toc-text">체인코드 설치</span></a></li></ol></section>-->
 <!--	-->
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<p>Git을 이용해 형상관리를 하다 보면 수정사항을 롤백 하고 싶을 때가 자주 있습니다.<br>이 포스트에서는 이전 커밋까지 롤백 하는 방법에 대해서 알아봅니다.</p>
+    	<p>하이퍼레저 프로젝트 개발시 체인코드 개발자는 테스트용 네트워크가 필요</p>
+<p>네트워크가 빨리 구성되면 좋지만 마냥 기다릴 수 없고 개발이 병행으로 진행되는 경우가 많아</p>
+<p>네트워크 구성 전 까지 사용할 기본 네트워크를 만들었음</p>
+<a href="https://github.com/dev-sawd/hyperledger-fabric-basic-network" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://opengraph.githubassets.com/730c2750645a82fd4beff9d6e321a59337b69cf394aceaf6cd987f955e397183/dev-sawd/hyperledger-fabric-basic-network"></img></div><div class="descriptions"><div class="og-title">GitHub - dev-sawd/hyperledger-fabric-basic-network</div><div class="og-description">Contribute to dev-sawd/hyperledger-fabric-basic-network development by creating an account on GitHub.</div></div></div></a>
+
 <a id="more"></a>
 
-<h2 id="git-add-명령을-하기-이전의-수정사항-롤백"><a href="#git-add-명령을-하기-이전의-수정사항-롤백" class="headerlink" title="git add 명령을 하기 이전의 수정사항 롤백"></a>git add 명령을 하기 이전의 수정사항 롤백</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> &#123;respository_directory&#125;</span></span><br><span class="line">respository_directory $ checkout .</span><br></pre></td></tr></table></figure>
-
-<h2 id="git-add-명령어를-한-이후의-수정사항-롤백"><a href="#git-add-명령어를-한-이후의-수정사항-롤백" class="headerlink" title="git add 명령어를 한 이후의 수정사항 롤백"></a>git add 명령어를 한 이후의 수정사항 롤백</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="git-commit을-한-이후-롤백"><a href="#git-commit을-한-이후-롤백" class="headerlink" title="git commit을 한 이후 롤백"></a>git commit을 한 이후 롤백</h2><ul>
-<li>주의 아래의 명령어는 수정사항이 완전히 삭제됩니다</li>
+<p>기존에 Fabric version 1.4.3을 기준으로 만들어놨었는데</p>
+<p>이번에 맥북 에어 M1으로 바꾸면서 M1에서도 돌아갈 수 있는 2.4.2 최신 버전을 기준으로 다시 재구성</p>
+<p>fabric-samples/test-network를 기반으로 필요없는 부분을 제거해서 작성</p>
+<ul>
+<li><a href="https://github.com/hyperledger/fabric-samples/tree/main/test-network" target="_blank" rel="noopener">https://github.com/hyperledger/fabric-samples/tree/main/test-network</a></li>
 </ul>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset --hard HEAD~</span></span><br></pre></td></tr></table></figure>
+<h2 id="Docker-Container-list"><a href="#Docker-Container-list" class="headerlink" title="Docker Container list"></a>Docker Container list</h2><ul>
+<li>ca_org1</li>
+<li>ca_orderer</li>
+<li>peer0.org1.example.com</li>
+<li>couchdb0</li>
+<li>orderer.example.com</li>
+<li>cli</li>
+</ul>
+<h2 id="실행"><a href="#실행" class="headerlink" title="실행"></a>실행</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ start.sh</span><br></pre></td></tr></table></figure>
 
-<h2 id="원격-저장소에-변경된-이력도-되돌리기"><a href="#원격-저장소에-변경된-이력도-되돌리기" class="headerlink" title="원격 저장소에 변경된 이력도 되돌리기"></a>원격 저장소에 변경된 이력도 되돌리기</h2><p>원격 저장소에 변경된 이력을 되돌리는 방법은 local 저장소의 새로운 변경사항으로 덮어쓰는것과 개념이 같습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset HEAD~</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit -m <span class="string">"commit message"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git push origin master</span></span><br></pre></td></tr></table></figure>
+<h2 id="종료"><a href="#종료" class="headerlink" title="종료"></a>종료</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ teardown.sh</span><br></pre></td></tr></table></figure>
 
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>여러 롤백 케이스중에서 자주 사용할 수 있는 상황을 뽑아서 포스팅해봤습니다.<br>이외 더 자세한 롤백 방법은 아래의 사이트에 자세하게 나와있습니다.</p>
-<p><a href="https://git-scm.com/book/ko/v2/Git-%EB%8F%84%EA%B5%AC-Reset-%EB%AA%85%ED%99%95%ED%9E%88-%EC%95%8C%EA%B3%A0-%EA%B0%80%EA%B8%B0" target="_blank" rel="noopener">https://git-scm.com/book/ko/v2/Git-%EB%8F%84%EA%B5%AC-Reset-%EB%AA%85%ED%99%95%ED%9E%88-%EC%95%8C%EA%B3%A0-%EA%B0%80%EA%B8%B0</a></p>
-<p>중요한것은 롤백을 하기 전 어떻게 이력관리를 할것인지 한번 더 생각해 보는게 중요할 것 같습니다.</p>
-
+<h2 id="체인코드-설치"><a href="#체인코드-설치" class="headerlink" title="체인코드 설치"></a>체인코드 설치</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sh .&#x2F;network.sh deployCC -ccn [CHAINCODE_NAME] -ccv [CHIANCODE_VERSION] -cci initLedger -ccl &quot;go&quot; -ccp [CHAINCODE_PATH]</span><br></pre></td></tr></table></figure>
   	</div>
 	  
 	  <div class="article-tags tags">
       
-        <a href="/tags/git/">git</a>
+        <a href="/tags/Chaincode/">Chaincode</a>
       
 	  </div>
     
@@ -194,13 +203,9 @@
 	
 		<div class="art-item-footer">
 				
-					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2020/05/25/MacOS-remote-access-for-dev-study/" rel="prev"  title="[MacOS] 개발 공부를 위한 원격 개발환경 세팅">
-						[MacOS] 개발 공부를 위한 원격 개발환경 세팅 
-					</a></span>
 				
-				
-					<span class="art-item-right">next：<a href="/2020/05/23/Github-change-remote-repository-url-in-local-repository/" rel="next"  title="[Github] 로컬 저장소의 원격 저장소 URL 변경">
-						[Github] 로컬 저장소의 원격 저장소 URL 변경
+					<span class="art-item-right">next：<a href="/2022/02/15/MySQL-event-schedule/" rel="next"  title="[MySQL] 이벤트 스케줄 사용시 주의사항">
+						[MySQL] 이벤트 스케줄 사용시 주의사항
 					</a><i class="icon icon-chevron-thin-right"></i></span>
 				
 		</div>
@@ -210,7 +215,7 @@
 </article>
 <script>
 	window.subData = {
-		title: '[Github] git 변경사항 되돌리기',
+		title: '[Chaincode] 체인코드 개발자용 Hyperledger fabric 테스트 네트워크',
 		tools: true
 	}
 </script>

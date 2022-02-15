@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dev-sawd.github.io/"/>
-  <updated>2022-02-14T18:18:27.580Z</updated>
+  <updated>2022-02-15T04:18:08.797Z</updated>
   <id>https://dev-sawd.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[Chaincode] 체인코드 개발자용 Hyperledger fabric 테스트 네트워크</title>
+    <link href="https://dev-sawd.github.io/2022/02/15/Chaincode-hyperledger-fabric-basic-network-for-chiancode-developer/"/>
+    <id>https://dev-sawd.github.io/2022/02/15/Chaincode-hyperledger-fabric-basic-network-for-chiancode-developer/</id>
+    <published>2022-02-15T03:53:28.000Z</published>
+    <updated>2022-02-15T04:18:08.797Z</updated>
+    
+    <content type="html"><![CDATA[<p>하이퍼레저 프로젝트 개발시 체인코드 개발자는 테스트용 네트워크가 필요</p><p>네트워크가 빨리 구성되면 좋지만 마냥 기다릴 수 없고 개발이 병행으로 진행되는 경우가 많아</p><p>네트워크 구성 전 까지 사용할 기본 네트워크를 만들었음</p><a href="https://github.com/dev-sawd/hyperledger-fabric-basic-network" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://opengraph.githubassets.com/730c2750645a82fd4beff9d6e321a59337b69cf394aceaf6cd987f955e397183/dev-sawd/hyperledger-fabric-basic-network"></img></div><div class="descriptions"><div class="og-title">GitHub - dev-sawd/hyperledger-fabric-basic-network</div><div class="og-description">Contribute to dev-sawd/hyperledger-fabric-basic-network development by creating an account on GitHub.</div></div></div></a><a id="more"></a><p>기존에 Fabric version 1.4.3을 기준으로 만들어놨었는데</p><p>이번에 맥북 에어 M1으로 바꾸면서 M1에서도 돌아갈 수 있는 2.4.2 최신 버전을 기준으로 다시 재구성</p><p>fabric-samples/test-network를 기반으로 필요없는 부분을 제거해서 작성</p><ul><li><a href="https://github.com/hyperledger/fabric-samples/tree/main/test-network" target="_blank" rel="noopener">https://github.com/hyperledger/fabric-samples/tree/main/test-network</a></li></ul><h2 id="Docker-Container-list"><a href="#Docker-Container-list" class="headerlink" title="Docker Container list"></a>Docker Container list</h2><ul><li>ca_org1</li><li>ca_orderer</li><li>peer0.org1.example.com</li><li>couchdb0</li><li>orderer.example.com</li><li>cli</li></ul><h2 id="실행"><a href="#실행" class="headerlink" title="실행"></a>실행</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ start.sh</span><br></pre></td></tr></table></figure><h2 id="종료"><a href="#종료" class="headerlink" title="종료"></a>종료</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ teardown.sh</span><br></pre></td></tr></table></figure><h2 id="체인코드-설치"><a href="#체인코드-설치" class="headerlink" title="체인코드 설치"></a>체인코드 설치</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sh .&#x2F;network.sh deployCC -ccn [CHAINCODE_NAME] -ccv [CHIANCODE_VERSION] -cci initLedger -ccl &quot;go&quot; -ccp [CHAINCODE_PATH]</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;하이퍼레저 프로젝트 개발시 체인코드 개발자는 테스트용 네트워크가 필요&lt;/p&gt;
+&lt;p&gt;네트워크가 빨리 구성되면 좋지만 마냥 기다릴 수 없고 개발이 병행으로 진행되는 경우가 많아&lt;/p&gt;
+&lt;p&gt;네트워크 구성 전 까지 사용할 기본 네트워크를 만들었음&lt;/p&gt;
+&lt;a href=&quot;https://github.com/dev-sawd/hyperledger-fabric-basic-network&quot; class=&quot;link-preview&quot; target=&quot;_blank&quot; rel=&quot;nofollow&quot;&gt;&lt;div class=&quot;link-area&quot;&gt;&lt;div class=&quot;og-image&quot;&gt;&lt;img src=&quot;https://opengraph.githubassets.com/730c2750645a82fd4beff9d6e321a59337b69cf394aceaf6cd987f955e397183/dev-sawd/hyperledger-fabric-basic-network&quot;&gt;&lt;/img&gt;&lt;/div&gt;&lt;div class=&quot;descriptions&quot;&gt;&lt;div class=&quot;og-title&quot;&gt;GitHub - dev-sawd/hyperledger-fabric-basic-network&lt;/div&gt;&lt;div class=&quot;og-description&quot;&gt;Contribute to dev-sawd/hyperledger-fabric-basic-network development by creating an account on GitHub.&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/a&gt;
+    
+    </summary>
+    
+    
+      <category term="Chaincode" scheme="https://dev-sawd.github.io/categories/Chaincode/"/>
+    
+    
+      <category term="Chaincode" scheme="https://dev-sawd.github.io/tags/Chaincode/"/>
+    
+  </entry>
   
   <entry>
     <title>[MySQL] 이벤트 스케줄 사용시 주의사항</title>
@@ -537,29 +563,6 @@
     
       <category term="Hyperledger Fabric" scheme="https://dev-sawd.github.io/categories/Hyperledger-Fabric/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>[ETC] URL, URI</title>
-    <link href="https://dev-sawd.github.io/2020/05/27/ETC-URL-URI/"/>
-    <id>https://dev-sawd.github.io/2020/05/27/ETC-URL-URI/</id>
-    <published>2020-05-27T05:20:28.000Z</published>
-    <updated>2022-01-26T13:51:21.101Z</updated>
-    
-    <content type="html"><![CDATA[<p>개발을 하다보면, 개발자들끼리 얘기 하다보면 URL이 자주 등장합니다.<br>그리고 문서나 stackoverflow를 이용하다 보면 URI라는 단어도 심심치 않게 보입니다.<br>아직까지 정확히 URL과 URI에 대해 차이점을 명확히 모르는 관계로 정리해보려 합니다.</p><a id="more"></a><h1 id="URL-Uniform-Resource-Locator"><a href="#URL-Uniform-Resource-Locator" class="headerlink" title="URL : Uniform Resource Locator"></a>URL : Uniform Resource Locator</h1><blockquote><p>ex. <a href="http://github.com/" target="_blank" rel="noopener">http://github.com/</a></p></blockquote><h1 id="URI-Uniform-Resource-Identifier"><a href="#URI-Uniform-Resource-Identifier" class="headerlink" title="URI : Uniform Resource Identifier"></a>URI : Uniform Resource Identifier</h1><p>URL 이하의 식별자까지 포함</p><blockquote><p>ex. <a href="http://github.com/devsawd" target="_blank" rel="noopener">http://github.com/devsawd</a><br>ex. <a href="http://github.com/test" target="_blank" rel="noopener">http://github.com/test</a></p></blockquote><p>URI 예시인 <a href="http://github.com/devsawd" target="_blank" rel="noopener">http://github.com/devsawd</a> 와 <a href="http://github.com/test" target="_blank" rel="noopener">http://github.com/test</a> 를 보면<br>URL은 <a href="http://github.com/" target="_blank" rel="noopener">http://github.com/</a> 으로 같고<br>URI는 각각 <a href="http://github.com/devsawd" target="_blank" rel="noopener">http://github.com/devsawd</a>, <a href="http://github.com/test" target="_blank" rel="noopener">http://github.com/test</a> 이 됩니다.</p><h1 id="현실은"><a href="#현실은" class="headerlink" title="현실은"></a>현실은</h1><p>??? : 주소 줘봐<br>!!! : <a href="http://github.com/devsawd" target="_blank" rel="noopener">http://github.com/devsawd</a></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;개발을 하다보면, 개발자들끼리 얘기 하다보면 URL이 자주 등장합니다.&lt;br&gt;그리고 문서나 stackoverflow를 이용하다 보면 URI라는 단어도 심심치 않게 보입니다.&lt;br&gt;아직까지 정확히 URL과 URI에 대해 차이점을 명확히 모르는 관계로 정리해보려 합니다.&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="ETC" scheme="https://dev-sawd.github.io/categories/ETC/"/>
-    
-    
-      <category term="TIL" scheme="https://dev-sawd.github.io/tags/TIL/"/>
     
   </entry>
   

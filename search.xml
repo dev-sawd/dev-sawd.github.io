@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>[Chaincode] 체인코드 개발자용 Hyperledger fabric 테스트 네트워크</title>
+      <link href="/2022/02/15/Chaincode-hyperledger-fabric-basic-network-for-chiancode-developer/"/>
+      <url>/2022/02/15/Chaincode-hyperledger-fabric-basic-network-for-chiancode-developer/</url>
+      
+        <content type="html"><![CDATA[<p>하이퍼레저 프로젝트 개발시 체인코드 개발자는 테스트용 네트워크가 필요</p><p>네트워크가 빨리 구성되면 좋지만 마냥 기다릴 수 없고 개발이 병행으로 진행되는 경우가 많아</p><p>네트워크 구성 전 까지 사용할 기본 네트워크를 만들었음</p><a href="https://github.com/dev-sawd/hyperledger-fabric-basic-network" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://opengraph.githubassets.com/730c2750645a82fd4beff9d6e321a59337b69cf394aceaf6cd987f955e397183/dev-sawd/hyperledger-fabric-basic-network"></img></div><div class="descriptions"><div class="og-title">GitHub - dev-sawd/hyperledger-fabric-basic-network</div><div class="og-description">Contribute to dev-sawd/hyperledger-fabric-basic-network development by creating an account on GitHub.</div></div></div></a><a id="more"></a><p>기존에 Fabric version 1.4.3을 기준으로 만들어놨었는데</p><p>이번에 맥북 에어 M1으로 바꾸면서 M1에서도 돌아갈 수 있는 2.4.2 최신 버전을 기준으로 다시 재구성</p><p>fabric-samples/test-network를 기반으로 필요없는 부분을 제거해서 작성</p><ul><li><a href="https://github.com/hyperledger/fabric-samples/tree/main/test-network" target="_blank" rel="noopener">https://github.com/hyperledger/fabric-samples/tree/main/test-network</a></li></ul><h2 id="Docker-Container-list"><a href="#Docker-Container-list" class="headerlink" title="Docker Container list"></a>Docker Container list</h2><ul><li>ca_org1</li><li>ca_orderer</li><li>peer0.org1.example.com</li><li>couchdb0</li><li>orderer.example.com</li><li>cli</li></ul><h2 id="실행"><a href="#실행" class="headerlink" title="실행"></a>실행</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ start.sh</span><br></pre></td></tr></table></figure><h2 id="종료"><a href="#종료" class="headerlink" title="종료"></a>종료</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ teardown.sh</span><br></pre></td></tr></table></figure><h2 id="체인코드-설치"><a href="#체인코드-설치" class="headerlink" title="체인코드 설치"></a>체인코드 설치</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sh .&#x2F;network.sh deployCC -ccn [CHAINCODE_NAME] -ccv [CHIANCODE_VERSION] -cci initLedger -ccl &quot;go&quot; -ccp [CHAINCODE_PATH]</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Chaincode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Chaincode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>[MySQL] 이벤트 스케줄 사용시 주의사항</title>
       <link href="/2022/02/15/MySQL-event-schedule/"/>
       <url>/2022/02/15/MySQL-event-schedule/</url>

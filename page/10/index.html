@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>[Github] git 변경사항 되돌리기 | SAWD</title>
+  <title>SAWD</title>
   <meta name="description" content="시간이 나야지..." />
   <meta name="keywords" content="" />
   <meta name="HandheldFriendly" content="True" />
@@ -12,17 +12,14 @@
   <link rel="shortcut icon" href="/images/favicon.png">
   <link rel="alternate" href="/atom.xml" title="SAWD">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Git을 이용해 형상관리를 하다 보면 수정사항을 롤백 하고 싶을 때가 자주 있습니다.이 포스트에서는 이전 커밋까지 롤백 하는 방법에 대해서 알아봅니다.">
-<meta property="og:type" content="article">
-<meta property="og:title" content="[Github] git 변경사항 되돌리기">
-<meta property="og:url" content="https://dev-sawd.github.io/2020/05/24/Github-revert-change/index.html">
+  <meta name="description" content="시간이 나야지...">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SAWD">
+<meta property="og:url" content="https://dev-sawd.github.io/page/10/index.html">
 <meta property="og:site_name" content="SAWD">
-<meta property="og:description" content="Git을 이용해 형상관리를 하다 보면 수정사항을 롤백 하고 싶을 때가 자주 있습니다.이 포스트에서는 이전 커밋까지 롤백 하는 방법에 대해서 알아봅니다.">
+<meta property="og:description" content="시간이 나야지...">
 <meta property="og:locale" content="ko_KR">
-<meta property="article:published_time" content="2020-05-24T01:55:54.000Z">
-<meta property="article:modified_time" content="2022-01-26T13:51:21.085Z">
 <meta property="article:author" content="SAWD">
-<meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
@@ -139,81 +136,63 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        <article id="post-Github-revert-change"
-  class="post white-box article-type-post"
-  itemscope itemprop="blogPost">
-	<section class='meta'>
-	<h2 class="title">
-  	<a href="/2020/05/24/Github-revert-change/">
-    	[Github] git 변경사항 되돌리기
-    </a>
-  </h2>
-	<time>
-	  5월 24, 2020
-	</time>
+        
+<section class="post-list">
 	
+    <div class='post-wrapper'>
+      <article class="post reveal">
+  <section class="meta">
+    
+    <h2 class="title">
+      <a href="/2018/06/12/app-transport-security-http/">
+        [iOS] App Transport Security has blocked a cleartext HTTP
+      </a>
+    </h2>
+    
+    <time>
+      2018년 6월 12일
+    </time>
+		
     
     <div class='cats'>
-        <a href="/categories/Github/">Github</a>
+        <a href="/categories/iOS/">iOS</a>
     </div>
 
-	</section>
-<!--	-->
-<!--		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#git-add-명령을-하기-이전의-수정사항-롤백"><span class="toc-number">1.</span> <span class="toc-text">git add 명령을 하기 이전의 수정사항 롤백</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-add-명령어를-한-이후의-수정사항-롤백"><span class="toc-number">2.</span> <span class="toc-text">git add 명령어를 한 이후의 수정사항 롤백</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-commit을-한-이후-롤백"><span class="toc-number">3.</span> <span class="toc-text">git commit을 한 이후 롤백</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#원격-저장소에-변경된-이력도-되돌리기"><span class="toc-number">4.</span> <span class="toc-text">원격 저장소에 변경된 이력도 되돌리기</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#마치며"><span class="toc-number">5.</span> <span class="toc-text">마치며</span></a></li></ol></section>-->
-<!--	-->
-	<section class="article typo">
-  	<div class="article-entry" itemprop="articleBody">
-    	<p>Git을 이용해 형상관리를 하다 보면 수정사항을 롤백 하고 싶을 때가 자주 있습니다.<br>이 포스트에서는 이전 커밋까지 롤백 하는 방법에 대해서 알아봅니다.</p>
-<a id="more"></a>
+  </section>
+  <section class="article typo">
+	  <h1 id="iOS를-공부하면서-개발하는데"><a href="#iOS를-공부하면서-개발하는데" class="headerlink" title="iOS를 공부하면서 개발하는데.."></a>iOS를 공부하면서 개발하는데..</h1><p>개인 프로젝트로 날씨를 보여주는 앱을 만들고 있습니다.<br>Objective C를 기반으로 공부하면서 시작하는데 http 통신에서 난데없이 에러가 발생했습니다.</p>
+<h2 id="에러-본문"><a href="#에러-본문" class="headerlink" title="에러 본문"></a>에러 본문</h2><p>App Transport Security has blocked a cleartext HTTP (http://) resource load since it is insecure.<br>Temporary exceptions can be configured via your app’s Info.plist file.</p>
 
-<h2 id="git-add-명령을-하기-이전의-수정사항-롤백"><a href="#git-add-명령을-하기-이전의-수정사항-롤백" class="headerlink" title="git add 명령을 하기 이전의 수정사항 롤백"></a>git add 명령을 하기 이전의 수정사항 롤백</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> &#123;respository_directory&#125;</span></span><br><span class="line">respository_directory $ checkout .</span><br></pre></td></tr></table></figure>
-
-<h2 id="git-add-명령어를-한-이후의-수정사항-롤백"><a href="#git-add-명령어를-한-이후의-수정사항-롤백" class="headerlink" title="git add 명령어를 한 이후의 수정사항 롤백"></a>git add 명령어를 한 이후의 수정사항 롤백</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="git-commit을-한-이후-롤백"><a href="#git-commit을-한-이후-롤백" class="headerlink" title="git commit을 한 이후 롤백"></a>git commit을 한 이후 롤백</h2><ul>
-<li>주의 아래의 명령어는 수정사항이 완전히 삭제됩니다</li>
-</ul>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset --hard HEAD~</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="원격-저장소에-변경된-이력도-되돌리기"><a href="#원격-저장소에-변경된-이력도-되돌리기" class="headerlink" title="원격 저장소에 변경된 이력도 되돌리기"></a>원격 저장소에 변경된 이력도 되돌리기</h2><p>원격 저장소에 변경된 이력을 되돌리는 방법은 local 저장소의 새로운 변경사항으로 덮어쓰는것과 개념이 같습니다.</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> git reset HEAD~</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git commit -m <span class="string">"commit message"</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> git push origin master</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>여러 롤백 케이스중에서 자주 사용할 수 있는 상황을 뽑아서 포스팅해봤습니다.<br>이외 더 자세한 롤백 방법은 아래의 사이트에 자세하게 나와있습니다.</p>
-<p><a href="https://git-scm.com/book/ko/v2/Git-%EB%8F%84%EA%B5%AC-Reset-%EB%AA%85%ED%99%95%ED%9E%88-%EC%95%8C%EA%B3%A0-%EA%B0%80%EA%B8%B0" target="_blank" rel="noopener">https://git-scm.com/book/ko/v2/Git-%EB%8F%84%EA%B5%AC-Reset-%EB%AA%85%ED%99%95%ED%9E%88-%EC%95%8C%EA%B3%A0-%EA%B0%80%EA%B8%B0</a></p>
-<p>중요한것은 롤백을 하기 전 어떻게 이력관리를 할것인지 한번 더 생각해 보는게 중요할 것 같습니다.</p>
-
-  	</div>
-	  
-	  <div class="article-tags tags">
+    
+	  <div class="readmore">
+      <a href="/2018/06/12/app-transport-security-http/">📖 Read More</a>
+    </div>
+    
+    
+    
+	  <div class="full-width auto-padding tags">
       
-        <a href="/tags/git/">git</a>
+        <a href="/tags/Troubleshooting/">Troubleshooting</a>
       
 	  </div>
     
-		
-	
-		<div class="art-item-footer">
-				
-					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2020/05/25/MacOS-remote-access-for-dev-study/" rel="prev"  title="[MacOS] 개발 공부를 위한 원격 개발환경 세팅">
-						[MacOS] 개발 공부를 위한 원격 개발환경 세팅 
-					</a></span>
-				
-				
-					<span class="art-item-right">next：<a href="/2020/05/23/Github-change-remote-repository-url-in-local-repository/" rel="next"  title="[Github] 로컬 저장소의 원격 저장소 URL 변경">
-						[Github] 로컬 저장소의 원격 저장소 URL 변경
-					</a><i class="icon icon-chevron-thin-right"></i></span>
-				
-		</div>
-	
-	</section>
-	
+  </section>
 </article>
-<script>
-	window.subData = {
-		title: '[Github] git 변경사항 되돌리기',
-		tools: true
-	}
-</script>
+    </div>
+  
+</section>
+
+
+  <nav id="page-nav">
+    
+    <a class="prev" rel="prev" href="/page/9/">
+      <span class="icon icon-chevron-left"></span>
+      <span class="text">Previous</span>
+    </a>
+    
+    
+  </nav>
+  
 
       </div>
       <aside class='l_side'>
