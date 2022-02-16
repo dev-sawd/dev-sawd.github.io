@@ -144,6 +144,48 @@
   <section class="meta">
     
     <h2 class="title">
+      <a href="/2022/02/16/MySQL-Error-ER-NOT-SUPPORTED-AUTH-MODE/">
+        [MySQL] Error: ER_NOT_SUPPORTED_AUTH_MODE 에러 해결
+      </a>
+    </h2>
+    
+    <time>
+      2022년 2월 16일
+    </time>
+		
+    
+    <div class='cats'>
+        <a href="/categories/MySQL/">MySQL</a>
+    </div>
+
+  </section>
+  <section class="article typo">
+	  <p>토이 프로젝트 개발중 새로운 MySQL을 설치하고 백엔드 서버에서 접속하려고 할때 아래와 같은 에러 발생</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">\node_modules\mysql\lib\protocol\Parser.js:437</span><br><span class="line">      throw err; &#x2F;&#x2F; Rethrow non-MySQL errors</span><br><span class="line">      ^</span><br><span class="line">      </span><br><span class="line">Error: ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client</span><br><span class="line">    at Handshake.Sequence._packetToError</span><br><span class="line">    at Handshake.ErrorPacket</span><br><span class="line">    at Protocol._parsePacket</span><br><span class="line">    at Parser._parsePacket</span><br><span class="line">    at Parser.write</span><br><span class="line">    at Protocol.write</span><br><span class="line">    at Socket.&lt;anonymous&gt;</span><br><span class="line">    at Socket.&lt;anonymous&gt;</span><br><span class="line">    at Socket.emit</span><br><span class="line">    at addChunk</span><br><span class="line">    --------------------</span><br><span class="line">    at Protocol._enqueue</span><br><span class="line">    at Protocol.handshake</span><br><span class="line">    at Connection.connect</span><br><span class="line">    at Object.&lt;anonymous&gt;</span><br><span class="line">    at Module._compile</span><br><span class="line">    at Object.Module._extensions..js</span><br><span class="line">    at Module.load</span><br><span class="line">  sqlMessage: &#39;Client does not support authentication protocol requested by server; consider upgrading MySQL client&#39;,</span><br><span class="line">  sqlState: &#39;08004&#39;,</span><br><span class="line">  fatal: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>내 개발 환경은 백엔드는 현재 로컬에서 작업중이고 MySQL은 AWS 서버에 올려둔 상태로 AWS에서는 외부 접속의 개념이 됨</p>
+<p>아이디는 root에 비밀번호가 11111111을 예로 아래와 같은 쿼리를 실행하여 해결</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &#39;root&#39;@&#39;%&#39; IDENTIFIED WITH mysql_native_password BY &#39;11111111&#39;;</span><br></pre></td></tr></table></figure>
+
+
+    
+    
+    
+	  <div class="full-width auto-padding tags">
+      
+        <a href="/tags/MySQL/">MySQL</a>
+      
+	  </div>
+    
+  </section>
+</article>
+    </div>
+  
+    <div class='post-wrapper'>
+      <article class="post reveal">
+  <section class="meta">
+    
+    <h2 class="title">
       <a href="/2022/02/15/Chaincode-hyperledger-fabric-basic-network-for-chiancode-developer/">
         [Chaincode] 체인코드 개발자용 Hyperledger fabric 테스트 네트워크
       </a>
@@ -368,56 +410,6 @@
 </article>
     </div>
   
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2022/02/06/Golang-go-modules/">
-        [Golang] go modules 사용
-      </a>
-    </h2>
-    
-    <time>
-      2022년 2월 6일
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/Golang/">Golang</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <h1 id="govendor-deprecated"><a href="#govendor-deprecated" class="headerlink" title="govendor (deprecated)"></a>govendor (deprecated)</h1><p>Golang을 처음 접하고 체인코드를 개발할때부터 시간에 쫓겨 의존성 라이브러리 관리를 govendor를 통해 했었음</p>
-<ul>
-<li><a href="https://github.com/kardianos/govendor" target="_blank" rel="noopener">https://github.com/kardianos/govendor</a></li>
-</ul>
-<h1 id="Go-modules"><a href="#Go-modules" class="headerlink" title="Go modules"></a>Go modules</h1><p>이제는 1.11부터 Go modules가 도입되면서 govendor 개발자도 1.14부터는 Go modules를 사용하도록 권장하고있음</p>
-<p>사실상 govendor는 deprecated 되어 앞으로는 사용하지 않을 것임</p>
-<ul>
-<li><a href="https://go.dev/blog/using-go-modules" target="_blank" rel="noopener">https://go.dev/blog/using-go-modules</a></li>
-</ul>
-
-    
-	  <div class="readmore">
-      <a href="/2022/02/06/Golang-go-modules/">📖 Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-        <a href="/tags/Golang/">Golang</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
 </section>
 
 
@@ -471,7 +463,7 @@
     
         <li><a class="flat-box" href="/categories/MacOS/"><div class='name'>MacOS</div><div class='badget'>2</div></a></li>
     
-        <li><a class="flat-box" href="/categories/MySQL/"><div class='name'>MySQL</div><div class='badget'>3</div></a></li>
+        <li><a class="flat-box" href="/categories/MySQL/"><div class='name'>MySQL</div><div class='badget'>4</div></a></li>
     
         <li><a class="flat-box" href="/categories/Node-js/"><div class='name'>Node.js</div><div class='badget'>4</div></a></li>
     
@@ -490,7 +482,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class='content'>
-        <a href="/tags/Chaincode/" style="font-size: 16.4px; color: #4d4d4d">Chaincode</a> <a href="/tags/Docker/" style="font-size: 17.6px; color: #333">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16.4px; color: #4d4d4d">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 15.2px; color: #666">ETC</a> <a href="/tags/Example/" style="font-size: 16.4px; color: #4d4d4d">Example</a> <a href="/tags/GitLab/" style="font-size: 16.4px; color: #4d4d4d">GitLab</a> <a href="/tags/Github/" style="font-size: 15.2px; color: #666">Github</a> <a href="/tags/Golang/" style="font-size: 18.8px; color: #1a1a1a">Golang</a> <a href="/tags/HEXO/" style="font-size: 15.2px; color: #666">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 16.4px; color: #4d4d4d">MySQL</a> <a href="/tags/Pattern/" style="font-size: 14px; color: #808080">Pattern</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Troubleshooting/" style="font-size: 15.2px; color: #666">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a>
+        <a href="/tags/Chaincode/" style="font-size: 16px; color: #555">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 15px; color: #6b6b6b">ETC</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Pattern/" style="font-size: 14px; color: #808080">Pattern</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a>
     </div>
 </div>
 

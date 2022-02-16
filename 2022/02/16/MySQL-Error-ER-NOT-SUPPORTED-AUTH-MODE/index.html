@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>[Chaincode] 체인코드에서의 MVC...? | SAWD</title>
+  <title>[MySQL] Error: ER_NOT_SUPPORTED_AUTH_MODE 에러 해결 | SAWD</title>
   <meta name="description" content="시간이 나야지..." />
   <meta name="keywords" content="" />
   <meta name="HandheldFriendly" content="True" />
@@ -12,20 +12,17 @@
   <link rel="shortcut icon" href="/images/favicon.png">
   <link rel="alternate" href="/atom.xml" title="SAWD">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="조금 더 확실하게 공부해서 앞으로 있을 체인코드 개발에 MVC에 가깝게 구조를 잡고 개발하기위해 정리 MVCMVC (모델-뷰-컨트롤러) 는 사용자 인터페이스, 데이터 및 논리 제어를 구현하는데 널리 사용되는 소프트웨어 디자인 패턴입니다. 소프트웨어의 비즈니스 로직과 화면을 구분하는데 중점을 두고 있습니다. 이러한 “관심사 분리” 는 더나은 업무의 분리와 향">
+  <meta name="description" content="토이 프로젝트 개발중 새로운 MySQL을 설치하고 백엔드 서버에서 접속하려고 할때 아래와 같은 에러 발생 123456789101112131415161718192021222324252627\node_modules\mysql\lib\protocol\Parser.js:437      throw err; &#x2F;&#x2F; Rethrow non-MySQL er">
 <meta property="og:type" content="article">
-<meta property="og:title" content="[Chaincode] 체인코드에서의 MVC...?">
-<meta property="og:url" content="https://dev-sawd.github.io/2022/02/04/Golang-mvc-pattern/index.html">
+<meta property="og:title" content="[MySQL] Error: ER_NOT_SUPPORTED_AUTH_MODE 에러 해결">
+<meta property="og:url" content="https://dev-sawd.github.io/2022/02/16/MySQL-Error-ER-NOT-SUPPORTED-AUTH-MODE/index.html">
 <meta property="og:site_name" content="SAWD">
-<meta property="og:description" content="조금 더 확실하게 공부해서 앞으로 있을 체인코드 개발에 MVC에 가깝게 구조를 잡고 개발하기위해 정리 MVCMVC (모델-뷰-컨트롤러) 는 사용자 인터페이스, 데이터 및 논리 제어를 구현하는데 널리 사용되는 소프트웨어 디자인 패턴입니다. 소프트웨어의 비즈니스 로직과 화면을 구분하는데 중점을 두고 있습니다. 이러한 “관심사 분리” 는 더나은 업무의 분리와 향">
+<meta property="og:description" content="토이 프로젝트 개발중 새로운 MySQL을 설치하고 백엔드 서버에서 접속하려고 할때 아래와 같은 에러 발생 123456789101112131415161718192021222324252627\node_modules\mysql\lib\protocol\Parser.js:437      throw err; &#x2F;&#x2F; Rethrow non-MySQL er">
 <meta property="og:locale" content="ko_KR">
-<meta property="article:published_time" content="2022-02-04T11:45:25.000Z">
-<meta property="article:modified_time" content="2022-02-06T09:57:22.972Z">
+<meta property="article:published_time" content="2022-02-16T00:42:57.000Z">
+<meta property="article:modified_time" content="2022-02-16T00:50:37.382Z">
 <meta property="article:author" content="SAWD">
-<meta property="article:tag" content="TIL">
-<meta property="article:tag" content="Golang">
-<meta property="article:tag" content="Pattern">
-<meta property="article:tag" content="Chaincode">
+<meta property="article:tag" content="MySQL">
 <meta name="twitter:card" content="summary">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
@@ -142,71 +139,42 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        <article id="post-Golang-mvc-pattern"
+        <article id="post-MySQL-Error-ER-NOT-SUPPORTED-AUTH-MODE"
   class="post white-box article-type-post"
   itemscope itemprop="blogPost">
 	<section class='meta'>
 	<h2 class="title">
-  	<a href="/2022/02/04/Golang-mvc-pattern/">
-    	[Chaincode] 체인코드에서의 MVC...?
+  	<a href="/2022/02/16/MySQL-Error-ER-NOT-SUPPORTED-AUTH-MODE/">
+    	[MySQL] Error: ER_NOT_SUPPORTED_AUTH_MODE 에러 해결
     </a>
   </h2>
 	<time>
-	  2월 4, 2022
+	  2월 16, 2022
 	</time>
 	
     
     <div class='cats'>
-        <a href="/categories/Chaincode/">Chaincode</a>
+        <a href="/categories/MySQL/">MySQL</a>
     </div>
 
 	</section>
 <!--	-->
-<!--		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#MVC"><span class="toc-number">1.</span> <span class="toc-text">MVC</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Model"><span class="toc-number">1.0.1.</span> <span class="toc-text">Model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#View"><span class="toc-number">1.0.2.</span> <span class="toc-text">View</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Controller"><span class="toc-number">1.0.3.</span> <span class="toc-text">Controller</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Go언어에서의-MVC"><span class="toc-number">2.</span> <span class="toc-text">Go언어에서의 MVC</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#하지만-체인코드에서는"><span class="toc-number">3.</span> <span class="toc-text">하지만 체인코드에서는..?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#폴더-구조"><span class="toc-number">4.</span> <span class="toc-text">폴더 구조</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#코드"><span class="toc-number">5.</span> <span class="toc-text">코드</span></a></li></ol></section>-->
+<!--		<section class="toc-wrapper"></section>-->
 <!--	-->
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
-    	<p>조금 더 확실하게 공부해서 앞으로 있을 체인코드 개발에 MVC에 가깝게 구조를 잡고 개발하기위해 정리</p>
-<h1 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h1><blockquote><p>MVC (모델-뷰-컨트롤러) 는 사용자 인터페이스, 데이터 및 논리 제어를 구현하는데 널리 사용되는 소프트웨어 디자인 패턴입니다. 소프트웨어의 비즈니스 로직과 화면을 구분하는데 중점을 두고 있습니다. 이러한 “관심사 분리” 는 더나은 업무의 분리와 향상된 관리를 제공합니다. MVC 에 기반을 둔 몇 가지 다른 디자인 패턴으로 MVVM (모델-뷰-뷰모델), MVP (모델-뷰-프리젠터), MVW (모델-뷰-왓에버) 가 있습니다.</p>
-</blockquote>
+    	<p>토이 프로젝트 개발중 새로운 MySQL을 설치하고 백엔드 서버에서 접속하려고 할때 아래와 같은 에러 발생</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">\node_modules\mysql\lib\protocol\Parser.js:437</span><br><span class="line">      throw err; &#x2F;&#x2F; Rethrow non-MySQL errors</span><br><span class="line">      ^</span><br><span class="line">      </span><br><span class="line">Error: ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol requested by server; consider upgrading MySQL client</span><br><span class="line">    at Handshake.Sequence._packetToError</span><br><span class="line">    at Handshake.ErrorPacket</span><br><span class="line">    at Protocol._parsePacket</span><br><span class="line">    at Parser._parsePacket</span><br><span class="line">    at Parser.write</span><br><span class="line">    at Protocol.write</span><br><span class="line">    at Socket.&lt;anonymous&gt;</span><br><span class="line">    at Socket.&lt;anonymous&gt;</span><br><span class="line">    at Socket.emit</span><br><span class="line">    at addChunk</span><br><span class="line">    --------------------</span><br><span class="line">    at Protocol._enqueue</span><br><span class="line">    at Protocol.handshake</span><br><span class="line">    at Connection.connect</span><br><span class="line">    at Object.&lt;anonymous&gt;</span><br><span class="line">    at Module._compile</span><br><span class="line">    at Object.Module._extensions..js</span><br><span class="line">    at Module.load</span><br><span class="line">  sqlMessage: &#39;Client does not support authentication protocol requested by server; consider upgrading MySQL client&#39;,</span><br><span class="line">  sqlState: &#39;08004&#39;,</span><br><span class="line">  fatal: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li><a href="https://developer.mozilla.org/ko/docs/Glossary/MVC" target="_blank" rel="noopener">https://developer.mozilla.org/ko/docs/Glossary/MVC</a></li>
-</ul>
-<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>데이터를 받아 비즈니스 로직을 처리<br>주로 DB와의 상호작용이 해당</p>
-<a id="more"></a>
-
-<h3 id="View"><a href="#View" class="headerlink" title="View"></a>View</h3><p>레이아웃과 화면을 처리<br>애플리케이션의 데이터를 보여주는 방식</p>
-<h3 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h3><p>사용자로부터 요청을 받아 수행할 비즈니스 로직을 제어</p>
-<p>&nbsp;</p>
-<h1 id="Go언어에서의-MVC"><a href="#Go언어에서의-MVC" class="headerlink" title="Go언어에서의 MVC"></a>Go언어에서의 MVC</h1><p>Go언어에서는 Revel이라고 하는 MVC를 도와주는 웹 프레임워크가 있다고 함</p>
-<a href="https://revel.github.io/" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="descriptions"><div class="og-title">Revel - Go Web Framework</div></div></div></a>
-
-<p>&nbsp;</p>
-<h1 id="하지만-체인코드에서는"><a href="#하지만-체인코드에서는" class="headerlink" title="하지만 체인코드에서는..?"></a>하지만 체인코드에서는..?</h1><p>MVC패턴을 제대로 모르더라도 구조를 보면 많이 익숙한 느낌이 들정도로 개발자들은 자주 접하는 구조<br>하지만 체인코드를 개발할때 MVC를 그대로 사용하기에는 무리가 있어서 조금 내 방식대로 수정<br>호출 순서는 아래와 같다고 생각</p>
-<p>사용자 → Controller → Service → DAO → DB</p>
-<p>그리고 각 호출에서 필요한 데이터 구조(DTO)를 정의하는 정도로 생각</p>
-<p>&nbsp;</p>
-<h1 id="폴더-구조"><a href="#폴더-구조" class="headerlink" title="폴더 구조"></a>폴더 구조</h1><p>직관적으로 각 구조마다 폴더명을 지정해서 관리<br>dao, dto는 service, object등으로 상황에 따라 다르게 사용</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">\GOPROJECT\SRC\MVC</span><br><span class="line">│  main.go</span><br><span class="line">│</span><br></pre></td></tr></table></figure>
-
-<p>&nbsp;</p>
-<h1 id="코드"><a href="#코드" class="headerlink" title="코드"></a>코드</h1><script src="//gist.github.com/c8bc668ea2d139dfdc69a16128db3189.js"></script>
-
-<p>개발을 하면서 반복되는 코드는 계속해서 리펙토링을 통해 제거하고 관리해야함</p>
-<p><del>그래도 나중엔 감당안되긴 해…</del></p>
+<p>내 개발 환경은 백엔드는 현재 로컬에서 작업중이고 MySQL은 AWS 서버에 올려둔 상태로 AWS에서는 외부 접속의 개념이 됨</p>
+<p>아이디는 root에 비밀번호가 11111111을 예로 아래와 같은 쿼리를 실행하여 해결</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER USER &#39;root&#39;@&#39;%&#39; IDENTIFIED WITH mysql_native_password BY &#39;11111111&#39;;</span><br></pre></td></tr></table></figure>
 
   	</div>
 	  
 	  <div class="article-tags tags">
       
-        <a href="/tags/TIL/">TIL</a>
-      
-        <a href="/tags/Golang/">Golang</a>
-      
-        <a href="/tags/Pattern/">Pattern</a>
-      
-        <a href="/tags/Chaincode/">Chaincode</a>
+        <a href="/tags/MySQL/">MySQL</a>
       
 	  </div>
     
@@ -214,13 +182,9 @@
 	
 		<div class="art-item-footer">
 				
-					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2022/02/06/Chaincode-panic-recover-sample/" rel="prev"  title="[Chaincode] panic recover 샘플">
-						[Chaincode] panic recover 샘플 
-					</a></span>
 				
-				
-					<span class="art-item-right">next：<a href="/2022/02/04/Hello-Golang/" rel="next"  title="Hello Golang">
-						Hello Golang
+					<span class="art-item-right">next：<a href="/2022/02/15/Chaincode-hyperledger-fabric-basic-network-for-chiancode-developer/" rel="next"  title="[Chaincode] 체인코드 개발자용 Hyperledger fabric 테스트 네트워크">
+						[Chaincode] 체인코드 개발자용 Hyperledger fabric 테스트 네트워크
 					</a><i class="icon icon-chevron-thin-right"></i></span>
 				
 		</div>
@@ -230,7 +194,7 @@
 </article>
 <script>
 	window.subData = {
-		title: '[Chaincode] 체인코드에서의 MVC...?',
+		title: '[MySQL] Error: ER_NOT_SUPPORTED_AUTH_MODE 에러 해결',
 		tools: true
 	}
 </script>
