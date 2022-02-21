@@ -144,6 +144,55 @@
   <section class="meta">
     
     <h2 class="title">
+      <a href="/2022/02/07/Docker-no-matching-manifest-for-linux-arm64-v8-in-the-manifest-list-entries/">
+        [Docker] no matching manifest for linux/arm64/v8 in the manifest list entries
+      </a>
+    </h2>
+    
+    <time>
+      2022년 2월 7일
+    </time>
+		
+    
+    <div class='cats'>
+        <a href="/categories/Docker/">Docker</a>
+    </div>
+
+  </section>
+  <section class="article typo">
+	  <p>M1 맥북 에어를 구입하고 Docker를 이용해 이미지를 받을때 아래와 같은 문제가 발생</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">% docker pull hyperledger&#x2F;fabric-javaenv:2.4</span><br><span class="line">2.4: Pulling from hyperledger&#x2F;fabric-javaenv</span><br><span class="line">no matching manifest for linux&#x2F;arm64&#x2F;v8 in the manifest list entries</span><br></pre></td></tr></table></figure>
+
+<p>M1 환경에서 발생하는 문제로 보임</p>
+<p><code>--platform linux/x86_64</code> 인자를 주어 실행하면 정상적으로 받아오는것을 확인</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">% docker pull --platform linux&#x2F;x86_64 hyperledger&#x2F;fabric-javaenv:2.4</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><a href="https://unluckyjung.github.io/develop-setting/2021/03/27/M1-Docker-Mysql-Error/" target="_blank" rel="noopener">https://unluckyjung.github.io/develop-setting/2021/03/27/M1-Docker-Mysql-Error/</a></li>
+<li><a href="https://stackoverflow.com/a/67361161" target="_blank" rel="noopener">https://stackoverflow.com/a/67361161</a></li>
+</ul>
+
+
+    
+    
+    
+	  <div class="full-width auto-padding tags">
+      
+        <a href="/tags/Docker/">Docker</a>
+      
+        <a href="/tags/M1-MacBook-Air/">M1 MacBook Air</a>
+      
+	  </div>
+    
+  </section>
+</article>
+    </div>
+  
+    <div class='post-wrapper'>
+      <article class="post reveal">
+  <section class="meta">
+    
+    <h2 class="title">
       <a href="/2022/02/06/Golang-go-modules/">
         [Golang] go modules 사용
       </a>
@@ -371,47 +420,6 @@
 </article>
     </div>
   
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2020/06/09/Node-js-file-system/">
-        [Node.js] 파일 시스템
-      </a>
-    </h2>
-    
-    <time>
-      2020년 6월 9일
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/Node-js/">Node.js</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p><img src="/images/node.js_logo.png" alt=""></p>
-<p>fs 모듈은 파일 시스템에 접근하는 모듈</p>
-
-    
-	  <div class="readmore">
-      <a href="/2020/06/09/Node-js-file-system/">📖 Read More</a>
-    </div>
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
 </section>
 
 
@@ -449,6 +457,8 @@
     <ul class="entry">
     
         <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badget'>8</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/CSS/"><div class='name'>CSS</div><div class='badget'>1</div></a></li>
     
         <li><a class="flat-box" href="/categories/Chaincode/"><div class='name'>Chaincode</div><div class='badget'>3</div></a></li>
     

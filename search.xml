@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>[CSS] Flexbox 정리</title>
+      <link href="/2022/02/21/CSS-flexbox/"/>
+      <url>/2022/02/21/CSS-flexbox/</url>
+      
+        <content type="html"><![CDATA[<p>프론트 개발자가 아니라 항상 처음부터 UI를 작성할때 어려움을 많이 느낌 <del>복사 붙여넣기는 잘함</del></p><p>flexbox의 속성들을 간단히 정리</p><a id="more"></a><h1 id="AXIS"><a href="#AXIS" class="headerlink" title="AXIS"></a>AXIS</h1><h3 id="main-axis"><a href="#main-axis" class="headerlink" title="main axis"></a>main axis</h3><p>사용자가 지정한 중심축</p><h3 id="across-axis"><a href="#across-axis" class="headerlink" title="across axis"></a>across axis</h3><p>사용자가 지정한 중심축의 수직축</p><h1 id="container-item"><a href="#container-item" class="headerlink" title="container, item"></a>container, item</h1><h3 id="container"><a href="#container" class="headerlink" title="container"></a>container</h3><p>말그대로 다른 엘리먼트들을 담을 수 있는 컨테이너</p><h3 id="container-속성"><a href="#container-속성" class="headerlink" title="container 속성"></a>container 속성</h3><ul><li>display</li><li>flex-direction</li><li>flex-wrap</li><li>flex-flow</li><li>justify-content(main axis)</li><li>align-items(across axis)</li><li>align-content(across axis)</li></ul><h3 id="item"><a href="#item" class="headerlink" title="item"></a>item</h3><p>컨테이너 안에 담긴 엘리먼트</p><h3 id="item-속성"><a href="#item-속성" class="headerlink" title="item 속성"></a>item 속성</h3><ul><li>order</li><li>flex-grow</li><li>flex-shrink</li><li>flex</li><li>align-self</li></ul><h1 id="vs-vh"><a href="#vs-vh" class="headerlink" title="% vs vh"></a>% vs vh</h1><p>%는 부모 엘리먼트를 기준으로 x%를 채움<br>vh는 보이는 viewport height를 기준으로 채움</p><p>참고</p><ul><li><a href="https://youtu.be/7neASrWEFEM" target="_blank" rel="noopener">https://youtu.be/7neASrWEFEM</a></li><li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/" target="_blank" rel="noopener">https://css-tricks.com/snippets/css/a-guide-to-flexbox/</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> CSS </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> TIL </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>[MySQL] Error: ER_NOT_SUPPORTED_AUTH_MODE 에러 해결</title>
       <link href="/2022/02/16/MySQL-Error-ER-NOT-SUPPORTED-AUTH-MODE/"/>
       <url>/2022/02/16/MySQL-Error-ER-NOT-SUPPORTED-AUTH-MODE/</url>
