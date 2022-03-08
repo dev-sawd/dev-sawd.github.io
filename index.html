@@ -144,6 +144,94 @@
   <section class="meta">
     
     <h2 class="title">
+      <a href="/2022/03/08/React-chatting-web/">
+        [React] 혼자 만들어본 채팅 앱
+      </a>
+    </h2>
+    
+    <time>
+      2022년 3월 8일
+    </time>
+		
+    
+    <div class='cats'>
+        <a href="/categories/React/">React</a>
+    </div>
+
+  </section>
+  <section class="article typo">
+	  <p>개인적으로 만들고있던 사이트도 어느정도 안정화가 되어가고..</p>
+<h1 id="이제-뭘하지"><a href="#이제-뭘하지" class="headerlink" title="이제 뭘하지?"></a>이제 뭘하지?</h1><p>뭔가 새로운것을 공부하고 만들어야겠다는 생각이 문득 들었다.</p>
+<p>그리고 아는것과 모르는것, 하고싶은 것과 하기싫은 것을 분류해보고…</p>
+<br>
+
+<h1 id="소켓을-이용한-무언가를-해보고싶어"><a href="#소켓을-이용한-무언가를-해보고싶어" class="headerlink" title="소켓을 이용한 무언가를 해보고싶어."></a>소켓을 이용한 무언가를 해보고싶어.</h1><p>소켓은 10여년 전 처음 자바를 배울때를 제외하고는 실무에서 전혀 접할 기회가 없었다.</p>
+<p>당시에는 간단한 1:1 채팅 앱을 학습했는데, 기억도 잘 나지 않고 당시에 나에게는 너무 어려웠다.</p>
+<blockquote><p><strong>소켓을 이용해 다시 채팅 앱을 만들어 보면 되겠다.</strong></p>
+</blockquote>
+
+<br>
+
+<h1 id="뭘-이용해서-만들까"><a href="#뭘-이용해서-만들까" class="headerlink" title="뭘 이용해서 만들까?"></a>뭘 이용해서 만들까?</h1><p>최근에 만든 사이트는 프론트를 React, 백엔드를 Node.js, DB를 MySQL로 만들었다.</p>
+<p>하지만 너무 겉핥기 식이고 빠르게 만드는 것에 바쁜 나머지 너무 날로 먹은것 같은 느낌이 들었다.</p>
+<br>
+
+<h3 id="또-다시-React"><a href="#또-다시-React" class="headerlink" title="또 다시 React"></a>또 다시 React</h3><p>내가 처음 React를 공부했을때(아마.. 2007년? 2008년?) 그때는 클래스형 구조로 되어있었다.</p>
+<p>그리고 최근에 사이트를 만들었을 때 그때의 기억을 토대로 클래스형 구조로 만들고 사이트의 구조가 굳어갈때..</p>
+<p>요즘 예제들은 함수형 구조로 된것이 많더라.</p>
+<p>이 말은 뭔가 검색해도 함수형 구조를 이해하고 있지 않으면 빠르게 문제를 해결할 수 없다는 것과 같은 말이다.</p>
+<p>결국은 클래스형 구조에서 함수형 구조로 다 뜯어 고치고 이 과정에서 생각보다 많은 시간을 잡아먹었다.</p>
+<blockquote><p><strong>이번 채팅 앱은 처음부터 함수형 구조로 시작해야겠어.</strong></p>
+</blockquote>
+
+<br>
+
+<h3 id="그리고-Node-js-서버"><a href="#그리고-Node-js-서버" class="headerlink" title="그리고 Node.js 서버"></a>그리고 Node.js 서버</h3><p>Javascript는 잘 못하는데, 그래도 Node.js로 서버개발을 해보니 의외로 간편하고 쉬웠다.</p>
+<blockquote><p><strong>무엇보다 React도 Javascript니까.</strong></p>
+</blockquote>
+
+<br>
+
+<h3 id="MUI"><a href="#MUI" class="headerlink" title="MUI"></a>MUI</h3><p>React UI library로 기본 UI보다 좀더 있어보이게 꾸밀 수 있다.</p>
+<p>컴포넌트마다 예제는 너무 잘 돼있는데 조금 취향에 맞게 수정하려고 하려면 생각보다 쉽진않은 듯 하다.</p>
+<a href="https://mui.com/" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://mui.com/static/social-previews/default-preview.jpg"></img></div><div class="descriptions"><div class="og-title">MUI: The React component library you always wanted</div><div class="og-description">MUI provides a simple, customizable, and accessible library of React components. Follow your own design system, or start with Material Desig…</div></div></div></a>
+
+<br>
+
+<h3 id="socket-io"><a href="#socket-io" class="headerlink" title="socket.io"></a>socket.io</h3><p>소켓을 사용하기 위해서 검색중 socket.io를 이용하면 간편하게 개발할 수 있을것으로 보였다.</p>
+<a href="https://socket.io/" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="descriptions"><div class="og-title">Socket.IO</div></div></div></a>
+
+<p>그리고 채팅 앱을 만드는 간단한 튜토리얼도 제공한다.</p>
+<ul>
+<li><a href="https://socket.io/get-started/chat" target="_blank" rel="noopener">https://socket.io/get-started/chat</a></li>
+</ul>
+<p>개발하는데 필요한 부분만 보고 개발했는데, 정리해서 포스팅해두면 나중에 쉽게 찾아볼 수 있을것 같아 조만간 정리할 예정이다.</p>
+<br>
+
+<h1 id="디자인"><a href="#디자인" class="headerlink" title="디자인"></a>디자인</h1><p>디자인에는 정말 소질이 없기 때문에 구글에서 ‘web chatting design’ 등의 검색 키워드를 몇개 참고해서 만들기로 했다.</p>
+
+    
+	  <div class="readmore">
+      <a href="/2022/03/08/React-chatting-web/">📖 Read More</a>
+    </div>
+    
+    
+    
+	  <div class="full-width auto-padding tags">
+      
+        <a href="/tags/Toy-project/">Toy project</a>
+      
+	  </div>
+    
+  </section>
+</article>
+    </div>
+  
+    <div class='post-wrapper'>
+      <article class="post reveal">
+  <section class="meta">
+    
+    <h2 class="title">
       <a href="/2022/02/21/CSS-flexbox/">
         [CSS] Flexbox 정리
       </a>
@@ -355,53 +443,6 @@
 </article>
     </div>
   
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2022/02/13/MySQL-access-denied-for-user/">
-        [MySQL] access denied for user
-      </a>
-    </h2>
-    
-    <time>
-      2022년 2월 13일
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/MySQL/">MySQL</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>토이 프로젝트를 만드는 중에 프로시져를 사용해야 할 일이 생김</p>
-<p>프로시져에 대해서 공부하고 테스트 서버에서 프로시져 생성 명령어를 실행하는데 아래와 같은 에러 발생</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access denied for user &#39;root&#39;@&#39;%&#39; to database &#39;information_schema&#39;</span><br></pre></td></tr></table></figure>
-
-<p>거의 반나절을 구글링과 스택오버플로우를 찾아봤는데도 해답을 찾을 수 없었음</p>
-<p>대부분 권한 문제 때문이라고 하는데 이미 필요한 권한은 다 가지고있었음</p>
-<p>그리고 며칠 지나 다시 문제를 풀어보려고 열었는데 에러 문구에 <code>database &#39;information_schema&#39;</code> 부분이 자꾸 거슬렸음</p>
-<p>그래서 이 부분에 초점을 두고 database를 내가 원하는 데이터베이스로 설정 후 프로시져를 생성하니 성공</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use my_database</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; procedure 생성</span><br></pre></td></tr></table></figure>
-
-<p>너무 허무하다.. 😪</p>
-
-
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/MySQL/">MySQL</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
 </section>
 
 
@@ -463,6 +504,8 @@
     
         <li><a class="flat-box" href="/categories/Objective-C/"><div class='name'>Objective-C</div><div class='badget'>1</div></a></li>
     
+        <li><a class="flat-box" href="/categories/React/"><div class='name'>React</div><div class='badget'>1</div></a></li>
+    
         <li><a class="flat-box" href="/categories/Samll-talk/"><div class='name'>Samll talk</div><div class='badget'>1</div></a></li>
     
         <li><a class="flat-box" href="/categories/iOS/"><div class='name'>iOS</div><div class='badget'>4</div></a></li>
@@ -476,7 +519,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class='content'>
-        <a href="/tags/Chaincode/" style="font-size: 16px; color: #555">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 15px; color: #6b6b6b">ETC</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Pattern/" style="font-size: 14px; color: #808080">Pattern</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a>
+        <a href="/tags/Chaincode/" style="font-size: 16px; color: #555">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 15px; color: #6b6b6b">ETC</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Pattern/" style="font-size: 14px; color: #808080">Pattern</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Toy-project/" style="font-size: 14px; color: #808080">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a>
     </div>
 </div>
 
