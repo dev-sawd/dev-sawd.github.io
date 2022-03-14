@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>[React] 혼자 만들어본 채팅 웹 앱(클라이언트 부분) | SAWD</title>
+  <meta name="description" content="시간이 나야지..." />
+  <meta name="keywords" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/images/favicon.png">
+  <link rel="alternate" href="/atom.xml" title="SAWD">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="이 포스트는 “[React] 혼자 만들어본 채팅 웹 앱”의 클라이언트 부분 설명입니다. 관련 글을 보고싶은 분은 글 최하단의 태그 Toy project 링크를 눌러 확인해보세요! 설명에 앞서 프론트를 전문으로 하는 개발자가 아니기 때문에 어색한 부분이 있을 수 있습니다. 특히 디자인 부분은.. 더이상의 설명은 생략하겠습니다 ㅜㅜ  서버와는 다르게 클라이언트">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[React] 혼자 만들어본 채팅 웹 앱(클라이언트 부분)">
+<meta property="og:url" content="https://dev-sawd.github.io/2022/03/14/React-chatting-socket-client/index.html">
+<meta property="og:site_name" content="SAWD">
+<meta property="og:description" content="이 포스트는 “[React] 혼자 만들어본 채팅 웹 앱”의 클라이언트 부분 설명입니다. 관련 글을 보고싶은 분은 글 최하단의 태그 Toy project 링크를 눌러 확인해보세요! 설명에 앞서 프론트를 전문으로 하는 개발자가 아니기 때문에 어색한 부분이 있을 수 있습니다. 특히 디자인 부분은.. 더이상의 설명은 생략하겠습니다 ㅜㅜ  서버와는 다르게 클라이언트">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://opengraph.githubassets.com/d56d93c00d882fde4c29a51e7f69bd625535b4780717dcbe8d4d9d35ad460f26/dev-sawd/chat-react">
+<meta property="og:image" content="https://dev-sawd.github.io/2022/03/14/React-chatting-socket-client/1.png">
+<meta property="og:image" content="https://dev-sawd.github.io/2022/03/14/React-chatting-socket-client/2.png">
+<meta property="og:image" content="https://ko.redux.js.org/img/redux-logo-landscape.png">
+<meta property="article:published_time" content="2022-03-14T03:46:52.000Z">
+<meta property="article:modified_time" content="2022-03-14T06:02:37.623Z">
+<meta property="article:author" content="SAWD">
+<meta property="article:tag" content="Toy project">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://opengraph.githubassets.com/d56d93c00d882fde4c29a51e7f69bd625535b4780717dcbe8d4d9d35ad460f26/dev-sawd/chat-react">
+    
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href='/css/waves.min.css' rel='stylesheet'>
+  
+<link rel="stylesheet" href="/style.css">
+
+
+  
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-120934734-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="SAWD" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+  <script>setLoadingBarProgress(20)</script> 
+  <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				SAWD
+			</a>
+			<div class='menu'>
+				<ul class='h-list'>
+					
+						<li>
+							<a class='flat-box nav-home' href='/'>
+								Home
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-archives' href='/archives'>
+								Archives
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-about' href='/about'>
+								About
+							</a>
+						</li>
+					
+				</ul>
+				<div class='underline'></div>
+			</div>
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon icon-search"></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a href='javascript:void(0)'><span class="icon icon-search flat-box"></span></a></li>
+				
+				<li class='s-menu'><a href='javascript:void(0)'><span class="icon icon-menu flat-box"></span></a></li>
+			</ul>
+		</div>
+		
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				Word of Forks
+			</a>
+
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a href='javascript:void(0)'><span class="icon icon-chat_bubble_outline flat-box"></span></a></li>
+				<li class='s-top'><a href='javascript:void(0)'><span class="icon icon-arrow_upward flat-box"></span></a></li>
+				<li class='s-toc'><a href='javascript:void(0)'><span class="icon icon-format_list_numbered flat-box"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<aside class="menu-phone">
+	<nav>
+		
+			<a href="/" class="nav-home nav">
+				Home
+			</a>
+		
+			<a href="/archives" class="nav-archives nav">
+				Archives
+			</a>
+		
+			<a href="/about" class="nav-about nav">
+				About
+			</a>
+		
+	</nav>
+</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+  <div class="l_body">
+    <div class='container clearfix'>
+      <div class='l_main'>
+        <article id="post-React-chatting-socket-client"
+  class="post white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<section class='meta'>
+	<h2 class="title">
+  	<a href="/2022/03/14/React-chatting-socket-client/">
+    	[React] 혼자 만들어본 채팅 웹 앱(클라이언트 부분)
+    </a>
+  </h2>
+	<time>
+	  3월 14, 2022
+	</time>
+	
+    
+    <div class='cats'>
+        <a href="/categories/React/">React</a>
+    </div>
+
+	</section>
+<!--	-->
+<!--		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#저장소-주소"><span class="toc-number">1.</span> <span class="toc-text">저장소 주소</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#설치"><span class="toc-number">2.</span> <span class="toc-text">설치</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#실행"><span class="toc-number">3.</span> <span class="toc-text">실행</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#설명"><span class="toc-number">4.</span> <span class="toc-text">설명</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#로그인"><span class="toc-number">4.0.1.</span> <span class="toc-text">로그인</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#채팅-메인-페이지"><span class="toc-number">4.0.2.</span> <span class="toc-text">채팅 메인 페이지</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#message"><span class="toc-number">4.0.2.0.1.</span> <span class="toc-text">message</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#loginUser"><span class="toc-number">4.0.2.0.2.</span> <span class="toc-text">loginUser</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#logoutUser"><span class="toc-number">4.0.2.0.3.</span> <span class="toc-text">logoutUser</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#로그인-유저-목록-채팅-룸"><span class="toc-number">4.0.3.</span> <span class="toc-text">로그인 유저 목록(채팅 룸)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#채팅"><span class="toc-number">4.0.4.</span> <span class="toc-text">채팅</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Redux"><span class="toc-number">4.0.5.</span> <span class="toc-text">Redux</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#정리"><span class="toc-number">5.</span> <span class="toc-text">정리</span></a></li></ol></section>-->
+<!--	-->
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>이 포스트는 “[React] 혼자 만들어본 채팅 웹 앱”의 클라이언트 부분 설명입니다.</p>
+<p>관련 글을 보고싶은 분은 글 최하단의 태그 <code>Toy project</code> 링크를 눌러 확인해보세요!</p>
+<p>설명에 앞서 프론트를 전문으로 하는 개발자가 아니기 때문에 어색한 부분이 있을 수 있습니다.</p>
+<p>특히 디자인 부분은.. 더이상의 설명은 생략하겠습니다 ㅜㅜ</p>
+<hr>
+<p>서버와는 다르게 클라이언트는 코드가 긴편이다.</p>
+<a id="more"></a>
+
+
+<h1 id="저장소-주소"><a href="#저장소-주소" class="headerlink" title="저장소 주소"></a>저장소 주소</h1><a href="https://github.com/dev-sawd/chat-react" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://opengraph.githubassets.com/d56d93c00d882fde4c29a51e7f69bd625535b4780717dcbe8d4d9d35ad460f26/dev-sawd/chat-react"></img></div><div class="descriptions"><div class="og-title">GitHub - dev-sawd/chat-react</div><div class="og-description">Contribute to dev-sawd/chat-react development by creating an account on GitHub.</div></div></div></a>
+
+<br>
+
+<h1 id="설치"><a href="#설치" class="headerlink" title="설치"></a>설치</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd workspace</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;dev-sawd&#x2F;chat-react</span><br><span class="line">cd chat-react</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="실행"><a href="#실행" class="headerlink" title="실행"></a>실행</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm start</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h1 id="설명"><a href="#설명" class="headerlink" title="설명"></a>설명</h1><h3 id="로그인"><a href="#로그인" class="headerlink" title="로그인"></a>로그인</h3><img src="/2022/03/14/React-chatting-socket-client/1.png" class="">
+
+<p>내가 만든 채팅 웹 앱은 첫 화면이 로그인 화면이다.</p>
+<p>따라서 로그인 화면이 떴을때 서버와의 소켓 연결을 시도한다.</p>
+<figure class="highlight javascript"><figcaption><span>src/login.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    SocketManager.setSocket(io.connect(<span class="string">'http://localhost:4000'</span>))</span><br><span class="line">&#125;, [])</span><br></pre></td></tr></table></figure>
+
+<p>서버에서는 <code>io.on(&#39;connection&#39;, (socket) =&gt; {...}</code> 이벤트가 호출된다.</p>
+<figure class="highlight javascript"><figcaption><span>src/login.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 로그인 버튼 onClick</span></span><br><span class="line">onClick=&#123;() =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (userName === <span class="string">''</span>)</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  dispatch(setLoginUser(userName));</span><br><span class="line">  SocketManager.getSocket().emit(<span class="string">'login'</span>, &#123;userName&#125;);</span><br><span class="line">  SocketManager.getSocket().on(<span class="string">'returnLoginResponse'</span>,</span><br><span class="line">      <span class="function"><span class="keyword">function</span>(<span class="params">result, userNameList</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (result) &#123;</span><br><span class="line">          dispatch(setUserNameList(userNameList));</span><br><span class="line">          navigate(<span class="string">'/main'</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          alert(<span class="string">'같은 아이디가 이미 존재합니다'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>입력한 ID가 공백이 아니라면 서버로 <code>login</code> 이벤트를 호출한다.</p>
+<p>이후 서버로부터 <code>returnLoginResponse</code> 이벤트가 호출됐을때 채팅 메인페이지로 이동하거나 같은 아이디가 존재하는지 경고창을 보이는등의 처리를 한다.</p>
+<blockquote><p>지금 보니 <code>returnLoginResponse</code> 이벤트는 useEffect에서 지정하면 조금 더 좋을것 같다.</p>
+</blockquote>
+
+<br>
+
+<h3 id="채팅-메인-페이지"><a href="#채팅-메인-페이지" class="headerlink" title="채팅 메인 페이지"></a>채팅 메인 페이지</h3><img src="/2022/03/14/React-chatting-socket-client/2.png" class="">
+
+<p>스크린샷의 좌측 리스트 영역으로 로그인한 사용자 목록과 함께 가장 최근 리스트를 간략하게 보여준다.</p>
+<p>우측은 간단한 웰컴 페이지와 함께 대화 상대를 선택하면 채팅 방으로 변경된다.</p>
+<p>이 화면에서는 주로 state에 따라 UI를 변경하고 소켓으로부터 받은 정보를 Redux에 전달한다.</p>
+<figure class="highlight javascript"><figcaption><span>src/chat.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">useEffect(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    socket.on(<span class="string">'message'</span>, (message) =&gt; &#123;</span><br><span class="line">        dispatch(addMessage(message))</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    socket.on(<span class="string">'loginUser'</span>, (userName) =&gt; &#123;</span><br><span class="line">        dispatch(addUserName(userName))</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    socket.on(<span class="string">'logoutUser'</span>, (userName) =&gt; &#123;</span><br><span class="line">        dispatch(deleteUserName(userName))</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;, [])</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h5 id="message"><a href="#message" class="headerlink" title="message"></a>message</h5><p>서버에서 <code>message</code> 이벤트를 호출해 메세지를 수신하면 Redux로 저장한다.</p>
+<br>
+
+<h5 id="loginUser"><a href="#loginUser" class="headerlink" title="loginUser"></a>loginUser</h5><p>서버에서 <code>loginUser</code> 이벤트를 호출해 추가로 로그인한 사용자 정보를 Redux로 저장한다. </p>
+<br>
+
+<h5 id="logoutUser"><a href="#logoutUser" class="headerlink" title="logoutUser"></a>logoutUser</h5><p>서버에서 <code>logoutUser</code> 이벤트를 호출해 로그아웃한 사용자 정보를 Redux에서 삭제한다.</p>
+<p>위의 조합을 통해 채팅 목록과 유저 목록을 관리한다.</p>
+<br>
+
+<h3 id="로그인-유저-목록-채팅-룸"><a href="#로그인-유저-목록-채팅-룸" class="headerlink" title="로그인 유저 목록(채팅 룸)"></a>로그인 유저 목록(채팅 룸)</h3><p>좌측 로그인 유저 목록을 관리하는 컴포넌트로 Redux에 저장된 <code>usernameList</code>를 통해 해당 목록을 보여준다.</p>
+<figure class="highlight javascript"><figcaption><span>src/components/chatRoomSide.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">userNameList.map(<span class="function">(<span class="params">userName</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (userName !== loginUser) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">ChatRoomBox</span> <span class="attr">key</span>=<span class="string">&#123;userName&#125;</span> <span class="attr">userName</span>=<span class="string">&#123;userName&#125;</span></span></span></span><br><span class="line"><span class="xml">                        lastMessage=&#123;messageList.filter(</span></span><br><span class="line"><span class="xml">                            message =&gt; ((message.sendUserName ===</span></span><br><span class="line"><span class="xml">                                    loginUser &amp;&amp;</span></span><br><span class="line"><span class="xml">                                    message.targetUserName === userName)</span></span><br><span class="line"><span class="xml">                                ||</span></span><br><span class="line"><span class="xml">                                (message.sendUserName === userName &amp;&amp;</span></span><br><span class="line"><span class="xml">                                    message.targetUserName ===</span></span><br><span class="line"><span class="xml">                                    loginUser)))&#125;</span></span><br><span class="line"><span class="xml">                        onClick=&#123;() =&gt; &#123;</span></span><br><span class="line"><span class="xml">                          dispatch(setTargetUserName(userName));</span></span><br><span class="line"><span class="xml">                        &#125;&#125;/&gt;</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="채팅"><a href="#채팅" class="headerlink" title="채팅"></a>채팅</h3><p>유저 목록에서 채팅할 상대를 선택하면 우측 영역이 채팅 영역으로 변경된다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">props.messages.map(<span class="function">(<span class="params">message, index</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (message.sendUserName === loginUser)</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">MyMessageBox</span> <span class="attr">key</span>=<span class="string">&#123;index&#125;</span> <span class="attr">message</span>=<span class="string">&#123;message.message&#125;/</span>&gt;</span></span>;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">OtherMessageBox</span> <span class="attr">key</span>=<span class="string">&#123;index&#125;</span> <span class="attr">message</span>=<span class="string">&#123;message.message&#125;/</span>&gt;</span></span>;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>내가 보낸 메세지인지, 상대방으로 부터 받은 메세지인지를 판단해서 좌측 또는 우측에 메세지를 배치시킨다.</p>
+<h3 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h3><p>부모 컴포넌트에서 자식 컴포넌트로 반복적인 props 전달 및 state관리를 조금 더 편하게 하기 위해서 REDUX를 사용했다.</p>
+<a href="https://ko.redux.js.org/" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://ko.redux.js.org/img/redux-logo-landscape.png"></img></div><div class="descriptions"><div class="og-title">Redux - 자바스크립트 앱을 위한 예측 가능한 상태 컨테이너. | Redux</div><div class="og-description">자바스크립트 앱을 위한 예측 가능한 상태 컨테이너.</div></div></div></a>
+
+<p>이 사이트의 Quick Start 부분을 그대로 따라해서 구조를 잡았다.</p>
+<figure class="highlight javascript"><figcaption><span>features/chatSlice.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 채팅 관련 state 관리</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> chatSlice = createSlice(&#123;</span><br><span class="line">  name: <span class="string">'chat'</span>,</span><br><span class="line">  initialState: &#123;</span><br><span class="line">    targetUserName: <span class="literal">null</span>,</span><br><span class="line">    userNameList: [],</span><br><span class="line">    messageList: [],</span><br><span class="line">  &#125;,</span><br><span class="line">  reducers: &#123;</span><br><span class="line">    setTargetUserName: <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">      state.targetUserName = action.payload;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    setUserNameList: <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">      state.userNameList = action.payload;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    addUserName: <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">      state.userNameList = [...state.userNameList, action.payload];</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    deleteUserName: <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">      state.userNameList = state.userNameList.filter(<span class="function"><span class="keyword">function</span>(<span class="params">userNameElement</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> userNameElement !== action.payload;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    setMessageList: <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">      state.messageList = action.payload;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    addMessage: <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">      state.messageList = [...state.messageList, action.payload];</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>채팅과 관련된 state를 관리한다.</p>
+<p>예를들면 채팅 가능한 상대들의 목록이나 채팅 상대 지정, 메세지 목록등의 정보를 저장한다.</p>
+<blockquote><p>처음부터 더 고민해서 만들었다면 조금 더 일관적인 구조가 되었을것 같다.<br>코드 자체는 간단하지만 구조에 기준이 없는 조잡한느낌..</p>
+</blockquote>
+
+<figure class="highlight javascript"><figcaption><span>features/loginSlice.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 로그인한 내 정보 관리</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> loginSlice = createSlice(&#123;</span><br><span class="line">    name: <span class="string">'loginUser'</span>,</span><br><span class="line">    initialState: &#123;</span><br><span class="line">        user: <span class="literal">null</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    reducers: &#123;</span><br><span class="line">        setLoginUser: <span class="function">(<span class="params">state, action</span>) =&gt;</span> &#123;</span><br><span class="line">            state.user = action.payload</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>로그인한 내 정보를 관리한다.</p>
+<p>이 정보를 이용해 유저 목록에서 내 정보를 가장 위에 배치하거나 내가 보낸 메세지인지 받은 메세지인지를 구분하는등의 정보로 사용한다.</p>
+<br>
+
+<h1 id="정리"><a href="#정리" class="headerlink" title="정리"></a>정리</h1><p>이곳저곳 더 신경쓰거나 DB를 추가한다면 더 괜찮은 채팅 웹 앱이 될 수 있다고 생각한다.</p>
+<p>이 프로젝트 개발하면서 또 다른것을 만들어야겠다는 생각이 들었던 만큼 재미있는 프로젝트였다.</p>
+
+  	</div>
+	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/Toy-project/">Toy project</a>
+      
+	  </div>
+    
+		
+	
+		<div class="art-item-footer">
+				
+				
+					<span class="art-item-right">next：<a href="/2022/03/13/Node-js-chatting-socket-server/" rel="next"  title="[Node.js] 혼자 만들어본 채팅 웹 앱(서버 부분)">
+						[Node.js] 혼자 만들어본 채팅 웹 앱(서버 부분)
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+</article>
+<script>
+	window.subData = {
+		title: '[React] 혼자 만들어본 채팅 웹 앱(클라이언트 부분)',
+		tools: true
+	}
+</script>
+
+      </div>
+      <aside class='l_side'>
+        
+  <section class='m_widget about'>
+
+<div class='header'>SAWD</div>
+<div class='content'>
+<div class='desc'>시간이 나면 쓰는 블로그</div>
+</div>
+</section>
+
+  <section class='m_widget categories'>
+<div class='header'>Categories</div>
+<div class='content'>
+    
+    <ul class="entry">
+    
+        <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badget'>8</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/CSS/"><div class='name'>CSS</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Chaincode/"><div class='name'>Chaincode</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Data-Structure/"><div class='name'>Data Structure</div><div class='badget'>6</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Docker/"><div class='name'>Docker</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>9</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/GitLab/"><div class='name'>GitLab</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Github/"><div class='name'>Github</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Golang/"><div class='name'>Golang</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Hyperledger-Fabric/"><div class='name'>Hyperledger Fabric</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Linux/"><div class='name'>Linux</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MacOS/"><div class='name'>MacOS</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MySQL/"><div class='name'>MySQL</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Node-js/"><div class='name'>Node.js</div><div class='badget'>5</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Objective-C/"><div class='name'>Objective-C</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/React/"><div class='name'>React</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Samll-talk/"><div class='name'>Samll talk</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/iOS/"><div class='name'>iOS</div><div class='badget'>4</div></a></li>
+    
+    </ul>
+    
+</div>
+</section>
+
+  
+<div class="m_widget tagcloud">
+    <div class="header">Tags</div>
+    <div class='content'>
+        <a href="/tags/Chaincode/" style="font-size: 16px; color: #555">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 15px; color: #6b6b6b">ETC</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Pattern/" style="font-size: 14px; color: #808080">Pattern</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a>
+    </div>
+</div>
+
+
+
+      </aside>
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+  </div>
+  <footer id="footer" class="clearfix">
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="https://github.com/dev-sawd" class="social github"
+          target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+<!--  <div>Theme <a href='https://github.com/stkevintan/hexo-theme-material-flow' target="_blank" rel="noopener" class="codename">MaterialFlow</a> designed by <a href="http://keyin.me/" target="_blank">Kevin Tan</a>.</div>-->
+  
+</footer>
+
+
+  <script>setLoadingBarProgress(80);</script>
+  
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='/js/waves.min.js'></script>
+<script src="/js/scrollreveal.min.js"></script>
+
+<script src="/js/jquery.fitvids.js"></script>
+
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "hexo";
+  var ROOT = "/"||"/";
+  if(!ROOT.endsWith('/'))ROOT += '/';
+</script>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/app.js"></script>
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
