@@ -148,6 +148,48 @@
   <section class="meta">
     
     <h2 class="title">
+      <a href="/2018/07/15/Data-Structure-Recursion/">
+        [Data Structure] Recursion
+      </a>
+    </h2>
+    
+    <time>
+      2018년 7월 15일
+    </time>
+		
+    
+    <div class='cats'>
+        <a href="/categories/Data-Structure/">Data Structure</a>
+    </div>
+
+  </section>
+  <section class="article typo">
+	  <p><a href="https://docs.google.com/presentation/d/1ctqfIf-ZW4M2rDRcjYI5yng5YiTCm__Mharz616kqR0/edit?usp=sharing" target="_blank" rel="noopener">원본자료</a></p>
+<h1 id="시작"><a href="#시작" class="headerlink" title="시작"></a>시작</h1><p>자료구조 두번째 포스팅입니다.<br>인트로보다 짧아서 부담이 덜하네요 ㅎㅎ..</p>
+<img src="/2018/07/15/Data-Structure-Recursion/2.jpg" class="">
+
+    
+	  <div class="readmore">
+      <a href="/2018/07/15/Data-Structure-Recursion/">📖 Read More</a>
+    </div>
+    
+    
+    
+	  <div class="full-width auto-padding tags">
+      
+        <a href="/tags/TIL/">TIL</a>
+      
+	  </div>
+    
+  </section>
+</article>
+    </div>
+  
+    <div class='post-wrapper'>
+      <article class="post reveal">
+  <section class="meta">
+    
+    <h2 class="title">
       <a href="/2018/07/11/Data-Structure-Intro/">
         [Data Structure] Intro
       </a>
@@ -537,50 +579,6 @@
 </article>
     </div>
   
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/06/16/iOS-How-to-add-tapgesture-at-UILabel/">
-        [iOS] UILabel을 클릭했을때 처리
-      </a>
-    </h2>
-    
-    <time>
-      2018년 6월 16일
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/iOS/">iOS</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <h1 id="개인-프로젝트를-진행하면서"><a href="#개인-프로젝트를-진행하면서" class="headerlink" title="개인 프로젝트를 진행하면서.."></a>개인 프로젝트를 진행하면서..</h1><p>UILabel을 탭했을때 페이지를 넘어가거나 특정 일을 처리해야 하는 경우가 생겼습니다.<br>iOS와 특히 Objective C 문법 개념을 같이 학습하려고 하니 필요한 부분들은 정리해 둘 필요가 있는것 같습니다.<br><del>그래야 안잊어 버립니다..</del></p>
-<p>검색해보니 생각보다 간단하게 처리할 수 있을 것 같습니다.<br>저는 viewDidLoad에 아래와 같이 UILabel을 클릭했을때 호출할 delegate와 action을 설정하였습니다.</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    ...</span><br><span class="line">    [labelMenu setUserInteractionEnabled:<span class="literal">YES</span>];</span><br><span class="line">    <span class="built_in">UITapGestureRecognizer</span> *tapGesture = [[<span class="built_in">UITapGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(labelTap:)];</span><br><span class="line">    [tapGesture setDelegate:<span class="keyword">self</span>];</span><br><span class="line">    [labelMenu addGestureRecognizer:tapGesture];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>그리고 같은 파일안에서 labelTap을 정의하고 처리작업을 넣었습니다.</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)labelTap:(<span class="built_in">UITapGestureRecognizer</span> *)recognizer &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"label is tapped"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>이제 해당 UILabel을 클릭하면 Log가 찍히는 것을 볼 수 있을 것입니다.</p>
-
-
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
 </section>
 
 
@@ -621,7 +619,7 @@
     
         <li><a class="flat-box" href="/categories/CSS/"><div class='name'>CSS</div><div class='badget'>1</div></a></li>
     
-        <li><a class="flat-box" href="/categories/Chaincode/"><div class='name'>Chaincode</div><div class='badget'>3</div></a></li>
+        <li><a class="flat-box" href="/categories/Chaincode/"><div class='name'>Chaincode</div><div class='badget'>4</div></a></li>
     
         <li><a class="flat-box" href="/categories/Data-Structure/"><div class='name'>Data Structure</div><div class='badget'>6</div></a></li>
     
@@ -662,7 +660,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class='content'>
-        <a href="/tags/Chaincode/" style="font-size: 16px; color: #555">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 15px; color: #6b6b6b">ETC</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Pattern/" style="font-size: 14px; color: #808080">Pattern</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a>
+        <a href="/tags/Chaincode/" style="font-size: 15px; color: #6b6b6b">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 15px; color: #6b6b6b">ETC</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 15px; color: #6b6b6b">체인코드에서의 MVC...?</a>
     </div>
 </div>
 
