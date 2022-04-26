@@ -149,6 +149,50 @@
   <section class="meta">
     
     <h2 class="title">
+      <a href="/2022/04/26/Golang-tesseract-ocr/">
+        [Golang] Tesseract를 이용한 OCR
+      </a>
+    </h2>
+    
+    <time>
+      2022년 4월 26일
+    </time>
+		
+    
+    <div class='cats'>
+        <a href="/categories/Golang/">Golang</a>
+    </div>
+
+  </section>
+  <section class="article typo">
+	  <p>토이 프로젝트에서 OCR을 할 일이 생김</p>
+<p>Go언어를 이용할거라 찾아봤는데 역시나 있음!</p>
+<a href="https://github.com/otiai10/gosseract" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://opengraph.githubassets.com/677741f2acde7b343801e159301ce0a3fdd6dbc25b97fae5362ac82c9bdbf6ae/otiai10/gosseract"></img></div><div class="descriptions"><div class="og-title">GitHub - otiai10/gosseract: Go package for OCR (Optical Character Recognition), by using Tesseract C++ library</div><div class="og-description">Go package for OCR (Optical Character Recognition), by using Tesseract C++ library - GitHub - otiai10/gosseract: Go package for OCR (Optical…</div></div></div></a>
+
+    
+	  <div class="readmore">
+      <a href="/2022/04/26/Golang-tesseract-ocr/">📖 Read More</a>
+    </div>
+    
+    
+    
+	  <div class="full-width auto-padding tags">
+      
+        <a href="/tags/Golang/">Golang</a>
+      
+        <a href="/tags/OCR/">OCR</a>
+      
+	  </div>
+    
+  </section>
+</article>
+    </div>
+  
+    <div class='post-wrapper'>
+      <article class="post reveal">
+  <section class="meta">
+    
+    <h2 class="title">
       <a href="/2022/04/22/Golang-mvc-pattern2/">
         [Chaincode] 체인코드에서의 MVC...? (2)
       </a>
@@ -171,17 +215,10 @@
 <hr>
 <h1 id="폴더-구조"><a href="#폴더-구조" class="headerlink" title="폴더 구조"></a>폴더 구조</h1><h3 id="기존-프로젝트-구조"><a href="#기존-프로젝트-구조" class="headerlink" title="기존 프로젝트 구조"></a>기존 프로젝트 구조</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\GOPROJECT\SRC\MVC</span><br><span class="line">├─controller</span><br><span class="line">├─dao</span><br><span class="line">├─dto</span><br><span class="line">└─service</span><br></pre></td></tr></table></figure>
 
-<p>이 구조의 문제는 큰 기능별로 패키지를 묶었는데 Golang의 패키지 사상과 맞지 않았음</p>
-<p>프로젝트의 덩치가 커지면 여기 저기 파일을 생성해 개발하고 또 수정되면 각 폴더를 찾아가며 관련 부분을 수정해야하는 불편함이 발생</p>
-<h3 id="수정된-프로젝트-구조"><a href="#수정된-프로젝트-구조" class="headerlink" title="수정된 프로젝트 구조"></a>수정된 프로젝트 구조</h3><p>feature 별로 패키지를 묶고 개발 및 수정시 여기저기 폴더를 이동하며 수정하는 불편함을 최소화</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">\GOPROJECT\SRC\MVC</span><br><span class="line">|   main.go</span><br><span class="line">|   personController.go</span><br><span class="line">|</span><br><span class="line">+---DB</span><br><span class="line">|       DBManager.go</span><br><span class="line">|</span><br><span class="line">\---person</span><br><span class="line">        person.go</span><br><span class="line">        service.go</span><br></pre></td></tr></table></figure>
-
-<h1 id="person에서-다른-서비스를-호출해야-할때"><a href="#person에서-다른-서비스를-호출해야-할때" class="headerlink" title="person에서 다른 서비스를 호출해야 할때"></a>person에서 다른 서비스를 호출해야 할때</h1><p>고민을 많이 했던 부분인데 결과적으로는 person controller에서 다른 feature의 service를 호출하는것으로 생각</p>
-<p>person의 service에서 다른 feature의 service를 호출하지 않은 이유는 service는 해당 feature의 기능만 담당해 feature간 의존성을 줄이기 위해서 service를 호출하는것은 controller</p>
-<p>그리고 호출 순서도 controller에서 관리</p>
-<script src="//gist.github.com/033504fe87a1ce67c602773803bd6061.js"></script>
-
-
+    
+	  <div class="readmore">
+      <a href="/2022/04/22/Golang-mvc-pattern2/">📖 Read More</a>
+    </div>
     
     
     
@@ -236,7 +273,7 @@
     
         <li><a class="flat-box" href="/categories/Github/"><div class='name'>Github</div><div class='badget'>3</div></a></li>
     
-        <li><a class="flat-box" href="/categories/Golang/"><div class='name'>Golang</div><div class='badget'>4</div></a></li>
+        <li><a class="flat-box" href="/categories/Golang/"><div class='name'>Golang</div><div class='badget'>5</div></a></li>
     
         <li><a class="flat-box" href="/categories/Hyperledger-Fabric/"><div class='name'>Hyperledger Fabric</div><div class='badget'>2</div></a></li>
     
@@ -265,7 +302,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class='content'>
-        <a href="/tags/Chaincode/" style="font-size: 15px; color: #6b6b6b">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 15px; color: #6b6b6b">ETC</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 15px; color: #6b6b6b">체인코드에서의 MVC...?</a>
+        <a href="/tags/Chaincode/" style="font-size: 15px; color: #6b6b6b">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 15px; color: #6b6b6b">ETC</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/OCR/" style="font-size: 14px; color: #808080">OCR</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 15px; color: #6b6b6b">체인코드에서의 MVC...?</a>
     </div>
 </div>
 
