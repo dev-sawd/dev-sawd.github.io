@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html translate="no">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>[ETC] 운영중인 http 사이트를 https로... | SAWD</title>
+  <meta name="description" content="시간이 나야지..." />
+  <meta name="keywords" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/images/favicon.png">
+  <link rel="alternate" href="/atom.xml" title="SAWD">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="기존에 공부하면서 만든 사이트는 http로 운영되고 있었습니다. 그런데 사용자가 조금씩 늘고 https도 공부해서 바꿔야 겠다는 생각이 문득 들더군요.. 그래서 시도해봤습니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[ETC] 운영중인 http 사이트를 https로...">
+<meta property="og:url" content="https://dev-sawd.github.io/2022/12/07/ETC-http-to-https/index.html">
+<meta property="og:site_name" content="SAWD">
+<meta property="og:description" content="기존에 공부하면서 만든 사이트는 http로 운영되고 있었습니다. 그런데 사용자가 조금씩 늘고 https도 공부해서 바꿔야 겠다는 생각이 문득 들더군요.. 그래서 시도해봤습니다.">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://dev-sawd.github.io/2022/12/07/ETC-http-to-https/1.png">
+<meta property="og:image" content="https://dev-sawd.github.io/2022/12/07/ETC-http-to-https/2.png">
+<meta property="og:image" content="https://dev-sawd.github.io/2022/12/07/ETC-http-to-https/3.png">
+<meta property="article:published_time" content="2022-12-07T08:38:14.000Z">
+<meta property="article:modified_time" content="2022-12-07T09:29:43.733Z">
+<meta property="article:author" content="SAWD">
+<meta property="article:tag" content="AWS">
+<meta property="article:tag" content="Node.js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dev-sawd.github.io/2022/12/07/ETC-http-to-https/1.png">
+    
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href='/css/waves.min.css' rel='stylesheet'>
+  
+<link rel="stylesheet" href="/style.css">
+
+
+  
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-120934734-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="SAWD" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+  <script>setLoadingBarProgress(20)</script> 
+  <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				SAWD
+			</a>
+			<div class='menu'>
+				<ul class='h-list'>
+					
+						<li>
+							<a class='flat-box nav-home' href='/'>
+								Home
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-archives' href='/archives'>
+								Archives
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-about' href='/about'>
+								About
+							</a>
+						</li>
+					
+				</ul>
+				<div class='underline'></div>
+			</div>
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon icon-search"></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a href='javascript:void(0)'><span class="icon icon-search flat-box"></span></a></li>
+				
+				<li class='s-menu'><a href='javascript:void(0)'><span class="icon icon-menu flat-box"></span></a></li>
+			</ul>
+		</div>
+		
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				Word of Forks
+			</a>
+
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a href='javascript:void(0)'><span class="icon icon-chat_bubble_outline flat-box"></span></a></li>
+				<li class='s-top'><a href='javascript:void(0)'><span class="icon icon-arrow_upward flat-box"></span></a></li>
+				<li class='s-toc'><a href='javascript:void(0)'><span class="icon icon-format_list_numbered flat-box"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<aside class="menu-phone">
+	<nav>
+		
+			<a href="/" class="nav-home nav">
+				Home
+			</a>
+		
+			<a href="/archives" class="nav-archives nav">
+				Archives
+			</a>
+		
+			<a href="/about" class="nav-about nav">
+				About
+			</a>
+		
+	</nav>
+</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+  <div class="l_body">
+    <div class='container clearfix'>
+      <div class='l_main'>
+        <article id="post-ETC-http-to-https"
+  class="post white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<section class='meta'>
+	<h2 class="title">
+  	<a href="/2022/12/07/ETC-http-to-https/">
+    	[ETC] 운영중인 http 사이트를 https로...
+    </a>
+  </h2>
+	<time>
+	  12월 7, 2022
+	</time>
+	
+    
+    <div class='cats'>
+        <a href="/categories/ETC/">ETC</a>
+    </div>
+
+	</section>
+<!--	-->
+<!--		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#환경"><span class="toc-number">1.</span> <span class="toc-text">환경</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTPS-443-포트-열기"><span class="toc-number">1.0.1.</span> <span class="toc-text">HTTPS(443) 포트 열기</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTPS-443-포트를-8080으로-포트포워딩"><span class="toc-number">1.0.2.</span> <span class="toc-text">HTTPS(443) 포트를 8080으로 포트포워딩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#기존-http-서버-코드를-https로-변경"><span class="toc-number">1.0.3.</span> <span class="toc-text">기존 http 서버 코드를 https로 변경</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#기존-http-서버를-대체할-코드"><span class="toc-number">1.0.4.</span> <span class="toc-text">기존 http 서버를 대체할 코드</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pm2를-이용해-구동"><span class="toc-number">1.0.5.</span> <span class="toc-text">pm2를 이용해 구동</span></a></li></ol></li></ol></li></ol></section>-->
+<!--	-->
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>기존에 공부하면서 만든 사이트는 http로 운영되고 있었습니다.</p>
+<p>그런데 사용자가 조금씩 늘고 https도 공부해서 바꿔야 겠다는 생각이 문득 들더군요..</p>
+<p>그래서 시도해봤습니다.</p>
+<a id="more"></a>
+
+<p>가장 좋은 방법은 개발 단계에서 https로 개발해서 오픈했으면 좋았겠지만 실력이나 시간적으로 여유가 없었습니다.</p>
+<p>https로 바꾸면서 http의 서비스를 갑자기 막을수는 없고 https로의 유도가 필요했습니다.</p>
+<p>처음에는 <code>http 페이지에 xx월 xx일에 http가 만료되니 https로 접속해주세요!</code> 라고 안내할까 했습니다.</p>
+<p>하지만 제가 사용자라면 저 문구를 발견하고 https로 다시 접속해야하는 불편함이 분명하게 있을거라 판단했습니다.</p>
+<p>고민 끝에 <code>https를 완전히 막지 않고 http로 접근한 사용자에게 https로 강제 이동시키는 방향</code>으로 개발했습니다.</p>
+<h1 id="환경"><a href="#환경" class="headerlink" title="환경"></a>환경</h1><p>AWS에서 Express로 구성했고 pm2로 관리하고있었습니다.</p>
+<h3 id="HTTPS-443-포트-열기"><a href="#HTTPS-443-포트-열기" class="headerlink" title="HTTPS(443) 포트 열기"></a>HTTPS(443) 포트 열기</h3><img src="/2022/12/07/ETC-http-to-https/1.png" class="">
+<p>좌측 메뉴에서 인스턴스를 선택 하고 현재 사용중인 인스턴스의 보안 그룹 이름을 확인합니다.</p>
+<img src="/2022/12/07/ETC-http-to-https/2.png" class="">
+<p>확인한 보안 그룹 아이템을 선택하여 하단의 인바운드 규칙 탭에서 인바운드 규칙 편집을 선택합니다.</p>
+<img src="/2022/12/07/ETC-http-to-https/3.png" class="">
+<p>좌측 하단의 규칙 추가를 선택하여 HTTPS를 선택하여 443포트를 열어줍니다.</p>
+<br>
+
+<h3 id="HTTPS-443-포트를-8080으로-포트포워딩"><a href="#HTTPS-443-포트를-8080으로-포트포워딩" class="headerlink" title="HTTPS(443) 포트를 8080으로 포트포워딩"></a>HTTPS(443) 포트를 8080으로 포트포워딩</h3><p>저는 기존에도 HTTP(80) 포트를 8000으로 포트포워딩해서 쓰고있었습니다.</p>
+<p>이번에는 HTTPS(443) 포트를 8080으로 포트포워딩 설정을 해서 구성할겁니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo iptables -t nat -A PREROUTING -p tcp --dport 443 -j REDIRECT --to-port 8080</span><br></pre></td></tr></table></figure>
+
+<p>잘 설정되었는지 확인합니다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo iptables -L -t nat </span><br><span class="line">Chain PREROUTING (policy ACCEPT) </span><br><span class="line">target     prot opt source               destination </span><br><span class="line">REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:https redir ports 8080 </span><br><span class="line">REDIRECT   tcp  --  anywhere             anywhere             tcp dpt:http redir ports 8000</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="기존-http-서버-코드를-https로-변경"><a href="#기존-http-서버-코드를-https로-변경" class="headerlink" title="기존 http 서버 코드를 https로 변경"></a>기존 http 서버 코드를 https로 변경</h3><p>SSL 인증서 사이트로 부터 받은 파일들을 이용해 createServer의 옵션을 아래와 같이 설정해줍니다.</p>
+<figure class="highlight javascript"><figcaption><span>https_server.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// require 생략</span></span><br><span class="line"><span class="keyword">const</span> HTTPS_PORT = <span class="number">8080</span>;</span><br><span class="line"><span class="keyword">const</span> options = &#123;</span><br><span class="line">  key: fs.readFileSync(KEY_PEM_PATH), </span><br><span class="line">  cert: fs.readFileSync(CRT_PEM_PATH),</span><br><span class="line">  ca : fs.readFileSync(CA_PEM_PATH)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">https.createServer(options, (req, res) =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`SSL Server is running at port <span class="subst">$&#123;HTTPS_PORT&#125;</span>`</span>);</span><br><span class="line">&#125;).listen(HTTPS_PORT);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="기존-http-서버를-대체할-코드"><a href="#기존-http-서버를-대체할-코드" class="headerlink" title="기존 http 서버를 대체할 코드"></a>기존 http 서버를 대체할 코드</h3><p>기존의 8000포트 서버를 8080 https용으로 변경했으니 8000포트의 새 서버를 만들어줬습니다.</p>
+<figure class="highlight javascript"><figcaption><span>http_server.js</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>); </span><br><span class="line"><span class="keyword">const</span> app = express(); </span><br><span class="line"><span class="keyword">const</span> HTTP_PORT = <span class="number">8000</span>; </span><br><span class="line">app.get(<span class="string">'/'</span>, (req, res) =&gt; &#123; </span><br><span class="line">    res.sendFile(__dirname + <span class="string">'/index.html'</span>) </span><br><span class="line">&#125;); </span><br><span class="line">app.listen(HTTP_PORT, () =&gt; &#123; </span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Server is running at port <span class="subst">$&#123;HTTP_PORT&#125;</span>`</span>); </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>html의 meta 태그를 이용해 즉시 https url로 이동시켜줄겁니다.</p>
+<figure class="highlight html"><figcaption><span>index.html</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"refresh"</span> <span class="attr">content</span>=<span class="string">"0; url=https://YOUR_HTTPS_URL"</span>&gt;</span><span class="tag">&lt;/<span class="name">meta</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="pm2를-이용해-구동"><a href="#pm2를-이용해-구동" class="headerlink" title="pm2를 이용해 구동"></a>pm2를 이용해 구동</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ pm2 start http_server.js --name http_server</span><br><span class="line">$ pm2 start https_server.js --name https_server</span><br></pre></td></tr></table></figure>
+
+<p>잘 구동되는지 확인해봅시다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ pm2 list </span><br><span class="line">┌─────┬───────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐ </span><br><span class="line">│ id  │ name              │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │ </span><br><span class="line">├─────┼───────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤ </span><br><span class="line">│ 17  │ https_server      │ default     │ N&#x2F;A     │ fork    │ 495678   │ 0M     │ 0    │ online    │ 0%       │ 42.1mb   │ ubuntu   │ disabled │ </span><br><span class="line">│ 3   │ http_server       │ default     │ N&#x2F;A     │ fork    │ 147708   │ 0M     │ 0    │ online    │ 0%       │ 20.3mb   │ ubuntu   │ disabled │ </span><br><span class="line">└─────┴───────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘</span><br></pre></td></tr></table></figure>
+
+<p>그리고 실제로 기존 http url로 접속하여 https로 이동시켜주는지 확인하면 작업은 끝납니다.</p>
+
+  	</div>
+	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/AWS/">AWS</a>
+      
+        <a href="/tags/Node-js/">Node.js</a>
+      
+	  </div>
+    
+		
+	
+		<div class="art-item-footer">
+				
+				
+					<span class="art-item-right">next：<a href="/2022/04/26/Golang-tesseract-ocr/" rel="next"  title="[Golang] Tesseract를 이용한 OCR">
+						[Golang] Tesseract를 이용한 OCR
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+</article>
+<script>
+	window.subData = {
+		title: '[ETC] 운영중인 http 사이트를 https로...',
+		tools: true
+	}
+</script>
+
+      </div>
+      <aside class='l_side'>
+        
+  <section class='m_widget about'>
+
+<div class='header'>SAWD</div>
+<div class='content'>
+<div class='desc'>시간이 나면 쓰는 블로그</div>
+</div>
+</section>
+
+  <section class='m_widget categories'>
+<div class='header'>Categories</div>
+<div class='content'>
+    
+    <ul class="entry">
+    
+        <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badget'>8</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/CSS/"><div class='name'>CSS</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Chaincode/"><div class='name'>Chaincode</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Data-Structure/"><div class='name'>Data Structure</div><div class='badget'>6</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Docker/"><div class='name'>Docker</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>10</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/GitLab/"><div class='name'>GitLab</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Github/"><div class='name'>Github</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Golang/"><div class='name'>Golang</div><div class='badget'>5</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Hyperledger-Fabric/"><div class='name'>Hyperledger Fabric</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Linux/"><div class='name'>Linux</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MacOS/"><div class='name'>MacOS</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MySQL/"><div class='name'>MySQL</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Node-js/"><div class='name'>Node.js</div><div class='badget'>5</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Objective-C/"><div class='name'>Objective-C</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/React/"><div class='name'>React</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Samll-talk/"><div class='name'>Samll talk</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/iOS/"><div class='name'>iOS</div><div class='badget'>4</div></a></li>
+    
+    </ul>
+    
+</div>
+</section>
+
+  
+<div class="m_widget tagcloud">
+    <div class="header">Tags</div>
+    <div class='content'>
+        <a href="/tags/AWS/" style="font-size: 14px; color: #808080">AWS</a> <a href="/tags/Chaincode/" style="font-size: 15px; color: #6b6b6b">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 15px; color: #6b6b6b">ETC</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #808080">Node.js</a> <a href="/tags/OCR/" style="font-size: 14px; color: #808080">OCR</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 15px; color: #6b6b6b">체인코드에서의 MVC...?</a>
+    </div>
+</div>
+
+
+
+      </aside>
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+  </div>
+  <footer id="footer" class="clearfix">
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="https://github.com/dev-sawd" class="social github"
+          target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+<!--  <div>Theme <a href='https://github.com/stkevintan/hexo-theme-material-flow' target="_blank" rel="noopener" class="codename">MaterialFlow</a> designed by <a href="http://keyin.me/" target="_blank">Kevin Tan</a>.</div>-->
+  
+</footer>
+
+
+  <script>setLoadingBarProgress(80);</script>
+  
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='/js/waves.min.js'></script>
+<script src="/js/scrollreveal.min.js"></script>
+
+<script src="/js/jquery.fitvids.js"></script>
+
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "hexo";
+  var ROOT = "/"||"/";
+  if(!ROOT.endsWith('/'))ROOT += '/';
+</script>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/app.js"></script>
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
