@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dev-sawd.github.io/"/>
-  <updated>2022-12-07T09:29:43.733Z</updated>
+  <updated>2022-12-08T19:50:41.329Z</updated>
   <id>https://dev-sawd.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>[ETC] 구글 크롬 번역 팝업 끄기</title>
+    <link href="https://dev-sawd.github.io/2022/12/09/ETC-disable-google-translate/"/>
+    <id>https://dev-sawd.github.io/2022/12/09/ETC-disable-google-translate/</id>
+    <published>2022-12-08T19:44:52.000Z</published>
+    <updated>2022-12-08T19:50:41.329Z</updated>
+    
+    <content type="html"><![CDATA[<p>현재 블로그를 사용하는데 있어 영어가 많은 페이지의 경우 크롬의 우측 상단에 번역 팝업이 자꾸 뜨는것을 볼 수 있었습니다.</p><p>이전에 1차적으로 html 태그에 번역 기능을 끄는 정보를 넣었습니다. </p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">translate</span>=<span class="string">"no"</span>&gt;</span></span><br></pre></td></tr></table></figure><p>하지만 일부 페이지는 정상 동작하지만 일부 페이지에서는 계속해서 번역 팝업이 떴습니다.</p><a id="more"></a><p>처음에는 페이지가 배포되고 아직 새로고침이 되지 않아서 발생했다고 생각했지만 시간이 꽤 흘렀는데도 아직까지 팝업이 뜨는군요..</p><p>검색해서 헤더에 메타를 넣어 해결했습니다.</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"google"</span> <span class="attr">content</span>=<span class="string">"notranslate"</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;현재 블로그를 사용하는데 있어 영어가 많은 페이지의 경우 크롬의 우측 상단에 번역 팝업이 자꾸 뜨는것을 볼 수 있었습니다.&lt;/p&gt;
+&lt;p&gt;이전에 1차적으로 html 태그에 번역 기능을 끄는 정보를 넣었습니다. &lt;/p&gt;
+&lt;figure class=&quot;highlight html&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;&amp;lt;&lt;span class=&quot;name&quot;&gt;html&lt;/span&gt; &lt;span class=&quot;attr&quot;&gt;translate&lt;/span&gt;=&lt;span class=&quot;string&quot;&gt;&quot;no&quot;&lt;/span&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;하지만 일부 페이지는 정상 동작하지만 일부 페이지에서는 계속해서 번역 팝업이 떴습니다.&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="ETC" scheme="https://dev-sawd.github.io/categories/ETC/"/>
+    
+    
+      <category term="ETC" scheme="https://dev-sawd.github.io/tags/ETC/"/>
+    
+  </entry>
   
   <entry>
     <title>[ETC] 운영중인 http 사이트를 https로...</title>
@@ -536,30 +563,6 @@
     
       &lt;p&gt;&lt;img src=&quot;/images/node.js_logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
 &lt;p&gt;fs 모듈은 파일 시스템에 접근하는 모듈&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="Node.js" scheme="https://dev-sawd.github.io/categories/Node-js/"/>
-    
-    
-      <category term="TIL" scheme="https://dev-sawd.github.io/tags/TIL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[Node.js] 단방향 암호화</title>
-    <link href="https://dev-sawd.github.io/2020/06/08/Node-js-simplex-crypto/"/>
-    <id>https://dev-sawd.github.io/2020/06/08/Node-js-simplex-crypto/</id>
-    <published>2020-06-08T12:19:54.000Z</published>
-    <updated>2022-01-26T13:51:21.161Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="/images/node.js_logo.png" alt=""></p><p>비밀번호는 보통 단방향 암호화 알고리즘을 사용해서 암호화함<br>단방향 암호화 알고리즘은 주로 해시 기법을 사용<br>해시 기법이란 어떠한 문자열을 고정된 길이의 다른 문자열로 바꿔버리는 방식</p><a id="more"></a><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> crypto = <span class="built_in">require</span>(<span class="string">'crypto'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'base64:'</span>, crypto.createHash(<span class="string">'sha512'</span>).update(<span class="string">'비밀번호'</span>).digest(<span class="string">'base64'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'hex:'</span>, crypto.createHash(<span class="string">'sha512'</span>).update(<span class="string">'비밀번호'</span>).digest(<span class="string">'hex'</span>));</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'base64:'</span>, crypto.createHash(<span class="string">'sha512'</span>).update(<span class="string">'다른 비밀번호'</span>).digest(<span class="string">'base64'</span>))</span><br></pre></td></tr></table></figure><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> node hash.js</span></span><br><span class="line">base64: dvfV6nyLRRt3NxKSlTHOkkEGgqW2HRtfu19Ou/psUXvwlebbXCboxIPmDYOFRIpqav2eUTBFuHaZri5x+usy1g==</span><br><span class="line">hex: 76f7d5ea7c8b451b773712929531ce92410682a5b61d1b5fbb5f4ebbfa6c517bf095e6db5c26e8c483e60d8385448a6a6afd9e513045b87699ae2e71faeb32d6</span><br><span class="line">base64: cx49cjC8ctKtMzwJGBY853itZeb6qxzXGvuUJkbWTGn5VXAFbAwXGEOxU2Qksoj+aM2GWPhc1O7mmkyohXMsQw==</span><br></pre></td></tr></table></figure><h1 id="createHash-알고리즘"><a href="#createHash-알고리즘" class="headerlink" title="createHash(알고리즘)"></a>createHash(알고리즘)</h1><p>사용할 해시 알고리즘<br>md5, sha1, sha256, sha512등이 가능, 현재는 sha512정도로 충분</p><h1 id="update-문자열"><a href="#update-문자열" class="headerlink" title="update(문자열)"></a>update(문자열)</h1><p>변환할 문자열</p><h1 id="digest-인코딩"><a href="#digest-인코딩" class="headerlink" title="digest(인코딩)"></a>digest(인코딩)</h1><p>인코딩할 알고리즘<br>base64, hex, latin1이 주로 사용, 그중 base64 결과 문자열이 가장 짧아 애용</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;img src=&quot;/images/node.js_logo.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-&lt;p&gt;비밀번호는 보통 단방향 암호화 알고리즘을 사용해서 암호화함&lt;br&gt;단방향 암호화 알고리즘은 주로 해시 기법을 사용&lt;br&gt;해시 기법이란 어떠한 문자열을 고정된 길이의 다른 문자열로 바꿔버리는 방식&lt;/p&gt;
     
     </summary>
     

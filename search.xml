@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>[ETC] 구글 크롬 번역 팝업 끄기</title>
+      <link href="/2022/12/09/ETC-disable-google-translate/"/>
+      <url>/2022/12/09/ETC-disable-google-translate/</url>
+      
+        <content type="html"><![CDATA[<p>현재 블로그를 사용하는데 있어 영어가 많은 페이지의 경우 크롬의 우측 상단에 번역 팝업이 자꾸 뜨는것을 볼 수 있었습니다.</p><p>이전에 1차적으로 html 태그에 번역 기능을 끄는 정보를 넣었습니다. </p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">translate</span>=<span class="string">"no"</span>&gt;</span></span><br></pre></td></tr></table></figure><p>하지만 일부 페이지는 정상 동작하지만 일부 페이지에서는 계속해서 번역 팝업이 떴습니다.</p><a id="more"></a><p>처음에는 페이지가 배포되고 아직 새로고침이 되지 않아서 발생했다고 생각했지만 시간이 꽤 흘렀는데도 아직까지 팝업이 뜨는군요..</p><p>검색해서 헤더에 메타를 넣어 해결했습니다.</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"google"</span> <span class="attr">content</span>=<span class="string">"notranslate"</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> ETC </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> ETC </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>[ETC] 운영중인 http 사이트를 https로...</title>
       <link href="/2022/12/07/ETC-http-to-https/"/>
       <url>/2022/12/07/ETC-http-to-https/</url>
