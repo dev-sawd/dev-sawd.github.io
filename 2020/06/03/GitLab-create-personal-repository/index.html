@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://dev-sawd.github.io/2020/06/03/GitLab-create-personal-repository/3.png">
 <meta property="og:image" content="https://dev-sawd.github.io/2020/06/03/GitLab-create-personal-repository/4.png">
 <meta property="article:published_time" content="2020-06-03T11:44:56.000Z">
-<meta property="article:modified_time" content="2022-02-03T19:19:07.299Z">
+<meta property="article:modified_time" content="2022-12-09T10:19:30.552Z">
 <meta property="article:author" content="SAWD">
 <meta property="article:tag" content="Docker">
 <meta property="article:tag" content="GitLab">
@@ -176,37 +176,23 @@
 <p>지난 포스트 <a href="https://dev-sawd.github.io/2020/05/30/MacOS-gitlab-with-docker/">Docker를 이용해 GitLab을 설치해보자</a>로 GitLab을 설치한 후 정말 제대로 동작하는지 궁금해졌습니다.<br>이번 포스트에서는 저장소를 직접 생성해보고 연동 테스트를 해볼거예요.</p>
  <a id="more"></a>
 
-<br>
 
 <h2 id="저장소-생성"><a href="#저장소-생성" class="headerlink" title="저장소 생성"></a>저장소 생성</h2><img src="/2020/06/03/GitLab-create-personal-repository/1.png" class="">
 <p>GitLab에 로그인 후 [Create a project]를 클릭합니다.</p>
-<br>
-<br>
-
 <img src="/2020/06/03/GitLab-create-personal-repository/2.png" class="">
 <p>프로젝트 이름을 적고 생성을 눌러줍니다.</p>
-<br>
-<br>
-
 <img src="/2020/06/03/GitLab-create-personal-repository/3.png" class="">
 <p>정상적으로 생성되었네요.<br>빨간 박스를 참고해 아래의 스텝에서 저장소를 복제하도록 합니다.</p>
-<br>
-<br>
-
 <h2 id="저장소-복제"><a href="#저장소-복제" class="headerlink" title="저장소 복제"></a>저장소 복제</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"> %</span><span class="bash"> git <span class="built_in">clone</span> http://xxx.xxx.xxx.xxx/devsawd/hello-world.git</span></span><br><span class="line"></span><br><span class="line">Cloning into 'hello-world'...</span><br><span class="line">Username for 'http://xxx.xxx.xxx.xxx': devsawd@gmail.com</span><br><span class="line">Password for 'http://devsawd@gmail.com@xxx.xxx.xxx.xxx':</span><br><span class="line">warning: You appear to have cloned an empty repository.</span><br><span class="line"><span class="meta"> %</span><span class="bash"> <span class="built_in">cd</span> hello-world</span></span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>빈 프로젝트를 복제한것이기 때문에 warning이 뜨니 가볍게 무시해줍니다.</p>
 </blockquote>
-<br>
-
 <h2 id="README-md-파일-생성"><a href="#README-md-파일-생성" class="headerlink" title="README.md 파일 생성"></a>README.md 파일 생성</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> touch README.md</span></span><br></pre></td></tr></table></figure>
 
-<br>
 
 <h2 id="Commit-and-Push"><a href="#Commit-and-Push" class="headerlink" title="Commit and Push"></a>Commit and Push</h2><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">hello-world % git add README.md</span><br><span class="line">hello-world % git commit -m "add README"</span><br><span class="line">[master (root-commit) 204db60] add README</span><br><span class="line">1 file changed, 0 insertions(+), 0 deletions(-)</span><br><span class="line">create mode 100644 README.md</span><br><span class="line"></span><br><span class="line">hello-world % git push -u origin master</span><br><span class="line">Username for 'http://xxx.xxx.xxx.xxx': devsawd@gmail.com</span><br><span class="line">Password for 'http://devsawd@gmail.com@xxx.xxx.xxx.xxx':</span><br><span class="line">Enumerating objects: 3, done.</span><br><span class="line">Counting objects: 100% (3/3), done.</span><br><span class="line">Writing objects: 100% (3/3), 212 bytes | 212.00 KiB/s, done.</span><br><span class="line">Total 3 (delta 0), reused 0 (delta 0)</span><br><span class="line">To http://xxx.xxx.xxx.xxx/devsawd/hello-world.git</span><br><span class="line">* [new branch]      master -&gt; master</span><br><span class="line">Branch 'master' set up to track remote branch 'master' from 'origin'.</span><br></pre></td></tr></table></figure>
 
-<br>
 
 <h2 id="결과"><a href="#결과" class="headerlink" title="결과"></a>결과</h2><img src="/2020/06/03/GitLab-create-personal-repository/4.png" class="">
 <p>정상적으로 파일이 올라간것이 보입니다!<br>이제 집 밖의 어디에서든 개인 GitLab에 접근해서 사용할 수 있게 되었습니다.</p>
@@ -278,6 +264,8 @@
     
         <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>11</div></a></li>
     
+        <li><a class="flat-box" href="/categories/Ethereum/"><div class='name'>Ethereum</div><div class='badget'>1</div></a></li>
+    
         <li><a class="flat-box" href="/categories/GitLab/"><div class='name'>GitLab</div><div class='badget'>3</div></a></li>
     
         <li><a class="flat-box" href="/categories/Github/"><div class='name'>Github</div><div class='badget'>3</div></a></li>
@@ -311,7 +299,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class='content'>
-        <a href="/tags/AWS/" style="font-size: 14px; color: #808080">AWS</a> <a href="/tags/Chaincode/" style="font-size: 15px; color: #6b6b6b">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #808080">Node.js</a> <a href="/tags/OCR/" style="font-size: 14px; color: #808080">OCR</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 15px; color: #6b6b6b">체인코드에서의 MVC...?</a>
+        <a href="/tags/AWS/" style="font-size: 14px; color: #808080">AWS</a> <a href="/tags/Chaincode/" style="font-size: 15px; color: #6b6b6b">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Ethereum/" style="font-size: 14px; color: #808080">Ethereum</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #808080">Node.js</a> <a href="/tags/OCR/" style="font-size: 14px; color: #808080">OCR</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/tool/" style="font-size: 14px; color: #808080">tool</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 15px; color: #6b6b6b">체인코드에서의 MVC...?</a>
     </div>
 </div>
 
