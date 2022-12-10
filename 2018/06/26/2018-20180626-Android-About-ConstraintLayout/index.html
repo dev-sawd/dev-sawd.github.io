@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html translate="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="google" content="notranslate">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>[Android] About ConstraintLayout | SAWD</title>
+  <meta name="description" content="시간이 나야지..." />
+  <meta name="keywords" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/images/favicon.png">
+  <link rel="alternate" href="/atom.xml" title="SAWD">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="오늘은 최근에 사용하기 시작한 ConstraintLayout에 대해 이야기해볼까 합니다.“이제야 ConstraintLayout을 사용하기 시작했다구요!?”네.. 그렇습니다.두달 전까지만 해도 저는 LinearLayout과 RelativeLayout을 이용해 UI를 그렸습니다.하지만 새 프로젝트를 시작하며 ConstraintLayout과 Coordinator">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Android] About ConstraintLayout">
+<meta property="og:url" content="https://dev-sawd.github.io/2018/06/26/2018-20180626-Android-About-ConstraintLayout/index.html">
+<meta property="og:site_name" content="SAWD">
+<meta property="og:description" content="오늘은 최근에 사용하기 시작한 ConstraintLayout에 대해 이야기해볼까 합니다.“이제야 ConstraintLayout을 사용하기 시작했다구요!?”네.. 그렇습니다.두달 전까지만 해도 저는 LinearLayout과 RelativeLayout을 이용해 UI를 그렸습니다.하지만 새 프로젝트를 시작하며 ConstraintLayout과 Coordinator">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://dev-sawd.github.io/2018/06/26/2018-20180626-Android-About-ConstraintLayout/1.png">
+<meta property="og:image" content="https://dev-sawd.github.io/2018/06/26/2018-20180626-Android-About-ConstraintLayout/2.png">
+<meta property="article:published_time" content="2018-06-25T20:41:13.000Z">
+<meta property="article:modified_time" content="2022-01-26T13:51:20.970Z">
+<meta property="article:author" content="SAWD">
+<meta property="article:tag" content="TIL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dev-sawd.github.io/2018/06/26/2018-20180626-Android-About-ConstraintLayout/1.png">
+    
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href='/css/waves.min.css' rel='stylesheet'>
+  
+<link rel="stylesheet" href="/style.css">
+
+
+  
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-120934734-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="SAWD" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+  <script>setLoadingBarProgress(20)</script> 
+  <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				SAWD
+			</a>
+			<div class='menu'>
+				<ul class='h-list'>
+					
+						<li>
+							<a class='flat-box nav-home' href='/'>
+								Home
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-archives' href='/archives'>
+								Archives
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-about' href='/about'>
+								About
+							</a>
+						</li>
+					
+				</ul>
+				<div class='underline'></div>
+			</div>
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon icon-search"></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a href='javascript:void(0)'><span class="icon icon-search flat-box"></span></a></li>
+				
+				<li class='s-menu'><a href='javascript:void(0)'><span class="icon icon-menu flat-box"></span></a></li>
+			</ul>
+		</div>
+		
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				Word of Forks
+			</a>
+
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a href='javascript:void(0)'><span class="icon icon-chat_bubble_outline flat-box"></span></a></li>
+				<li class='s-top'><a href='javascript:void(0)'><span class="icon icon-arrow_upward flat-box"></span></a></li>
+				<li class='s-toc'><a href='javascript:void(0)'><span class="icon icon-format_list_numbered flat-box"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<aside class="menu-phone">
+	<nav>
+		
+			<a href="/" class="nav-home nav">
+				Home
+			</a>
+		
+			<a href="/archives" class="nav-archives nav">
+				Archives
+			</a>
+		
+			<a href="/about" class="nav-about nav">
+				About
+			</a>
+		
+	</nav>
+</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+  <div class="l_body">
+    <div class='container clearfix'>
+      <div class='l_main'>
+        <article id="post-2018-20180626-Android-About-ConstraintLayout"
+  class="post white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<section class='meta'>
+	<h2 class="title">
+  	<a href="/2018/06/26/2018-20180626-Android-About-ConstraintLayout/">
+    	[Android] About ConstraintLayout
+    </a>
+  </h2>
+	<time>
+	  6월 26, 2018
+	</time>
+	
+    
+    <div class='cats'>
+        <a href="/categories/Android/">Android</a>
+    </div>
+
+	</section>
+<!--	-->
+<!--		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ConstraintLayout"><span class="toc-number">1.</span> <span class="toc-text">ConstraintLayout</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#장점"><span class="toc-number">1.1.</span> <span class="toc-text">장점</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#같은-코드-맞아"><span class="toc-number">1.1.1.</span> <span class="toc-text">같은 코드 맞아?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#마치-그리듯"><span class="toc-number">1.1.2.</span> <span class="toc-text">마치 그리듯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#예쁜-뷰를-빠르게"><span class="toc-number">1.1.3.</span> <span class="toc-text">예쁜 뷰를 빠르게</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#진입장벽"><span class="toc-number">1.1.4.</span> <span class="toc-text">진입장벽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#추가로"><span class="toc-number">1.1.5.</span> <span class="toc-text">추가로</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#단점"><span class="toc-number">1.2.</span> <span class="toc-text">단점</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#생각보다-느립니다"><span class="toc-number">1.2.1.</span> <span class="toc-text">생각보다 느립니다.</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#내가-원하는-소스코드랑-다른데…"><span class="toc-number">1.2.2.</span> <span class="toc-text">내가 원하는 소스코드랑 다른데…</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#결론"><span class="toc-number">1.3.</span> <span class="toc-text">결론</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#마무리"><span class="toc-number">2.</span> <span class="toc-text">마무리</span></a></li></ol></section>-->
+<!--	-->
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>오늘은 최근에 사용하기 시작한 ConstraintLayout에 대해 이야기해볼까 합니다.<br>“이제야 ConstraintLayout을 사용하기 시작했다구요!?”<br>네.. 그렇습니다.<br>두달 전까지만 해도 저는 LinearLayout과 RelativeLayout을 이용해 UI를 그렸습니다.<br>하지만 새 프로젝트를 시작하며 ConstraintLayout과 CoordinatorLayout을 사용해보고는 자연스럽게 LinearLayout과 RelativeLayout의 사용 빈도가 줄어 들었습니다.<br>특히 RelativeLayout은 더욱요.</p>
+<h1 id="ConstraintLayout"><a href="#ConstraintLayout" class="headerlink" title="ConstraintLayout"></a>ConstraintLayout</h1><p>이 단어를 검색하기만 해도 수많은 사이트들이 쏟아져나올겁니다.<br>한 2년 전 쯤에 처음 접한것 같아요.<br>한창 LinearLayout과 RelativeLayout을 사용하는 제게는 굳이 왜 써야되는지 이해가 안갔습니다.</p>
+<a id="more"></a>
+<h2 id="장점"><a href="#장점" class="headerlink" title="장점"></a>장점</h2><h3 id="같은-코드-맞아"><a href="#같은-코드-맞아" class="headerlink" title="같은 코드 맞아?"></a>같은 코드 맞아?</h3><p>어떤 화면이 있다고 가정합니다.</p>
+<p>아래의 코드는 화면을 RelativeLayout과 LinearLayout으로 표현한 코드입니다.<br>코드가 너무 길어지기 때문에 큰 틀만 보도록 할게요.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">RelativeLayout</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ImageView</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ImageView</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">RealativeLayout</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">TextView</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">RelativeLayout</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">EditText</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">LenarLayout</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">TextView</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">RelativeLayout</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">EditText</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">Relativelayout</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">TextView</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Button</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">Button</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">LelativeLayout</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">RelativeLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>아래는 같은 화면을 ConstraintLayout으로 표현한 코드입니다.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ConstraintLayout</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ImageView</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ImageView</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">TextView</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">TextView</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">EditText</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">TextView</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">EditText</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">TextView</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Button</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Button</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ContraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>말이 필요 없네요.<br>화면에 보여줘야할 뷰가 많아지면 많아질수록 코드는 기하급수적으로 차이날 겁니다.</p>
+<h3 id="마치-그리듯"><a href="#마치-그리듯" class="headerlink" title="마치 그리듯"></a>마치 그리듯</h3><p>UI 화면에서 ConstraintLayout안에 뷰를 끌어다 이리저리 위치시키면 됩니다.<br>그리고 배치한 뷰의 상하좌우 가운데에 있는 ㅇ를 끌어다가 제약조건을 추가하면 됩니다.<br>제약 조건에 따라 뷰가 스르륵 움직이며 어떤 배치인지 다시 나타납니다.</p>
+<blockquote><p>“A는 B의 오른쪽에 위치하고 윗줄은 D와 나란히..”</p>
+</blockquote>
+
+<p>아래와 같이 직관적으로 표현됩니다.</p>
+<img src="/2018/06/26/2018-20180626-Android-About-ConstraintLayout/1.png" class="">
+
+<h3 id="예쁜-뷰를-빠르게"><a href="#예쁜-뷰를-빠르게" class="headerlink" title="예쁜 뷰를 빠르게"></a>예쁜 뷰를 빠르게</h3><p>다시 위에서 보여준 사진을 봅시다.<br>키패드와 키패드의 간격이 모두 16으로 설정되어있습니다.<br>RelativeLayout으로 이것을 구현하려면 해당 뷰의 margin을 찾아서 직접 입력해야 합니다.<br>하지만 ConstraintLayout에는 뷰와 뷰 사이의 기본 margin을 설정할 수 있습니다.<br>위에서 그리듯 제약조건을 추가하면 기본으로 8dp의 제약조건이 설정되어 있고 사용자 임의로 간격을 수정할 수 있습니다.</p>
+<p>이미 배치한 뷰의 margin을 수정해야 할때는요?<br>소스코드 바다를 해맬 필요가 없습니다.<br>View Attribute 상단에 우선적으로 margin을 설정할 수 있도록 안드로이드 스튜디오가 지원하고 있습니다.</p>
+<img src="/2018/06/26/2018-20180626-Android-About-ConstraintLayout/2.png" class="">
+
+<h3 id="진입장벽"><a href="#진입장벽" class="headerlink" title="진입장벽"></a>진입장벽</h3><p>팀원 요청에 따라 ConstraintLayout을 사용하는 방법을 가이드했습니다.</p>
+<ol>
+<li>이전처럼 뷰를 ConstraintLayout안에 배치하구요</li>
+<li>ㅇ 버튼을 눌러 제약조건이 필요한 부분에 끌어다 놓습니다.</li>
+<li>뷰를 부모 뷰 가운데 위치하고 싶다면 상하좌우 제약조건을 부모 뷰 상하좌우에 설정하세요.</li>
+<li>여기 기본적으로 margin이 설정되어 있으니 필요에 따라 수정하세요.</li>
+</ol>
+<p>10분도 안돼서 가이드는 끝났습니다.<br>그리고 이런 피드백이 왔습니다.</p>
+<blockquote><p>이정도면 UI 그릴만 한데..? 내가 할까? ㅋㅋㅋ</p>
+</blockquote>
+
+<h3 id="추가로"><a href="#추가로" class="headerlink" title="추가로"></a>추가로</h3><p>이 포스트를 쓰면서 알게된 것인데 화면을 처리하는 속도에도 영향이 있다고 합니다.</p>
+<blockquote><p>사용자가 뷰를 보기까지 안드로이드는 3단계를 거칩니다.</p>
+<ol>
+<li>측정</li>
+<li>레이아웃</li>
+<li>그리기</li>
+</ol>
+<p>측정 단계에서는 View의 크기를 결정합니다.<br>측정 노드는 루트 노드에서 시작해서 반복적으로 호출되며, 각각의 호출은 부모로부터 전달된 인자들과 함께 발생합니다.</p>
+<p>레이아웃 단계에서는 각각의 view 크기를 기준으로 view의 위치를 결정합니다.<br>루트 노드에서 시작해서 말단 노드까지 반복적으로 호출됩니다.</p>
+<p>그리기 단계는 스크린에 자신을 그리는 단계입니다.<br>RelativeLayout이 자신을 화면에 그리라는 요청을 받게 되면 자식들에게 자신을 측정하라는 메세지가 전달되며<br>모든 view가 측정될 때까지 이 과정이 계속됩니다.<br>중첩된 레이아웃이 많을수록 측정하는데 걸리는 시간도 늘어나게됩니다.</p>
+</blockquote>
+
+<h2 id="단점"><a href="#단점" class="headerlink" title="단점"></a>단점</h2><h3 id="생각보다-느립니다"><a href="#생각보다-느립니다" class="headerlink" title="생각보다 느립니다."></a>생각보다 느립니다.</h3><p>위에서 설명한 제약조건이나 뷰를 다시 배치했을때 즉각 반응한다기 보단 조금 기다려야 합니다.</p>
+<h3 id="내가-원하는-소스코드랑-다른데…"><a href="#내가-원하는-소스코드랑-다른데…" class="headerlink" title="내가 원하는 소스코드랑 다른데…"></a>내가 원하는 소스코드랑 다른데…</h3><p>ConstraintLayout뿐만 아니라 예전부터 고질병처럼 쫓아오는 단점입니다.<br>드래그 앤 드롭으로 UI를 그리면 내가 원하지 않는 소스코드들이 덕지덕지 붙어있습니다.<br>굉장히 신경쓰이는 부분입니다.</p>
+<h2 id="결론"><a href="#결론" class="headerlink" title="결론"></a>결론</h2><p>위의 단점에도 불구하고 장점이 강력하기 때문에 앞으로도 계속 사용 될 것입니다.</p>
+<h1 id="마무리"><a href="#마무리" class="headerlink" title="마무리"></a>마무리</h1><p>제 경험에 비추어 ConstraintLayout에 대해서 적어봤습니다.<br>이 포스트에서 언급하지 않았지만 체인, 비율 등의 장점도 있습니다.</p>
+
+  	</div>
+	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/TIL/">TIL</a>
+      
+	  </div>
+    
+		
+	
+		<div class="art-item-footer">
+				
+					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2018/06/26/2018-20180626-Android-Launcher-Icons/" rel="prev"  title="[Android] Launcher Icons">
+						[Android] Launcher Icons 
+					</a></span>
+				
+				
+					<span class="art-item-right">next：<a href="/2018/06/25/2018-20180625-Android-Fragment-Example/" rel="next"  title="[Android] Fragment Example">
+						[Android] Fragment Example
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+</article>
+<script>
+	window.subData = {
+		title: '[Android] About ConstraintLayout',
+		tools: true
+	}
+</script>
+
+      </div>
+      <aside class='l_side'>
+        
+  <section class='m_widget about'>
+
+<div class='header'>SAWD</div>
+<div class='content'>
+<div class='desc'>시간이 나면 쓰는 블로그</div>
+</div>
+</section>
+
+  <section class='m_widget categories'>
+<div class='header'>Categories</div>
+<div class='content'>
+    
+    <ul class="entry">
+    
+        <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badget'>8</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/CSS/"><div class='name'>CSS</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Chaincode/"><div class='name'>Chaincode</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Data-Structure/"><div class='name'>Data Structure</div><div class='badget'>6</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Docker/"><div class='name'>Docker</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>11</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Ethereum/"><div class='name'>Ethereum</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/GitLab/"><div class='name'>GitLab</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Github/"><div class='name'>Github</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Golang/"><div class='name'>Golang</div><div class='badget'>5</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Hyperledger-Fabric/"><div class='name'>Hyperledger Fabric</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Linux/"><div class='name'>Linux</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MacOS/"><div class='name'>MacOS</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MySQL/"><div class='name'>MySQL</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Node-js/"><div class='name'>Node.js</div><div class='badget'>5</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Objective-C/"><div class='name'>Objective-C</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/React/"><div class='name'>React</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Samll-talk/"><div class='name'>Samll talk</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/iOS/"><div class='name'>iOS</div><div class='badget'>4</div></a></li>
+    
+    </ul>
+    
+</div>
+</section>
+
+  
+<div class="m_widget tagcloud">
+    <div class="header">Tags</div>
+    <div class='content'>
+        <a href="/tags/AWS/" style="font-size: 14px; color: #808080">AWS</a> <a href="/tags/Chaincode/" style="font-size: 15px; color: #6b6b6b">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Ethereum/" style="font-size: 14px; color: #808080">Ethereum</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #808080">Node.js</a> <a href="/tags/OCR/" style="font-size: 14px; color: #808080">OCR</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Tool/" style="font-size: 14px; color: #808080">Tool</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 15px; color: #6b6b6b">체인코드에서의 MVC...?</a>
+    </div>
+</div>
+
+
+
+      </aside>
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+  </div>
+  <footer id="footer" class="clearfix">
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="https://github.com/dev-sawd" class="social github"
+          target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+<!--  <div>Theme <a href='https://github.com/stkevintan/hexo-theme-material-flow' target="_blank" rel="noopener" class="codename">MaterialFlow</a> designed by <a href="http://keyin.me/" target="_blank">Kevin Tan</a>.</div>-->
+  
+</footer>
+
+
+  <script>setLoadingBarProgress(80);</script>
+  
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='/js/waves.min.js'></script>
+<script src="/js/scrollreveal.min.js"></script>
+
+<script src="/js/jquery.fitvids.js"></script>
+
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "hexo";
+  var ROOT = "/"||"/";
+  if(!ROOT.endsWith('/'))ROOT += '/';
+</script>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/app.js"></script>
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>

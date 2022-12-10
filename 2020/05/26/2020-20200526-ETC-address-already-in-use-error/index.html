@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html translate="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="google" content="notranslate">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>[ETC] address already in use error | SAWD</title>
+  <meta name="description" content="시간이 나야지..." />
+  <meta name="keywords" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/images/favicon.png">
+  <link rel="alternate" href="/atom.xml" title="SAWD">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="포스트 작성을 위해 hexo server로 프로세스로 돌고있던 터미널을 강제로 종료했습니다.이후 hexo server를 실행하려 하는데 address already in use 에러가 발생했습니다. 간단히 이 에러를 해결해봅시다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[ETC] address already in use error">
+<meta property="og:url" content="https://dev-sawd.github.io/2020/05/26/2020-20200526-ETC-address-already-in-use-error/index.html">
+<meta property="og:site_name" content="SAWD">
+<meta property="og:description" content="포스트 작성을 위해 hexo server로 프로세스로 돌고있던 터미널을 강제로 종료했습니다.이후 hexo server를 실행하려 하는데 address already in use 에러가 발생했습니다. 간단히 이 에러를 해결해봅시다.">
+<meta property="og:locale" content="ko_KR">
+<meta property="article:published_time" content="2020-05-26T07:48:51.000Z">
+<meta property="article:modified_time" content="2022-02-03T19:17:50.595Z">
+<meta property="article:author" content="SAWD">
+<meta property="article:tag" content="HEXO">
+<meta name="twitter:card" content="summary">
+    
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href='/css/waves.min.css' rel='stylesheet'>
+  
+<link rel="stylesheet" href="/style.css">
+
+
+  
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-120934734-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="SAWD" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+  <script>setLoadingBarProgress(20)</script> 
+  <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				SAWD
+			</a>
+			<div class='menu'>
+				<ul class='h-list'>
+					
+						<li>
+							<a class='flat-box nav-home' href='/'>
+								Home
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-archives' href='/archives'>
+								Archives
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-about' href='/about'>
+								About
+							</a>
+						</li>
+					
+				</ul>
+				<div class='underline'></div>
+			</div>
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon icon-search"></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a href='javascript:void(0)'><span class="icon icon-search flat-box"></span></a></li>
+				
+				<li class='s-menu'><a href='javascript:void(0)'><span class="icon icon-menu flat-box"></span></a></li>
+			</ul>
+		</div>
+		
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				Word of Forks
+			</a>
+
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a href='javascript:void(0)'><span class="icon icon-chat_bubble_outline flat-box"></span></a></li>
+				<li class='s-top'><a href='javascript:void(0)'><span class="icon icon-arrow_upward flat-box"></span></a></li>
+				<li class='s-toc'><a href='javascript:void(0)'><span class="icon icon-format_list_numbered flat-box"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<aside class="menu-phone">
+	<nav>
+		
+			<a href="/" class="nav-home nav">
+				Home
+			</a>
+		
+			<a href="/archives" class="nav-archives nav">
+				Archives
+			</a>
+		
+			<a href="/about" class="nav-about nav">
+				About
+			</a>
+		
+	</nav>
+</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+  <div class="l_body">
+    <div class='container clearfix'>
+      <div class='l_main'>
+        <article id="post-2020-20200526-ETC-address-already-in-use-error"
+  class="post white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<section class='meta'>
+	<h2 class="title">
+  	<a href="/2020/05/26/2020-20200526-ETC-address-already-in-use-error/">
+    	[ETC] address already in use error
+    </a>
+  </h2>
+	<time>
+	  5월 26, 2020
+	</time>
+	
+    
+    <div class='cats'>
+        <a href="/categories/ETC/">ETC</a>
+    </div>
+
+	</section>
+<!--	-->
+<!--		<section class="toc-wrapper"></section>-->
+<!--	-->
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>포스트 작성을 위해 hexo server로 프로세스로 돌고있던 터미널을 강제로 종료했습니다.<br>이후 hexo server를 실행하려 하는데 <code>address already in use</code> 에러가 발생했습니다.</p>
+<p>간단히 이 에러를 해결해봅시다.</p>
+<a id="more"></a>
+
+<p>에러 전문은 아래와 같습니다.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> hexo server</span></span><br><span class="line">AL Port 4000 has been used. Try other port instead.</span><br><span class="line">FATAL Something's wrong. Maybe you can find the solution here: https://hexo.io/docs/troubleshooting.html</span><br><span class="line">Error: listen EADDRINUSE: address already in use :::4000</span><br><span class="line">    at Server.setupListenHandle [as _listen2] (net.js:1309:16)</span><br><span class="line">    at listenInCluster (net.js:1357:12)</span><br><span class="line">    at Server.listen (net.js:1445:7)</span><br><span class="line">    at /Users/devsawd/blog/node_modules/hexo-server/lib/server.js:69:12</span><br><span class="line">    at Promise._execute (/Users/devsawd/blog/node_modules/bluebird/js/release/debuggability.js:384:9)</span><br><span class="line">    at Promise._resolveFromExecutor (/Users/devsawd/blog/node_modules/bluebird/js/release/promise.js:518:18)</span><br><span class="line">    at new Promise (/Users/devsawd/blog/node_modules/bluebird/js/release/promise.js:103:10)</span><br><span class="line">    at checkPort (/Users/devsawd/blog/node_modules/hexo-server/lib/server.js:66:10)</span><br><span class="line">    at Hexo.module.exports (/Users/devsawd/blog/node_modules/hexo-server/lib/server.js:18:10)</span><br><span class="line">    at Hexo.tryCatcher (/Users/devsawd/blog/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Hexo.&lt;anonymous&gt; (/Users/devsawd/blog/node_modules/bluebird/js/release/method.js:15:34)</span><br><span class="line">    at /Users/devsawd/blog/node_modules/hexo/lib/hexo/index.js:248:17</span><br><span class="line">    at Promise._execute (/Users/devsawd/blog/node_modules/bluebird/js/release/debuggability.js:384:9)</span><br><span class="line">    at Promise._resolveFromExecutor (/Users/devsawd/blog/node_modules/bluebird/js/release/promise.js:518:18)</span><br><span class="line">    at new Promise (/Users/devsawd/blog/node_modules/bluebird/js/release/promise.js:103:10)</span><br><span class="line">    at Hexo.call (/Users/devsawd/blog/node_modules/hexo/lib/hexo/index.js:244:12)</span><br><span class="line">    at /usr/local/lib/node_modules/hexo-cli/lib/hexo.js:67:17</span><br><span class="line">    at tryCatcher (/usr/local/lib/node_modules/hexo-cli/node_modules/bluebird/js/release/util.js:16:23)</span><br><span class="line">    at Promise._settlePromiseFromHandler (/usr/local/lib/node_modules/hexo-cli/node_modules/bluebird/js/release/promise.js:547:31)</span><br><span class="line">    at Promise._settlePromise (/usr/local/lib/node_modules/hexo-cli/node_modules/bluebird/js/release/promise.js:604:18)</span><br><span class="line">    at Promise._settlePromise0 (/usr/local/lib/node_modules/hexo-cli/node_modules/bluebird/js/release/promise.js:649:10)</span><br><span class="line">    at Promise._settlePromises (/usr/local/lib/node_modules/hexo-cli/node_modules/bluebird/js/release/promise.js:729:18)</span><br></pre></td></tr></table></figure>
+
+<p>에러 내용은 4000번 포트가 이미 사용되고 있다는겁니다.<br>4000번 포트를 사용중인 프로세스를 먼저 찾아봐야겠네요.</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> lsof -i :4000</span></span><br><span class="line">COMMAND   PID    USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME</span><br><span class="line">node    43609 devsawd   42u  IPv6 0x1a23ef236800be15      0t0  TCP *:terabase (LISTEN)</span><br></pre></td></tr></table></figure>
+
+<p>PID의 43609번이 사용중으로 확인됩니다.<br>kill 명령어로 해당 프로세스를 종료시킨 후</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash">  <span class="built_in">kill</span> -9 43609</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash">  hexo server</span></span><br></pre></td></tr></table></figure>
+
+<p>hexo server 명령어를 이용해 재구동 하니 정상적으로 사용할 수 있습니다.</p>
+<p><code>address already in use</code>에러는 port를 사용하는 프로세스를 다룰때 자주 볼 수 있는 에러입니다.<br>간단히 해당 프로세스를 종료시켜 문제를 해결할 수 있습니다.</p>
+
+  	</div>
+	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/HEXO/">HEXO</a>
+      
+	  </div>
+    
+		
+	
+		<div class="art-item-footer">
+				
+					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2020/05/27/2020-20200527-ETC-URL-URI/" rel="prev"  title="[ETC] URL, URI">
+						[ETC] URL, URI 
+					</a></span>
+				
+				
+					<span class="art-item-right">next：<a href="/2020/05/25/2020-20200525-MacOS-remote-access-for-dev-study/" rel="next"  title="[MacOS] 개발 공부를 위한 원격 개발환경 세팅">
+						[MacOS] 개발 공부를 위한 원격 개발환경 세팅
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+</article>
+<script>
+	window.subData = {
+		title: '[ETC] address already in use error',
+		tools: true
+	}
+</script>
+
+      </div>
+      <aside class='l_side'>
+        
+  <section class='m_widget about'>
+
+<div class='header'>SAWD</div>
+<div class='content'>
+<div class='desc'>시간이 나면 쓰는 블로그</div>
+</div>
+</section>
+
+  <section class='m_widget categories'>
+<div class='header'>Categories</div>
+<div class='content'>
+    
+    <ul class="entry">
+    
+        <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badget'>8</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/CSS/"><div class='name'>CSS</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Chaincode/"><div class='name'>Chaincode</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Data-Structure/"><div class='name'>Data Structure</div><div class='badget'>6</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Docker/"><div class='name'>Docker</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>11</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Ethereum/"><div class='name'>Ethereum</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/GitLab/"><div class='name'>GitLab</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Github/"><div class='name'>Github</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Golang/"><div class='name'>Golang</div><div class='badget'>5</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Hyperledger-Fabric/"><div class='name'>Hyperledger Fabric</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Linux/"><div class='name'>Linux</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MacOS/"><div class='name'>MacOS</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MySQL/"><div class='name'>MySQL</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Node-js/"><div class='name'>Node.js</div><div class='badget'>5</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Objective-C/"><div class='name'>Objective-C</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/React/"><div class='name'>React</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Samll-talk/"><div class='name'>Samll talk</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/iOS/"><div class='name'>iOS</div><div class='badget'>4</div></a></li>
+    
+    </ul>
+    
+</div>
+</section>
+
+  
+<div class="m_widget tagcloud">
+    <div class="header">Tags</div>
+    <div class='content'>
+        <a href="/tags/AWS/" style="font-size: 14px; color: #808080">AWS</a> <a href="/tags/Chaincode/" style="font-size: 15px; color: #6b6b6b">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Ethereum/" style="font-size: 14px; color: #808080">Ethereum</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #808080">Node.js</a> <a href="/tags/OCR/" style="font-size: 14px; color: #808080">OCR</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Tool/" style="font-size: 14px; color: #808080">Tool</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 15px; color: #6b6b6b">체인코드에서의 MVC...?</a>
+    </div>
+</div>
+
+
+
+      </aside>
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+  </div>
+  <footer id="footer" class="clearfix">
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="https://github.com/dev-sawd" class="social github"
+          target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+<!--  <div>Theme <a href='https://github.com/stkevintan/hexo-theme-material-flow' target="_blank" rel="noopener" class="codename">MaterialFlow</a> designed by <a href="http://keyin.me/" target="_blank">Kevin Tan</a>.</div>-->
+  
+</footer>
+
+
+  <script>setLoadingBarProgress(80);</script>
+  
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='/js/waves.min.js'></script>
+<script src="/js/scrollreveal.min.js"></script>
+
+<script src="/js/jquery.fitvids.js"></script>
+
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "hexo";
+  var ROOT = "/"||"/";
+  if(!ROOT.endsWith('/'))ROOT += '/';
+</script>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/app.js"></script>
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html translate="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="google" content="notranslate">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>[Android] Fragment Example | SAWD</title>
+  <meta name="description" content="시간이 나야지..." />
+  <meta name="keywords" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/images/favicon.png">
+  <link rel="alternate" href="/atom.xml" title="SAWD">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="오늘 포스트는 이전 포스트에서 언급했던 Fragment에 대해서 간단한 예제를 만들어 보려고 합니다.주말에 포스팅 하려고 했는데 시간도 시간이고 개인적인 스터디를 따로 하고 있어서 짬이 나지 않네요 ㅜㅜ.개인적인 스터디에 대해서 필요한 포스팅은 또 따로 진행하도록 하겠습니다.각설하고 시작해봅시다. 어떤 예제를 만들 것인가?사실 너무 간단한 예제입니다.스크린">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Android] Fragment Example">
+<meta property="og:url" content="https://dev-sawd.github.io/2018/06/25/2018-20180625-Android-Fragment-Example/index.html">
+<meta property="og:site_name" content="SAWD">
+<meta property="og:description" content="오늘 포스트는 이전 포스트에서 언급했던 Fragment에 대해서 간단한 예제를 만들어 보려고 합니다.주말에 포스팅 하려고 했는데 시간도 시간이고 개인적인 스터디를 따로 하고 있어서 짬이 나지 않네요 ㅜㅜ.개인적인 스터디에 대해서 필요한 포스팅은 또 따로 진행하도록 하겠습니다.각설하고 시작해봅시다. 어떤 예제를 만들 것인가?사실 너무 간단한 예제입니다.스크린">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://dev-sawd.github.io/2018/06/25/2018-20180625-Android-Fragment-Example/1.png">
+<meta property="og:image" content="https://dev-sawd.github.io/2018/06/25/2018-20180625-Android-Fragment-Example/3.png">
+<meta property="article:published_time" content="2018-06-25T03:09:12.000Z">
+<meta property="article:modified_time" content="2022-01-26T13:51:20.968Z">
+<meta property="article:author" content="SAWD">
+<meta property="article:tag" content="TIL">
+<meta property="article:tag" content="Example">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dev-sawd.github.io/2018/06/25/2018-20180625-Android-Fragment-Example/1.png">
+    
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href='/css/waves.min.css' rel='stylesheet'>
+  
+<link rel="stylesheet" href="/style.css">
+
+
+  
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-120934734-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="SAWD" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+  <script>setLoadingBarProgress(20)</script> 
+  <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				SAWD
+			</a>
+			<div class='menu'>
+				<ul class='h-list'>
+					
+						<li>
+							<a class='flat-box nav-home' href='/'>
+								Home
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-archives' href='/archives'>
+								Archives
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-about' href='/about'>
+								About
+							</a>
+						</li>
+					
+				</ul>
+				<div class='underline'></div>
+			</div>
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon icon-search"></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a href='javascript:void(0)'><span class="icon icon-search flat-box"></span></a></li>
+				
+				<li class='s-menu'><a href='javascript:void(0)'><span class="icon icon-menu flat-box"></span></a></li>
+			</ul>
+		</div>
+		
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				Word of Forks
+			</a>
+
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a href='javascript:void(0)'><span class="icon icon-chat_bubble_outline flat-box"></span></a></li>
+				<li class='s-top'><a href='javascript:void(0)'><span class="icon icon-arrow_upward flat-box"></span></a></li>
+				<li class='s-toc'><a href='javascript:void(0)'><span class="icon icon-format_list_numbered flat-box"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<aside class="menu-phone">
+	<nav>
+		
+			<a href="/" class="nav-home nav">
+				Home
+			</a>
+		
+			<a href="/archives" class="nav-archives nav">
+				Archives
+			</a>
+		
+			<a href="/about" class="nav-about nav">
+				About
+			</a>
+		
+	</nav>
+</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+  <div class="l_body">
+    <div class='container clearfix'>
+      <div class='l_main'>
+        <article id="post-2018-20180625-Android-Fragment-Example"
+  class="post white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<section class='meta'>
+	<h2 class="title">
+  	<a href="/2018/06/25/2018-20180625-Android-Fragment-Example/">
+    	[Android] Fragment Example
+    </a>
+  </h2>
+	<time>
+	  6월 25, 2018
+	</time>
+	
+    
+    <div class='cats'>
+        <a href="/categories/Android/">Android</a>
+    </div>
+
+	</section>
+<!--	-->
+<!--		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#어떤-예제를-만들-것인가"><span class="toc-number">1.</span> <span class="toc-text">어떤 예제를 만들 것인가?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Main"><span class="toc-number">2.</span> <span class="toc-text">Main</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#activity-main-xml"><span class="toc-number">2.1.</span> <span class="toc-text">activity_main.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MainActivity-java"><span class="toc-number">2.2.</span> <span class="toc-text">MainActivity.java</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fragment"><span class="toc-number">3.</span> <span class="toc-text">Fragment</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Fragment1-xml"><span class="toc-number">3.1.</span> <span class="toc-text">Fragment1.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fragment1-java"><span class="toc-number">3.2.</span> <span class="toc-text">Fragment1.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fragment2-xml"><span class="toc-number">3.3.</span> <span class="toc-text">Fragment2.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fragment2-java"><span class="toc-number">3.4.</span> <span class="toc-text">Fragment2.java</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#마무리"><span class="toc-number">4.</span> <span class="toc-text">마무리</span></a></li></ol></section>-->
+<!--	-->
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<p>오늘 포스트는 이전 포스트에서 언급했던 Fragment에 대해서 간단한 예제를 만들어 보려고 합니다.<br>주말에 포스팅 하려고 했는데 시간도 시간이고 개인적인 스터디를 따로 하고 있어서 짬이 나지 않네요 ㅜㅜ.<br>개인적인 스터디에 대해서 필요한 포스팅은 또 따로 진행하도록 하겠습니다.<br>각설하고 시작해봅시다.</p>
+<h1 id="어떤-예제를-만들-것인가"><a href="#어떤-예제를-만들-것인가" class="headerlink" title="어떤 예제를 만들 것인가?"></a>어떤 예제를 만들 것인가?</h1><p>사실 너무 간단한 예제입니다.<br>스크린샷부터 볼게요.</p>
+<img src="/2018/06/25/2018-20180625-Android-Fragment-Example/1.png" class="">
+<p>2개의 Fragment를 만들고(분홍색, 파란색)<br>Fragment 1 버튼을 눌렀을 때는 분홍색 Fragment가<br>Fragment 2 버튼을 눌렀을 때는 파란색 Fragment가 보이도록 할 겁니다.</p>
+<a id="more"></a>
+<h1 id="Main"><a href="#Main" class="headerlink" title="Main"></a>Main</h1><p>아래와 같이 액티비티를 만들었습니다.<br>상단에 버튼을 2개 배치하고 하단에는 Fragment 영역을 두었습니다.</p>
+<img src="/2018/06/25/2018-20180625-Android-Fragment-Example/3.png" class="">
+<h2 id="activity-main-xml"><a href="#activity-main-xml" class="headerlink" title="activity_main.xml"></a>activity_main.xml</h2><figure class="highlight xml"><figcaption><span>activity_main.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">android.support.constraint.ConstraintLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/btnShowFragment1"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_marginStart</span>=<span class="string">"8dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_marginTop</span>=<span class="string">"16dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">"Fragment 1"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">"parent"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">Button</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/btnShowFragment2"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"wrap_content"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_marginEnd</span>=<span class="string">"8dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_marginStart</span>=<span class="string">"8dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_marginTop</span>=<span class="string">"16dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:text</span>=<span class="string">"Fragment 2"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintHorizontal_bias</span>=<span class="string">"0.0"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintStart_toEndOf</span>=<span class="string">"@+id/btnShowFragment1"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintTop_toTopOf</span>=<span class="string">"parent"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">LinearLayout</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:id</span>=<span class="string">"@+id/fragment_container"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"0dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"0dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_marginBottom</span>=<span class="string">"8dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_marginEnd</span>=<span class="string">"8dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_marginStart</span>=<span class="string">"8dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_marginTop</span>=<span class="string">"8dp"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:orientation</span>=<span class="string">"horizontal"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintBottom_toBottomOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">"parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">app:layout_constraintTop_toBottomOf</span>=<span class="string">"@+id/btnShowFragment2"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">android.support.constraint.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="MainActivity-java"><a href="#MainActivity-java" class="headerlink" title="MainActivity.java"></a>MainActivity.java</h2><figure class="highlight java"><figcaption><span>MainActivity.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sawd.app.fragmentexam;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.support.v4.app.FragmentManager;</span><br><span class="line"><span class="keyword">import</span> android.support.v4.app.FragmentTransaction;</span><br><span class="line"><span class="keyword">import</span> android.support.v7.app.AppCompatActivity;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.widget.Button;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        Button btnShowView1 = findViewById(R.id.btnShowFragment1);</span><br><span class="line">        btnShowView1.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">                FragmentManager fragmentManager = getSupportFragmentManager();</span><br><span class="line">                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</span><br><span class="line">                fragmentTransaction.replace(R.id.fragment_container, <span class="keyword">new</span> Fragment1());</span><br><span class="line">                fragmentTransaction.commit();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        Button btnShowView2 = findViewById(R.id.btnShowFragment2);</span><br><span class="line">        btnShowView2.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">                FragmentManager fragmentManager = getSupportFragmentManager();</span><br><span class="line">                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</span><br><span class="line">                fragmentTransaction.replace(R.id.fragment_container, <span class="keyword">new</span> Fragment2());</span><br><span class="line">                fragmentTransaction.commit();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        FragmentManager fragmentManager = getSupportFragmentManager();</span><br><span class="line">        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</span><br><span class="line">        fragmentTransaction.replace(R.id.fragment_container, <span class="keyword">new</span> Fragment1());</span><br><span class="line">        fragmentTransaction.commit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Fragment는 FragmentManager를 이용해서 FragmentTransaction 인스턴스를 통해 사용 가능합니다.<br>바로 아래의 코드가 FragmentTransaction을 가져오는 부분입니다.</p>
+<figure class="highlight java"><figcaption><span>get FragmentTransaction</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FragmentManager fragmentManager = getSupportFragmentManager();</span><br><span class="line">FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</span><br></pre></td></tr></table></figure>
+
+<p>이 FragmentTransaction을 이용해 변경 사항을 설정하기 위해 add(), remove(), replace()와 같은 메서드를 이용할 수 있습니다.<br>저는 replace를 이용해 화면 전환을 구현했습니다.</p>
+<figure class="highlight java"><figcaption><span>replace method</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> FragmentTransaction <span class="title">replace</span> <span class="params">(<span class="keyword">int</span> containerViewId, </span></span></span><br><span class="line"><span class="function"><span class="params">                Fragment fragment)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>replace의 첫번째 인자는 Fragment를 나타낼 뷰, 두번째 인자는 해당 Fragment를 넘겨주면 됩니다.<br>코드는 이렇게 되겠네요.</p>
+<figure class="highlight java"><figcaption><span>how to call replace method</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fragmentTransaction.replace(R.id.fragment_container, <span class="keyword">new</span> Fragment1());</span><br></pre></td></tr></table></figure>
+
+<p>FragmentTransaction을 변경하고 나면 반드시 commit()을 호출해야 변경 내용이 적용됩니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fragmentTransaction.commit();</span><br></pre></td></tr></table></figure>
+
+<p>완성된 코드 뭉치는 이렇게 됩니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FragmentManager fragmentManager = getSupportFragmentManager();</span><br><span class="line">FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</span><br><span class="line">fragmentTransaction.replace(R.id.fragment_container, <span class="keyword">new</span> Fragment1());</span><br><span class="line">fragmentTransaction.commit();</span><br></pre></td></tr></table></figure>
+
+<p>다시 MainActivity.java로 돌아와서 아래의 문구가 이해가 되실겁니다.<br>btnShowView1 버튼을 누르면 Fragment1<br>btnShowView2 버튼을 누르면 Fragment2를 보여줍니다.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Button btnShowView1 = findViewById(R.id.btnShowFragment1);</span><br><span class="line">btnShowView1.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        FragmentManager fragmentManager = getSupportFragmentManager();</span><br><span class="line">        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</span><br><span class="line">        fragmentTransaction.replace(R.id.fragment_container, <span class="keyword">new</span> Fragment1());</span><br><span class="line">        fragmentTransaction.commit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">Button btnShowView2 = findViewById(R.id.btnShowFragment2);</span><br><span class="line">btnShowView2.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        FragmentManager fragmentManager = getSupportFragmentManager();</span><br><span class="line">        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();</span><br><span class="line">        fragmentTransaction.replace(R.id.fragment_container, <span class="keyword">new</span> Fragment2());</span><br><span class="line">        fragmentTransaction.commit();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="Fragment"><a href="#Fragment" class="headerlink" title="Fragment"></a>Fragment</h1><h2 id="Fragment1-xml"><a href="#Fragment1-xml" class="headerlink" title="Fragment1.xml"></a>Fragment1.xml</h2><p>크게 의미없는 배경만 있는 코드지만 혹시 필요로하는 분들을 위해 작성합니다.</p>
+<figure class="highlight xml"><figcaption><span>fragment1.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">android.support.constraint.ConstraintLayout</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">"@+id/parentView"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span> <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:background</span>=<span class="string">"@color/colorAccent"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">android.support.constraint.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Fragment1-java"><a href="#Fragment1-java" class="headerlink" title="Fragment1.java"></a>Fragment1.java</h2><figure class="highlight java"><figcaption><span>Fragment1.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sawd.app.fragmentexam;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.support.v4.app.Fragment;</span><br><span class="line"><span class="keyword">import</span> android.view.LayoutInflater;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.view.ViewGroup;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fragment1</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(LayoutInflater inflater, ViewGroup container,</span></span></span><br><span class="line"><span class="function"><span class="params">                             Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        View parentView = inflater.inflate(R.layout.fragment1, container, <span class="keyword">false</span>);</span><br><span class="line">        <span class="comment">// Inflate the layout for this fragment</span></span><br><span class="line">        <span class="keyword">return</span> parentView;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Fragment2-xml"><a href="#Fragment2-xml" class="headerlink" title="Fragment2.xml"></a>Fragment2.xml</h2><p>Fragment1과 완전 같고 xml의 background만 다릅니다.</p>
+<figure class="highlight xml"><figcaption><span>fragment2.xml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">android.support.constraint.ConstraintLayout</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:id</span>=<span class="string">"@+id/parentView"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span> <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:background</span>=<span class="string">"@color/colorAccent"</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">android.support.constraint.ConstraintLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Fragment2-java"><a href="#Fragment2-java" class="headerlink" title="Fragment2.java"></a>Fragment2.java</h2><figure class="highlight java"><figcaption><span>Fragment2.java</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.sawd.app.fragmentexam;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.os.Bundle;</span><br><span class="line"><span class="keyword">import</span> android.support.v4.app.Fragment;</span><br><span class="line"><span class="keyword">import</span> android.view.LayoutInflater;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.view.ViewGroup;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Fragment1</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">onCreateView</span><span class="params">(LayoutInflater inflater, ViewGroup container,</span></span></span><br><span class="line"><span class="function"><span class="params">                             Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        View parentView = inflater.inflate(R.layout.fragment1, container, <span class="keyword">false</span>);</span><br><span class="line">        <span class="comment">// Inflate the layout for this fragment</span></span><br><span class="line">        <span class="keyword">return</span> parentView;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="마무리"><a href="#마무리" class="headerlink" title="마무리"></a>마무리</h1><p>간단하게 Fragment를 사용하는 방법을 알아봤는데요.<br>이것으로 무궁무진한 Fragment를 사용할 수는 없지만 기초라고 할 수 있습니다.<br>포스트에 모든 소스코드를 첨부해서 크게 필요없다고 생각되지만<br>혹시나 프로젝트 단위로 다운받고싶은 분이 있을까 해서 링크 남깁니다.</p>
+<a href="https://github.com/dev-sawd/Fragment-Example" title="" target="">Fragment-Example</a>
+  	</div>
+	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/TIL/">TIL</a>
+      
+        <a href="/tags/Example/">Example</a>
+      
+	  </div>
+    
+		
+	
+		<div class="art-item-footer">
+				
+					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2018/06/26/2018-20180626-Android-About-ConstraintLayout/" rel="prev"  title="[Android] About ConstraintLayout">
+						[Android] About ConstraintLayout 
+					</a></span>
+				
+				
+					<span class="art-item-right">next：<a href="/2018/06/21/2018-20180621-Android-About-fragment/" rel="next"  title="[Android] About fragment">
+						[Android] About fragment
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+</article>
+<script>
+	window.subData = {
+		title: '[Android] Fragment Example',
+		tools: true
+	}
+</script>
+
+      </div>
+      <aside class='l_side'>
+        
+  <section class='m_widget about'>
+
+<div class='header'>SAWD</div>
+<div class='content'>
+<div class='desc'>시간이 나면 쓰는 블로그</div>
+</div>
+</section>
+
+  <section class='m_widget categories'>
+<div class='header'>Categories</div>
+<div class='content'>
+    
+    <ul class="entry">
+    
+        <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badget'>8</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/CSS/"><div class='name'>CSS</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Chaincode/"><div class='name'>Chaincode</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Data-Structure/"><div class='name'>Data Structure</div><div class='badget'>6</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Docker/"><div class='name'>Docker</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>11</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Ethereum/"><div class='name'>Ethereum</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/GitLab/"><div class='name'>GitLab</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Github/"><div class='name'>Github</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Golang/"><div class='name'>Golang</div><div class='badget'>5</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Hyperledger-Fabric/"><div class='name'>Hyperledger Fabric</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Linux/"><div class='name'>Linux</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MacOS/"><div class='name'>MacOS</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MySQL/"><div class='name'>MySQL</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Node-js/"><div class='name'>Node.js</div><div class='badget'>5</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Objective-C/"><div class='name'>Objective-C</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/React/"><div class='name'>React</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Samll-talk/"><div class='name'>Samll talk</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/iOS/"><div class='name'>iOS</div><div class='badget'>4</div></a></li>
+    
+    </ul>
+    
+</div>
+</section>
+
+  
+<div class="m_widget tagcloud">
+    <div class="header">Tags</div>
+    <div class='content'>
+        <a href="/tags/AWS/" style="font-size: 14px; color: #808080">AWS</a> <a href="/tags/Chaincode/" style="font-size: 15px; color: #6b6b6b">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Ethereum/" style="font-size: 14px; color: #808080">Ethereum</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #808080">Node.js</a> <a href="/tags/OCR/" style="font-size: 14px; color: #808080">OCR</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Tool/" style="font-size: 14px; color: #808080">Tool</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 15px; color: #6b6b6b">체인코드에서의 MVC...?</a>
+    </div>
+</div>
+
+
+
+      </aside>
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+  </div>
+  <footer id="footer" class="clearfix">
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="https://github.com/dev-sawd" class="social github"
+          target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+<!--  <div>Theme <a href='https://github.com/stkevintan/hexo-theme-material-flow' target="_blank" rel="noopener" class="codename">MaterialFlow</a> designed by <a href="http://keyin.me/" target="_blank">Kevin Tan</a>.</div>-->
+  
+</footer>
+
+
+  <script>setLoadingBarProgress(80);</script>
+  
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='/js/waves.min.js'></script>
+<script src="/js/scrollreveal.min.js"></script>
+
+<script src="/js/jquery.fitvids.js"></script>
+
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "hexo";
+  var ROOT = "/"||"/";
+  if(!ROOT.endsWith('/'))ROOT += '/';
+</script>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/app.js"></script>
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
