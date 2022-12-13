@@ -145,6 +145,47 @@
   <section class="meta">
     
     <h2 class="title">
+      <a href="/2018/06/26/2018-20180626-Android-About-ConstraintLayout/">
+        [Android] About ConstraintLayout
+      </a>
+    </h2>
+    
+    <time>
+      2018년 6월 26일
+    </time>
+		
+    
+    <div class='cats'>
+        <a href="/categories/Android/">Android</a>
+    </div>
+
+  </section>
+  <section class="article typo">
+	  <p>오늘은 최근에 사용하기 시작한 ConstraintLayout에 대해 이야기해볼까 합니다.<br>“이제야 ConstraintLayout을 사용하기 시작했다구요!?”<br>네.. 그렇습니다.<br>두달 전까지만 해도 저는 LinearLayout과 RelativeLayout을 이용해 UI를 그렸습니다.<br>하지만 새 프로젝트를 시작하며 ConstraintLayout과 CoordinatorLayout을 사용해보고는 자연스럽게 LinearLayout과 RelativeLayout의 사용 빈도가 줄어 들었습니다.<br>특히 RelativeLayout은 더욱요.</p>
+<h1 id="ConstraintLayout"><a href="#ConstraintLayout" class="headerlink" title="ConstraintLayout"></a>ConstraintLayout</h1><p>이 단어를 검색하기만 해도 수많은 사이트들이 쏟아져나올겁니다.<br>한 2년 전 쯤에 처음 접한것 같아요.<br>한창 LinearLayout과 RelativeLayout을 사용하는 제게는 굳이 왜 써야되는지 이해가 안갔습니다.</p>
+
+    
+	  <div class="readmore">
+      <a href="/2018/06/26/2018-20180626-Android-About-ConstraintLayout/">📖 Read More</a>
+    </div>
+    
+    
+    
+	  <div class="full-width auto-padding tags">
+      
+        <a href="/tags/TIL/">TIL</a>
+      
+	  </div>
+    
+  </section>
+</article>
+    </div>
+  
+    <div class='post-wrapper'>
+      <article class="post reveal">
+  <section class="meta">
+    
+    <h2 class="title">
       <a href="/2018/06/25/2018-20180625-Android-Fragment-Example/">
         [Android] Fragment Example
       </a>
@@ -357,50 +398,6 @@
 </article>
     </div>
   
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2018/06/16/2018-20180616-iOS-How-to-add-tapgesture-at-UILabel/">
-        [iOS] UILabel을 클릭했을때 처리
-      </a>
-    </h2>
-    
-    <time>
-      2018년 6월 16일
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/iOS/">iOS</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <h1 id="개인-프로젝트를-진행하면서"><a href="#개인-프로젝트를-진행하면서" class="headerlink" title="개인 프로젝트를 진행하면서.."></a>개인 프로젝트를 진행하면서..</h1><p>UILabel을 탭했을때 페이지를 넘어가거나 특정 일을 처리해야 하는 경우가 생겼습니다.<br>iOS와 특히 Objective C 문법 개념을 같이 학습하려고 하니 필요한 부분들은 정리해 둘 필요가 있는것 같습니다.<br><del>그래야 안잊어 버립니다..</del></p>
-<p>검색해보니 생각보다 간단하게 처리할 수 있을 것 같습니다.<br>저는 viewDidLoad에 아래와 같이 UILabel을 클릭했을때 호출할 delegate와 action을 설정하였습니다.</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    ...</span><br><span class="line">    [labelMenu setUserInteractionEnabled:<span class="literal">YES</span>];</span><br><span class="line">    <span class="built_in">UITapGestureRecognizer</span> *tapGesture = [[<span class="built_in">UITapGestureRecognizer</span> alloc] initWithTarget:<span class="keyword">self</span> action:<span class="keyword">@selector</span>(labelTap:)];</span><br><span class="line">    [tapGesture setDelegate:<span class="keyword">self</span>];</span><br><span class="line">    [labelMenu addGestureRecognizer:tapGesture];</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>그리고 같은 파일안에서 labelTap을 정의하고 처리작업을 넣었습니다.</p>
-<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)labelTap:(<span class="built_in">UITapGestureRecognizer</span> *)recognizer &#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"label is tapped"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>이제 해당 UILabel을 클릭하면 Log가 찍히는 것을 볼 수 있을 것입니다.</p>
-
-
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/TIL/">TIL</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
 </section>
 
 
@@ -449,7 +446,7 @@
     
         <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>11</div></a></li>
     
-        <li><a class="flat-box" href="/categories/Ethereum/"><div class='name'>Ethereum</div><div class='badget'>1</div></a></li>
+        <li><a class="flat-box" href="/categories/Ethereum/"><div class='name'>Ethereum</div><div class='badget'>2</div></a></li>
     
         <li><a class="flat-box" href="/categories/GitLab/"><div class='name'>GitLab</div><div class='badget'>3</div></a></li>
     
@@ -484,7 +481,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class='content'>
-        <a href="/tags/AWS/" style="font-size: 14px; color: #808080">AWS</a> <a href="/tags/Chaincode/" style="font-size: 15px; color: #6b6b6b">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Ethereum/" style="font-size: 14px; color: #808080">Ethereum</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #808080">Node.js</a> <a href="/tags/OCR/" style="font-size: 14px; color: #808080">OCR</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Tool/" style="font-size: 14px; color: #808080">Tool</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 15px; color: #6b6b6b">체인코드에서의 MVC...?</a>
+        <a href="/tags/AWS/" style="font-size: 14px; color: #808080">AWS</a> <a href="/tags/Chaincode/" style="font-size: 15px; color: #6b6b6b">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Ethereum/" style="font-size: 15px; color: #6b6b6b">Ethereum</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/Geth/" style="font-size: 14px; color: #808080">Geth</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #808080">Node.js</a> <a href="/tags/OCR/" style="font-size: 14px; color: #808080">OCR</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Tool/" style="font-size: 14px; color: #808080">Tool</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 15px; color: #6b6b6b">체인코드에서의 MVC...?</a>
     </div>
 </div>
 

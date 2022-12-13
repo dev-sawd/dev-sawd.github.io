@@ -21,7 +21,7 @@
 <meta property="og:description" content="govendor (deprecated)Golang을 처음 접하고 체인코드를 개발할때부터 시간에 쫓겨 의존성 라이브러리 관리를 govendor를 통해 했었음  https:&#x2F;&#x2F;github.com&#x2F;kardianos&#x2F;govendor  Go modules이제는 1.11부터 Go modules가 도입되면서 govendor 개발자도 1.14부터는 Go modules를">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2022-02-06T10:20:03.000Z">
-<meta property="article:modified_time" content="2022-02-06T12:57:14.931Z">
+<meta property="article:modified_time" content="2022-12-10T20:24:47.965Z">
 <meta property="article:author" content="SAWD">
 <meta property="article:tag" content="TIL">
 <meta property="article:tag" content="Golang">
@@ -161,7 +161,7 @@
 
 	</section>
 <!--	-->
-<!--		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#govendor-deprecated"><span class="toc-number">1.</span> <span class="toc-text">govendor (deprecated)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Go-modules"><span class="toc-number">2.</span> <span class="toc-text">Go modules</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#go-mod-init-module-name"><span class="toc-number">2.0.1.</span> <span class="toc-text">go mod init [module-name]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#go-get-module-name"><span class="toc-number">2.0.2.</span> <span class="toc-text">go get [module-name]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#go-mod-tidy"><span class="toc-number">2.0.3.</span> <span class="toc-text">go mod tidy</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#go-mod-vendor"><span class="toc-number">2.0.4.</span> <span class="toc-text">go mod vendor</span></a></li></ol></li></ol></li></ol></section>-->
+<!--		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#govendor-deprecated"><span class="toc-number">1.</span> <span class="toc-text">govendor (deprecated)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Go-modules"><span class="toc-number">2.</span> <span class="toc-text">Go modules</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#go-mod-init-module-name"><span class="toc-number">2.1.</span> <span class="toc-text">go mod init [module-name]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#go-get-module-name"><span class="toc-number">2.2.</span> <span class="toc-text">go get [module-name]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#go-mod-tidy"><span class="toc-number">2.3.</span> <span class="toc-text">go mod tidy</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#go-mod-vendor"><span class="toc-number">2.4.</span> <span class="toc-text">go mod vendor</span></a></li></ol></li></ol></section>-->
 <!--	-->
 	<section class="article typo">
   	<div class="article-entry" itemprop="articleBody">
@@ -176,16 +176,16 @@
 </ul>
 <a id="more"></a>
 
-<h3 id="go-mod-init-module-name"><a href="#go-mod-init-module-name" class="headerlink" title="go mod init [module-name]"></a>go mod init [module-name]</h3><p>새 모듈을 만들었을때 go mod init 명령어로 go.mod 파일 작성</p>
+<h2 id="go-mod-init-module-name"><a href="#go-mod-init-module-name" class="headerlink" title="go mod init [module-name]"></a>go mod init [module-name]</h2><p>새 모듈을 만들었을때 go mod init 명령어로 go.mod 파일 작성</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go mod init github.com&#x2F;dev-sawd&#x2F;</span><br></pre></td></tr></table></figure>
 
-<h3 id="go-get-module-name"><a href="#go-get-module-name" class="headerlink" title="go get [module-name]"></a>go get [module-name]</h3><p>종속성 모듈을 다운로드</p>
+<h2 id="go-get-module-name"><a href="#go-get-module-name" class="headerlink" title="go get [module-name]"></a>go get [module-name]</h2><p>종속성 모듈을 다운로드</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go get github.com&#x2F;dev-sawd&#x2F;</span><br></pre></td></tr></table></figure>
 
-<h3 id="go-mod-tidy"><a href="#go-mod-tidy" class="headerlink" title="go mod tidy"></a>go mod tidy</h3><p>사용되지 않는 종속성 모듈을 제거하거나 추가된 종속성 모듈을 go.mod에 추가</p>
+<h2 id="go-mod-tidy"><a href="#go-mod-tidy" class="headerlink" title="go mod tidy"></a>go mod tidy</h2><p>사용되지 않는 종속성 모듈을 제거하거나 추가된 종속성 모듈을 go.mod에 추가</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go mod tidy</span><br></pre></td></tr></table></figure>
 
-<h3 id="go-mod-vendor"><a href="#go-mod-vendor" class="headerlink" title="go mod vendor"></a>go mod vendor</h3><p>해당 위치에 종속성 모듈을 vendor 폴더안에 복사</p>
+<h2 id="go-mod-vendor"><a href="#go-mod-vendor" class="headerlink" title="go mod vendor"></a>go mod vendor</h2><p>해당 위치에 종속성 모듈을 vendor 폴더안에 복사</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go mod vendor</span><br></pre></td></tr></table></figure>
 
 <p>프로젝트를 새로 만들었을 경우는 go mod init를 이용해 go.mod를 생성하고 작업하면서 필요한 모듈들을 정리해가며 개발</p>
@@ -257,7 +257,7 @@
     
         <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>11</div></a></li>
     
-        <li><a class="flat-box" href="/categories/Ethereum/"><div class='name'>Ethereum</div><div class='badget'>1</div></a></li>
+        <li><a class="flat-box" href="/categories/Ethereum/"><div class='name'>Ethereum</div><div class='badget'>2</div></a></li>
     
         <li><a class="flat-box" href="/categories/GitLab/"><div class='name'>GitLab</div><div class='badget'>3</div></a></li>
     
@@ -292,7 +292,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class='content'>
-        <a href="/tags/AWS/" style="font-size: 14px; color: #808080">AWS</a> <a href="/tags/Chaincode/" style="font-size: 15px; color: #6b6b6b">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Ethereum/" style="font-size: 14px; color: #808080">Ethereum</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #808080">Node.js</a> <a href="/tags/OCR/" style="font-size: 14px; color: #808080">OCR</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Tool/" style="font-size: 14px; color: #808080">Tool</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 15px; color: #6b6b6b">체인코드에서의 MVC...?</a>
+        <a href="/tags/AWS/" style="font-size: 14px; color: #808080">AWS</a> <a href="/tags/Chaincode/" style="font-size: 15px; color: #6b6b6b">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Ethereum/" style="font-size: 15px; color: #6b6b6b">Ethereum</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/Geth/" style="font-size: 14px; color: #808080">Geth</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #808080">Node.js</a> <a href="/tags/OCR/" style="font-size: 14px; color: #808080">OCR</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Tool/" style="font-size: 14px; color: #808080">Tool</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 15px; color: #6b6b6b">체인코드에서의 MVC...?</a>
     </div>
 </div>
 
