@@ -22,7 +22,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="https://dev-sawd.github.io/2022/12/17/Ethereum-building-a-cloud-private-network/thumbnail.png">
 <meta property="article:published_time" content="2022-12-16T22:58:42.000Z">
-<meta property="article:modified_time" content="2022-12-17T18:47:53.701Z">
+<meta property="article:modified_time" content="2022-12-17T18:56:46.807Z">
 <meta property="article:author" content="SAWD">
 <meta property="article:tag" content="Ethereum">
 <meta name="twitter:card" content="summary">
@@ -213,6 +213,7 @@
 <h2 id="Dockerfile-생성"><a href="#Dockerfile-생성" class="headerlink" title="Dockerfile 생성"></a>Dockerfile 생성</h2><p>private-net 디렉터리에서 Dockerfile이라는 문서를 만듭니다.</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">FROM ethereum/client-go</span><br><span class="line"></span><br><span class="line">COPY genesis.json /var/share/ethereum/</span><br><span class="line">COPY keystore /var/share/ethereum/keystore/</span><br><span class="line">COPY password /var/share/ethereum/</span><br><span class="line">COPY entrypoint.sh /</span><br><span class="line">RUN chmod 744 /entrypoint.sh</span><br><span class="line"></span><br><span class="line">EXPOSE 8545 8546 30303 30303/udp</span><br><span class="line"></span><br><span class="line">ENTRYPOINT ["/entrypoint.sh"]</span><br></pre></td></tr></table></figure>
 
+<p><code>ethereum/client-go</code> 이미지를 기반으로 하여 <code>private-net</code> 폴더 안에 있는 실행에 필요한 파일들을 지정합니다.</p>
 <h2 id="entrypoint-sh-생성"><a href="#entrypoint-sh-생성" class="headerlink" title="entrypoint.sh 생성"></a>entrypoint.sh 생성</h2><p>컨테이너를 처음 실행할 때 프라이빗 네트워크를 초기화, 실행하는 데 필요한 스크립트입니다.<br>private-net 디렉터리 안에 생성합니다.</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/bash</span></span><br><span class="line">geth --datadir /var/share/ethereum --nodiscover --maxpeers 0 \</span><br><span class="line">init /var/share/ethereum/genesis.json \</span><br><span class="line">&amp;&amp; \</span><br><span class="line">geth --datadir /var/share/ethereum --networkid 15 \</span><br><span class="line">--nodiscover --maxpeers 0 --mine --miner.threads 1 \</span><br><span class="line">--http --http.addr "0.0.0.0" --http.corsdomain "*" \</span><br><span class="line">--http.vhosts "*" --http.api "eth,web3,personal,net,miner" \</span><br><span class="line">--ipcpath /tmp/geth.ipc --ws --ws.addr "0.0.0.0" \</span><br><span class="line">--ws.api "eth,web3,personal,net,miner" --ws.origins "*" \</span><br><span class="line">--allow-insecure-unlock --password /var/share/ethereum/password</span><br></pre></td></tr></table></figure>
 
@@ -262,6 +263,10 @@
 	
 		<div class="art-item-footer">
 				
+					<span class="art-item-left"><i class="icon icon-chevron-thin-left"></i>prev：<a href="/2022/12/19/ETC-exec-format-error/" rel="prev"  title="[ETC] exec format error">
+						[ETC] exec format error 
+					</a></span>
+				
 				
 					<span class="art-item-right">next：<a href="/2022/12/15/Ethereum-deploy-contract/" rel="next"  title="[Ethereum] 프라이빗 네트워크에 컨트랙트 배포 및 테스트">
 						[Ethereum] 프라이빗 네트워크에 컨트랙트 배포 및 테스트
@@ -306,7 +311,7 @@
     
         <li><a class="flat-box" href="/categories/Docker/"><div class='name'>Docker</div><div class='badget'>1</div></a></li>
     
-        <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>11</div></a></li>
+        <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>12</div></a></li>
     
         <li><a class="flat-box" href="/categories/Ethereum/"><div class='name'>Ethereum</div><div class='badget'>5</div></a></li>
     
@@ -343,7 +348,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class='content'>
-        <a href="/tags/AWS/" style="font-size: 14px; color: #808080">AWS</a> <a href="/tags/Chaincode/" style="font-size: 15px; color: #6b6b6b">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Ethereum/" style="font-size: 18px; color: #2b2b2b">Ethereum</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/Geth/" style="font-size: 14px; color: #808080">Geth</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #808080">Node.js</a> <a href="/tags/OCR/" style="font-size: 14px; color: #808080">OCR</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Tool/" style="font-size: 14px; color: #808080">Tool</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Truffle/" style="font-size: 14px; color: #808080">Truffle</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 15px; color: #6b6b6b">체인코드에서의 MVC...?</a>
+        <a href="/tags/AWS/" style="font-size: 14px; color: #808080">AWS</a> <a href="/tags/Chaincode/" style="font-size: 15px; color: #6b6b6b">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Ethereum/" style="font-size: 18px; color: #2b2b2b">Ethereum</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/Geth/" style="font-size: 14px; color: #808080">Geth</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/Kubernetes/" style="font-size: 14px; color: #808080">Kubernetes</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #808080">Node.js</a> <a href="/tags/OCR/" style="font-size: 14px; color: #808080">OCR</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Tool/" style="font-size: 14px; color: #808080">Tool</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Truffle/" style="font-size: 14px; color: #808080">Truffle</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 15px; color: #6b6b6b">체인코드에서의 MVC...?</a>
     </div>
 </div>
 
