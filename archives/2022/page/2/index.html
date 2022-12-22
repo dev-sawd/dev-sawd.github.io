@@ -150,6 +150,54 @@
   <section class="meta">
     
     <h2 class="title">
+      <a href="/2022/04/22/Golang-mvc-pattern2/">
+        [Chaincode] 체인코드에서의 MVC...? (2)
+      </a>
+    </h2>
+    
+    <time>
+      2022년 4월 22일
+    </time>
+		
+    
+    <div class='cats'>
+        <a href="/categories/Chaincode/">Chaincode</a>
+    </div>
+
+  </section>
+  <section class="article typo">
+	  <p>이전에 체인코드에서의 MVC패턴에 대해서 공부하고 앞으로의 프로젝트에서 적용하려고 정리했습니다.</p>
+<p>그리고 실제로 프로젝트 투입 후 이렇게 저렇게 구조를 정리해본 결과를 한번 더 정리하려 합니다.</p>
+<p>완성도는 올라간것 같지만 아직 손봐야될 부분이 생길수도 있다고 생각합니다.</p>
+<hr>
+<h1 id="폴더-구조"><a href="#폴더-구조" class="headerlink" title="폴더 구조"></a>폴더 구조</h1><h2 id="기존-프로젝트-구조"><a href="#기존-프로젝트-구조" class="headerlink" title="기존 프로젝트 구조"></a>기존 프로젝트 구조</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">\GOPROJECT\SRC\MVC</span><br><span class="line">├─controller</span><br><span class="line">├─dao</span><br><span class="line">├─dto</span><br><span class="line">└─service</span><br></pre></td></tr></table></figure>
+
+    
+	  <div class="readmore">
+      <a href="/2022/04/22/Golang-mvc-pattern2/">📖 Read More</a>
+    </div>
+    
+    
+    
+	  <div class="full-width auto-padding tags">
+      
+        <a href="/tags/TIL/">TIL</a>
+      
+        <a href="/tags/Golang/">Golang</a>
+      
+        <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/">체인코드에서의 MVC...?</a>
+      
+	  </div>
+    
+  </section>
+</article>
+    </div>
+  
+    <div class='post-wrapper'>
+      <article class="post reveal">
+  <section class="meta">
+    
+    <h2 class="title">
       <a href="/2022/03/14/React-chatting-socket-client/">
         [React] 혼자 만들어본 채팅 웹 앱(클라이언트 부분)
       </a>
@@ -542,55 +590,6 @@
 </article>
     </div>
   
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2022/02/07/Docker-no-matching-manifest-for-linux-arm64-v8-in-the-manifest-list-entries/">
-        [Docker] no matching manifest for linux/arm64/v8 in the manifest list entries
-      </a>
-    </h2>
-    
-    <time>
-      2022년 2월 7일
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/Docker/">Docker</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>M1 맥북 에어를 구입하고 Docker를 이용해 이미지를 받을때 아래와 같은 문제가 발생</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">% docker pull hyperledger&#x2F;fabric-javaenv:2.4</span><br><span class="line">2.4: Pulling from hyperledger&#x2F;fabric-javaenv</span><br><span class="line">no matching manifest for linux&#x2F;arm64&#x2F;v8 in the manifest list entries</span><br></pre></td></tr></table></figure>
-
-<p>M1 환경에서 발생하는 문제로 보임</p>
-<p><code>--platform linux/x86_64</code> 인자를 주어 실행하면 정상적으로 받아오는것을 확인</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">% docker pull --platform linux&#x2F;x86_64 hyperledger&#x2F;fabric-javaenv:2.4</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><a href="https://unluckyjung.github.io/develop-setting/2021/03/27/M1-Docker-Mysql-Error/" target="_blank" rel="noopener">https://unluckyjung.github.io/develop-setting/2021/03/27/M1-Docker-Mysql-Error/</a></li>
-<li><a href="https://stackoverflow.com/a/67361161" target="_blank" rel="noopener">https://stackoverflow.com/a/67361161</a></li>
-</ul>
-
-
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/Docker/">Docker</a>
-      
-        <a href="/tags/M1-MacBook-Air/">M1 MacBook Air</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
 </section>
 
 
@@ -640,7 +639,7 @@
     
         <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>12</div></a></li>
     
-        <li><a class="flat-box" href="/categories/Ethereum/"><div class='name'>Ethereum</div><div class='badget'>5</div></a></li>
+        <li><a class="flat-box" href="/categories/Ethereum/"><div class='name'>Ethereum</div><div class='badget'>6</div></a></li>
     
         <li><a class="flat-box" href="/categories/GitLab/"><div class='name'>GitLab</div><div class='badget'>3</div></a></li>
     
@@ -675,7 +674,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class='content'>
-        <a href="/tags/AWS/" style="font-size: 14px; color: #808080">AWS</a> <a href="/tags/Chaincode/" style="font-size: 15px; color: #6b6b6b">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Ethereum/" style="font-size: 18px; color: #2b2b2b">Ethereum</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/Geth/" style="font-size: 14px; color: #808080">Geth</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/Kubernetes/" style="font-size: 14px; color: #808080">Kubernetes</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #808080">Node.js</a> <a href="/tags/OCR/" style="font-size: 14px; color: #808080">OCR</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Tool/" style="font-size: 14px; color: #808080">Tool</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Truffle/" style="font-size: 14px; color: #808080">Truffle</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 15px; color: #6b6b6b">체인코드에서의 MVC...?</a>
+        <a href="/tags/AWS/" style="font-size: 14px; color: #808080">AWS</a> <a href="/tags/Chaincode/" style="font-size: 14.86px; color: #6e6e6e">Chaincode</a> <a href="/tags/Docker/" style="font-size: 17.43px; color: #373737">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 15.71px; color: #5b5b5b">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 15.71px; color: #5b5b5b">ETC</a> <a href="/tags/Ethereum/" style="font-size: 18.29px; color: #252525">Ethereum</a> <a href="/tags/Example/" style="font-size: 15.71px; color: #5b5b5b">Example</a> <a href="/tags/Geth/" style="font-size: 14.86px; color: #6e6e6e">Geth</a> <a href="/tags/GitLab/" style="font-size: 15.71px; color: #5b5b5b">GitLab</a> <a href="/tags/Github/" style="font-size: 14.86px; color: #6e6e6e">Github</a> <a href="/tags/Golang/" style="font-size: 19.14px; color: #121212">Golang</a> <a href="/tags/HEXO/" style="font-size: 14.86px; color: #6e6e6e">HEXO</a> <a href="/tags/Kubernetes/" style="font-size: 14px; color: #808080">Kubernetes</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 16.57px; color: #494949">MySQL</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #808080">Node.js</a> <a href="/tags/OCR/" style="font-size: 14px; color: #808080">OCR</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Tool/" style="font-size: 14px; color: #808080">Tool</a> <a href="/tags/Toy-project/" style="font-size: 15.71px; color: #5b5b5b">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 14.86px; color: #6e6e6e">Troubleshooting</a> <a href="/tags/Truffle/" style="font-size: 14.86px; color: #6e6e6e">Truffle</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 14.86px; color: #6e6e6e">체인코드에서의 MVC...?</a>
     </div>
 </div>
 

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html translate="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="google" content="notranslate">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>[Ethereum] 로컬 프라이빗 네트워크에 스마트 컨트랙트 배포 | SAWD</title>
+  <meta name="description" content="시간이 나야지..." />
+  <meta name="keywords" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/images/favicon.png">
+  <link rel="alternate" href="/atom.xml" title="SAWD">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="로컬 프라이빗 네트워크에 스마트 컨트랙트를 배포하고 호출해보겠습니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Ethereum] 로컬 프라이빗 네트워크에 스마트 컨트랙트 배포">
+<meta property="og:url" content="https://dev-sawd.github.io/2022/12/23/Ethereum-deploying-smart-contract-to-private-network/index.html">
+<meta property="og:site_name" content="SAWD">
+<meta property="og:description" content="로컬 프라이빗 네트워크에 스마트 컨트랙트를 배포하고 호출해보겠습니다.">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://dev-sawd.github.io/2022/12/23/Ethereum-deploying-smart-contract-to-private-network/thumbnail.png">
+<meta property="og:image" content="https://www.openzeppelin.com/hubfs/Cover_OZm-2.png#keepProtocol">
+<meta property="article:published_time" content="2022-12-22T17:00:43.000Z">
+<meta property="article:modified_time" content="2022-12-22T17:35:01.630Z">
+<meta property="article:author" content="SAWD">
+<meta property="article:tag" content="Ethereum">
+<meta property="article:tag" content="Geth">
+<meta property="article:tag" content="Truffle">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dev-sawd.github.io/2022/12/23/Ethereum-deploying-smart-contract-to-private-network/thumbnail.png">
+    
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href='/css/waves.min.css' rel='stylesheet'>
+  
+<link rel="stylesheet" href="/style.css">
+
+
+  
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-120934734-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="SAWD" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+  <script>setLoadingBarProgress(20)</script> 
+  <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				SAWD
+			</a>
+			<div class='menu'>
+				<ul class='h-list'>
+					
+						<li>
+							<a class='flat-box nav-home' href='/'>
+								Home
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-archives' href='/archives'>
+								Archives
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-about' href='/about'>
+								About
+							</a>
+						</li>
+					
+				</ul>
+				<div class='underline'></div>
+			</div>
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon icon-search"></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a href='javascript:void(0)'><span class="icon icon-search flat-box"></span></a></li>
+				
+				<li class='s-menu'><a href='javascript:void(0)'><span class="icon icon-menu flat-box"></span></a></li>
+			</ul>
+		</div>
+		
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				Word of Forks
+			</a>
+
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a href='javascript:void(0)'><span class="icon icon-chat_bubble_outline flat-box"></span></a></li>
+				<li class='s-top'><a href='javascript:void(0)'><span class="icon icon-arrow_upward flat-box"></span></a></li>
+				<li class='s-toc'><a href='javascript:void(0)'><span class="icon icon-format_list_numbered flat-box"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<aside class="menu-phone">
+	<nav>
+		
+			<a href="/" class="nav-home nav">
+				Home
+			</a>
+		
+			<a href="/archives" class="nav-archives nav">
+				Archives
+			</a>
+		
+			<a href="/about" class="nav-about nav">
+				About
+			</a>
+		
+	</nav>
+</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+  <div class="l_body">
+    <div class='container clearfix'>
+      <div class='l_main'>
+        <article id="post-Ethereum-deploying-smart-contract-to-private-network"
+  class="post white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<section class='meta'>
+	<h2 class="title">
+  	<a href="/2022/12/23/Ethereum-deploying-smart-contract-to-private-network/">
+    	[Ethereum] 로컬 프라이빗 네트워크에 스마트 컨트랙트 배포
+    </a>
+  </h2>
+	<time>
+	  12월 23, 2022
+	</time>
+	
+    
+    <div class='cats'>
+        <a href="/categories/Ethereum/">Ethereum</a>
+    </div>
+
+	</section>
+<!--	-->
+<!--		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#트러플-프로젝트-만들기"><span class="toc-number">1.</span> <span class="toc-text">트러플 프로젝트 만들기</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#이더리움-네트워크-설정"><span class="toc-number">2.</span> <span class="toc-text">이더리움 네트워크 설정</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Truffle-Console-실행"><span class="toc-number">3.</span> <span class="toc-text">Truffle Console 실행</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#package-json-만들기"><span class="toc-number">4.</span> <span class="toc-text">package.json 만들기</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#오픈제플린-설치"><span class="toc-number">5.</span> <span class="toc-text">오픈제플린 설치</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#스마트-컨트랙트-구현"><span class="toc-number">6.</span> <span class="toc-text">스마트 컨트랙트 구현</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#컴파일"><span class="toc-number">7.</span> <span class="toc-text">컴파일</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#프라이빗-네트워크에-계약-배포"><span class="toc-number">8.</span> <span class="toc-text">프라이빗 네트워크에 계약 배포</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#마이그레이션-파일-작성"><span class="toc-number">8.1.</span> <span class="toc-text">마이그레이션 파일 작성</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#가나슈에-트러플-프로젝트-배포"><span class="toc-number">8.2.</span> <span class="toc-text">가나슈에 트러플 프로젝트 배포</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#스마트-컨트랙트-호출-확인"><span class="toc-number">9.</span> <span class="toc-text">스마트 컨트랙트 호출 확인</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Geth-콘솔에-접속-후-계정-잠금-해제"><span class="toc-number">9.1.</span> <span class="toc-text">Geth 콘솔에 접속 후 계정 잠금 해제</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#계정-잔액-확인"><span class="toc-number">9.2.</span> <span class="toc-text">계정 잔액 확인</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#스마트-컨트랙트-객체"><span class="toc-number">9.3.</span> <span class="toc-text">스마트 컨트랙트 객체</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#스마트-컨트랙트의-잔고-확인"><span class="toc-number">9.4.</span> <span class="toc-text">스마트 컨트랙트의 잔고 확인</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#함수-호출"><span class="toc-number">9.5.</span> <span class="toc-text">함수 호출</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#트랜잭션-발행-결과-확인"><span class="toc-number">9.6.</span> <span class="toc-text">트랜잭션 발행 결과 확인</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#스마트-컨트랙트-잔액-확인"><span class="toc-number">9.7.</span> <span class="toc-text">스마트 컨트랙트 잔액 확인</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#계정-잔액-확인-1"><span class="toc-number">9.8.</span> <span class="toc-text">계정 잔액 확인</span></a></li></ol></li></ol></section>-->
+<!--	-->
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<img src="/2022/12/23/Ethereum-deploying-smart-contract-to-private-network/thumbnail.png" class="">
+
+<p>로컬 프라이빗 네트워크에 스마트 컨트랙트를 배포하고 호출해보겠습니다.</p>
+<a id="more"></a>
+
+<h1 id="트러플-프로젝트-만들기"><a href="#트러플-프로젝트-만들기" class="headerlink" title="트러플 프로젝트 만들기"></a>트러플 프로젝트 만들기</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> mkdir ~/truffleproject</span></span><br><span class="line"><span class="meta">%</span><span class="bash"> <span class="built_in">cd</span> ~/truffleproject </span></span><br><span class="line">truffleproject % truffle init</span><br><span class="line"></span><br><span class="line">Starting init...</span><br><span class="line">================</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Copying project files to /Users/devsawd/truffleproject</span></span><br><span class="line"></span><br><span class="line">Init successful, sweet!</span><br><span class="line"></span><br><span class="line">Try our scaffold commands to get started:</span><br><span class="line"><span class="meta">  $</span><span class="bash"> truffle create contract YourContractName <span class="comment"># scaffold a contract</span></span></span><br><span class="line"><span class="meta">  $</span><span class="bash"> truffle create <span class="built_in">test</span> YourTestName         <span class="comment"># scaffold a test</span></span></span><br><span class="line"></span><br><span class="line">http://trufflesuite.com/docs</span><br></pre></td></tr></table></figure>
+
+<h1 id="이더리움-네트워크-설정"><a href="#이더리움-네트워크-설정" class="headerlink" title="이더리움 네트워크 설정"></a>이더리움 네트워크 설정</h1><p><code>~/truffleproject/truffle-config.js</code>에서 Geth 프라이빗 네트워크, 가나슈, 솔리디티 컴파일 버전 관련 설정을 진행합니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">networks: &#123;</span><br><span class="line">    development: &#123;</span><br><span class="line">         host: "127.0.0.1",     // Localhost (default: none)</span><br><span class="line">         port: 8545,            // Standard Ethereum port (default: none)</span><br><span class="line">         network_id: "15",       // Any network (default: none)</span><br><span class="line">         gas : 4700000</span><br><span class="line">    &#125;,</span><br><span class="line">    ganache: &#123;</span><br><span class="line">          host: '127.0.0.1',</span><br><span class="line">          port: 7545,</span><br><span class="line">          network_id: '*'</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;,</span><br><span class="line">compilers: &#123;</span><br><span class="line">    solc: &#123;</span><br><span class="line">      version: "0.8.17" // Fetch exact version from solc-bin (default: truffle's version)</span><br><span class="line">      // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)</span><br><span class="line">      // settings: &#123;          // See the solidity docs for advice about optimization and evmVersion</span><br><span class="line">      //  optimizer: &#123;</span><br><span class="line">      //    enabled: false,</span><br><span class="line">      //    runs: 200</span><br><span class="line">      //  &#125;,</span><br><span class="line">      //  evmVersion: "byzantium"</span><br><span class="line">      // &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Truffle-Console-실행"><a href="#Truffle-Console-실행" class="headerlink" title="Truffle Console 실행"></a>Truffle Console 실행</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> truffle console --network development</span></span><br><span class="line"><span class="meta">truffle(development)&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>만약 아래와 같은 에러 발생시 Geth가 실행되어있는지 확인합니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> truffle console --network development</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Something went wrong <span class="keyword">while</span> attempting to connect to the network at http://127.0.0.1:8545. Check your network configuration.</span></span><br><span class="line">ProviderError: </span><br><span class="line">Could not connect to your Ethereum client with the following parameters:</span><br><span class="line">    - host       &gt; 127.0.0.1</span><br><span class="line">    - port       &gt; 8545</span><br><span class="line">    - network_id &gt; 15</span><br><span class="line">Please check that your Ethereum client:</span><br><span class="line">    - is running</span><br><span class="line">    - is accepting RPC connections (i.e., "--rpc" or "--http" option is used in geth)</span><br><span class="line">    - is accessible over the network</span><br><span class="line">    - is properly configured in your Truffle configuration file (truffle-config.js)</span><br><span class="line"></span><br><span class="line">    at /opt/homebrew/lib/node_modules/truffle/build/webpack:/packages/provider/wrapper.js:80:1</span><br><span class="line">    at /opt/homebrew/lib/node_modules/truffle/build/webpack:/packages/provider/wrapper.js:118:1</span><br><span class="line">    at XMLHttpRequest.request.onreadystatechange (/opt/homebrew/lib/node_modules/truffle/build/webpack:/node_modules/web3-providers-http/lib/index.js:98:1)</span><br><span class="line">    at XMLHttpRequestEventTarget.dispatchEvent (/opt/homebrew/lib/node_modules/truffle/build/webpack:/node_modules/xhr2-cookies/dist/xml-http-request-event-target.js:34:1)</span><br><span class="line">    at XMLHttpRequest.exports.modules.996763.XMLHttpRequest._setReadyState (/opt/homebrew/lib/node_modules/truffle/build/webpack:/node_modules/xhr2-cookies/dist/xml-http-request.js:208:1)</span><br><span class="line">    at XMLHttpRequest.exports.modules.996763.XMLHttpRequest._onHttpRequestError (/opt/homebrew/lib/node_modules/truffle/build/webpack:/node_modules/xhr2-cookies/dist/xml-http-request.js:349:1)</span><br><span class="line">    at ClientRequest.&lt;anonymous&gt; (/opt/homebrew/lib/node_modules/truffle/build/webpack:/node_modules/xhr2-cookies/dist/xml-http-request.js:252:48)</span><br><span class="line">    at ClientRequest.emit (node:events:513:28)</span><br><span class="line">    at ClientRequest.emit (node:domain:482:12)</span><br><span class="line">    at Socket.socketErrorListener (node:_http_client:481:9)</span><br><span class="line">    at Socket.emit (node:events:513:28)</span><br><span class="line">    at Socket.emit (node:domain:482:12)</span><br><span class="line">    at emitErrorNT (node:internal/streams/destroy:151:8)</span><br><span class="line">    at emitErrorCloseNT (node:internal/streams/destroy:116:3)</span><br><span class="line">    at processTicksAndRejections (node:internal/process/task_queues:82:21)</span><br><span class="line">Truffle v5.6.9 (core: 5.6.9)</span><br><span class="line">Node v18.6.0</span><br></pre></td></tr></table></figure>
+
+<h1 id="package-json-만들기"><a href="#package-json-만들기" class="headerlink" title="package.json 만들기"></a>package.json 만들기</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> npm init -y    </span></span><br><span class="line">Wrote to /Users/devsawd/truffleproject/package.json:</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  "name": "truffleproject",</span><br><span class="line">  "version": "1.0.0",</span><br><span class="line">  "description": "",</span><br><span class="line">  "main": "truffle-config.js",</span><br><span class="line">  "directories": &#123;</span><br><span class="line">    "test": "test"</span><br><span class="line">  &#125;,</span><br><span class="line">  "scripts": &#123;</span><br><span class="line">    "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"</span><br><span class="line">  &#125;,</span><br><span class="line">  "keywords": [],</span><br><span class="line">  "author": "",</span><br><span class="line">  "license": "ISC"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="오픈제플린-설치"><a href="#오픈제플린-설치" class="headerlink" title="오픈제플린 설치"></a>오픈제플린 설치</h1><p>안전한 스마트 컨트랙트 개발을 위한 라이브러리입니다.</p>
+<p>ERC20 및 ERC721과 같은 표준 구현을 지원합니다.</p>
+<p>이 실습에서 꼭 필요한 라이브러리는 아니지만 학습에 참고하면 유용합니다.</p>
+<a href="https://openzeppelin.org/" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://www.openzeppelin.com/hubfs/Cover_OZm-2.png#keepProtocol"></img></div><div class="descriptions"><div class="og-title">OpenZeppelin | Contracts</div><div class="og-description">OpenZeppelin Contracts helps you minimize risk by using battle-tested libraries of smart contracts for Ethereum and other blockchains. It in…</div></div></div></a>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> npm install @openzeppelin/contracts</span></span><br><span class="line"></span><br><span class="line">added 1 package, and audited 2 packages in 3s</span><br><span class="line"></span><br><span class="line">found 0 vulnerabilities</span><br></pre></td></tr></table></figure>
+
+<h1 id="스마트-컨트랙트-구현"><a href="#스마트-컨트랙트-구현" class="headerlink" title="스마트 컨트랙트 구현"></a>스마트 컨트랙트 구현</h1><p>스마트 컨트랙트로 이더를 전송하는 간단한 함수를 구현해보겠습니다.</p>
+<blockquote><p>오픈제플린의 Ownable을 어떻게 import해서 사용하는지 참고하면 좋습니다.</p>
+</blockquote>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> <span class="built_in">cd</span> contracts</span></span><br><span class="line"><span class="meta">%</span><span class="bash"> touch Sample.sol</span></span><br><span class="line"></span><br><span class="line">// SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity ^0.8.0;</span><br><span class="line"></span><br><span class="line">import "@openzeppelin/contracts/access/Ownable.sol";</span><br><span class="line"></span><br><span class="line">contract Sample is Ownable&#123;</span><br><span class="line">    function send() public payable &#123;</span><br><span class="line">      address sender = payable(msg.sender);</span><br><span class="line">      bool sent = payable(sender).send(msg.value);</span><br><span class="line">      require(sent,"Failed to send either");</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="컴파일"><a href="#컴파일" class="headerlink" title="컴파일"></a>컴파일</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> truffle compile</span></span><br><span class="line"></span><br><span class="line">Compiling your contracts...</span><br><span class="line">===========================</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Compiling ./contracts/Sample.sol</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Compiling @openzeppelin/contracts/access/Ownable.sol</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Compiling @openzeppelin/contracts/utils/Context.sol</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Artifacts written to /Users/devsawd/truffleproject/build/contracts</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Compiled successfully using:</span></span><br><span class="line">   - solc: 0.8.17+commit.8df45f5f.Emscripten.clang</span><br></pre></td></tr></table></figure>
+
+<h1 id="프라이빗-네트워크에-계약-배포"><a href="#프라이빗-네트워크에-계약-배포" class="headerlink" title="프라이빗 네트워크에 계약 배포"></a>프라이빗 네트워크에 계약 배포</h1><h2 id="마이그레이션-파일-작성"><a href="#마이그레이션-파일-작성" class="headerlink" title="마이그레이션 파일 작성"></a>마이그레이션 파일 작성</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> <span class="built_in">cd</span> ~/truffleproject/migrasions</span></span><br><span class="line"><span class="meta">%</span><span class="bash"> touch 2_deploy_sample.js</span></span><br><span class="line"></span><br><span class="line">const Sample = artifacts.require('../contracts/Sample.sol')</span><br><span class="line"></span><br><span class="line">module.exports = deployer =&gt; &#123;</span><br><span class="line">    deployer.deploy(Sample).then(instance =&gt; &#123;</span><br><span class="line">        console.log('ABI:', JSON.stringify(instance.abi))</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="가나슈에-트러플-프로젝트-배포"><a href="#가나슈에-트러플-프로젝트-배포" class="headerlink" title="가나슈에 트러플 프로젝트 배포"></a>가나슈에 트러플 프로젝트 배포</h2><p>앞서 설정한 가나슈 네트워크에 배포합니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> truffle migrate --network ganache</span></span><br><span class="line"></span><br><span class="line">Compiling your contracts...</span><br><span class="line">===========================</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Everything is up to date, there is nothing to compile.</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Starting migrations...</span><br><span class="line">======================</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Network name:    <span class="string">'ganache'</span></span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Network id:      5777</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Block gas <span class="built_in">limit</span>: 6721975 (0x6691b7)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">2_deploy_sample.js</span><br><span class="line">==================</span><br><span class="line"></span><br><span class="line">   Deploying 'Sample'</span><br><span class="line">   ------------------</span><br><span class="line"><span class="meta">   &gt;</span><span class="bash"> transaction <span class="built_in">hash</span>:    0xcca8f14829c106e3bf74d00282e9323358bc8904eee76a2a0469bbbe159b4eae</span></span><br><span class="line"><span class="meta">   &gt;</span><span class="bash"> Blocks: 0            Seconds: 0</span></span><br><span class="line"><span class="meta">   &gt;</span><span class="bash"> contract address:    0x8e36a247aD15a98ae7e7B6e23D4D69988bE9c12e</span></span><br><span class="line"><span class="meta">   &gt;</span><span class="bash"> block number:        1</span></span><br><span class="line"><span class="meta">   &gt;</span><span class="bash"> block timestamp:     1671726245</span></span><br><span class="line"><span class="meta">   &gt;</span><span class="bash"> account:             0x9313a92d0F000dBf856252A1cd3E176E116fc704</span></span><br><span class="line"><span class="meta">   &gt;</span><span class="bash"> balance:             99.9921389</span></span><br><span class="line"><span class="meta">   &gt;</span><span class="bash"> gas used:            393055 (0x5ff5f)</span></span><br><span class="line"><span class="meta">   &gt;</span><span class="bash"> gas price:           20 gwei</span></span><br><span class="line"><span class="meta">   &gt;</span><span class="bash"> value sent:          0 ETH</span></span><br><span class="line"><span class="meta">   &gt;</span><span class="bash"> total cost:          0.0078611 ETH</span></span><br><span class="line"></span><br><span class="line">ABI: [&#123;"anonymous":false,"inputs":[&#123;"indexed":true,"internalType":"address","name":"previousOwner","type":"address"&#125;,&#123;"indexed":true,"internalType":"address","name":"newOwner","type":"address"&#125;],"name":"OwnershipTransferred","type":"event","signature":"0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"&#125;,&#123;"inputs":[],"name":"owner","outputs":[&#123;"internalType":"address","name":"","type":"address"&#125;],"stateMutability":"view","type":"function","constant":true,"signature":"0x8da5cb5b"&#125;,&#123;"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function","signature":"0x715018a6"&#125;,&#123;"inputs":[&#123;"internalType":"address","name":"newOwner","type":"address"&#125;],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function","signature":"0xf2fde38b"&#125;,&#123;"inputs":[],"name":"send","outputs":[],"stateMutability":"payable","type":"function","payable":true,"signature":"0xb46300ec"&#125;]</span><br><span class="line"><span class="meta">   &gt;</span><span class="bash"> Saving artifacts</span></span><br><span class="line">   -------------------------------------</span><br><span class="line"><span class="meta">   &gt;</span><span class="bash"> Total cost:           0.0078611 ETH</span></span><br><span class="line"></span><br><span class="line">Summary</span><br><span class="line">=======</span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Total deployments:   1</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> Final cost:          0.0078611 ETH</span></span><br></pre></td></tr></table></figure>
+
+<p>만약 컴파일과 마이그레이션을 처음부터 실행할때는 아래의 명령어를 이용합니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truffle migrate --reset --compile-all --network ganache</span><br></pre></td></tr></table></figure>
+
+<h1 id="스마트-컨트랙트-호출-확인"><a href="#스마트-컨트랙트-호출-확인" class="headerlink" title="스마트 컨트랙트 호출 확인"></a>스마트 컨트랙트 호출 확인</h1><h2 id="Geth-콘솔에-접속-후-계정-잠금-해제"><a href="#Geth-콘솔에-접속-후-계정-잠금-해제" class="headerlink" title="Geth 콘솔에 접속 후 계정 잠금 해제"></a>Geth 콘솔에 접속 후 계정 잠금 해제</h2><p>계정이 잠겨있으면 send 함수를 호출할 수 없으니 계정의 잠금을 해제해줍니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> geth attach http://localhost:8545</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> web3.personal.unlockAccount(eth.accounts[1])</span></span><br><span class="line">Unlock account 0x66b4e7be902300f9a15d900822bbd8803be87391</span><br><span class="line">Passphrase: </span><br><span class="line">true</span><br></pre></td></tr></table></figure>
+
+<h2 id="계정-잔액-확인"><a href="#계정-잔액-확인" class="headerlink" title="계정 잔액 확인"></a>계정 잔액 확인</h2><p>이더를 보내기 전의 잔액을 확인합니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> web3.fromWei(eth.getBalance(eth.accounts[1]))</span></span><br><span class="line">499999999.9999319599999997</span><br><span class="line"><span class="meta">&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="스마트-컨트랙트-객체"><a href="#스마트-컨트랙트-객체" class="headerlink" title="스마트 컨트랙트 객체"></a>스마트 컨트랙트 객체</h2><p>트러플 프로젝트를 배포한 후 스마트 컨트랙트의 기능을 호출하기 위해 스마트 컨트랙트 객체를 가져옵니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 예시</span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> eth.contract(&#123;ABI&#125;).at(&#123;contract address&#125;)</span></span><br></pre></td></tr></table></figure>
+
+<p><code>가나슈에 트러플 프로젝트 배포</code>의 로그를 확인해 <code>{ABI}</code>와 <code>{contract address}</code>에 알맞은 값을 입력해 Sample 객체를 가져옵니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> var sample = eth.contract([&#123;<span class="string">"anonymous"</span>:<span class="literal">false</span>,<span class="string">"inputs"</span>:[&#123;<span class="string">"indexed"</span>:<span class="literal">true</span>,<span class="string">"internalType"</span>:<span class="string">"address"</span>,<span class="string">"name"</span>:<span class="string">"previousOwner"</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;,&#123;<span class="string">"indexed"</span>:<span class="literal">true</span>,<span class="string">"internalType"</span>:<span class="string">"address"</span>,<span class="string">"name"</span>:<span class="string">"newOwner"</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;],<span class="string">"name"</span>:<span class="string">"OwnershipTransferred"</span>,<span class="string">"type"</span>:<span class="string">"event"</span>,<span class="string">"signature"</span>:<span class="string">"0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"</span>&#125;,&#123;<span class="string">"inputs"</span>:[],<span class="string">"name"</span>:<span class="string">"owner"</span>,<span class="string">"outputs"</span>:[&#123;<span class="string">"internalType"</span>:<span class="string">"address"</span>,<span class="string">"name"</span>:<span class="string">""</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;],<span class="string">"stateMutability"</span>:<span class="string">"view"</span>,<span class="string">"type"</span>:<span class="string">"function"</span>,<span class="string">"constant"</span>:<span class="literal">true</span>,<span class="string">"signature"</span>:<span class="string">"0x8da5cb5b"</span>&#125;,&#123;<span class="string">"inputs"</span>:[],<span class="string">"name"</span>:<span class="string">"renounceOwnership"</span>,<span class="string">"outputs"</span>:[],<span class="string">"stateMutability"</span>:<span class="string">"nonpayable"</span>,<span class="string">"type"</span>:<span class="string">"function"</span>,<span class="string">"signature"</span>:<span class="string">"0x715018a6"</span>&#125;,&#123;<span class="string">"inputs"</span>:[&#123;<span class="string">"internalType"</span>:<span class="string">"address"</span>,<span class="string">"name"</span>:<span class="string">"newOwner"</span>,<span class="string">"type"</span>:<span class="string">"address"</span>&#125;],<span class="string">"name"</span>:<span class="string">"transferOwnership"</span>,<span class="string">"outputs"</span>:[],<span class="string">"stateMutability"</span>:<span class="string">"nonpayable"</span>,<span class="string">"type"</span>:<span class="string">"function"</span>,<span class="string">"signature"</span>:<span class="string">"0xf2fde38b"</span>&#125;,&#123;<span class="string">"inputs"</span>:[],<span class="string">"name"</span>:<span class="string">"send"</span>,<span class="string">"outputs"</span>:[],<span class="string">"stateMutability"</span>:<span class="string">"payable"</span>,<span class="string">"type"</span>:<span class="string">"function"</span>,<span class="string">"payable"</span>:<span class="literal">true</span>,<span class="string">"signature"</span>:<span class="string">"0xb46300ec"</span>&#125;]).at(<span class="string">'0x8e36a247aD15a98ae7e7B6e23D4D69988bE9c12e'</span>)</span></span><br><span class="line">undefined</span><br></pre></td></tr></table></figure>
+
+<p>스마트 컨트랙트를 확인합니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> sample</span></span><br><span class="line">&#123;</span><br><span class="line">  abi: [&#123;</span><br><span class="line">      anonymous: false,</span><br><span class="line">      inputs: [&#123;...&#125;, &#123;...&#125;],</span><br><span class="line">      name: "OwnershipTransferred",</span><br><span class="line">      signature: "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",</span><br><span class="line">      type: "event"</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      constant: true,</span><br><span class="line">      inputs: [],</span><br><span class="line">      name: "owner",</span><br><span class="line">      outputs: [&#123;...&#125;],</span><br><span class="line">      signature: "0x8da5cb5b",</span><br><span class="line">      stateMutability: "view",</span><br><span class="line">      type: "function"</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      inputs: [],</span><br><span class="line">      name: "renounceOwnership",</span><br><span class="line">      outputs: [],</span><br><span class="line">      signature: "0x715018a6",</span><br><span class="line">      stateMutability: "nonpayable",</span><br><span class="line">      type: "function"</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      inputs: [&#123;...&#125;],</span><br><span class="line">      name: "transferOwnership",</span><br><span class="line">      outputs: [],</span><br><span class="line">      signature: "0xf2fde38b",</span><br><span class="line">      stateMutability: "nonpayable",</span><br><span class="line">      type: "function"</span><br><span class="line">  &#125;, &#123;</span><br><span class="line">      inputs: [],</span><br><span class="line">      name: "send",</span><br><span class="line">      outputs: [],</span><br><span class="line">      payable: true,</span><br><span class="line">      signature: "0xb46300ec",</span><br><span class="line">      stateMutability: "payable",</span><br><span class="line">      type: "function"</span><br><span class="line">  &#125;],</span><br><span class="line">  address: "0x8e36a247aD15a98ae7e7B6e23D4D69988bE9c12e",</span><br><span class="line">  transactionHash: null,</span><br><span class="line">  OwnershipTransferred: function bound(),</span><br><span class="line">  allEvents: function bound(),</span><br><span class="line">  owner: function bound(),</span><br><span class="line">  renounceOwnership: function bound(),</span><br><span class="line">  send: function bound(),</span><br><span class="line">  transferOwnership: function bound()</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="스마트-컨트랙트의-잔고-확인"><a href="#스마트-컨트랙트의-잔고-확인" class="headerlink" title="스마트 컨트랙트의 잔고 확인"></a>스마트 컨트랙트의 잔고 확인</h2><p>계정으로부터 이더를 전송하기 전 스마트 컨트랙트의 잔고를 확인합니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> web3.fromWei(eth.getBalance(<span class="string">'0x8e36a247aD15a98ae7e7B6e23D4D69988bE9c12e'</span>))</span></span><br><span class="line">0</span><br></pre></td></tr></table></figure>
+
+<h2 id="함수-호출"><a href="#함수-호출" class="headerlink" title="함수 호출"></a>함수 호출</h2><p>아래의 방법으로 함수를 트랜잭션 방식으로 호출합니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">계약객체.함수이름.sendTransaction(인자, &#123;from: 호출주소, gas: 가스제한, value: 송금액&#125;)</span><br></pre></td></tr></table></figure>
+<p>value는 필요없으면 생략이 가능합니다.</p>
+<p>send 함수를 transaction으로 호출합니다.<br>이때 <code>accounts[1]</code>에서 스마트 컨트랙트로 0.1 이더를 전송해보겠습니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> sample.send.sendTransaction(&#123;from: eth.accounts[1], gas: 100000, value: web3.toWei(0.1, <span class="string">'ether'</span>)&#125;)</span></span><br><span class="line">"0x86e3b84c28caad0874e9933c42e02e3deebd42c7edf8b1d0c07f0b47c12de6cd"</span><br></pre></td></tr></table></figure>
+
+<h2 id="트랜잭션-발행-결과-확인"><a href="#트랜잭션-발행-결과-확인" class="headerlink" title="트랜잭션 발행 결과 확인"></a>트랜잭션 발행 결과 확인</h2><p>0.1 이더 전송시 발생한 트랜잭션으로 결과를 확인할 수 있습니다. </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> eth.getTransaction(<span class="string">'0x86e3b84c28caad0874e9933c42e02e3deebd42c7edf8b1d0c07f0b47c12de6cd'</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">  blockHash: "0x4d45695ee99e9271727659d29f18c32aca450db64bb8302e8478aa469d79f6ad",</span><br><span class="line">  blockNumber: 5575,</span><br><span class="line">  chainId: "0xf",</span><br><span class="line">  from: "0x66b4e7be902300f9a15d900822bbd8803be87391",</span><br><span class="line">  gas: 100000,</span><br><span class="line">  gasPrice: 1000000000,</span><br><span class="line">  hash: "0x86e3b84c28caad0874e9933c42e02e3deebd42c7edf8b1d0c07f0b47c12de6cd",</span><br><span class="line">  input: "0xb46300ec",</span><br><span class="line">  nonce: 3,</span><br><span class="line">  r: "0x6e690cb0b3eff501580b6dd1e66a98d73140957f1d639e25baf8b57ea222971f",</span><br><span class="line">  s: "0x67f8d94c622c528d5dfdc44fdfcfa579896eb2dd1c9fd4a653aa4d4b8b4dc167",</span><br><span class="line">  to: "0x8e36a247ad15a98ae7e7b6e23d4d69988be9c12e",</span><br><span class="line">  transactionIndex: 0,</span><br><span class="line">  type: "0x0",</span><br><span class="line">  v: "0x42",</span><br><span class="line">  value: 100000000000000000</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>만약 <code>blockNumber</code>가 <code>null</code>이라면 채굴해서 트랜잭션을 블록에 포함시킵니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> miner.start(1)</span></span><br><span class="line">null</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> 약간의 시간이 지난 후 트랜잭션 발행 결과 확인</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;</span><span class="bash"> miner.stop()</span></span><br><span class="line">null</span><br></pre></td></tr></table></figure>
+
+<h2 id="스마트-컨트랙트-잔액-확인"><a href="#스마트-컨트랙트-잔액-확인" class="headerlink" title="스마트 컨트랙트 잔액 확인"></a>스마트 컨트랙트 잔액 확인</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> web3.fromWei(eth.getBalance(<span class="string">'0x8e36a247aD15a98ae7e7B6e23D4D69988bE9c12e'</span>))</span></span><br><span class="line">0.1</span><br></pre></td></tr></table></figure>
+
+<h2 id="계정-잔액-확인-1"><a href="#계정-잔액-확인-1" class="headerlink" title="계정 잔액 확인"></a>계정 잔액 확인</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;</span><span class="bash"> web3.fromWei(eth.getBalance(eth.accounts[1]))</span></span><br><span class="line">499999999.8999107519999997</span><br></pre></td></tr></table></figure>
+  	</div>
+	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/Ethereum/">Ethereum</a>
+      
+        <a href="/tags/Geth/">Geth</a>
+      
+        <a href="/tags/Truffle/">Truffle</a>
+      
+	  </div>
+    
+		
+	
+		<div class="art-item-footer">
+				
+				
+					<span class="art-item-right">next：<a href="/2022/12/19/ETC-exec-format-error/" rel="next"  title="[ETC] exec format error">
+						[ETC] exec format error
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+</article>
+<script>
+	window.subData = {
+		title: '[Ethereum] 로컬 프라이빗 네트워크에 스마트 컨트랙트 배포',
+		tools: true
+	}
+</script>
+
+      </div>
+      <aside class='l_side'>
+        
+  <section class='m_widget about'>
+
+<div class='header'>SAWD</div>
+<div class='content'>
+<div class='desc'>시간이 나면 쓰는 블로그</div>
+</div>
+</section>
+
+  <section class='m_widget categories'>
+<div class='header'>Categories</div>
+<div class='content'>
+    
+    <ul class="entry">
+    
+        <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badget'>8</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/CSS/"><div class='name'>CSS</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Chaincode/"><div class='name'>Chaincode</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Data-Structure/"><div class='name'>Data Structure</div><div class='badget'>6</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Docker/"><div class='name'>Docker</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>12</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Ethereum/"><div class='name'>Ethereum</div><div class='badget'>6</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/GitLab/"><div class='name'>GitLab</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Github/"><div class='name'>Github</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Golang/"><div class='name'>Golang</div><div class='badget'>5</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Hyperledger-Fabric/"><div class='name'>Hyperledger Fabric</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Linux/"><div class='name'>Linux</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MacOS/"><div class='name'>MacOS</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MySQL/"><div class='name'>MySQL</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Node-js/"><div class='name'>Node.js</div><div class='badget'>5</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Objective-C/"><div class='name'>Objective-C</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/React/"><div class='name'>React</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Samll-talk/"><div class='name'>Samll talk</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/iOS/"><div class='name'>iOS</div><div class='badget'>4</div></a></li>
+    
+    </ul>
+    
+</div>
+</section>
+
+  
+<div class="m_widget tagcloud">
+    <div class="header">Tags</div>
+    <div class='content'>
+        <a href="/tags/AWS/" style="font-size: 14px; color: #808080">AWS</a> <a href="/tags/Chaincode/" style="font-size: 14.86px; color: #6e6e6e">Chaincode</a> <a href="/tags/Docker/" style="font-size: 17.43px; color: #373737">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 15.71px; color: #5b5b5b">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 15.71px; color: #5b5b5b">ETC</a> <a href="/tags/Ethereum/" style="font-size: 18.29px; color: #252525">Ethereum</a> <a href="/tags/Example/" style="font-size: 15.71px; color: #5b5b5b">Example</a> <a href="/tags/Geth/" style="font-size: 14.86px; color: #6e6e6e">Geth</a> <a href="/tags/GitLab/" style="font-size: 15.71px; color: #5b5b5b">GitLab</a> <a href="/tags/Github/" style="font-size: 14.86px; color: #6e6e6e">Github</a> <a href="/tags/Golang/" style="font-size: 19.14px; color: #121212">Golang</a> <a href="/tags/HEXO/" style="font-size: 14.86px; color: #6e6e6e">HEXO</a> <a href="/tags/Kubernetes/" style="font-size: 14px; color: #808080">Kubernetes</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 16.57px; color: #494949">MySQL</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #808080">Node.js</a> <a href="/tags/OCR/" style="font-size: 14px; color: #808080">OCR</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Tool/" style="font-size: 14px; color: #808080">Tool</a> <a href="/tags/Toy-project/" style="font-size: 15.71px; color: #5b5b5b">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 14.86px; color: #6e6e6e">Troubleshooting</a> <a href="/tags/Truffle/" style="font-size: 14.86px; color: #6e6e6e">Truffle</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 14.86px; color: #6e6e6e">체인코드에서의 MVC...?</a>
+    </div>
+</div>
+
+
+
+      </aside>
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+  </div>
+  <footer id="footer" class="clearfix">
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="https://github.com/dev-sawd" class="social github"
+          target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+<!--  <div>Theme <a href='https://github.com/stkevintan/hexo-theme-material-flow' target="_blank" rel="noopener" class="codename">MaterialFlow</a> designed by <a href="http://keyin.me/" target="_blank">Kevin Tan</a>.</div>-->
+  
+</footer>
+
+
+  <script>setLoadingBarProgress(80);</script>
+  
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='/js/waves.min.js'></script>
+<script src="/js/scrollreveal.min.js"></script>
+
+<script src="/js/jquery.fitvids.js"></script>
+
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "hexo";
+  var ROOT = "/"||"/";
+  if(!ROOT.endsWith('/'))ROOT += '/';
+</script>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/app.js"></script>
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
