@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://dev-sawd.github.io/"/>
-  <updated>2022-12-22T17:35:01.630Z</updated>
+  <updated>2023-01-05T00:58:10.545Z</updated>
   <id>https://dev-sawd.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>이더리움 공부를 하면서..</title>
+    <link href="https://dev-sawd.github.io/2023/01/05/about-ethereum-study/"/>
+    <id>https://dev-sawd.github.io/2023/01/05/about-ethereum-study/</id>
+    <published>2023-01-05T00:37:30.000Z</published>
+    <updated>2023-01-05T00:58:10.545Z</updated>
+    
+    <content type="html"><![CDATA[<p>최근에 이더리움 공부를 시작하면서 처음부터 느꼈는데 결국 일이 터졌습니다.</p><p>제가 예전에 실습했던 자료들이나 블로그들의 내용이 이미 구식이 되어버렸군요..</p><a id="more"></a><p>예를들면 제가 사용하는 m1 맥북으로 세팅하는 방법이나 개발시 사용할 툴 및 명령어 그리고 명령어 옵션들</p><p>그리고 Ropsten, Rinkeby 등이 지원 중단될 예정이고.. <del>어쩐지 검색해도 잘 안나오더라</del></p><a href="https://blog.ethereum.org/2022/06/21/testnet-deprecation" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://blog.ethereum.org/images/posts/upload_8d7ea1c612b90c3235dd54044d541b6a.jpg"></img></div><div class="descriptions"><div class="og-title">Ropsten, Rinkeby &amp; Kiln Deprecation Announcement | Ethereum Foundation Blog</div></div></div></a><p>대신 Goerli를 이용하는 추세인것 같습니다.</p><a href="https://goerli.net/" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://goerli.net/img/ascii_com.png"></img></div><div class="descriptions"><div class="og-title">Goerli Testnet</div><div class="og-description">A cross-client proof-of-authority testing network for Ethereum.</div></div></div></a><p>테스트넷에 직접 스마트 컨트랙트를 올리고 테스트하는 실습 단계에서 부딪혔는데..</p><p>이 부분까지 정리해서 올리고 다시한번 앞부분에서 실습한 내용을 돌아봐야겠습니다.</p><p>계속해서 공부한 내용은 포스팅할 예정입니다 😭</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;최근에 이더리움 공부를 시작하면서 처음부터 느꼈는데 결국 일이 터졌습니다.&lt;/p&gt;
+&lt;p&gt;제가 예전에 실습했던 자료들이나 블로그들의 내용이 이미 구식이 되어버렸군요..&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="Small talk" scheme="https://dev-sawd.github.io/categories/Small-talk/"/>
+    
+    
+      <category term="Ethereum" scheme="https://dev-sawd.github.io/tags/Ethereum/"/>
+    
+  </entry>
   
   <entry>
     <title>[Ethereum] 로컬 프라이빗 네트워크에 스마트 컨트랙트 배포</title>
@@ -525,34 +549,6 @@
       
         &lt;p&gt;DB의 두 컬럼의 값이 바뀌어 들어가는 실수가 발생했을때 아래와 같이 두 컬럼의 값을 바꿀 수 있음&lt;/p&gt;
 &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span clas
-      
-    
-    </summary>
-    
-    
-      <category term="MySQL" scheme="https://dev-sawd.github.io/categories/MySQL/"/>
-    
-    
-      <category term="MySQL" scheme="https://dev-sawd.github.io/tags/MySQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>[MySQL] access denied for user</title>
-    <link href="https://dev-sawd.github.io/2022/02/13/MySQL-access-denied-for-user/"/>
-    <id>https://dev-sawd.github.io/2022/02/13/MySQL-access-denied-for-user/</id>
-    <published>2022-02-13T14:33:52.000Z</published>
-    <updated>2022-02-13T14:34:54.604Z</updated>
-    
-    <content type="html"><![CDATA[<p>토이 프로젝트를 만드는 중에 프로시져를 사용해야 할 일이 생김</p><p>프로시져에 대해서 공부하고 테스트 서버에서 프로시져 생성 명령어를 실행하는데 아래와 같은 에러 발생</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access denied for user &#39;root&#39;@&#39;%&#39; to database &#39;information_schema&#39;</span><br></pre></td></tr></table></figure><p>거의 반나절을 구글링과 스택오버플로우를 찾아봤는데도 해답을 찾을 수 없었음</p><p>대부분 권한 문제 때문이라고 하는데 이미 필요한 권한은 다 가지고있었음</p><p>그리고 며칠 지나 다시 문제를 풀어보려고 열었는데 에러 문구에 <code>database &#39;information_schema&#39;</code> 부분이 자꾸 거슬렸음</p><p>그래서 이 부분에 초점을 두고 database를 내가 원하는 데이터베이스로 설정 후 프로시져를 생성하니 성공</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">use my_database</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; procedure 생성</span><br></pre></td></tr></table></figure><p>너무 허무하다.. 😪</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;토이 프로젝트를 만드는 중에 프로시져를 사용해야 할 일이 생김&lt;/p&gt;
-&lt;p&gt;프로시져에 대해서 공부하고 테스트 서버에서 프로시져 생성 명령어를 실행하는데 아래와 같은 에러 발생&lt;/p&gt;
-&lt;figure class=&quot;highlight plain&quot;&gt;&lt;ta
       
     
     </summary>

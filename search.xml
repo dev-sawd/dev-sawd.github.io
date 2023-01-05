@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>이더리움 공부를 하면서..</title>
+      <link href="/2023/01/05/about-ethereum-study/"/>
+      <url>/2023/01/05/about-ethereum-study/</url>
+      
+        <content type="html"><![CDATA[<p>최근에 이더리움 공부를 시작하면서 처음부터 느꼈는데 결국 일이 터졌습니다.</p><p>제가 예전에 실습했던 자료들이나 블로그들의 내용이 이미 구식이 되어버렸군요..</p><a id="more"></a><p>예를들면 제가 사용하는 m1 맥북으로 세팅하는 방법이나 개발시 사용할 툴 및 명령어 그리고 명령어 옵션들</p><p>그리고 Ropsten, Rinkeby 등이 지원 중단될 예정이고.. <del>어쩐지 검색해도 잘 안나오더라</del></p><a href="https://blog.ethereum.org/2022/06/21/testnet-deprecation" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://blog.ethereum.org/images/posts/upload_8d7ea1c612b90c3235dd54044d541b6a.jpg"></img></div><div class="descriptions"><div class="og-title">Ropsten, Rinkeby &amp; Kiln Deprecation Announcement | Ethereum Foundation Blog</div></div></div></a><p>대신 Goerli를 이용하는 추세인것 같습니다.</p><a href="https://goerli.net/" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://goerli.net/img/ascii_com.png"></img></div><div class="descriptions"><div class="og-title">Goerli Testnet</div><div class="og-description">A cross-client proof-of-authority testing network for Ethereum.</div></div></div></a><p>테스트넷에 직접 스마트 컨트랙트를 올리고 테스트하는 실습 단계에서 부딪혔는데..</p><p>이 부분까지 정리해서 올리고 다시한번 앞부분에서 실습한 내용을 돌아봐야겠습니다.</p><p>계속해서 공부한 내용은 포스팅할 예정입니다 😭</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Small talk </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Ethereum </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>[Ethereum] 로컬 프라이빗 네트워크에 스마트 컨트랙트 배포</title>
       <link href="/2022/12/23/Ethereum-deploying-smart-contract-to-private-network/"/>
       <url>/2022/12/23/Ethereum-deploying-smart-contract-to-private-network/</url>
