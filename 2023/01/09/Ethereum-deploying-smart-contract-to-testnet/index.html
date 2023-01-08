@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html translate="no">
+<head>
+  <meta charset="utf-8">
+  <meta name="google" content="notranslate">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  <title>[Ethereum] Goerli 테스트넷에 스마트 컨트랙트 배포 | SAWD</title>
+  <meta name="description" content="시간이 나야지..." />
+  <meta name="keywords" content="" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" href="/images/favicon.png">
+  <link rel="alternate" href="/atom.xml" title="SAWD">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Hardhat을 이용해 Goerli 테스트넷에 스마트 컨트랙트 배포 실습한 내용을 정리하여 올립니다.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[Ethereum] Goerli 테스트넷에 스마트 컨트랙트 배포">
+<meta property="og:url" content="https://dev-sawd.github.io/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/index.html">
+<meta property="og:site_name" content="SAWD">
+<meta property="og:description" content="Hardhat을 이용해 Goerli 테스트넷에 스마트 컨트랙트 배포 실습한 내용을 정리하여 올립니다.">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://dev-sawd.github.io/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/thumbnail.png">
+<meta property="og:image" content="https://images.ctfassets.net/9sy2a0egs6zh/77mVisJcj8sMquYlW3iq73/1d47648a1511e1e79b5b58bba0bebf80/home_featured.png">
+<meta property="og:image" content="https://dev-sawd.github.io/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/1.png">
+<meta property="og:image" content="https://dev-sawd.github.io/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/2.png">
+<meta property="og:image" content="https://dev-sawd.github.io/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/3.png">
+<meta property="og:image" content="https://goerli.net/img/ascii_com.png">
+<meta property="og:image" content="https://dev-sawd.github.io/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/4.png">
+<meta property="og:image" content="https://dev-sawd.github.io/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/5.png">
+<meta property="og:image" content="https://opengraph.githubassets.com/41c1c1892ccb52a8298340594a216f007ee34c564f038620ccb7a9125246d99b/motdotla/dotenv">
+<meta property="og:image" content="https://dev-sawd.github.io/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/6.png">
+<meta property="og:image" content="https://etherscan.io/images/brandassets/etherscan-logo-circle.jpg">
+<meta property="og:image" content="https://dev-sawd.github.io/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/7.png">
+<meta property="article:published_time" content="2023-01-08T20:58:59.000Z">
+<meta property="article:modified_time" content="2023-01-08T22:24:22.064Z">
+<meta property="article:author" content="SAWD">
+<meta property="article:tag" content="Ethereum">
+<meta property="article:tag" content="Hardhat">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dev-sawd.github.io/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/thumbnail.png">
+    
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  <link href='/css/waves.min.css' rel='stylesheet'>
+  
+<link rel="stylesheet" href="/style.css">
+
+
+  
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-120934734-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="SAWD" type="application/atom+xml">
+</head>
+
+<body>
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+
+
+  <script>setLoadingBarProgress(20)</script> 
+  <header class="l_header">
+	<div class='wrapper'>
+		<div class="nav-main container container--flex">
+			<a class="logo flat-box" href='/' >
+				SAWD
+			</a>
+			<div class='menu'>
+				<ul class='h-list'>
+					
+						<li>
+							<a class='flat-box nav-home' href='/'>
+								Home
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-archives' href='/archives'>
+								Archives
+							</a>
+						</li>
+					
+						<li>
+							<a class='flat-box nav-about' href='/about'>
+								About
+							</a>
+						</li>
+					
+				</ul>
+				<div class='underline'></div>
+			</div>
+			
+				<div class="m_search">
+					<form name="searchform" class="form u-search-form">
+						<input type="text" class="input u-search-input" placeholder="Search" />
+						<span class="icon icon-search"></span>
+					</form>
+				</div>
+			
+			<ul class='switcher h-list'>
+				
+					<li class='s-search'><a href='javascript:void(0)'><span class="icon icon-search flat-box"></span></a></li>
+				
+				<li class='s-menu'><a href='javascript:void(0)'><span class="icon icon-menu flat-box"></span></a></li>
+			</ul>
+		</div>
+		
+		<div class='nav-sub container container--flex'>
+			<a class="logo" class="flat-box" href='javascript:void(0)'>
+				Word of Forks
+			</a>
+
+			<ul class='switcher h-list'>
+				<li class='s-comment'><a href='javascript:void(0)'><span class="icon icon-chat_bubble_outline flat-box"></span></a></li>
+				<li class='s-top'><a href='javascript:void(0)'><span class="icon icon-arrow_upward flat-box"></span></a></li>
+				<li class='s-toc'><a href='javascript:void(0)'><span class="icon icon-format_list_numbered flat-box"></span></a></li>
+			</ul>
+		</div>
+	</div>
+</header>
+<aside class="menu-phone">
+	<nav>
+		
+			<a href="/" class="nav-home nav">
+				Home
+			</a>
+		
+			<a href="/archives" class="nav-archives nav">
+				Archives
+			</a>
+		
+			<a href="/about" class="nav-about nav">
+				About
+			</a>
+		
+	</nav>
+</aside>
+
+    <script>setLoadingBarProgress(40);</script>
+  <div class="l_body">
+    <div class='container clearfix'>
+      <div class='l_main'>
+        <article id="post-Ethereum-deploying-smart-contract-to-testnet"
+  class="post white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<section class='meta'>
+	<h2 class="title">
+  	<a href="/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/">
+    	[Ethereum] Goerli 테스트넷에 스마트 컨트랙트 배포
+    </a>
+  </h2>
+	<time>
+	  1월 9, 2023
+	</time>
+	
+    
+    <div class='cats'>
+        <a href="/categories/Ethereum/">Ethereum</a>
+    </div>
+
+	</section>
+<!--	-->
+<!--		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#메타마스크"><span class="toc-number">1.</span> <span class="toc-text">메타마스크</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Goerli"><span class="toc-number">2.</span> <span class="toc-text">Goerli</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Goerli-faucet"><span class="toc-number">3.</span> <span class="toc-text">Goerli faucet</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Alchemy"><span class="toc-number">4.</span> <span class="toc-text">Alchemy</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#프로젝트-폴더-생성"><span class="toc-number">5.</span> <span class="toc-text">프로젝트 폴더 생성</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hardhat"><span class="toc-number">6.</span> <span class="toc-text">Hardhat</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#test-smart-contract-contracts-Sample-sol-작성"><span class="toc-number">7.</span> <span class="toc-text">test_smart_contract&#x2F;contracts&#x2F;Sample.sol 작성</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#test-smart-contract-hardhat-config-js-수정"><span class="toc-number">8.</span> <span class="toc-text">test_smart_contract&#x2F;hardhat.config.js 수정</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dotenv"><span class="toc-number">9.</span> <span class="toc-text">dotenv</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#test-smart-contract-env-파일-생성"><span class="toc-number">10.</span> <span class="toc-text">test_smart_contract&#x2F;.env 파일 생성</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#test-smart-contract-scripts-deploy-js-작성"><span class="toc-number">11.</span> <span class="toc-text">test_smart_contract&#x2F;scripts&#x2F;deploy.js 작성</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#스마트-컨트랙트-배포"><span class="toc-number">12.</span> <span class="toc-text">스마트 컨트랙트 배포</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#test-smart-contract-env에-컨트랙트-주소-추가"><span class="toc-number">13.</span> <span class="toc-text">test_smart_contract&#x2F;.env에 컨트랙트 주소 추가</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#test-smart-contract-scripts-interact-js-작성"><span class="toc-number">14.</span> <span class="toc-text">test_smart_contract&#x2F;scripts&#x2F;interact.js 작성</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#interact-js-실행"><span class="toc-number">15.</span> <span class="toc-text">interact.js 실행</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#전송된-GoerliETH-확인"><span class="toc-number">16.</span> <span class="toc-text">전송된 GoerliETH 확인</span></a></li></ol></section>-->
+<!--	-->
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<img src="/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/thumbnail.png" class="">
+
+<p>Hardhat을 이용해 Goerli 테스트넷에 스마트 컨트랙트 배포 실습한 내용을 정리하여 올립니다.</p>
+<a id="more"></a>
+
+<h1 id="메타마스크"><a href="#메타마스크" class="headerlink" title="메타마스크"></a>메타마스크</h1><a href="https://metamask.io/" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://images.ctfassets.net/9sy2a0egs6zh/77mVisJcj8sMquYlW3iq73/1d47648a1511e1e79b5b58bba0bebf80/home_featured.png"></img></div><div class="descriptions"><div class="og-title">The crypto wallet for Defi, Web3 Dapps and NFTs | MetaMask</div><div class="og-description">A safe crypto wallet for digital tokens &amp; NFTs. Join the blockchain and DeFi world.</div></div></div></a>
+
+<p>저는 주로 크롬을 사용하는데 크롬의 확장 프로그램으로 메타마스크를 설치합니다.</p>
+<p>메타마스크는 크립토 월렛을 간편하게 생성할 수 있습니다.</p>
+<p>실제 지갑을 가지고 테스트넷에서도 이용할 수 있으니 참고하면 좋을 것 같습니다.</p>
+<p>설치 후 뜨는 팝업 페이지에서 <code>[시작하기]</code> 또는 <code>크롬 우측 상단의 [퍼즐 아이콘 &gt; 메타마스크]</code>를 선택해 지갑을 생성합니다.</p>
+<img src="/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/1.png" class="">
+
+<p>생성 완료 후 비밀 복구 구문은 꼭 안전한 곳에 보관하세요.</p>
+<img src="/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/2.png" class="">
+
+<p>현재 이더리움 메인넷의 이더 보유량이 나옵니다.</p>
+<img src="/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/3.png" class="">
+
+<p>우리는 테스트넷을 이용할 것이니 상단에 <code>[이더리움 메인넷]</code>을 눌러 <code>[보기/숨기기 네트워크 해지]</code> 버튼을 눌러 테스트넷이 목록에 나오도록 합니다.</p>
+<p>그리고 <code>[Goerli 테스트 네트워크]</code>를 선택합니다.</p>
+<h1 id="Goerli"><a href="#Goerli" class="headerlink" title="Goerli"></a>Goerli</h1><a href="https://goerli.net/" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://goerli.net/img/ascii_com.png"></img></div><div class="descriptions"><div class="og-title">Goerli Testnet</div><div class="og-description">A cross-client proof-of-authority testing network for Ethereum.</div></div></div></a>
+
+<p>Goerli는 proof-of-authority 방식을 사용하는 이더리움 테스트 네트워크입니다.</p>
+<p>우리는 Goerli에서 스마트 컨트랙트를 배포하고 테스트 할겁니다.</p>
+<h1 id="Goerli-faucet"><a href="#Goerli-faucet" class="headerlink" title="Goerli faucet"></a>Goerli faucet</h1><p><a href="https://goerlifaucet.com" target="_blank" rel="noopener">https://goerlifaucet.com</a></p>
+<p>메타마스크에서 <code>[Goerli 테스트 네트워크]</code>를 선택했을때 새 지갑이니 당연히 보유중인 GoerliETH가 0일겁니다.</p>
+<p>Goerli 테스트넷에 스마트 컨트랙트를 배포하고 테스트하기 위해서는 일정량의 GoerliETH가 필요합니다.</p>
+<p>파우셋 사이트에서 테스트를 위한 일정량의 GoerliETH를 얻어옵니다.</p>
+<p>메타마스크의 상단 중앙에 있는 <code>0x로 시작하는 지갑 주소</code>를 클릭하면 클립보드로 복사됩니다.</p>
+<p>복사된 지갑 주소를 파우셋 사이트에서 붙여넣기 하여 <code>0.2 GoerliETH를 받습니다.</code></p>
+<blockquote><p>사이트의 설명에 따르면 하루에 0.2 GoerliETH를 얻을 수 있다고 합니다.</p>
+</blockquote>
+
+<h1 id="Alchemy"><a href="#Alchemy" class="headerlink" title="Alchemy"></a>Alchemy</h1><p><a href="https://dashboard.alchemy.com/" target="_blank" rel="noopener">https://dashboard.alchemy.com/</a></p>
+<p>스마트 컨트랙트의 트랜잭션을 모니터링 하거나 관리하기 위해 Alchemy의 서비스를 이용합니다.</p>
+<p>회원 가입 후 <code>[메뉴 Apps &gt; Create App]</code>을 눌러 앱을 생성합니다.</p>
+<p>특히 NETWORK는 메인넷이 아닌 <code>Goerli</code>를 선택해주세요.</p>
+<img src="/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/4.png" class="">
+
+<p>생성된 App의 우측 상단 VIEW KEY를 눌러 API KEY를 확인하세요.</p>
+<img src="/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/5.png" class="">
+
+<h1 id="프로젝트-폴더-생성"><a href="#프로젝트-폴더-생성" class="headerlink" title="프로젝트 폴더 생성"></a>프로젝트 폴더 생성</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> mkdir test_smart_contract</span></span><br><span class="line"><span class="meta">%</span><span class="bash"> <span class="built_in">cd</span> test_smart_contract</span></span><br><span class="line">test_smart_contract % npm init -y</span><br><span class="line">Wrote to /test_smart_contract/package.json:</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  "name": "test_smart_contract",</span><br><span class="line">  "version": "1.0.0",</span><br><span class="line">  "description": "",</span><br><span class="line">  "main": "index.js",</span><br><span class="line">  "scripts": &#123;</span><br><span class="line">    "test": "echo \"Error: no test specified\" &amp;&amp; exit 1"</span><br><span class="line">  &#125;,</span><br><span class="line">  "keywords": [],</span><br><span class="line">  "author": "",</span><br><span class="line">  "license": "ISC"</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Hardhat"><a href="#Hardhat" class="headerlink" title="Hardhat"></a>Hardhat</h1><p><a href="https://hardhat.org" target="_blank" rel="noopener">https://hardhat.org</a></p>
+<p>Hardhat은 이더리움 소프트웨어 개발 환경을 제공합니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> npm install hardhat</span></span><br><span class="line"><span class="meta">%</span><span class="bash"> npm install @nomiclabs/hardhat-ethers ethers</span></span><br><span class="line"><span class="meta">%</span><span class="bash"> npx hardhat compile</span></span><br><span class="line">888    888                      888 888               888</span><br><span class="line">888    888                      888 888               888</span><br><span class="line">888    888                      888 888               888</span><br><span class="line">8888888888  8888b.  888d888 .d88888 88888b.   8888b.  888888</span><br><span class="line">888    888     "88b 888P"  d88" 888 888 "88b     "88b 888</span><br><span class="line">888    888 .d888888 888    888  888 888  888 .d888888 888</span><br><span class="line">888    888 888  888 888    Y88b 888 888  888 888  888 Y88b.</span><br><span class="line">888    888 "Y888888 888     "Y88888 888  888 "Y888888  "Y888</span><br><span class="line"></span><br><span class="line">👷 Welcome to Hardhat v2.12.5 👷‍</span><br><span class="line"></span><br><span class="line">✔ What do you want to do? · Create a JavaScript project</span><br><span class="line">✔ Hardhat project root: · /test_smart_contract</span><br><span class="line">✔ Do you want to add a .gitignore? (Y/n) · n</span><br><span class="line">✔ Do you want to install this sample project's dependencies with npm (hardhat @nomicfoundation/hardhat-toolbox)? (Y/n) · y</span><br><span class="line"></span><br><span class="line">✨ Project created ✨</span><br><span class="line"></span><br><span class="line">See the README.md file for some example tasks you can run</span><br><span class="line"></span><br><span class="line">Give Hardhat a star on Github if you're enjoying it! 💞✨</span><br><span class="line"></span><br><span class="line">     https://github.com/NomicFoundation/hardhat</span><br><span class="line"></span><br><span class="line">Please take a moment to complete the 2022 Solidity Survey: https://hardhat.org/solidity-survey-2022</span><br></pre></td></tr></table></figure>
+
+<p>컴파일 실행시 여러 옵션이 뜨는데 자바스크립트 프로젝트를 선택합니다.</p>
+<p>위치는 우리가 설정한 현재 위치(디폴트) 값을 선택합니다.</p>
+<p>gitIgnore는 현재 실습에서는 아무 옵션이나 상관없습니다.</p>
+<p>hardhat-toolbox를 설치하는 옵션을 선택합니다.</p>
+<h1 id="test-smart-contract-contracts-Sample-sol-작성"><a href="#test-smart-contract-contracts-Sample-sol-작성" class="headerlink" title="test_smart_contract/contracts/Sample.sol 작성"></a>test_smart_contract/contracts/Sample.sol 작성</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> <span class="built_in">cd</span> contracts</span></span><br><span class="line">// 기존의 예제 파일 Lock.sol 삭제 </span><br><span class="line"><span class="meta">%</span><span class="bash"> rm Lock.sol</span></span><br><span class="line">remove Lock.sol? y</span><br><span class="line"><span class="meta">%</span><span class="bash"> touch Sample.sol</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><figcaption><span>Sample.sol</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; SPDX-License-Identifier: MIT</span><br><span class="line">pragma solidity ^0.8.0;</span><br><span class="line"></span><br><span class="line">contract Sample&#123;</span><br><span class="line">    uint public recvEther;</span><br><span class="line"></span><br><span class="line">    function send() payable public&#123;</span><br><span class="line">        recvEther +&#x3D; msg.value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>스마트 컨트랙트에 이더를 보내는 간단한 로직입니다.</p>
+<h1 id="test-smart-contract-hardhat-config-js-수정"><a href="#test-smart-contract-hardhat-config-js-수정" class="headerlink" title="test_smart_contract/hardhat.config.js 수정"></a>test_smart_contract/hardhat.config.js 수정</h1><p>기존의 내용을 삭제하고 아래의 내용으로 대체합니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">require('dotenv').config();</span><br><span class="line">require("@nomicfoundation/hardhat-toolbox");</span><br><span class="line"></span><br><span class="line">const &#123; API_KEY, PRIVATE_KEY &#125; = process.env;</span><br><span class="line">module.exports = &#123;</span><br><span class="line">     solidity: "0.8.9",</span><br><span class="line">     networks: &#123;</span><br><span class="line">       goerli: &#123;</span><br><span class="line">         url: `https://eth-goerli.alchemyapi.io/v2/$&#123;API_KEY&#125;`,</span><br><span class="line">         accounts: [PRIVATE_KEY]</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="dotenv"><a href="#dotenv" class="headerlink" title="dotenv"></a>dotenv</h1><a href="https://github.com/motdotla/dotenv" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://opengraph.githubassets.com/41c1c1892ccb52a8298340594a216f007ee34c564f038620ccb7a9125246d99b/motdotla/dotenv"></img></div><div class="descriptions"><div class="og-title">GitHub - motdotla/dotenv: Loads environment variables from .env for nodejs projects.</div><div class="og-description">Loads environment variables from .env for nodejs projects. - GitHub - motdotla/dotenv: Loads environment variables from .env for nodejs proj…</div></div></div></a>
+
+<p>dotenv는 .env 파일 안에 정보를 작성하고 그 정보를 불러올 수 있습니다.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install dotenv</span><br></pre></td></tr></table></figure>
+
+<h1 id="test-smart-contract-env-파일-생성"><a href="#test-smart-contract-env-파일-생성" class="headerlink" title="test_smart_contract/.env 파일 생성"></a>test_smart_contract/.env 파일 생성</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">API_KEY="3aXDkjuGnK7FT3qYgy9naFW4la08G3a1"</span><br><span class="line">PRIVATE_KEY=&#123;YOUR_PRIVATE_KEY&#125;</span><br></pre></td></tr></table></figure>
+<p>위의 내용은 예제입니다.</p>
+<p>우측의 값은 실제 여러분의 alchemy <code>API_KEY</code>, 지갑의 <code>PRIVATE_KEY</code> 값을 넣으세요</p>
+<p>지갑의 <code>PRIVATE_KEY</code> 값은 메타마스크의 계정 오른 쪽의 <code>...</code>를 눌러 <code>계정 세부 정보 &gt; 비공개 키 보내기</code>를 누른 후 <code>메타마스크 비밀번호</code>를 입력하여 얻을 수 있습니다.</p>
+<img src="/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/6.png" class="">
+
+<h1 id="test-smart-contract-scripts-deploy-js-작성"><a href="#test-smart-contract-scripts-deploy-js-작성" class="headerlink" title="test_smart_contract/scripts/deploy.js 작성"></a>test_smart_contract/scripts/deploy.js 작성</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">const hre = require("hardhat");</span><br><span class="line"></span><br><span class="line">async function main() &#123;</span><br><span class="line">  const [deployer] = await ethers.getSigners()</span><br><span class="line">  console.log(</span><br><span class="line">    `Deploying contracts with the account: `, deployer.address</span><br><span class="line">  );</span><br><span class="line">  const Sample = await hre.ethers.getContractFactory("Sample");</span><br><span class="line">  const sample = await Sample.deploy();</span><br><span class="line">  console.log(</span><br><span class="line">    `Deployed to $&#123;sample.address&#125;`</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main()</span><br><span class="line">  .then(() =&gt; process.exit(0))</span><br><span class="line">  .catch((error) =&gt; &#123;</span><br><span class="line">    console.error(error);</span><br><span class="line">    process.exit(1);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>스마트 컨트랙트를 배포할 때 사용할 스크립트고 배포에 완료되면 스마트 컨트랙트의 주소를 얻을 수 있습니다.</p>
+<h1 id="스마트-컨트랙트-배포"><a href="#스마트-컨트랙트-배포" class="headerlink" title="스마트 컨트랙트 배포"></a>스마트 컨트랙트 배포</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> npx hardhat --network goerli run scripts/deploy.js</span></span><br><span class="line">Downloading compiler 0.8.9</span><br><span class="line">Compiled 3 Solidity files successfully</span><br><span class="line">Deploying contracts with the account:  0x92bdf2d42659cDD40d6610B49Fc357A46c0b6aDb</span><br><span class="line">Deployed to 0x1405b7559c745b074b919b92d4ccc0585908b5c7</span><br></pre></td></tr></table></figure>
+
+<p>위의 <code>Deployed to 0x...</code>의 주소를 복사합니다.</p>
+<p>이 주소가 배포된 스마트 컨트랙트의 주소입니다.</p>
+<h1 id="test-smart-contract-env에-컨트랙트-주소-추가"><a href="#test-smart-contract-env에-컨트랙트-주소-추가" class="headerlink" title="test_smart_contract/.env에 컨트랙트 주소 추가"></a>test_smart_contract/.env에 컨트랙트 주소 추가</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">API_KEY="3aXDkjuGnK7FT3qYgy9naFW4la08G3a1"</span><br><span class="line">PRIVATE_KEY=&#123;YOUR_PRIVATE_KEY&#125;</span><br><span class="line">CONTRACT_ADDRESS="0x1405b7559c745b074b919b92d4ccc0585908b5c7"</span><br></pre></td></tr></table></figure>
+
+<h1 id="test-smart-contract-scripts-interact-js-작성"><a href="#test-smart-contract-scripts-interact-js-작성" class="headerlink" title="test_smart_contract/scripts/interact.js 작성"></a>test_smart_contract/scripts/interact.js 작성</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">const API_KEY = "3aXDkjuGnK7FT3qYgy9naFW4la08G3a1";</span><br><span class="line">const PRIVATE_KEY = &#123;YOUR_PRIVATE_KEY&#125;;</span><br><span class="line">const CONTRACT_ADDRESS = "0x1405b7559c745b074b919b92d4ccc0585908b5c7";</span><br><span class="line"></span><br><span class="line">const &#123; ethers &#125; = require("ethers");</span><br><span class="line">const contract = require("../artifacts/contracts/Sample.sol/Sample.json");</span><br><span class="line"></span><br><span class="line">// provider - Alchemy</span><br><span class="line">const alchemyProvider = new ethers.providers.AlchemyProvider(network="goerli", API_KEY);</span><br><span class="line"></span><br><span class="line">// signer - you</span><br><span class="line">const signer = new ethers.Wallet(PRIVATE_KEY, alchemyProvider);</span><br><span class="line"></span><br><span class="line">// contract instance</span><br><span class="line">const sampleContract = new ethers.Contract(CONTRACT_ADDRESS, contract.abi, signer);</span><br><span class="line"></span><br><span class="line">async function main() &#123;</span><br><span class="line">  const tx = await sampleContract.send(&#123;</span><br><span class="line">    value: ethers.utils.parseEther("0.04")</span><br><span class="line">  &#125;);</span><br><span class="line">  await tx.wait();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">main();</span><br></pre></td></tr></table></figure>
+
+<p>스마트 컨트랙트의 send 함수를 호출하는 스크립트입니다.</p>
+<p>현재 코드상에서는 0.04의 이더를 스마트 컨트랙트로 전송합니다.</p>
+<h1 id="interact-js-실행"><a href="#interact-js-실행" class="headerlink" title="interact.js 실행"></a>interact.js 실행</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash"> node interact.js</span></span><br></pre></td></tr></table></figure>
+
+<p>따로 로그 처리를 하지 않았으니 에러가 나지 않았다면 정상적으로 실행됩니다.</p>
+<h1 id="전송된-GoerliETH-확인"><a href="#전송된-GoerliETH-확인" class="headerlink" title="전송된 GoerliETH 확인"></a>전송된 GoerliETH 확인</h1><a href="https://goerli.etherscan.io/" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://etherscan.io/images/brandassets/etherscan-logo-circle.jpg"></img></div><div class="descriptions"><div class="og-title">TESTNET  Goerli (GTH) Blockchain Explorer</div><div class="og-description">Etherscan allows you to explore and search the Goerli blockchain for transactions, addresses, tokens, prices and other activities taking pla…</div></div></div></a>
+
+<p>메타마스크에서 생성한 지갑의 주소와 스마트 컨트랙트 주소를 조회할 수 있는 사이트입니다.</p>
+<img src="/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/7.png" class="">
+
+<p>Balance에서 현재 보유중인 이더(실제로는 GoerliETH)와 Transactions에서 Send메소드를 이용해 0.04 이더를 받은것을 확인할 수 있습니다.</p>
+
+  	</div>
+	  
+	  <div class="article-tags tags">
+      
+        <a href="/tags/Ethereum/">Ethereum</a>
+      
+        <a href="/tags/Hardhat/">Hardhat</a>
+      
+	  </div>
+    
+		
+	
+		<div class="art-item-footer">
+				
+				
+					<span class="art-item-right">next：<a href="/2023/01/05/about-ethereum-study/" rel="next"  title="이더리움을 공부 하면서..">
+						이더리움을 공부 하면서..
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
+</article>
+<script>
+	window.subData = {
+		title: '[Ethereum] Goerli 테스트넷에 스마트 컨트랙트 배포',
+		tools: true
+	}
+</script>
+
+      </div>
+      <aside class='l_side'>
+        
+  <section class='m_widget about'>
+
+<div class='header'>SAWD</div>
+<div class='content'>
+<div class='desc'>시간이 나면 쓰는 블로그</div>
+</div>
+</section>
+
+  <section class='m_widget categories'>
+<div class='header'>Categories</div>
+<div class='content'>
+    
+    <ul class="entry">
+    
+        <li><a class="flat-box" href="/categories/Android/"><div class='name'>Android</div><div class='badget'>8</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/CSS/"><div class='name'>CSS</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Chaincode/"><div class='name'>Chaincode</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Data-Structure/"><div class='name'>Data Structure</div><div class='badget'>6</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Docker/"><div class='name'>Docker</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/ETC/"><div class='name'>ETC</div><div class='badget'>12</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Ethereum/"><div class='name'>Ethereum</div><div class='badget'>7</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/GitLab/"><div class='name'>GitLab</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Github/"><div class='name'>Github</div><div class='badget'>3</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Golang/"><div class='name'>Golang</div><div class='badget'>5</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Hyperledger-Fabric/"><div class='name'>Hyperledger Fabric</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Linux/"><div class='name'>Linux</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MacOS/"><div class='name'>MacOS</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/MySQL/"><div class='name'>MySQL</div><div class='badget'>4</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Node-js/"><div class='name'>Node.js</div><div class='badget'>5</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Objective-C/"><div class='name'>Objective-C</div><div class='badget'>1</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/React/"><div class='name'>React</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/Small-talk/"><div class='name'>Small talk</div><div class='badget'>2</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/iOS/"><div class='name'>iOS</div><div class='badget'>4</div></a></li>
+    
+    </ul>
+    
+</div>
+</section>
+
+  
+<div class="m_widget tagcloud">
+    <div class="header">Tags</div>
+    <div class='content'>
+        <a href="/tags/AWS/" style="font-size: 14px; color: #808080">AWS</a> <a href="/tags/Chaincode/" style="font-size: 15px; color: #6b6b6b">Chaincode</a> <a href="/tags/Docker/" style="font-size: 18px; color: #2b2b2b">Docker</a> <a href="/tags/Docker-Compose/" style="font-size: 16px; color: #555">Docker-Compose</a> <a href="/tags/ETC/" style="font-size: 16px; color: #555">ETC</a> <a href="/tags/Ethereum/" style="font-size: 19px; color: #151515">Ethereum</a> <a href="/tags/Example/" style="font-size: 16px; color: #555">Example</a> <a href="/tags/Geth/" style="font-size: 15px; color: #6b6b6b">Geth</a> <a href="/tags/GitLab/" style="font-size: 16px; color: #555">GitLab</a> <a href="/tags/Github/" style="font-size: 15px; color: #6b6b6b">Github</a> <a href="/tags/Golang/" style="font-size: 19px; color: #151515">Golang</a> <a href="/tags/HEXO/" style="font-size: 15px; color: #6b6b6b">HEXO</a> <a href="/tags/Hardhat/" style="font-size: 14px; color: #808080">Hardhat</a> <a href="/tags/Kubernetes/" style="font-size: 14px; color: #808080">Kubernetes</a> <a href="/tags/M1-MacBook-Air/" style="font-size: 14px; color: #808080">M1 MacBook Air</a> <a href="/tags/MacOS/" style="font-size: 14px; color: #808080">MacOS</a> <a href="/tags/Material-Design/" style="font-size: 14px; color: #808080">Material Design</a> <a href="/tags/MySQL/" style="font-size: 17px; color: #404040">MySQL</a> <a href="/tags/Node-js/" style="font-size: 14px; color: #808080">Node.js</a> <a href="/tags/OCR/" style="font-size: 14px; color: #808080">OCR</a> <a href="/tags/TIL/" style="font-size: 20px; color: #000">TIL</a> <a href="/tags/Tool/" style="font-size: 14px; color: #808080">Tool</a> <a href="/tags/Toy-project/" style="font-size: 16px; color: #555">Toy project</a> <a href="/tags/Troubleshooting/" style="font-size: 15px; color: #6b6b6b">Troubleshooting</a> <a href="/tags/Truffle/" style="font-size: 15px; color: #6b6b6b">Truffle</a> <a href="/tags/Windows/" style="font-size: 14px; color: #808080">Windows</a> <a href="/tags/git/" style="font-size: 14px; color: #808080">git</a> <a href="/tags/%EC%B2%B4%EC%9D%B8%EC%BD%94%EB%93%9C%EC%97%90%EC%84%9C%EC%9D%98-MVC/" style="font-size: 15px; color: #6b6b6b">체인코드에서의 MVC...?</a>
+    </div>
+</div>
+
+
+
+      </aside>
+      <script>setLoadingBarProgress(60);</script>
+    </div>
+  </div>
+  <footer id="footer" class="clearfix">
+
+	<div class="social-wrapper">
+  	
+      
+        <a href="https://github.com/dev-sawd" class="social github"
+          target="_blank" rel="external">
+          <span class="icon icon-github"></span>
+        </a>
+      
+    
+  </div>
+  
+<!--  <div>Theme <a href='https://github.com/stkevintan/hexo-theme-material-flow' target="_blank" rel="noopener" class="codename">MaterialFlow</a> designed by <a href="http://keyin.me/" target="_blank">Kevin Tan</a>.</div>-->
+  
+</footer>
+
+
+  <script>setLoadingBarProgress(80);</script>
+  
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src='/js/waves.min.js'></script>
+<script src="/js/scrollreveal.min.js"></script>
+
+<script src="/js/jquery.fitvids.js"></script>
+
+<script>
+	var GOOGLE_CUSTOM_SEARCH_API_KEY = "";
+	var GOOGLE_CUSTOM_SEARCH_ENGINE_ID = "";
+	var ALGOLIA_API_KEY = "";
+	var ALGOLIA_APP_ID = "";
+	var ALGOLIA_INDEX_NAME = "";
+  var AZURE_SERVICE_NAME = "";
+  var AZURE_INDEX_NAME = "";
+  var AZURE_QUERY_KEY = "";
+  var BAIDU_API_ID = "";
+  var SEARCH_SERVICE = "hexo";
+  var ROOT = "/"||"/";
+  if(!ROOT.endsWith('/'))ROOT += '/';
+</script>
+
+<script src="/js/search.js"></script>
+
+
+<script src="/js/app.js"></script>
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
