@@ -28,12 +28,12 @@
 <meta property="og:image" content="https://goerli.net/img/ascii_com.png">
 <meta property="og:image" content="https://dev-sawd.github.io/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/4.png">
 <meta property="og:image" content="https://dev-sawd.github.io/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/5.png">
-<meta property="og:image" content="https://opengraph.githubassets.com/4d8fb2ee3e6e33f8cdfbf061998be914ab3b5434ed63751fd66248060cfc506c/motdotla/dotenv">
+<meta property="og:image" content="https://opengraph.githubassets.com/0f6fc7649121ac1c5a1ff1cad68dd5d3321b9a8a86ed540579b82645f6891c15/motdotla/dotenv">
 <meta property="og:image" content="https://dev-sawd.github.io/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/6.png">
 <meta property="og:image" content="https://etherscan.io/images/brandassets/etherscan-logo-circle.jpg">
 <meta property="og:image" content="https://dev-sawd.github.io/2023/01/09/Ethereum-deploying-smart-contract-to-testnet/7.png">
 <meta property="article:published_time" content="2023-01-08T20:58:59.000Z">
-<meta property="article:modified_time" content="2023-01-08T22:24:22.064Z">
+<meta property="article:modified_time" content="2023-01-09T22:32:33.883Z">
 <meta property="article:author" content="SAWD">
 <meta property="article:tag" content="Ethereum">
 <meta property="article:tag" content="Hardhat">
@@ -238,10 +238,14 @@
 <h1 id="test-smart-contract-hardhat-config-js-수정"><a href="#test-smart-contract-hardhat-config-js-수정" class="headerlink" title="test_smart_contract/hardhat.config.js 수정"></a>test_smart_contract/hardhat.config.js 수정</h1><p>기존의 내용을 삭제하고 아래의 내용으로 대체합니다.</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">require('dotenv').config();</span><br><span class="line">require("@nomicfoundation/hardhat-toolbox");</span><br><span class="line"></span><br><span class="line">const &#123; API_KEY, PRIVATE_KEY &#125; = process.env;</span><br><span class="line">module.exports = &#123;</span><br><span class="line">     solidity: "0.8.9",</span><br><span class="line">     networks: &#123;</span><br><span class="line">       goerli: &#123;</span><br><span class="line">         url: `https://eth-goerli.alchemyapi.io/v2/$&#123;API_KEY&#125;`,</span><br><span class="line">         accounts: [PRIVATE_KEY]</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;;</span><br></pre></td></tr></table></figure>
 
-<h1 id="dotenv"><a href="#dotenv" class="headerlink" title="dotenv"></a>dotenv</h1><a href="https://github.com/motdotla/dotenv" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://opengraph.githubassets.com/4d8fb2ee3e6e33f8cdfbf061998be914ab3b5434ed63751fd66248060cfc506c/motdotla/dotenv"></img></div><div class="descriptions"><div class="og-title">GitHub - motdotla/dotenv: Loads environment variables from .env for nodejs projects.</div><div class="og-description">Loads environment variables from .env for nodejs projects. - GitHub - motdotla/dotenv: Loads environment variables from .env for nodejs proj…</div></div></div></a>
+<h1 id="dotenv"><a href="#dotenv" class="headerlink" title="dotenv"></a>dotenv</h1><a href="https://github.com/motdotla/dotenv" class="link-preview" target="_blank" rel="nofollow"><div class="link-area"><div class="og-image"><img src="https://opengraph.githubassets.com/0f6fc7649121ac1c5a1ff1cad68dd5d3321b9a8a86ed540579b82645f6891c15/motdotla/dotenv"></img></div><div class="descriptions"><div class="og-title">GitHub - motdotla/dotenv: Loads environment variables from .env for nodejs projects.</div><div class="og-description">Loads environment variables from .env for nodejs projects. - GitHub - motdotla/dotenv: Loads environment variables from .env for nodejs proj…</div></div></div></a>
 
 <p>dotenv는 .env 파일 안에 정보를 작성하고 그 정보를 불러올 수 있습니다.</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install dotenv</span><br></pre></td></tr></table></figure>
+
+<blockquote><p>.env 파일에는 중요한 API KEY나 URL을 정의하는 경우가 많습니다.</p>
+<p>만약 github과 같은 오픈소스로 관리하는 경우 ignore 지정이 필수입니다.</p>
+</blockquote>
 
 <h1 id="test-smart-contract-env-파일-생성"><a href="#test-smart-contract-env-파일-생성" class="headerlink" title="test_smart_contract/.env 파일 생성"></a>test_smart_contract/.env 파일 생성</h1><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">API_KEY="3aXDkjuGnK7FT3qYgy9naFW4la08G3a1"</span><br><span class="line">PRIVATE_KEY=&#123;YOUR_PRIVATE_KEY&#125;</span><br></pre></td></tr></table></figure>
 <p>위의 내용은 예제입니다.</p>
